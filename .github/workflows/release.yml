@@ -15,16 +15,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ruby-version: "3.3"
+          python-version: "3.12"
+
+      - name: Install maintainer tooling dependencies
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements.txt
 
       - name: Verify source contracts and generated bundles
-        run: ruby scripts/verify.rb
+        run: python scripts/verify.py
 
       - name: Confirm the tag matches the plugin manifests
-        run: ruby scripts/check_version.rb "${GITHUB_REF_NAME#v}"
+        run: python scripts/check_version.py "${GITHUB_REF_NAME#v}"
 
       - name: Build upload packages
         run: |

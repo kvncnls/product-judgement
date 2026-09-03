@@ -297,19 +297,21 @@ Rerun the full `skills add` command when an update reports a failure, when a new
 
 ### For maintainers
 
+The tooling needs Python 3.9 or newer and PyYAML (`python3 -m pip install -r scripts/requirements.txt`). The Skills themselves still have no dependencies.
+
 Bundles are build artifacts, regenerated from the source folders rather than edited directly:
 
 ```bash
-ruby scripts/build_bundles.rb
+python3 scripts/build_bundles.py
 ```
 
 Run the repository verifier before committing. It validates Skill frontmatter, relative links, scoring and boundary invariants, behavioral contract fixtures, the plugin manifests and installer, and exact bundle synchronization; CI runs the same command:
 
 ```bash
-ruby scripts/verify.rb
+python3 scripts/verify.py
 ```
 
-Every plugin manifest carries the same version, and `scripts/check_version.rb` enforces that a release tag matches it. Pushing a `v*` tag runs the verifier, builds the upload packages, and publishes a release.
+Every plugin manifest carries the same version, and `scripts/check_version.py` enforces that a release tag matches it. Pushing a `v*` tag runs the verifier, builds the upload packages, and publishes a release.
 
 ## License
 

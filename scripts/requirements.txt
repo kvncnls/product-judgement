@@ -1,0 +1,2 @@
+# Maintainer tooling only. The Skills themselves have no dependencies.
+PyYAML>=6.0
