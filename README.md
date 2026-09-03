@@ -297,6 +297,8 @@ Rerun the full `skills add` command when an update reports a failure, when a new
 
 ### For maintainers
 
+The tooling under `scripts/` is Ruby, and it deliberately targets **Ruby 2.6** so it runs on the interpreter macOS ships, with nothing to install. CI pins 3.3, so a 2.7-only method such as `filter_map` passes CI and still fails on a stock Mac. Keep new code inside the 2.6 standard library; `/usr/bin/ruby scripts/verify.rb` is the check that matters. The Skills themselves stay pure Markdown, so this constraint never reaches anyone installing them.
+
 Bundles are build artifacts, regenerated from the source folders rather than edited directly:
 
 ```bash
@@ -309,7 +311,17 @@ Run the repository verifier before committing. It validates Skill frontmatter, r
 ruby scripts/verify.rb
 ```
 
-Every plugin manifest carries the same version, and `scripts/check_version.rb` enforces that a release tag matches it. Pushing a `v*` tag runs the verifier, builds the upload packages, and publishes a release.
+#### Cutting a release
+
+The version appears in four manifests, and `scripts/check_version.rb` fails the release if any of them disagrees with the tag. Bump all four first, then tag:
+
+```bash
+ruby scripts/check_version.rb 1.1.0
+git commit -am "Release 1.1.0" && git push
+git tag v1.1.0 && git push origin v1.1.0
+```
+
+The four are `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, and `.codex-plugin/plugin.json`. Pushing the `v*` tag runs the verifier, confirms the tag matches, builds the Skill `.zip` packages and combined bundle, and publishes the release that the [Claude Desktop and Claude.ai](#claude-desktop-and-claudeai) section links to.
 
 ## License
 
