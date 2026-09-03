@@ -18,6 +18,7 @@ Common uses include an instruction file, a rules file, or an uploaded knowledge 
 ---
 name: focal
 description: Use when designing, reviewing, or decluttering a functional product, app, dashboard, or tool screen on any platform. Focal is the screen-local structure-and-attention lens—it decides what belongs, what waits, and what wins attention through Information Architecture, Progressive Disclosure, and Visual Hierarchy. Its methodology is One Screen, One Clear Intent—not one action per screen. It classifies task, hub, and exploration registers, chooses the matching action model, supports inherent binary-choice or dual-mode sets, and adjusts density for expertise. Triggers on clutter, "too much on screen", "simplify this screen", "what's the primary action", "too many choices", choice overload, manual selection, input parsing, contextual information, "show the consequence", one screen one purpose, one clear intent, IA, dashboard, admin, or onboarding/settings. Not for multi-screen flows or navigation (use Compass), visual styling, motion, research, code, marketing/landing pages, backend, or non-UI work.
+license: MIT
 argument-hint: "[build | review] <screen, file, or description>"
 ---
 
@@ -39,12 +40,12 @@ Three disciplines, treated as top priorities, are how you earn that outcome:
 
 ```
                  ┌────────────────────────────────────────────┐
-   the outcome   │         ONE SCREEN, ONE CLEAR INTENT         │
+   the outcome   │        ONE SCREEN, ONE CLEAR INTENT        │
                  └────────────────────────────────────────────┘
                         ▲              ▲               ▲
    the means     Information      Progressive       Visual
                  Architecture     Disclosure        Hierarchy
-                 what belongs     what shows now     what wins
+                 what belongs     what shows now    what wins
 ```
 
 Get all three right and the screen settles around one clear intent on its own. Miss any one and that intent blurs. **Progressive Disclosure is the anti-overload discipline**—it runs before hierarchy because a screen cannot rank its way out of carrying too much. That is a sequencing dependency, not extra numeric weight: all three disciplines still score on the same 0–4 scale.
@@ -207,6 +208,8 @@ These skills are not a whole-app IA or sitemap tool. If the question is "how sho
 
 ## Routing
 
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. When Product Judgement names several screens, score the *worst* one, name that screen in the rationale, and raise the others as separate findings—never average screens into one score.
+
 - **No argument** → explain the methodology and three disciplines briefly, then ask: building a new screen, or reviewing an existing one?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Focal with Compass, Flywheel, and Soul and reconciles the results.
 - **`build` (or a description of a screen to design)** → follow **The five moves** below. Pull techniques from [reference/patterns.md](reference/patterns.md).
@@ -357,7 +360,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the rendered UI or system condition, not the user's emotion.
 4. **Lifecycle**—the moment in use or relationship: first run, setup, recurring use, re-entry, post-action, or another specific moment.
 
-Use product labels and concrete conditions. `Contact detail · screen-local · empty state · first visit after contact creation` is actionable; `CRM screen` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
+Use the narrowest defensible locator. `Contact detail · screen-local · empty state · first visit after contact creation` is actionable; `CRM screen` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
 
 ## Adjust for register
 
@@ -448,7 +451,7 @@ Score each discipline holistically against its local rubric. Read all checks and
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the dimension is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
 
 Keep the native total: `total = Information Architecture + Progressive Disclosure + Visual Hierarchy`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
@@ -460,6 +463,8 @@ Keep the native total: `total = Information Architecture + Progressive Disclosur
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
 Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores.
+
+- If more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
 
 Dimension score, overall quality band, issue severity, critical blocker, and the **One Screen, One Clear Intent** verdict are separate. The verdict remains Yes or No: a screen can be Solid and still receive No if its organizing intent or action model is structurally unresolved. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
@@ -517,7 +522,7 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 
 Filling it:
 - **Coverage**—name only states and lifecycle moments the evidence actually exposes. Use `gaps` for consequential variants such as loading, error, first-run, re-entry, or worst-case data that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Next**—structural before executional, always: polishing a screen with an unresolved organizing intent only organizes the clutter. Resolve structural items with the five-move build workflow in [SKILL.md](../SKILL.md). Single-screen work is Focal's; if the real problem is the path between screens, hand off to Compass; if it is a lifecycle leak in activation, value recognition, or return, hand off to Flywheel.
 - Re-run the audit after fixes to watch the score climb.
 

@@ -121,7 +121,9 @@ focal/
 │   ├── patterns.md
 │   └── examples.md
 ├── README.md
-└── LICENSE
+├── LICENSE
+└── agents/
+    └── openai.yaml
 ```
 
 ## Quick reference
@@ -136,10 +138,6 @@ SHOW       make consequences legible; use a preview or visualization when it hel
 HIERARCHY  one intended attention order · strongest treatment matches the action model
 NEVER      hide price, requirements, consequences, or controls needed now
 ```
-
-## Contributing
-
-Issues and pull requests are welcome. Changes should sharpen Focal’s ownership of screen structure, disclosure, and attention rather than broaden it into journey design, relationship design, visual styling, motion, or implementation.
 
 ## License
 

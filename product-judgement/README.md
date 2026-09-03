@@ -2,6 +2,8 @@
 
 > **Audit the product as a connected system.**
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+
 Product Judgement is the holistic audit for the four foundational Skills in this collection:
 
 - [Focal](../focal) owns decisions inside the screen.
@@ -97,10 +99,11 @@ For build work, route to the local output you need: Focal’s Screen Spec, Compa
 product-judgement/
 ├── SKILL.md
 ├── README.md
+├── LICENSE
 └── agents/
     └── openai.yaml
 ```
 
 ## License
 
-[MIT](../LICENSE) © 2026 Kevin Canlas.
+[MIT](./LICENSE) © 2026 Kevin Canlas.

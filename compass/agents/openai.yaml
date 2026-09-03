@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compass"
+  short_description: "Keep a multi-screen journey from getting lost"
+  default_prompt: "Audit this flow with Compass: position, step count, retreat, and state across the seams."

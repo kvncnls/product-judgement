@@ -1,4 +1,4 @@
 interface:
   display_name: "Product Judgement"
   short_description: "Audit the app across four experience scales"
-  default_prompt: "Use $product-judgement to audit this app across screen, journey, relationship, and memory."
+  default_prompt: "Audit this app with Product Judgement across screen, journey, relationship, and memory."

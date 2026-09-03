@@ -126,7 +126,9 @@ flywheel/
 │   ├── review.md
 │   └── examples.md
 ├── README.md
-└── LICENSE
+├── LICENSE
+└── agents/
+    └── openai.yaml
 ```
 
 ## Quick reference

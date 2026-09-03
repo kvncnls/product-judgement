@@ -1,6 +1,7 @@
 ---
 name: focal
 description: Use when designing, reviewing, or decluttering a functional product, app, dashboard, or tool screen on any platform. Focal is the screen-local structure-and-attention lens—it decides what belongs, what waits, and what wins attention through Information Architecture, Progressive Disclosure, and Visual Hierarchy. Its methodology is One Screen, One Clear Intent—not one action per screen. It classifies task, hub, and exploration registers, chooses the matching action model, supports inherent binary-choice or dual-mode sets, and adjusts density for expertise. Triggers on clutter, "too much on screen", "simplify this screen", "what's the primary action", "too many choices", choice overload, manual selection, input parsing, contextual information, "show the consequence", one screen one purpose, one clear intent, IA, dashboard, admin, or onboarding/settings. Not for multi-screen flows or navigation (use Compass), visual styling, motion, research, code, marketing/landing pages, backend, or non-UI work.
+license: MIT
 argument-hint: "[build | review] <screen, file, or description>"
 ---
 
@@ -22,12 +23,12 @@ Three disciplines, treated as top priorities, are how you earn that outcome:
 
 ```
                  ┌────────────────────────────────────────────┐
-   the outcome   │         ONE SCREEN, ONE CLEAR INTENT         │
+   the outcome   │        ONE SCREEN, ONE CLEAR INTENT        │
                  └────────────────────────────────────────────┘
                         ▲              ▲               ▲
    the means     Information      Progressive       Visual
                  Architecture     Disclosure        Hierarchy
-                 what belongs     what shows now     what wins
+                 what belongs     what shows now    what wins
 ```
 
 Get all three right and the screen settles around one clear intent on its own. Miss any one and that intent blurs. **Progressive Disclosure is the anti-overload discipline**—it runs before hierarchy because a screen cannot rank its way out of carrying too much. That is a sequencing dependency, not extra numeric weight: all three disciplines still score on the same 0–4 scale.
@@ -189,6 +190,8 @@ These skills are not a whole-app IA or sitemap tool. If the question is "how sho
 ---
 
 ## Routing
+
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. When Product Judgement names several screens, score the *worst* one, name that screen in the rationale, and raise the others as separate findings—never average screens into one score.
 
 - **No argument** → explain the methodology and three disciplines briefly, then ask: building a new screen, or reviewing an existing one?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Focal with Compass, Flywheel, and Soul and reconciles the results.

@@ -120,7 +120,9 @@ compass/
 │   ├── patterns.md
 │   └── examples.md
 ├── README.md
-└── LICENSE
+├── LICENSE
+└── agents/
+    └── openai.yaml
 ```
 
 ## Quick reference
@@ -133,10 +135,6 @@ RETREAT    platform-appropriate back, home, close, cancel, or exit behavior
 CARRY      context survives transitions, retreat, interruption, and re-entry
 NEVER      dead ends, traps, silent resets, or shortcuts that hide consequence
 ```
-
-## Contributing
-
-Issues and pull requests are welcome. Changes should sharpen Compass’s ownership of movement, orientation, path economy, and continuity rather than broaden it into screen composition or relationship strategy.
 
 ## License
 
