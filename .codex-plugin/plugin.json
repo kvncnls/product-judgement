@@ -1,0 +1,41 @@
+{
+  "name": "product-judgement",
+  "version": "1.0.0",
+  "description": "Skills for making better product decisions across the screen, the journey, the relationship, and the memory.",
+  "author": {
+    "name": "Kevin Canlas",
+    "url": "https://github.com/kvncnls"
+  },
+  "homepage": "https://github.com/kvncnls/product-judgement",
+  "repository": "https://github.com/kvncnls/product-judgement",
+  "license": "MIT",
+  "keywords": [
+    "product-design",
+    "ux",
+    "audit",
+    "information-architecture",
+    "navigation",
+    "retention",
+    "design-review"
+  ],
+  "skills": [
+    "./focal",
+    "./compass",
+    "./flywheel",
+    "./soul",
+    "./product-judgement"
+  ],
+  "interface": {
+    "displayName": "Product Judgement",
+    "shortDescription": "Audit a product across screen, journey, relationship, and memory",
+    "longDescription": "Five Skills for product judgement. Focal sharpens a single screen, Compass connects a multi-screen journey, Flywheel finds where the relationship leaks, Soul decides which moments earn craft, and Product Judgement runs all four for a holistic, prioritized audit.",
+    "developerName": "Kevin Canlas",
+    "category": "Design",
+    "websiteURL": "https://github.com/kvncnls/product-judgement",
+    "defaultPrompt": [
+      "Audit this dashboard screen with Focal",
+      "Audit the onboarding flow with Compass",
+      "Audit this app across all four scales with Product Judgement"
+    ]
+  }
+}

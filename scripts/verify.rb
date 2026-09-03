@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require "json"
 require "open3"
 require "rbconfig"
 require "yaml"
@@ -50,6 +51,88 @@ SKILLS.each do |skill|
   errors << "#{path}: frontmatter name must be #{skill.inspect}" unless metadata.is_a?(Hash) && metadata["name"] == skill
   description = metadata.is_a?(Hash) ? metadata["description"] : nil
   errors << "#{path}: frontmatter description must be a substantive string" unless description.is_a?(String) && description.length >= 80
+end
+
+# Plugin manifests are the install path for Claude Code, Cursor, and Codex, so
+# every one of them must stay valid, agree on a version, and expose all five
+# Skills. A manifest that silently drops a Skill installs a broken collection.
+PLUGIN_MANIFESTS = %w[
+  .claude-plugin/plugin.json
+  .claude-plugin/marketplace.json
+  .cursor-plugin/plugin.json
+  .codex-plugin/plugin.json
+  .agents/plugins/marketplace.json
+].freeze
+
+manifests = {}
+PLUGIN_MANIFESTS.each do |path|
+  manifests[path] = JSON.parse(read(path))
+rescue Errno::ENOENT
+  errors << "#{path}: missing"
+rescue JSON::ParserError => error
+  errors << "#{path}: invalid JSON (#{error.message.lines.first.strip})"
+end
+
+expected_skill_paths = SKILLS.map { |skill| "./#{skill}" }.sort
+
+%w[.claude-plugin/plugin.json .cursor-plugin/plugin.json .codex-plugin/plugin.json].each do |path|
+  next unless (manifest = manifests[path])
+
+  errors << "#{path}: name must be \"product-judgement\"" unless manifest["name"] == "product-judgement"
+  declared = manifest["skills"]
+  unless declared.is_a?(Array) && declared.sort == expected_skill_paths
+    errors << "#{path}: skills must list every Skill as #{expected_skill_paths.inspect}"
+  end
+end
+
+# Each marketplace points at the repository root, so the plugin manifests above
+# are what actually resolve the Skills.
+if (marketplace = manifests[".claude-plugin/marketplace.json"])
+  entries = marketplace["plugins"]
+  if entries.is_a?(Array) && entries.length == 1
+    errors << ".claude-plugin/marketplace.json: plugin source must be \"./\"" unless entries.first["source"] == "./"
+    errors << ".claude-plugin/marketplace.json: plugin name must be \"product-judgement\"" unless entries.first["name"] == "product-judgement"
+  else
+    errors << ".claude-plugin/marketplace.json: expected exactly one plugin entry"
+  end
+  errors << ".claude-plugin/marketplace.json: owner.name is required" unless marketplace.dig("owner", "name").is_a?(String)
+end
+
+if (marketplace = manifests[".agents/plugins/marketplace.json"])
+  entries = marketplace["plugins"]
+  if entries.is_a?(Array) && entries.length == 1
+    source = entries.first["source"]
+    unless source.is_a?(Hash) && source["source"] == "local" && source["path"] == "./"
+      errors << ".agents/plugins/marketplace.json: plugin source must be a local path of \"./\""
+    end
+  else
+    errors << ".agents/plugins/marketplace.json: expected exactly one plugin entry"
+  end
+end
+
+# One version across every manifest keeps a tagged release honest.
+versions = manifests.filter_map do |path, manifest|
+  next unless manifest
+  version = path.end_with?("marketplace.json") ? manifest.dig("plugins", 0, "version") : manifest["version"]
+  [path, version] if version
+end
+if versions.map(&:last).uniq.length > 1
+  errors << "plugin manifests disagree on version: #{versions.map { |path, version| "#{path}=#{version}" }.join(", ")}"
+end
+
+# The universal installer must stay runnable and cover every Skill and agent.
+install_script = File.join(ROOT, "scripts", "install.sh")
+if File.file?(install_script)
+  errors << "scripts/install.sh: must be executable" unless File.executable?(install_script)
+  install_source = read("scripts/install.sh")
+  errors << "scripts/install.sh: SKILLS list must match the Skill folders" unless install_source.include?("SKILLS=\"#{SKILLS.join(" ")}\"")
+  %w[claude codex cursor].each do |agent|
+    errors << "scripts/install.sh: missing a target directory for #{agent}" unless install_source.match?(/^\s+#{agent}\)/)
+  end
+  _, shellcheck_stderr, shellcheck_status = Open3.capture3("sh", "-n", install_script)
+  errors << "scripts/install.sh: shell syntax error (#{shellcheck_stderr.strip})" unless shellcheck_status.success?
+else
+  errors << "scripts/install.sh: missing"
 end
 
 # Relative Markdown links in source documentation must resolve. Generated bundles

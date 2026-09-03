@@ -1,0 +1,53 @@
+name: Release Skill packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Verify source contracts and generated bundles
+        run: ruby scripts/verify.rb
+
+      - name: Confirm the tag matches the plugin manifests
+        run: ruby scripts/check_version.rb "${GITHUB_REF_NAME#v}"
+
+      - name: Build upload packages
+        run: |
+          mkdir -p dist
+          for skill in focal compass flywheel soul product-judgement; do
+            zip -r "dist/$skill.zip" "$skill" -x '*.DS_Store'
+          done
+          zip -r dist/product-judgement-all-skills.zip \
+            focal compass flywheel soul product-judgement -x '*.DS_Store'
+          cp bundles/all.md dist/product-judgement-complete-bundle.md
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            Install for Claude Code, Cursor, or Codex with the plugin commands in
+            [the README](https://github.com/kvncnls/product-judgement#install).
+
+            The attachments below are for environments that take an upload instead:
+
+            - `<skill>.zip` — one Skill, ready to upload to Claude.ai or Claude Desktop.
+            - `product-judgement-all-skills.zip` — all five Skill folders.
+            - `product-judgement-complete-bundle.md` — all five Skills as one Markdown
+              file, for a ChatGPT Project, a custom GPT, or a single rules file.
