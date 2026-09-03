@@ -111,11 +111,11 @@ if (marketplace = manifests[".agents/plugins/marketplace.json"])
 end
 
 # One version across every manifest keeps a tagged release honest.
-versions = manifests.filter_map do |path, manifest|
+versions = manifests.map do |path, manifest|
   next unless manifest
   version = path.end_with?("marketplace.json") ? manifest.dig("plugins", 0, "version") : manifest["version"]
   [path, version] if version
-end
+end.compact
 if versions.map(&:last).uniq.length > 1
   errors << "plugin manifests disagree on version: #{versions.map { |path, version| "#{path}=#{version}" }.join(", ")}"
 end
@@ -216,7 +216,7 @@ begin
   unless fixtures.is_a?(Array) && fixtures.length >= 8
     errors << "tests/behavioral-contracts.yml: expected at least eight fixtures"
   else
-    ids = fixtures.filter_map { |fixture| fixture.is_a?(Hash) ? fixture["id"] : nil }
+    ids = fixtures.map { |fixture| fixture.is_a?(Hash) ? fixture["id"] : nil }.compact
     errors << "tests/behavioral-contracts.yml: fixture IDs must be unique" unless ids.length == ids.uniq.length
 
     fixtures.each_with_index do |fixture, index|
