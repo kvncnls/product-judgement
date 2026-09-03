@@ -1,0 +1,28 @@
+{
+  "name": "product-judgement",
+  "version": "1.0.0",
+  "description": "Skills for making better product decisions across the screen, the journey, the relationship, and the memory.",
+  "author": {
+    "name": "Kevin Canlas",
+    "url": "https://github.com/kvncnls"
+  },
+  "homepage": "https://github.com/kvncnls/product-judgement",
+  "repository": "https://github.com/kvncnls/product-judgement",
+  "license": "MIT",
+  "keywords": [
+    "product-design",
+    "ux",
+    "audit",
+    "information-architecture",
+    "navigation",
+    "retention",
+    "design-review"
+  ],
+  "skills": [
+    "./focal",
+    "./compass",
+    "./flywheel",
+    "./soul",
+    "./product-judgement"
+  ]
+}

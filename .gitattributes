@@ -1,0 +1,11 @@
+# This repository is a Markdown Skills collection. The code under scripts/ is
+# maintainer tooling that is never installed with a Skill, so excluding it stops
+# GitHub from reporting the whole repository as that language.
+*.md linguist-detectable=true
+scripts/** linguist-detectable=false
+
+# Bundles are build artifacts of scripts/build_bundles.rb. Marking them generated
+# keeps them out of language stats and collapses them in pull request diffs, where
+# a regeneration would otherwise bury the real change.
+bundles/*.md linguist-generated=true
+bundles/*.md linguist-detectable=false

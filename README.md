@@ -4,6 +4,26 @@ Skills for making better product decisions across the screen, the journey, the r
 
 The umbrella is **coherence**: focused within a screen, navigable across a journey, valuable across the relationship, memorable after the experience, and trustworthy throughout.
 
+## Quick install
+
+All five Skills, in one command, on the agent you already use:
+
+```bash
+claude plugin marketplace add kvncnls/product-judgement && claude plugin install product-judgement@product-judgement
+```
+
+```bash
+cursor-agent plugin marketplace add https://github.com/kvncnls/product-judgement
+```
+
+```bash
+codex plugin marketplace add kvncnls/product-judgement && codex plugin add product-judgement@product-judgement
+```
+
+Then ask for an audit: `audit this dashboard with Focal`, or `audit this app with Product Judgement`.
+
+Using Claude Desktop, Claude.ai, ChatGPT, or another agent? See [Install](#install) for uploads, single-file bundles, project-scoped setups, and the script that covers everything else.
+
 ## Why this collection exists
 
 Vibe coding made implementation fast and easy and made product judgement even easier to skip. Features accumulate, screens grow crowded, flows become mazes, value gets buried, and working products become generic and forgettable. The 'Ship fast, iterate later' mantra has produced AI product slop en masse.
@@ -150,83 +170,146 @@ Give the Skills the surrounding product context as well. Attach or point the LLM
 
 ## Install
 
-### Claude Code, Codex, and Cursor
+Each Skill is a folder with a `SKILL.md` at its root, which is the shape Claude Code, Cursor, Codex, and Gemini CLI all read. Pick the row that matches where you work.
 
-Install all five Skills—including the holistic audit—globally with the [Skills CLI](https://skills.sh/docs/cli):
+| Environment | How it installs | Invocation |
+|---|---|---|
+| Claude Code, Cursor, Codex | Plugin, from this repository | `/product-judgement:focal`, `/product-judgement:compass`, … |
+| Claude Desktop, Claude.ai | Upload a Skill `.zip` | `/focal`, `/compass`, … |
+| ChatGPT, custom GPTs | Upload the combined Markdown bundle | Ask for the Skill by name |
+| Anything else, or a project-scoped setup | `scripts/install.sh` | `/focal`, `/compass`, … |
 
-```bash
-npx skills add kvncnls/product-judgement --skill '*' -g -a claude-code -a codex -a cursor -y
-```
+### Claude Code, Cursor, and Codex
 
-The CLI keeps a canonical installed copy and links supported agents to it where possible. Global installation makes the Skills available across projects. To let the CLI ask which Skills, agents, scope, and installation method you want instead, run:
+These three read a plugin manifest from this repository, so installation is one marketplace and one plugin. Claude Code and Cursor share `.claude-plugin/`; Codex reads `.agents/plugins/` and `.codex-plugin/`.
 
-```bash
-npx skills add kvncnls/product-judgement
-```
-
-Install one foundational Skill by name:
-
-```bash
-npx skills add kvncnls/product-judgement --skill focal -g
-```
-
-Product Judgement uses the four foundational Skills, so install the full set with the command above when you want `/product-judgement`.
-
-### Update an existing installation
-
-Check whether tracked Skills have changed upstream:
+Claude Code:
 
 ```bash
-npx skills check
+claude plugin marketplace add kvncnls/product-judgement
+claude plugin install product-judgement@product-judgement
 ```
 
-Update this collection's five globally installed Skills:
+Cursor:
 
 ```bash
-npx skills update -g product-judgement focal compass flywheel soul
+cursor-agent plugin marketplace add https://github.com/kvncnls/product-judgement
 ```
 
-Running the update command again is the normal way to refresh an installation; it uses the source recorded by the CLI. If an update reports a failure, a new Skill was added to the repository, an agent link is missing, or the installation predates the CLI lock record, rerun the full global `skills add` command above. The add command is also the repair path when you intentionally want to overwrite an existing installation or add another agent target. Use `npx skills list -g` to inspect what is installed.
-
-### Manual installation
-
-Each Skill comes in two shapes. The **folder** (`focal/`) is the source and loads its references on demand. The **bundle** ([`bundles/focal.md`](./bundles)) is generated from that folder for tools that can only load one Markdown file. Start by cloning:
+Codex:
 
 ```bash
-git clone https://github.com/kvncnls/product-judgement.git
-cd product-judgement
+codex plugin marketplace add kvncnls/product-judgement
+codex plugin add product-judgement@product-judgement
 ```
 
-Agents that support Skill folders can load an independent copy or a symlink. The common global locations are `~/.claude/skills/` for Claude Code, `~/.codex/skills/` for Codex, and `~/.cursor/skills/` for Cursor. For example:
+Claude Code and Cursor also accept the same commands from inside a session as `/plugin marketplace add kvncnls/product-judgement` followed by `/plugin install`. Pin a release by appending a tag to the source, as in `kvncnls/product-judgement@v1.0.0`.
+
+Plugin Skills are namespaced by their plugin, so the audit commands appear as `/product-judgement:focal` rather than `/focal`. If you would rather type the bare names, use [the install script](#any-other-agent-or-a-project-scoped-install) instead.
+
+Update or remove an installed plugin with its own tooling:
 
 ```bash
-ln -s "$(pwd)/focal" ~/.claude/skills/focal
-ln -s "$(pwd)/focal" ~/.codex/skills/focal
-ln -s "$(pwd)/focal" ~/.cursor/skills/focal
+claude plugin update product-judgement
+codex plugin marketplace upgrade product-judgement
+cursor-agent plugin marketplace update product-judgement
 ```
 
-Repeat that for each Skill you need. A project-scoped installation belongs in the agent's project Skill directory instead. Consult the agent's current documentation because discovery paths can change.
+### Claude Desktop and Claude.ai
 
-For tools without multi-file Skill support, load a generated bundle. Examples include appending one to a project instruction file, using one as a Cursor rule, or uploading one to a ChatGPT Project or custom GPT:
+Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Download the packages from the [latest release](https://github.com/kvncnls/product-judgement/releases/latest), or build them yourself:
+
+```bash
+zip -r focal.zip focal
+```
+
+Enable **Code execution and file creation** in Settings → Capabilities, then upload the `.zip` under Settings → Capabilities → Skills. Repeat for each Skill you want. A holistic `/product-judgement` audit needs all five, because the orchestration Skill calls the four local methodologies.
+
+### ChatGPT, custom GPTs, and other single-file environments
+
+Some tools accept only one Markdown file. [`bundles/all.md`](./bundles/all.md) is the whole collection—all five Skills, generated from the same sources—in one file, which is what a holistic audit needs:
+
+```bash
+cp bundles/all.md ~/Desktop/product-judgement.md
+```
+
+Upload it as a ChatGPT Project or custom GPT knowledge file, or attach it to a Claude Project. For a single Skill, use its own bundle instead:
 
 ```bash
 cat bundles/focal.md >> AGENTS.md
 cp bundles/focal.md .cursor/rules/focal.md
 ```
 
-Swap `focal` for the Skill you want. For a holistic `/product-judgement` audit in a single-file environment, load all five bundles; the holistic Skill needs the four local methodologies to produce native scorecards and one cross-scale fix order.
+At roughly 320 KB, the combined bundle suits an uploaded knowledge file rather than an always-loaded instruction file. Append a single-Skill bundle to `AGENTS.md` instead when the whole file is read on every request.
 
-Bundles are build artifacts. Maintainers regenerate them from the source folders rather than editing them directly:
+### Any other agent, or a project-scoped install
+
+`scripts/install.sh` symlinks the Skill folders into whichever agents it finds, with no Node and no build step. Because the links point back at your clone, `git pull` updates every agent at once.
+
+```bash
+git clone https://github.com/kvncnls/product-judgement.git
+cd product-judgement
+./scripts/install.sh
+```
+
+It targets Claude Code, Cursor, Codex, Gemini CLI, and opencode, and installs the bare `/focal`-style names rather than namespaced plugin ones. Useful variations:
+
+```bash
+./scripts/install.sh --agent claude --agent cursor   # only these agents
+./scripts/install.sh --skill focal --skill compass   # only these Skills
+./scripts/install.sh --scope project                 # into ./.claude/skills and friends
+./scripts/install.sh --copy                          # independent copies, not symlinks
+./scripts/install.sh --list                          # print target directories, change nothing
+./scripts/install.sh --uninstall                     # remove what it installed
+```
+
+Run `./scripts/install.sh --help` for the full set. Restart your agent afterwards so it reloads Skill metadata.
+
+To wire up an agent by hand, link each Skill folder into that agent's Skill directory. The common global locations are `~/.claude/skills/` for Claude Code, `~/.cursor/skills/` for Cursor, and `~/.agents/skills/` for Codex, which also reads a repository's `.agents/skills/`:
+
+```bash
+ln -s "$(pwd)/focal" ~/.claude/skills/focal
+```
+
+Consult the agent's current documentation, because discovery paths change.
+
+### Skills CLI
+
+The [Skills CLI](https://skills.sh/docs/cli) is an alternative that keeps one canonical copy and links supported agents to it. It requires Node:
+
+```bash
+npx skills add kvncnls/product-judgement --skill '*' -g -a claude-code -a codex -a cursor -y
+```
+
+Run `npx skills add kvncnls/product-judgement` to be asked which Skills, agents, and scope you want, or name one Skill directly:
+
+```bash
+npx skills add kvncnls/product-judgement --skill focal -g
+```
+
+Check for upstream changes with `npx skills check`, then update this collection's five globally installed Skills:
+
+```bash
+npx skills update -g product-judgement focal compass flywheel soul
+```
+
+Rerun the full `skills add` command when an update reports a failure, when a new Skill is added to the repository, when an agent link is missing, or when an installation predates the CLI lock record. Use `npx skills list -g` to inspect what is installed.
+
+### For maintainers
+
+Bundles are build artifacts, regenerated from the source folders rather than edited directly:
 
 ```bash
 ruby scripts/build_bundles.rb
 ```
 
-Run the repository verifier before committing. It validates Skill frontmatter, relative links, scoring and boundary invariants, behavioral contract fixtures, and exact bundle synchronization; CI runs the same command:
+Run the repository verifier before committing. It validates Skill frontmatter, relative links, scoring and boundary invariants, behavioral contract fixtures, the plugin manifests and installer, and exact bundle synchronization; CI runs the same command:
 
 ```bash
 ruby scripts/verify.rb
 ```
+
+Every plugin manifest carries the same version, and `scripts/check_version.rb` enforces that a release tag matches it. Pushing a `v*` tag runs the verifier, builds the upload packages, and publishes a release.
 
 ## License
 

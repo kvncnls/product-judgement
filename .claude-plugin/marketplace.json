@@ -1,0 +1,17 @@
+{
+  "name": "product-judgement",
+  "owner": {
+    "name": "Kevin Canlas",
+    "url": "https://github.com/kvncnls"
+  },
+  "description": "Product judgement Skills for the screen, the journey, the relationship, and the memory.",
+  "plugins": [
+    {
+      "name": "product-judgement",
+      "source": "./",
+      "description": "Focal, Compass, Flywheel, Soul, and the holistic Product Judgement audit.",
+      "version": "1.0.0",
+      "category": "Design"
+    }
+  ]
+}

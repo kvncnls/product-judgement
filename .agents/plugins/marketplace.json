@@ -1,0 +1,19 @@
+{
+  "name": "product-judgement",
+  "interface": {
+    "displayName": "Product Judgement"
+  },
+  "plugins": [
+    {
+      "name": "product-judgement",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Design"
+    }
+  ]
+}
