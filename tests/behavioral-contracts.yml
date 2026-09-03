@@ -136,3 +136,108 @@
   reject:
     - Award 4/4 merely because no major failure is visible.
     - Describe 4/4 as the expected professional baseline.
+
+- id: focal-orchestrated-no-local-template
+  skill: focal
+  scenario: Run the Focal pass as one leg of a Product Judgement audit that will print its own holistic wrapper.
+  evidence:
+    - Product Judgement is orchestrating this pass and owns the printed output.
+    - The user asked for the holistic audit, not the detailed Focal review.
+    - The screen is a task screen with one primary action and two deferred settings.
+  expected:
+    - Return the Focal findings as working notes for the orchestrator.
+    - Preserve the native /12 score, the One Screen One Clear Intent verdict, and every component rationale.
+    - Keep the Screen, Flow, State, and Lifecycle locator on each finding so the orchestrator can reconcile it.
+  reject:
+    - Print the locked Focal review template with its own scorecard table and Top moves section.
+    - Drop the component score rationales because the orchestrator will summarize them.
+
+- id: compass-orchestrated-no-local-template
+  skill: compass
+  scenario: Run the Compass pass as one leg of a Product Judgement audit that will print its own holistic wrapper.
+  evidence:
+    - Product Judgement is orchestrating this pass and supplies the ordered journey.
+    - The user asked for the holistic audit, not the detailed Compass review.
+    - The journey is a four-step linear checkout with a known state loss on retreat.
+  expected:
+    - Return the Compass findings as working notes for the orchestrator.
+    - Preserve the native /12 score, the Never Lost verdict, and every component rationale.
+    - Send the screen-local and lifecycle findings to the orchestrator's Handoffs section instead of invoking a sibling Skill.
+  reject:
+    - Open the response with a Compass verdict line ahead of the orchestrator's own output.
+    - Print the locked Flow review template with its own scorecard table.
+
+- id: flywheel-orchestrated-full-four-plays
+  skill: flywheel
+  scenario: Run the Flywheel pass as one leg of a Product Judgement audit of a product whose evidence covers all four relationship stages.
+  evidence:
+    - Product Judgement is orchestrating this pass and requires all four plays evaluated.
+    - Arrival, activation, first value, and returning-user behavior are all evidenced.
+    - The user asked for the holistic audit, not the detailed Flywheel diagnosis.
+  expected:
+    - Evaluate Trust, Friction, Wins, and Emotion and give each a score with a next-point change.
+    - Return the findings as working notes and preserve the /16 total and the earliest evidenced leak.
+    - Read an individual play reference file only when a next-point change cannot be grounded without it.
+  reject:
+    - Score only the single leaking play because the Skill says to run one play deeply.
+    - Print the locked diagnosis template with its own Fix this first section.
+
+- id: soul-orchestrated-records-despite-broken-floor
+  skill: soul
+  scenario: Run the Soul pass as the last leg of a Product Judgement audit in which Compass has already found a state loss on the same path.
+  evidence:
+    - Product Judgement is orchestrating this pass and requires a Soul row in its scorecard.
+    - Compass owns a state-loss defect on the path being swept.
+    - The default happy path, its beats, and their frequencies are visible.
+  expected:
+    - Map the path, assign every beat a tier, and record the findings rather than returning nothing.
+    - Mark Readiness Deferred and let the orchestrator sequence treatment after the structural repair.
+    - Score the gates the artifact makes evaluable instead of reporting a bare handoff.
+  reject:
+    - Return an empty Soul contribution because the floor fails and the Skill says to hand off first.
+    - Recommend expressive treatment as the first priority change.
+
+- id: product-judgement-missing-sibling-skill
+  skill: product-judgement
+  scenario: Run a holistic audit in an environment where Focal, Compass, and Flywheel resolve but Soul is not installed.
+  evidence:
+    - The Soul Skill spine and its review contract cannot be loaded.
+    - The default happy path and its beats are visible in the artifact.
+    - Focal, Compass, and Flywheel are available and evidenced.
+  expected:
+    - Run the three available passes and preserve their native totals and verdicts.
+    - Mark the Soul scale N/E—Skill not installed and name the install path as its next step.
+    - Keep the cross-scale findings and priority changes limited to the three evaluated scales.
+  reject:
+    - Improvise a Soul score, Readiness verdict, or /12 total from the four-scale template.
+    - Silently omit the Soul row from the four-scale scorecard.
+
+- id: product-judgement-skips-local-examples
+  skill: product-judgement
+  scenario: Run a full four-scale audit of a mid-size app where every sibling Skill is installed and every reference file is readable.
+  evidence:
+    - Each local Skill instructs a calibration read of its own reference examples before emitting output.
+    - This orchestrated pass emits the holistic wrapper, not the four locked local templates.
+    - The four local Skill spines and review contracts are the contracts being applied.
+  expected:
+    - Read each local Skill spine and its review contract to run the pass.
+    - Skip the local reference examples calibration read for this orchestrated pass.
+    - Calibrate length and tone to the holistic wrapper rather than to the local worked examples.
+  reject:
+    - Load all four local reference examples files before producing the holistic audit.
+    - Cite a worked local example as evidence about the audited product.
+
+- id: compass-indicator-matches-flow-type
+  skill: compass
+  scenario: Review a hub-and-spoke settings area whose index links to eight detail panes that each return to the index.
+  evidence:
+    - The settings index is the stable home anchor and every pane returns to it.
+    - There is no single end state and no ordered sequence across the panes.
+    - Each pane shows an active nav state naming the current section.
+  expected:
+    - Classify the flow as hub-and-spoke before judging Orientation.
+    - Accept the active nav state as the position indicator the flow type requires.
+    - Judge Orientation on return-to-hub clarity rather than on remaining scope.
+  reject:
+    - Recommend a step counter or a percentage-complete bar for the settings panes.
+    - Justify the indicator choice as reviewer preference instead of naming the flow type that requires it.

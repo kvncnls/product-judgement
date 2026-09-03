@@ -29,7 +29,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the interaction or system condition: waiting, validation error, retry, Back, refresh, deep-linked, resumed, and so on.
 4. **Lifecycle**—the journey moment: first-run activation, returning completion, interruption/resume, recovery, or another specific path.
 
-Use concrete transitions. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not guess.
+Use the narrowest defensible locator. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not invent behavior.
 
 ## Adjust for flow type
 
@@ -52,7 +52,7 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 *At every step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
 
 - Run the **drop test** on every screen: drop the user onto it with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? A screen that fails those applicable questions fails Orientation.
-- Check **position and progress**: "Step 2 of 4," a breadcrumb, an active nav state. Is progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
+- Check **position and progress** against the mechanism the flow type requires, in **Orientation** in [SKILL.md](../SKILL.md): a counter for linear, a named branch counted within itself for branching, an active nav state plus a labeled route to the center for hub-and-spoke, location without a counter for open-ended. A mechanism borrowed from the wrong flow type is a finding even when something is displayed. Is bounded progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
 - Check for a **platform-appropriate retreat or home path** and an **escape hatch** from every owned bounded flow—especially modals and wizards. Browser Back can be sufficient when history and state behave correctly; a product-owned stack needs its own visible retreat. Do not demand duplicate controls that add no clarity.
 - Hunt for **dead ends**: a screen the user can reach but not leave is a bug, not a state.
 - For branching/hub flows, check that the user can see **which branch they're on** or **how to get back to the hub**.
@@ -60,7 +60,7 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 | Score | Criteria |
 |-------|----------|
 | 0 | No recovery exists—a true dead end, or a flow the user cannot leave from any screen |
-| 1 | A way out exists but is hidden or unlabeled; or progress is hidden and the drop test fails on a key screen. Browser Back alone is a failure only when the product owns a bounded flow, history is unsafe or surprising, or the retreat is not reasonably discoverable. A retreat that *wipes work* is Gate 3's, not this gate's |
+| 1 | A way out exists but is hidden or unlabeled; or progress is hidden and the drop test fails on a key screen. Browser Back alone is a failure only when the product owns a bounded flow, history is unsafe or surprising, or the retreat is absent from the screen's default state, reachable only by hover or gesture. A retreat that *wipes work* is Gate 3's, not this gate's |
 | 2 | Orientable, but one applicable answer—where-am-I, what-remains-when-bounded, or how-to-retreat/get-home—is weak or absent at a step |
 | 3 | Clear position, platform-appropriate retreat/home, and exit throughout; minor signposting gaps |
 | 4 | At every step the user knows where they are, what remains when bounded, and how to proceed, retreat, get home, or escape—the journey-appropriate drop test passes everywhere |
@@ -193,7 +193,7 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 
 Filling it:
 - **Coverage**—name only conditions actually walked or evidenced. Use `gaps` for consequential paths such as Back, refresh, retry, interruption/resume, deep link, or returning-user bypass that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Next**—structural before executional, always: signposting a maze only labels the dead ends. Resolve structural items with the four-move build workflow in [SKILL.md](../SKILL.md) and the techniques in [patterns.md](patterns.md).
 - **Single-screen problems are out of scope—route them to [Focal](../../focal).** If an individual screen is overloaded, mis-ranked, or has no clear primary action, that is a within-screen failure for Focal, not a seam for Compass; name it in **Next** and hand it off.
 - Re-run the audit after fixes to watch the score climb.

@@ -17,7 +17,9 @@ Common uses include an instruction file, a rules file, or an uploaded knowledge 
 
 ---
 name: product-judgement
-description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Requires the four foundational Skills installed alongside it; it audits the scales it can load and marks any it cannot `N/E`. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+license: MIT
+argument-hint: "[audit] <product, codebase, prototype, or frames>"
 ---
 
 # Product Judgement
@@ -92,6 +94,22 @@ Focal has the same boundary rule: a confusing action surface is Focal; a mislead
 
 Run the four local methodologies in this order. This is the evidence order, not an automatic fix order.
 
+### When a sibling Skill is not installed
+
+Every pass below loads a sibling spine by relative path. Those paths resolve when the four foundational Skills sit beside this one—the plugin, marketplace, and `install.sh` layouts all produce that—but not for a single-Skill upload, a lone `bundles/product-judgement.md`, or a partial `skills add`. Check before auditing, and never simulate a methodology you could not read: an invented Focal score is worse than a missing one, because the reader cannot tell the two apart.
+
+A single-file bundle is the exception that looks like this case but is not. `bundles/all.md` concatenates all five spines and their review contracts into one file, so the content is already in context even though `../focal/SKILL.md` resolves to nothing. Use the in-context sections and run the full audit. Report a scale unavailable only when its methodology is neither readable at its path nor present in context.
+
+When a spine or review contract is genuinely unavailable:
+
+1. Name the unavailable scale and the reason in **Coverage**.
+2. Run the passes whose Skills are present, in the same order.
+3. Score the missing scale `N/E—Skill not installed` in the scorecard and leave its cross-scale finding empty. Keep the row: the gap is part of the result.
+4. Say what closes it—`claude plugin install product-judgement@product-judgement`, or `./scripts/install.sh`, installs all five.
+5. Keep the reconciliation and the priority sequence, and mark the ordering provisional. An unread scale can hide the real upstream owner.
+
+With fewer than two scales available, stop and say so. Reconciliation is this Skill's whole function, and there is nothing to reconcile.
+
 ### 1. Frame the audit and map coverage
 
 Establish the product, audience, stakes, first value, business goal, and evidence basis. Build a compact map with four views:
@@ -123,7 +141,7 @@ Use the Compass map as evidence for the route, but keep the question separate: C
 
 ### 5. Run Soul after checking the floor
 
-Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable; otherwise preserve `N/E` and do not invent a total.
+Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable. Deferred Readiness is not by itself `N/E`: score the treatment the artifact actually shows, and use `N/E` only for a gate the structural failure genuinely prevents evaluating. Omit the total whenever any gate is `N/E`; never invent one.
 
 If Focal, Compass, or Flywheel finds a broken floor, still record the Soul findings, but sequence expressive treatment after the structural or lifecycle repair. Do not use delight to cover confusion, a maze, a trust break, or invisible value.
 
@@ -138,7 +156,7 @@ Create one issue ledger from the four native reports:
 5. Preserve every local score, verdict, and component score rationale; do not average unlike totals into a false Product Judgement score.
 6. Separate observed, inferred, walked, tested, and measured claims.
 
-One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
+Order the ledger by severity, P0 first. Within one severity, order by owner in the run order above—Focal, then Compass, then Flywheel, then Soul—and then by that Skill's own tie-break. One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
 
 Set the priority changes by dependency and consequence. Rank concrete implementation changes, not just findings or Skill owners:
 
@@ -152,7 +170,9 @@ This order can change when evidence shows a different upstream dependency. Do no
 
 ## Holistic output
 
-Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
+Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes.
+
+The local contracts produce more than this wrapper prints, so five rules settle the surplus. **Several screens, one Focal row**—score the worst screen, name it in the Score rationale, and raise the others as separate cross-scale findings; never average screens. **Bands live in the rationale**—put each local quality band and its weakest-dimension ceiling at the end of that Skill's **Score rationale** bullet, since the scorecard has no band column. **One Blocker**—take the highest-consequence local blocker, name its owner, and record the rest as findings at their own severity. **Four slots, not six**—the local contracts mandate up to three Top moves each plus Flywheel's Fix this first and Soul's ranked moments; select for this wrapper by dependency and consequence, and say in **Handoffs** which owner's moves did not make the cut. **This wrapper supersedes local output instructions**—the local Voice sections, calibration reads of `reference/examples.md`, re-run advice, build-workflow trailers, and sibling handoffs do not apply to an orchestrated pass; their analysis still informs the scores. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
 
 ```markdown
 **Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship> · <one biggest cross-scale issue>
@@ -169,10 +189,10 @@ Run all four local audits first, then return this wrapper. Keep the local report
 ## Four-scale scorecard
 | Skill | Native verdict | Score | Cross-scale finding |
 |---|---|---:|---|
-| Focal | <Clear Intent verdict> | _/12 · _._/4 | <one line> |
-| Compass | <Never Lost verdict> | _/12 · _._/4 | <one line> |
-| Flywheel | <earliest evidenced leak | undetermined pending evidence> | <_/16 · _._/4 | N/E> | <one line> |
-| Soul | <Readiness + authored-state verdict> | <_/12 · _._/4 | N/E> | <one line> |
+| Focal | <Clear Intent verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Compass | <Never Lost verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Flywheel | <earliest evidenced leak | undetermined pending evidence | N/E—Skill not installed> | <_/16 · _._/4 | N/E> | <one line> |
+| Soul | <Readiness + authored-state verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
 
 ## Score rationale
 - **Focal <_/12>:** Information Architecture _/4 — <evidence → consequence → rubric anchor → next-point change>; Progressive Disclosure _/4 — <evidence → consequence → rubric anchor → next-point change>; Visual Hierarchy _/4 — <evidence → consequence → rubric anchor → next-point change>.
@@ -181,7 +201,7 @@ Run all four local audits first, then return this wrapper. Keep the local report
 - **Soul <_/12 or N/E> · Readiness <Ready | Deferred>:** Placement <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Proportion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Signature <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>.
 
 ## Cross-scale findings
-- **[P0–P3 · <Focal | Compass | Flywheel | Soul>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
+- **[P0–P3 · <Focal | Compass | Flywheel | Soul> · <discipline, play, or beat>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
 
 ## Priority changes (up to 4)
 1. **Priority 1 · <P0–P3> · Now — <primary owner and stage>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the concrete implementation change>. **Why now:** <the consequence and upstream reason>. **Depends on:** <owner or "none">.

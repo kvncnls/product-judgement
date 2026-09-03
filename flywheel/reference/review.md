@@ -29,7 +29,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the rendered or system condition: first encounter, empty, loading, error, success, ask, retry, and so on.
 4. **Lifecycle**—the relationship stage: arrival, consideration, activation before value, first value, return, lapse, re-engagement, or advocacy.
 
-Use the narrowest defensible locator. `Report screen → result · report generation flow · success after processing · first value for a new signup` is actionable; `activation` is not. If any locator field is not evidenced, write `not shown` and name the metric or behavior that would confirm it in **Coverage** or **Basis**.
+Use the narrowest defensible locator. `Report screen → result · report generation flow · success after processing · first value for a new signup` is actionable; `activation` is not. If any locator field is not evidenced, write `not shown` and name the metric or behavior that would confirm it in **Coverage** or **Basis**—do not invent behavior.
 
 ## The four gates
 
@@ -98,7 +98,7 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 
 ## Scoring rules
 
-Every play uses the same integer anchors:
+Every evaluated play uses the same integer anchors:
 
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
@@ -108,7 +108,7 @@ Every play uses the same integer anchors:
 | **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
 | **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit prerequisite caps, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
+Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
 
 ### Score rationale—required
 
@@ -125,11 +125,13 @@ For a **full diagnosis with all four plays evaluated**, keep the native total: `
 
 Then cap the band by the weakest play: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the four scores.
 
+- If more than one independent failure sits in a play, score the *worst* one, then list the others as separate issues.
+
 - **A dark pattern is a critical blocker regardless of total.** Hiding cost, permission, risk, or reversibility to increase action; weaponizing emotion; or removing informed choice must be tagged P0 and named in **Blocker**. Do not mechanically force an unrelated play to 0; score the play using its rubric.
 - **The earliest evidenced leaking stage governs non-critical investment.** A 1 at Trust and a 1 at Emotion is a Trust problem; fixing Emotion first spends effort on people who never arrive. If an earlier play is `N/E`, call the ordering provisional and put its validating check before downstream investment. A P0 at any stage overrides that order for immediate stop or repair and becomes **Fix this first**. After the critical condition is removed, resume from the earliest remaining evidenced leak.
 - **Do not average away a safety or accessibility failure.** Give it its own issue line and blocker state when warranted rather than hiding it inside the total.
 
-Dimension score, overall quality band, issue severity, critical blocker, and the earliest leaking stage are separate. A P0 is always a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. P0 stop-or-repair work governs **Fix this first**; otherwise the earliest leaking stage does.
+Dimension score, overall quality band, issue severity, critical blocker, and the earliest leaking stage are separate. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**. P0 stop-or-repair work governs **Fix this first**; otherwise the earliest leaking stage does.
 
 ## Issue severity
 
@@ -142,11 +144,11 @@ Dimension score, overall quality band, issue severity, critical blocker, and the
 
 Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
 
-**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by stage order—Trust, then Friction, then Wins, then Emotion—because upstream fixes change the population that reaches everything downstream. Never reorder across priorities.
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by stage order—Trust, then Friction, then Wins, then Emotion—because upstream fixes change the population that reaches everything downstream. Never reorder across priorities; a P0 Emotion issue outranks a P1 Trust issue.
 
 ## Output format—use this exact structure
 
-Every diagnosis returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape.
+Every diagnosis returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
 
 ```
 **Verdict:** <the leaking stage | undetermined pending evidence> · <the one biggest loss or evidence gap, one phrase> · **<full: total/16 or N/E | targeted: play score/4>**
@@ -187,6 +189,6 @@ Every diagnosis returns this template verbatim, in this order. Don't add, remove
 Filling it:
 - **Coverage**—name only relationship stages and app states the evidence actually exposes. Use `gaps` for consequential stages such as first value, return, lapse, or re-engagement that were not shown or measured.
 - **Scope and total**—use `/16` only when all four plays were evaluated. In a full diagnosis, an entirely unsupported play is `N/E—insufficient evidence`; in a targeted stage review, the three out-of-scope rows are `N/E—outside targeted scope`. Neither kind of `N/E` is `0`, and either prevents a total or common band.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Fix this first recommendation, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Keep the `At` locator precise enough to identify the exact touchpoint and cohort moment that must change. `<observation>` may run two or three sentences when being specific and quantitative; the rest stay tight. If nothing ranks above P3, write "None above P3." under the header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Fix this first recommendation, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Keep the `At` locator precise enough to identify the exact touchpoint and cohort moment that must change. `<observation>` may run two or three sentences when being specific and quantitative; the rest stay tight. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Fix this first**—one stage, never a list. The whole point of the diagnosis is to refuse to work on four things at once.
 - **Basis**—never claim measurement you do not have. Use the controlled basis vocabulary in the template, and name the fastest confirming metric or behavior.

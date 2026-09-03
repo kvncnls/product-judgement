@@ -1,0 +1,4 @@
+interface:
+  display_name: "Focal"
+  short_description: "Sharpen one screen's intent and attention"
+  default_prompt: "Audit this screen with Focal: what belongs, what waits, and what wins attention."

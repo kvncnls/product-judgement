@@ -18,6 +18,7 @@ Common uses include an instruction file, a rules file, or an uploaded knowledge 
 ---
 name: soul
 description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by reach and memory, splits treatments by frequency so repetition never turns expression into noise, and refuses the traditional dumping grounds (404 pages, easter eggs, error mascots) where delight goes to be unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
+license: MIT
 argument-hint: "[build | search] <product, flow, or moment>"
 ---
 
@@ -113,6 +114,8 @@ Selection heuristics, archetypes, and the full dumping-grounds list live in [ref
 ---
 
 ## Routing
+
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `search` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Record the findings even when an earlier pass found a broken floor: Product Judgement sequences the repair ahead of the treatment, and an empty Soul contribution leaves a required row unfillable.
 
 - **No argument** → explain the placement idea in three sentences, then ask: search an existing product, or build one moment?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
@@ -236,14 +239,14 @@ Error branches are not Net-New candidates, but they are evidence for restraint. 
 
 ## Locate every finding
 
-Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Moment, small thing, Next item, and handoff carries it:
+Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Moment, small thing, Next item, and handoff must carry the same locator:
 
 1. **Screen**—the exact beat, touchpoint, message, or control.
 2. **Flow**—the named happy path or transition.
 3. **State**—the rendered or system condition: first-use, empty, loading, success, failure, re-entry, and so on.
 4. **Lifecycle**—the occurrence: first run, every run, recurring milestone, first value, return, lapse, or recovery.
 
-Use the narrowest defensible locator. `Payment notification · invoice-to-payment · successful settlement · recurring value realization` is actionable; `the ending` is not. If any field is not evidenced, write `not shown` and name the fastest validating check in Coverage or Basis.
+Use the narrowest defensible locator. `Payment notification · invoice-to-payment · successful settlement · recurring value realization` is actionable; `the ending` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
 
 ## The three scored gates
 
@@ -298,17 +301,21 @@ Every evaluated gate uses the same integer anchors:
 
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
-| **0** | **Broken or harmful** | The gate fails outright, inverts its intended behavior, or creates material harm. |
-| **1** | **Major failure** | The gate is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
-| **2** | **Partial or inconsistent** | The basic quality exists, but a material weakness prevents dependable execution. |
-| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target. |
-| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the context, realistic states, and constraints. This is intentionally uncommon, not the normal target. |
+| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
+| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
+| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
+| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
+| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each gate holistically against its local rubric. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` explains what is unusually effective; a restrained `3` can be better product judgment than an over-authored `4` attempt.
+Score each evaluated gate holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the gate overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` is exemplary for the gate being scored; a restrained `3` can be better product judgment than an over-authored `4` attempt.
 
-A score without an explanation is invalid. Every row uses **evidence → consequence → rubric anchor → next-point change**. A `2` names what works and the material weakness; a `3` names the remaining minor gap; a `4` says why the gate is above and beyond and uses `None—already exemplary` for the next point. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+- If more than one independent failure sits in a gate, score the *worst* one, then list the others as separate issues.
 
-When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, round to one decimal, and apply:
+### Score rationale—required
+
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+
+When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -317,18 +324,22 @@ When all three gates are evaluated, keep the native total: `total = Placement + 
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Cap the displayed band by the weakest evaluated gate: `0` caps at Broken, `1` at Significant rework, `2` at Solid, and `3–4` adds no ceiling. If any gate is `N/E`, report no total, average, or common band.
+Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any gate is `N/E`, report no total, average, or common band.
 
-Readiness, gate score, final band, issue severity, blocker, and authored-state verdict remain separate. A Deferred readiness result is not itself P0. Assign severity from consequence, reach, and recoverability; a methodology preference is never automatically release-critical.
+Readiness, dimension score, overall quality band, issue severity, critical blocker, and the authored-state verdict are separate. A Deferred readiness result is not itself P0. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
 | Priority | Meaning |
-|---|---|
-| **P0 — Critical** | Blocks the core outcome; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
+|----------|---------|
+| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
+| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
+| **P2 — Moderate** | Creates real friction, confusion, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
 | **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
+
+Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by gate order—**Placement** (the wrong beat, or a beat off the default path) outranks **Proportion** (treatment out of scale with the moment) outranks **Signature** (character that reads as anonymous or borrowed). Never reorder across priorities; a P0 Signature issue outranks a P1 Placement issue.
 
 ## Output format—use this exact structure
 

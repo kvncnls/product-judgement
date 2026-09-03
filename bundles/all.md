@@ -15,7 +15,9 @@ Load this single file when your environment accepts only one Markdown instructio
 
 ---
 name: product-judgement
-description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Requires the four foundational Skills installed alongside it; it audits the scales it can load and marks any it cannot `N/E`. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+license: MIT
+argument-hint: "[audit] <product, codebase, prototype, or frames>"
 ---
 
 # Product Judgement
@@ -90,6 +92,22 @@ Focal has the same boundary rule: a confusing action surface is Focal; a mislead
 
 Run the four local methodologies in this order. This is the evidence order, not an automatic fix order.
 
+### When a sibling Skill is not installed
+
+Every pass below loads a sibling spine by relative path. Those paths resolve when the four foundational Skills sit beside this one—the plugin, marketplace, and `install.sh` layouts all produce that—but not for a single-Skill upload, a lone `bundles/product-judgement.md`, or a partial `skills add`. Check before auditing, and never simulate a methodology you could not read: an invented Focal score is worse than a missing one, because the reader cannot tell the two apart.
+
+A single-file bundle is the exception that looks like this case but is not. `bundles/all.md` concatenates all five spines and their review contracts into one file, so the content is already in context even though `../focal/SKILL.md` resolves to nothing. Use the in-context sections and run the full audit. Report a scale unavailable only when its methodology is neither readable at its path nor present in context.
+
+When a spine or review contract is genuinely unavailable:
+
+1. Name the unavailable scale and the reason in **Coverage**.
+2. Run the passes whose Skills are present, in the same order.
+3. Score the missing scale `N/E—Skill not installed` in the scorecard and leave its cross-scale finding empty. Keep the row: the gap is part of the result.
+4. Say what closes it—`claude plugin install product-judgement@product-judgement`, or `./scripts/install.sh`, installs all five.
+5. Keep the reconciliation and the priority sequence, and mark the ordering provisional. An unread scale can hide the real upstream owner.
+
+With fewer than two scales available, stop and say so. Reconciliation is this Skill's whole function, and there is nothing to reconcile.
+
 ### 1. Frame the audit and map coverage
 
 Establish the product, audience, stakes, first value, business goal, and evidence basis. Build a compact map with four views:
@@ -121,7 +139,7 @@ Use the Compass map as evidence for the route, but keep the question separate: C
 
 ### 5. Run Soul after checking the floor
 
-Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable; otherwise preserve `N/E` and do not invent a total.
+Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable. Deferred Readiness is not by itself `N/E`: score the treatment the artifact actually shows, and use `N/E` only for a gate the structural failure genuinely prevents evaluating. Omit the total whenever any gate is `N/E`; never invent one.
 
 If Focal, Compass, or Flywheel finds a broken floor, still record the Soul findings, but sequence expressive treatment after the structural or lifecycle repair. Do not use delight to cover confusion, a maze, a trust break, or invisible value.
 
@@ -136,7 +154,7 @@ Create one issue ledger from the four native reports:
 5. Preserve every local score, verdict, and component score rationale; do not average unlike totals into a false Product Judgement score.
 6. Separate observed, inferred, walked, tested, and measured claims.
 
-One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
+Order the ledger by severity, P0 first. Within one severity, order by owner in the run order above—Focal, then Compass, then Flywheel, then Soul—and then by that Skill's own tie-break. One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
 
 Set the priority changes by dependency and consequence. Rank concrete implementation changes, not just findings or Skill owners:
 
@@ -150,7 +168,9 @@ This order can change when evidence shows a different upstream dependency. Do no
 
 ## Holistic output
 
-Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
+Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes.
+
+The local contracts produce more than this wrapper prints, so five rules settle the surplus. **Several screens, one Focal row**—score the worst screen, name it in the Score rationale, and raise the others as separate cross-scale findings; never average screens. **Bands live in the rationale**—put each local quality band and its weakest-dimension ceiling at the end of that Skill's **Score rationale** bullet, since the scorecard has no band column. **One Blocker**—take the highest-consequence local blocker, name its owner, and record the rest as findings at their own severity. **Four slots, not six**—the local contracts mandate up to three Top moves each plus Flywheel's Fix this first and Soul's ranked moments; select for this wrapper by dependency and consequence, and say in **Handoffs** which owner's moves did not make the cut. **This wrapper supersedes local output instructions**—the local Voice sections, calibration reads of `reference/examples.md`, re-run advice, build-workflow trailers, and sibling handoffs do not apply to an orchestrated pass; their analysis still informs the scores. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
 
 ```markdown
 **Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship> · <one biggest cross-scale issue>
@@ -167,10 +187,10 @@ Run all four local audits first, then return this wrapper. Keep the local report
 ## Four-scale scorecard
 | Skill | Native verdict | Score | Cross-scale finding |
 |---|---|---:|---|
-| Focal | <Clear Intent verdict> | _/12 · _._/4 | <one line> |
-| Compass | <Never Lost verdict> | _/12 · _._/4 | <one line> |
-| Flywheel | <earliest evidenced leak | undetermined pending evidence> | <_/16 · _._/4 | N/E> | <one line> |
-| Soul | <Readiness + authored-state verdict> | <_/12 · _._/4 | N/E> | <one line> |
+| Focal | <Clear Intent verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Compass | <Never Lost verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Flywheel | <earliest evidenced leak | undetermined pending evidence | N/E—Skill not installed> | <_/16 · _._/4 | N/E> | <one line> |
+| Soul | <Readiness + authored-state verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
 
 ## Score rationale
 - **Focal <_/12>:** Information Architecture _/4 — <evidence → consequence → rubric anchor → next-point change>; Progressive Disclosure _/4 — <evidence → consequence → rubric anchor → next-point change>; Visual Hierarchy _/4 — <evidence → consequence → rubric anchor → next-point change>.
@@ -179,7 +199,7 @@ Run all four local audits first, then return this wrapper. Keep the local report
 - **Soul <_/12 or N/E> · Readiness <Ready | Deferred>:** Placement <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Proportion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Signature <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>.
 
 ## Cross-scale findings
-- **[P0–P3 · <Focal | Compass | Flywheel | Soul>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
+- **[P0–P3 · <Focal | Compass | Flywheel | Soul> · <discipline, play, or beat>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
 
 ## Priority changes (up to 4)
 1. **Priority 1 · <P0–P3> · Now — <primary owner and stage>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the concrete implementation change>. **Why now:** <the consequence and upstream reason>. **Depends on:** <owner or "none">.
@@ -227,6 +247,7 @@ Read the sibling Skill spines and their review contracts when running the local 
 ---
 name: focal
 description: Use when designing, reviewing, or decluttering a functional product, app, dashboard, or tool screen on any platform. Focal is the screen-local structure-and-attention lens—it decides what belongs, what waits, and what wins attention through Information Architecture, Progressive Disclosure, and Visual Hierarchy. Its methodology is One Screen, One Clear Intent—not one action per screen. It classifies task, hub, and exploration registers, chooses the matching action model, supports inherent binary-choice or dual-mode sets, and adjusts density for expertise. Triggers on clutter, "too much on screen", "simplify this screen", "what's the primary action", "too many choices", choice overload, manual selection, input parsing, contextual information, "show the consequence", one screen one purpose, one clear intent, IA, dashboard, admin, or onboarding/settings. Not for multi-screen flows or navigation (use Compass), visual styling, motion, research, code, marketing/landing pages, backend, or non-UI work.
+license: MIT
 argument-hint: "[build | review] <screen, file, or description>"
 ---
 
@@ -248,12 +269,12 @@ Three disciplines, treated as top priorities, are how you earn that outcome:
 
 ```
                  ┌────────────────────────────────────────────┐
-   the outcome   │         ONE SCREEN, ONE CLEAR INTENT         │
+   the outcome   │        ONE SCREEN, ONE CLEAR INTENT        │
                  └────────────────────────────────────────────┘
                         ▲              ▲               ▲
    the means     Information      Progressive       Visual
                  Architecture     Disclosure        Hierarchy
-                 what belongs     what shows now     what wins
+                 what belongs     what shows now    what wins
 ```
 
 Get all three right and the screen settles around one clear intent on its own. Miss any one and that intent blurs. **Progressive Disclosure is the anti-overload discipline**—it runs before hierarchy because a screen cannot rank its way out of carrying too much. That is a sequencing dependency, not extra numeric weight: all three disciplines still score on the same 0–4 scale.
@@ -416,6 +437,8 @@ These skills are not a whole-app IA or sitemap tool. If the question is "how sho
 
 ## Routing
 
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. When Product Judgement names several screens, score the *worst* one, name that screen in the rationale, and raise the others as separate findings—never average screens into one score.
+
 - **No argument** → explain the methodology and three disciplines briefly, then ask: building a new screen, or reviewing an existing one?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Focal with Compass, Flywheel, and Soul and reconciles the results.
 - **`build` (or a description of a screen to design)** → follow **The five moves** below. Pull techniques from [reference/patterns.md](reference/patterns.md).
@@ -566,7 +589,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the rendered UI or system condition, not the user's emotion.
 4. **Lifecycle**—the moment in use or relationship: first run, setup, recurring use, re-entry, post-action, or another specific moment.
 
-Use product labels and concrete conditions. `Contact detail · screen-local · empty state · first visit after contact creation` is actionable; `CRM screen` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
+Use the narrowest defensible locator. `Contact detail · screen-local · empty state · first visit after contact creation` is actionable; `CRM screen` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
 
 ## Adjust for register
 
@@ -657,7 +680,7 @@ Score each discipline holistically against its local rubric. Read all checks and
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the dimension is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
 
 Keep the native total: `total = Information Architecture + Progressive Disclosure + Visual Hierarchy`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
@@ -669,6 +692,8 @@ Keep the native total: `total = Information Architecture + Progressive Disclosur
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
 Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores.
+
+- If more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
 
 Dimension score, overall quality band, issue severity, critical blocker, and the **One Screen, One Clear Intent** verdict are separate. The verdict remains Yes or No: a screen can be Solid and still receive No if its organizing intent or action model is structurally unresolved. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
@@ -726,7 +751,7 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 
 Filling it:
 - **Coverage**—name only states and lifecycle moments the evidence actually exposes. Use `gaps` for consequential variants such as loading, error, first-run, re-entry, or worst-case data that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Next**—structural before executional, always: polishing a screen with an unresolved organizing intent only organizes the clutter. Resolve structural items with the five-move build workflow in [SKILL.md](../SKILL.md). Single-screen work is Focal's; if the real problem is the path between screens, hand off to Compass; if it is a lifecycle leak in activation, value recognition, or return, hand off to Flywheel.
 - Re-run the audit after fixes to watch the score climb.
 
@@ -1003,7 +1028,8 @@ Note the disclosure discipline doing the real work in the build: seven things we
 
 ---
 name: compass
-description: Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, or navigation in any functional product, app, dashboard, or tool. Compass is the cross-screen lens—it owns the path between screens—navigation, step count, routing, retreat/home behavior, state, and entry points. Its promise is Never Lost—at every step the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Three disciplines—Orientation (load-bearing), Path Economy (fewest honest steps or least needless effort), and Continuity (context and state survive the seams). Adapts to finite and open-ended journey types and the user's expertise. Pairs with Focal, which designs the individual screens. Triggers on flow, journey, navigation, onboarding, checkout, wizard, multi-step, "too many steps", "back button", "where am I", lost, dead end, routing, breadcrumb, progress. Not for single-screen layout (use Focal), visual styling, copy, code, marketing/landing pages, backend, or non-UI work.
+description: Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, or navigation in any functional product, app, dashboard, or tool. Compass is the cross-screen lens—it owns the path between screens—navigation, step count, routing, retreat/home behavior, state, and entry points. Its promise is Never Lost—at every step the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Three disciplines—Orientation (load-bearing), Path Economy (fewest honest steps or least needless effort), and Continuity (context and state survive the seams). Pairs with Focal, which designs the individual screens. Triggers on flow, journey, navigation, onboarding, checkout, wizard, multi-step, "too many steps", "back button", "where am I", lost, dead end, routing, breadcrumb, progress. Not for single-screen layout (use Focal), visual styling, copy, code, marketing/landing pages, backend, or non-UI work.
+license: MIT
 argument-hint: "[build | review] <flow, journey, or description>"
 ---
 
@@ -1060,7 +1086,7 @@ A journey that answers every applicable question feels effortless. A bounded flo
 
 The user is never without their bearings. This is the promise; the other two disciplines serve it.
 
-- **Show position and progress when the journey is bounded.** Use "Step 2 of 4," a breadcrumb, or an active nav state as appropriate. Frame bounded progress as achievable milestones, never a demoralizing tally. Open-ended spaces need position and home, not fake completion.
+- **Show position and progress when the journey is bounded.** The mechanism follows the flow type, never taste. **Linear**—a step counter (`Step 2 of 4`). **Branching**—name the branch and count within it; a global count becomes a lie the moment the path forks. **Hub-and-spoke**—an active nav state plus a labeled route back to the center, because the center *is* the position. **Open-ended**—location in the space (breadcrumb, active filter, or anchor) and no counter at all. Frame bounded progress as achievable milestones, never a demoralizing tally. Open-ended spaces need position and home, not fake completion.
 - **Always a way to retreat or leave.** Use the platform's expected mechanism: an in-product Back where the product owns the stack, browser Back where history is meaningful and state-safe, a breadcrumb or hub link in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate a platform control without adding clarity; do ensure every modal and owned flow has an obvious escape.
 - **No dead ends.** Every screen has a clear next step or a clear way out. A screen the user can reach but not leave is a bug, not a state.
 - **Signal the current location.** The user should always be able to point at where they are in the app's structure.
@@ -1137,6 +1163,8 @@ Two ties worth naming, because they recur:
 ---
 
 ## Routing
+
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output.
 
 - **No argument** → explain Never Lost and the three disciplines briefly, then ask: building a new flow, or reviewing an existing one?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Compass with Focal, Flywheel, and Soul and reconciles the results.
@@ -1271,7 +1299,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the interaction or system condition: waiting, validation error, retry, Back, refresh, deep-linked, resumed, and so on.
 4. **Lifecycle**—the journey moment: first-run activation, returning completion, interruption/resume, recovery, or another specific path.
 
-Use concrete transitions. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not guess.
+Use the narrowest defensible locator. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not invent behavior.
 
 ## Adjust for flow type
 
@@ -1294,7 +1322,7 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 *At every step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
 
 - Run the **drop test** on every screen: drop the user onto it with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? A screen that fails those applicable questions fails Orientation.
-- Check **position and progress**: "Step 2 of 4," a breadcrumb, an active nav state. Is progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
+- Check **position and progress** against the mechanism the flow type requires, in **Orientation** in [SKILL.md](../SKILL.md): a counter for linear, a named branch counted within itself for branching, an active nav state plus a labeled route to the center for hub-and-spoke, location without a counter for open-ended. A mechanism borrowed from the wrong flow type is a finding even when something is displayed. Is bounded progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
 - Check for a **platform-appropriate retreat or home path** and an **escape hatch** from every owned bounded flow—especially modals and wizards. Browser Back can be sufficient when history and state behave correctly; a product-owned stack needs its own visible retreat. Do not demand duplicate controls that add no clarity.
 - Hunt for **dead ends**: a screen the user can reach but not leave is a bug, not a state.
 - For branching/hub flows, check that the user can see **which branch they're on** or **how to get back to the hub**.
@@ -1302,7 +1330,7 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 | Score | Criteria |
 |-------|----------|
 | 0 | No recovery exists—a true dead end, or a flow the user cannot leave from any screen |
-| 1 | A way out exists but is hidden or unlabeled; or progress is hidden and the drop test fails on a key screen. Browser Back alone is a failure only when the product owns a bounded flow, history is unsafe or surprising, or the retreat is not reasonably discoverable. A retreat that *wipes work* is Gate 3's, not this gate's |
+| 1 | A way out exists but is hidden or unlabeled; or progress is hidden and the drop test fails on a key screen. Browser Back alone is a failure only when the product owns a bounded flow, history is unsafe or surprising, or the retreat is absent from the screen's default state, reachable only by hover or gesture. A retreat that *wipes work* is Gate 3's, not this gate's |
 | 2 | Orientable, but one applicable answer—where-am-I, what-remains-when-bounded, or how-to-retreat/get-home—is weak or absent at a step |
 | 3 | Clear position, platform-appropriate retreat/home, and exit throughout; minor signposting gaps |
 | 4 | At every step the user knows where they are, what remains when bounded, and how to proceed, retreat, get home, or escape—the journey-appropriate drop test passes everywhere |
@@ -1435,7 +1463,7 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 
 Filling it:
 - **Coverage**—name only conditions actually walked or evidenced. Use `gaps` for consequential paths such as Back, refresh, retry, interruption/resume, deep link, or returning-user bypass that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Next**—structural before executional, always: signposting a maze only labels the dead ends. Resolve structural items with the four-move build workflow in [SKILL.md](../SKILL.md) and the techniques in [patterns.md](patterns.md).
 - **Single-screen problems are out of scope—route them to [Focal](../../focal).** If an individual screen is overloaded, mis-ranked, or has no clear primary action, that is a within-screen failure for Focal, not a seam for Compass; name it in **Next** and hand it off.
 - Re-run the audit after fixes to watch the score climb.
@@ -1692,6 +1720,7 @@ Note the honest-path line running through both: the review's fix for the buried 
 ---
 name: flywheel
 description: Use when improving how a product converts attention into durable value—the growth and retention side of design. Flywheel finds where a product loses the people it already earned, then applies the play that fixes that relationship stage across four ordered plays—Trust, Friction, Wins, and Emotion. A full relationship diagnosis evaluates all four plays and reports /16 only when each is supportable; a targeted stage review scores one play without fabricating a cross-play total. Triggers on growth, retention, activation, onboarding, conversion, churn, drop-off, first impression, time to value, empty state, upgrade prompt, referral, advocacy, "why do users leave", "nobody comes back", or "they sign up but never return". Not for screen-local structure (use Focal), route mechanics or journey orientation (use Compass), expressive treatment (use Soul), paid channels, campaign copy, analytics instrumentation, or research protocols.
+license: MIT
 argument-hint: "[build | diagnose] <product, stage, or symptom>"
 ---
 
@@ -1810,6 +1839,8 @@ Flywheel owns whether the relationship earns return, preference, and advocacy. S
 ---
 
 ## Routing
+
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `diagnose` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Run the full four-play diagnosis; read an individual play's reference file only when a next-point change cannot be grounded without it.
 
 - **No argument** → explain the wheel and the four plays briefly, then ask: diagnosing an existing product, or designing a relationship stage?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Flywheel with Focal, Compass, and Soul and reconciles the results.
@@ -1941,7 +1972,7 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 3. **State**—the rendered or system condition: first encounter, empty, loading, error, success, ask, retry, and so on.
 4. **Lifecycle**—the relationship stage: arrival, consideration, activation before value, first value, return, lapse, re-engagement, or advocacy.
 
-Use the narrowest defensible locator. `Report screen → result · report generation flow · success after processing · first value for a new signup` is actionable; `activation` is not. If any locator field is not evidenced, write `not shown` and name the metric or behavior that would confirm it in **Coverage** or **Basis**.
+Use the narrowest defensible locator. `Report screen → result · report generation flow · success after processing · first value for a new signup` is actionable; `activation` is not. If any locator field is not evidenced, write `not shown` and name the metric or behavior that would confirm it in **Coverage** or **Basis**—do not invent behavior.
 
 ## The four gates
 
@@ -2010,7 +2041,7 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 
 ## Scoring rules
 
-Every play uses the same integer anchors:
+Every evaluated play uses the same integer anchors:
 
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
@@ -2020,7 +2051,7 @@ Every play uses the same integer anchors:
 | **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
 | **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit prerequisite caps, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
+Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
 
 ### Score rationale—required
 
@@ -2037,11 +2068,13 @@ For a **full diagnosis with all four plays evaluated**, keep the native total: `
 
 Then cap the band by the weakest play: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the four scores.
 
+- If more than one independent failure sits in a play, score the *worst* one, then list the others as separate issues.
+
 - **A dark pattern is a critical blocker regardless of total.** Hiding cost, permission, risk, or reversibility to increase action; weaponizing emotion; or removing informed choice must be tagged P0 and named in **Blocker**. Do not mechanically force an unrelated play to 0; score the play using its rubric.
 - **The earliest evidenced leaking stage governs non-critical investment.** A 1 at Trust and a 1 at Emotion is a Trust problem; fixing Emotion first spends effort on people who never arrive. If an earlier play is `N/E`, call the ordering provisional and put its validating check before downstream investment. A P0 at any stage overrides that order for immediate stop or repair and becomes **Fix this first**. After the critical condition is removed, resume from the earliest remaining evidenced leak.
 - **Do not average away a safety or accessibility failure.** Give it its own issue line and blocker state when warranted rather than hiding it inside the total.
 
-Dimension score, overall quality band, issue severity, critical blocker, and the earliest leaking stage are separate. A P0 is always a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. P0 stop-or-repair work governs **Fix this first**; otherwise the earliest leaking stage does.
+Dimension score, overall quality band, issue severity, critical blocker, and the earliest leaking stage are separate. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**. P0 stop-or-repair work governs **Fix this first**; otherwise the earliest leaking stage does.
 
 ## Issue severity
 
@@ -2054,11 +2087,11 @@ Dimension score, overall quality band, issue severity, critical blocker, and the
 
 Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
 
-**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by stage order—Trust, then Friction, then Wins, then Emotion—because upstream fixes change the population that reaches everything downstream. Never reorder across priorities.
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by stage order—Trust, then Friction, then Wins, then Emotion—because upstream fixes change the population that reaches everything downstream. Never reorder across priorities; a P0 Emotion issue outranks a P1 Trust issue.
 
 ## Output format—use this exact structure
 
-Every diagnosis returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape.
+Every diagnosis returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
 
 ```
 **Verdict:** <the leaking stage | undetermined pending evidence> · <the one biggest loss or evidence gap, one phrase> · **<full: total/16 or N/E | targeted: play score/4>**
@@ -2099,7 +2132,7 @@ Every diagnosis returns this template verbatim, in this order. Don't add, remove
 Filling it:
 - **Coverage**—name only relationship stages and app states the evidence actually exposes. Use `gaps` for consequential stages such as first value, return, lapse, or re-engagement that were not shown or measured.
 - **Scope and total**—use `/16` only when all four plays were evaluated. In a full diagnosis, an entirely unsupported play is `N/E—insufficient evidence`; in a targeted stage review, the three out-of-scope rows are `N/E—outside targeted scope`. Neither kind of `N/E` is `0`, and either prevents a total or common band.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Fix this first recommendation, Next item, and handoff a complete **screen · flow · state · lifecycle** locator. Keep the `At` locator precise enough to identify the exact touchpoint and cohort moment that must change. `<observation>` may run two or three sentences when being specific and quantitative; the rest stay tight. If nothing ranks above P3, write "None above P3." under the header and keep the header.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Fix this first recommendation, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Keep the `At` locator precise enough to identify the exact touchpoint and cohort moment that must change. `<observation>` may run two or three sentences when being specific and quantitative; the rest stay tight. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
 - **Fix this first**—one stage, never a list. The whole point of the diagnosis is to refuse to work on four things at once.
 - **Basis**—never claim measurement you do not have. Use the controlled basis vocabulary in the template, and name the fastest confirming metric or behavior.
 
@@ -2606,6 +2639,7 @@ Note what stayed. Two frictions were preserved and named—the upload and the re
 ---
 name: soul
 description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by reach and memory, splits treatments by frequency so repetition never turns expression into noise, and refuses the traditional dumping grounds (404 pages, easter eggs, error mascots) where delight goes to be unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
+license: MIT
 argument-hint: "[build | search] <product, flow, or moment>"
 ---
 
@@ -2701,6 +2735,8 @@ Selection heuristics, archetypes, and the full dumping-grounds list live in [ref
 ---
 
 ## Routing
+
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `search` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Record the findings even when an earlier pass found a broken floor: Product Judgement sequences the repair ahead of the treatment, and an empty Soul contribution leaves a required row unfillable.
 
 - **No argument** → explain the placement idea in three sentences, then ask: search an existing product, or build one moment?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
@@ -2824,14 +2860,14 @@ Error branches are not Net-New candidates, but they are evidence for restraint. 
 
 ## Locate every finding
 
-Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Moment, small thing, Next item, and handoff carries it:
+Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Moment, small thing, Next item, and handoff must carry the same locator:
 
 1. **Screen**—the exact beat, touchpoint, message, or control.
 2. **Flow**—the named happy path or transition.
 3. **State**—the rendered or system condition: first-use, empty, loading, success, failure, re-entry, and so on.
 4. **Lifecycle**—the occurrence: first run, every run, recurring milestone, first value, return, lapse, or recovery.
 
-Use the narrowest defensible locator. `Payment notification · invoice-to-payment · successful settlement · recurring value realization` is actionable; `the ending` is not. If any field is not evidenced, write `not shown` and name the fastest validating check in Coverage or Basis.
+Use the narrowest defensible locator. `Payment notification · invoice-to-payment · successful settlement · recurring value realization` is actionable; `the ending` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**—do not invent behavior.
 
 ## The three scored gates
 
@@ -2886,17 +2922,21 @@ Every evaluated gate uses the same integer anchors:
 
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
-| **0** | **Broken or harmful** | The gate fails outright, inverts its intended behavior, or creates material harm. |
-| **1** | **Major failure** | The gate is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
-| **2** | **Partial or inconsistent** | The basic quality exists, but a material weakness prevents dependable execution. |
-| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target. |
-| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the context, realistic states, and constraints. This is intentionally uncommon, not the normal target. |
+| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
+| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
+| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
+| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
+| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each gate holistically against its local rubric. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` explains what is unusually effective; a restrained `3` can be better product judgment than an over-authored `4` attempt.
+Score each evaluated gate holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the gate overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` is exemplary for the gate being scored; a restrained `3` can be better product judgment than an over-authored `4` attempt.
 
-A score without an explanation is invalid. Every row uses **evidence → consequence → rubric anchor → next-point change**. A `2` names what works and the material weakness; a `3` names the remaining minor gap; a `4` says why the gate is above and beyond and uses `None—already exemplary` for the next point. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+- If more than one independent failure sits in a gate, score the *worst* one, then list the others as separate issues.
 
-When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, round to one decimal, and apply:
+### Score rationale—required
+
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+
+When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -2905,18 +2945,22 @@ When all three gates are evaluated, keep the native total: `total = Placement + 
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Cap the displayed band by the weakest evaluated gate: `0` caps at Broken, `1` at Significant rework, `2` at Solid, and `3–4` adds no ceiling. If any gate is `N/E`, report no total, average, or common band.
+Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any gate is `N/E`, report no total, average, or common band.
 
-Readiness, gate score, final band, issue severity, blocker, and authored-state verdict remain separate. A Deferred readiness result is not itself P0. Assign severity from consequence, reach, and recoverability; a methodology preference is never automatically release-critical.
+Readiness, dimension score, overall quality band, issue severity, critical blocker, and the authored-state verdict are separate. A Deferred readiness result is not itself P0. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
 | Priority | Meaning |
-|---|---|
-| **P0 — Critical** | Blocks the core outcome; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
+|----------|---------|
+| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
+| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
+| **P2 — Moderate** | Creates real friction, confusion, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
 | **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
+
+Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by gate order—**Placement** (the wrong beat, or a beat off the default path) outranks **Proportion** (treatment out of scale with the moment) outranks **Signature** (character that reads as anonymous or borrowed). Never reorder across priorities; a P0 Signature issue outranks a P1 Placement issue.
 
 ## Output format—use this exact structure
 

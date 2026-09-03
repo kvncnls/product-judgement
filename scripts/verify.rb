@@ -51,6 +51,67 @@ SKILLS.each do |skill|
   errors << "#{path}: frontmatter name must be #{skill.inspect}" unless metadata.is_a?(Hash) && metadata["name"] == skill
   description = metadata.is_a?(Hash) ? metadata["description"] : nil
   errors << "#{path}: frontmatter description must be a substantive string" unless description.is_a?(String) && description.length >= 80
+  # The Agent Skills spec caps description at 1024 characters. Over it, the
+  # claude.ai and Skills API upload paths reject the Skill; Claude Code does
+  # not validate, so nothing else in this repo would notice.
+  if description.is_a?(String) && description.length > 1024
+    errors << "#{path}: frontmatter description is #{description.length} characters; the spec cap is 1024"
+  end
+  errors << "#{path}: frontmatter name must be 64 characters or fewer" if metadata.is_a?(Hash) && metadata["name"].to_s.length > 64
+  errors << "#{path}: frontmatter must declare license: MIT" unless metadata.is_a?(Hash) && metadata["license"] == "MIT"
+  # argument-hint is a Claude Code extension, kept deliberately and stripped
+  # from the upload packages by scripts/package_skills.rb.
+  errors << "#{path}: frontmatter must carry an argument-hint" unless metadata.is_a?(Hash) && metadata["argument-hint"].is_a?(String)
+  unknown_keys = metadata.is_a?(Hash) ? metadata.keys - %w[name description license compatibility metadata allowed-tools argument-hint] : []
+  unless unknown_keys.empty?
+    errors << "#{path}: frontmatter keys #{unknown_keys.inspect} are neither spec fields nor known Claude Code extensions; teach scripts/package_skills.rb about them first"
+  end
+end
+
+# Every Skill folder is installed, zipped, and symlinked whole, so they must
+# carry the same files. This is the check that would have caught ABOUT.md
+# living in two of five folders and product-judgement shipping no LICENSE.
+SKILLS.each do |skill|
+  %w[SKILL.md README.md LICENSE agents/openai.yaml].each do |required|
+    errors << "#{skill}/#{required}: missing" unless File.file?(File.join(ROOT, skill, required))
+  end
+  extra = Dir.glob(File.join(ROOT, skill, "*.md")).map { |p| File.basename(p) } - %w[SKILL.md README.md]
+  errors << "#{skill}: unexpected top-level Markdown #{extra.inspect}; reference material belongs in reference/" unless extra.empty?
+end
+# product-judgement legitimately has no reference/ — it is audit-only and its
+# contract is always needed, so it lives in the spine.
+(SKILLS - %w[product-judgement]).each do |skill|
+  errors << "#{skill}/reference: must contain at least one Markdown file" if Dir.glob(File.join(ROOT, skill, "reference", "*.md")).empty?
+end
+
+# agents/openai.yaml is Codex's per-skill interface file. It went unchecked and
+# so existed on one Skill of five.
+OPENAI_INTERFACE_KEYS = %w[display_name short_description icon_small icon_large brand_color default_prompt].freeze
+SKILLS.each do |skill|
+  rel = "#{skill}/agents/openai.yaml"
+  next unless File.file?(File.join(ROOT, rel))
+
+  begin
+    doc = YAML.safe_load(read(rel), permitted_classes: [], aliases: false)
+  rescue Psych::SyntaxError => error
+    errors << "#{rel}: invalid YAML (#{error.message.lines.first.strip})"
+    next
+  end
+  interface = doc.is_a?(Hash) ? doc["interface"] : nil
+  unless interface.is_a?(Hash)
+    errors << "#{rel}: must declare an interface mapping"
+    next
+  end
+  stray = interface.keys - OPENAI_INTERFACE_KEYS
+  errors << "#{rel}: unknown interface key(s) #{stray.inspect}" unless stray.empty?
+  display = interface["display_name"]
+  errors << "#{rel}: interface.display_name is required and capped at 64 characters" unless display.is_a?(String) && !display.empty? && display.length <= 64
+  short = interface["short_description"]
+  # OpenAI's own generator rejects anything outside 25-64, which is stricter
+  # than the 1024 the Codex runtime allows. Match the generator.
+  unless short.is_a?(String) && (25..64).cover?(short.length)
+    errors << "#{rel}: interface.short_description must be 25-64 characters (was #{short.is_a?(String) ? short.length : short.class})"
+  end
 end
 
 # Plugin manifests are the install path for Claude Code, Cursor, and Codex, so
@@ -239,6 +300,100 @@ begin
   end
 rescue Errno::ENOENT, Psych::SyntaxError => error
   errors << "tests/behavioral-contracts.yml: #{error.message.lines.first.strip}"
+end
+
+# The four review contracts each restate one shared audit contract, because every
+# Skill must be installable standalone. Nothing compared the copies, so Soul had
+# silently paraphrased the score anchors and dropped whole rules. These passages
+# are contract, not prose: they must be byte-identical in all four.
+REVIEW_CONTRACTS = SKILLS.reject { |skill| skill == "product-judgement" }.map { |skill| "#{skill}/reference/review.md" }.freeze
+
+SHARED_CONTRACT_TEXT = [
+  ["score anchor 0", "| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |"],
+  ["score anchor 1", "| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |"],
+  ["score anchor 2", "| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |"],
+  ["score anchor 3", "| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |"],
+  ["score anchor 4", "| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |"],
+  ["P0 severity definition", "| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |"],
+  ["P3 severity definition", "| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |"],
+  ["severity assignment rule", "Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0."],
+  ["ordering rule", "**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by"],
+  ["band ceiling rule", "Use the lower-quality result of the average band and this ceiling."],
+  ["blocker independence rule", "a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0"],
+  ["non-critical failures rule", "Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**."],
+  ["score rationale chain", "**evidence → consequence → rubric anchor → next-point change**"],
+  ["worst-failure rule", "score the *worst* one, then list the others as separate issues."],
+  ["holistic scoring rule", "let one severe material failure determine the score when the rubric warrants it"],
+  ["no-invented-behavior rule", "do not invent behavior."],
+  ["narrowest locator rule", "Use the narrowest defensible locator."],
+].freeze
+
+SHARED_CONTRACT_TEXT.each do |label, text|
+  missing = REVIEW_CONTRACTS.reject { |rel| read(rel).include?(text) }
+  next if missing.empty?
+
+  errors << "shared audit contract drifted: #{label.inspect} is missing from #{missing.join(", ")}"
+end
+
+# The /12 band table is shared by the three three-dimension Skills; Flywheel's
+# /16 rows are correct local arithmetic for four plays, not drift.
+BAND_ROWS_12 = [
+  "| **Broken** | `average <= 1.5` | `0–4 / 12` |",
+  "| **Significant rework** | `1.5 < average < 2.5` | `5–7 / 12` |",
+  "| **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |",
+  "| **Excellent** | `average >= 3.5` | `11–12 / 12` |",
+].freeze
+BAND_ROWS_16 = [
+  "| **Broken** | `average <= 1.5` | `0–6 / 16` |",
+  "| **Significant rework** | `1.5 < average < 2.5` | `7–9 / 16` |",
+  "| **Solid** | `2.5 <= average < 3.5` | `10–13 / 16` |",
+  "| **Excellent** | `average >= 3.5` | `14–16 / 16` |",
+].freeze
+%w[focal compass soul].each do |skill|
+  rel = "#{skill}/reference/review.md"
+  BAND_ROWS_12.each { |row| errors << "#{rel}: missing shared /12 band row #{row.inspect}" unless read(rel).include?(row) }
+end
+BAND_ROWS_16.each { |row| errors << "flywheel/reference/review.md: missing /16 band row #{row.inspect}" unless read("flywheel/reference/review.md").include?(row) }
+
+# The orchestration override is what stops a local Skill printing its own locked
+# template, asking a framing question, or routing back to the orchestrator from
+# inside an orchestrated pass. Losing it silently breaks every holistic audit.
+(SKILLS - %w[product-judgement]).each do |skill|
+  rel = "#{skill}/SKILL.md"
+  content = read(rel)
+  errors << "#{rel}: missing the orchestrated-pass override" unless content.include?("**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.**")
+  errors << "#{rel}: orchestrated pass must suppress the examples calibration read" unless content.include?("do not read [reference/examples.md](reference/examples.md)")
+  errors << "#{rel}: orchestrated pass must forbid handing a cross-scale request back" unless content.include?("Never hand a cross-scale request back to Product Judgement")
+end
+
+require_text(errors, "product-judgement/SKILL.md", "### When a sibling Skill is not installed", "missing-sibling fallback")
+require_text(errors, "product-judgement/SKILL.md", "N/E—Skill not installed", "uninstalled-scale verdict")
+require_text(errors, "product-judgement/SKILL.md", "This wrapper supersedes local output instructions", "local-output supersession")
+require_text(errors, "README.md", "a scale whose Skill is not installed alongside Product Judgement", "third permitted N/E use")
+
+# The behavioral fixtures now have a runner. It spends real model tokens, so it
+# must stay opt-in and must never be wired into the verifier or CI.
+eval_script = File.join(ROOT, "scripts", "eval.rb")
+if File.file?(eval_script)
+  errors << "scripts/eval.rb: must be executable" unless File.executable?(eval_script)
+  _, eval_stderr, eval_status = Open3.capture3(RbConfig.ruby, "-c", eval_script)
+  errors << "scripts/eval.rb: syntax error (#{eval_stderr.strip})" unless eval_status.success?
+  errors << ".github/workflows/verify.yml: must not run scripts/eval.rb; it costs model tokens" if read(".github/workflows/verify.yml").include?("eval.rb")
+  errors << ".github/workflows/release.yml: must not run scripts/eval.rb; it costs model tokens" if read(".github/workflows/release.yml").include?("eval.rb")
+else
+  errors << "scripts/eval.rb: missing"
+end
+
+# The upload packages must be built by the script that strips non-spec
+# frontmatter, not by a bare zip that would ship a rejected argument-hint.
+package_script = File.join(ROOT, "scripts", "package_skills.rb")
+if File.file?(package_script)
+  errors << "scripts/package_skills.rb: must be executable" unless File.executable?(package_script)
+  _, pkg_stderr, pkg_status = Open3.capture3(RbConfig.ruby, "-c", package_script)
+  errors << "scripts/package_skills.rb: syntax error (#{pkg_stderr.strip})" unless pkg_status.success?
+  require_text(errors, ".github/workflows/release.yml", "scripts/package_skills.rb", "packaging step")
+else
+  errors << "scripts/package_skills.rb: missing"
 end
 
 # Generated bundles must be exact products of the canonical source files.

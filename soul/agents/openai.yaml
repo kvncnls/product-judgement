@@ -1,0 +1,4 @@
+interface:
+  display_name: "Soul"
+  short_description: "Place the moments worth remembering"
+  default_prompt: "Sweep the happy path with Soul: which beats stay Expected, gain craft, or earn a rebuild."

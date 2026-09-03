@@ -1,0 +1,8 @@
+# Upload packages built by scripts/package_skills.rb and the release workflow.
+dist/
+
+# Output of scripts/eval.rb: per-run transcripts, judge output, and eval.json.
+# These are evaluation records of one model on one day, not source.
+tests/results/
+
+.DS_Store

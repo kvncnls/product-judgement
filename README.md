@@ -70,13 +70,13 @@ For Flywheel, a **leak** is not just churn. It is the first point where momentum
 
 Build outputs are proposals, so their gates remain binary and unscored. Audit-style outputs evaluate something that already exists, so every evaluated local dimension receives an integer score from `0–4`:
 
-| Score | Meaning |
-|---:|---|
-| **0 — Broken or harmful** | Fails outright, blocks the dimension's core outcome, inverts the intended behavior, or creates material harm. |
-| **1 — Major failure** | Technically possible, but seriously compromised, unreliable, or largely absent. |
-| **2 — Partial or inconsistent** | The basic function exists, but a material weakness prevents dependable quality. |
-| **3 — Strong** | Deliberate, dependable professional work with only minor gaps—the normal target for good execution. |
-| **4 — Exemplary, above and beyond** | Goes beyond strong professional execution: fully realized and unusually effective for its context, realistic states, and constraints. It is intentionally uncommon and not the norm. |
+| Score | Canonical label | Shared meaning |
+|---:|---|---|
+| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
+| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
+| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
+| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
+| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
 These are ordinal quality levels, not percentages or school grades. A `3/4` is the intended bar for strong product work; it does **not** mean 75%. A Focal, Compass, or Soul result of `9/12`, or a full Flywheel result of `12/16`, means every evaluated dimension is Strong. A `4/4` is deliberately harder: it recognizes above-and-beyond execution in a selectively exemplary dimension. It is not the norm, the expected baseline, or the minimum acceptable result.
 
@@ -91,9 +91,9 @@ The scorecard keeps each foundational Skill's native total—`/12` for Focal, Co
 | **Solid** | `≥ 2.5` and `< 3.5` | `8–10` | `10–13` |
 | **Excellent** | `≥ 3.5` | `11–12` | `14–16` |
 
-The weakest dimension then caps the final displayed band: a lowest score of `0` caps it at **Broken**, `1` at **Significant rework**, `2` at **Solid**, and `3–4` adds no ceiling. This prevents a high total from hiding one failed dimension.
+The weakest dimension then caps the overall quality band: a lowest score of `0` caps it at **Broken**, `1` at **Significant rework**, `2` at **Solid**, and `3–4` adds no ceiling. This prevents a high total from hiding one failed dimension.
 
-`N/E` means **not evaluated**, not zero. Use it only where the local contract permits it: a Flywheel play outside targeted scope or entirely unsupported by evidence, or a Soul gate made genuinely unevaluable by Deferred Readiness. When a native scorecard is incomplete, report the evaluated rows and the evidence gap, but do not calculate its native total or common band.
+`N/E` means **not evaluated**, not zero. Use it only where the local contract permits it: a Flywheel play outside targeted scope or entirely unsupported by evidence, a Soul gate made genuinely unevaluable by Deferred Readiness, or a scale whose Skill is not installed alongside Product Judgement. When a native scorecard is incomplete, report the evaluated rows and the evidence gap, but do not calculate its native total or common band.
 
 ### Scores must explain themselves
 
@@ -111,10 +111,21 @@ Do not award credit for behavior the artifact does not expose, and do not turn a
 Five concepts remain separate in every audit:
 
 - **Dimension score**—quality within one Skill-specific discipline, play, or gate.
-- **Final quality band**—the lower of the average-derived band and weakest-dimension ceiling.
+- **Overall quality band**—the lower of the average-derived band and weakest-dimension ceiling.
 - **Issue severity**—P0 Critical, P1 Major, P2 Moderate, or P3 Minor, assigned from consequence, reach, and recoverability.
-- **Blocker**—an explicit release-critical condition; every P0 is a blocker, but a blocker does not automatically force a score to `0`.
+- **Blocker**—an explicit release-critical condition; every P0 is a blocker, but a blocker does not automatically rewrite a score to `0`, and a score of `0` does not automatically imply P0.
 - **Local verdict**—the Skill's own north-star conclusion, evaluated independently from the common band.
+
+### Issue severity
+
+| Priority | Meaning |
+|----------|---------|
+| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
+| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, or return for a meaningful share of users. Fix before release. |
+| **P2 — Moderate** | Creates real friction, confusion, dilution, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
+| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
+
+Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
 
 Every audit declares **Coverage** with a four-part implementation locator: **Screen** (the exact UI surface), **Flow** (the named journey or transition, or `screen-local`), **State** (the exact rendered or system condition), and **Lifecycle** (the exact user/product moment). Every issue, top move, Next item, handoff, and Product Judgement priority change carries the same four fields, so the reader can open the right place and reproduce how and when the condition occurs. Here, lifecycle means the user's journey or relationship with the product (first run, pre-value activation, recurring use, interruption/resume, re-entry, lapse), not a software release phase. Never use only `the dashboard` or `onboarding`; if a field is not evidenced, write `not shown` and name the validating check instead of inventing behavior.
 
@@ -220,8 +231,10 @@ cursor-agent plugin marketplace update product-judgement
 Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Download the packages from the [latest release](https://github.com/kvncnls/product-judgement/releases/latest), or build them yourself:
 
 ```bash
-zip -r focal.zip focal
+ruby scripts/package_skills.rb --out dist
 ```
+
+Build them with that script rather than a bare `zip`. These Skills carry `argument-hint` in their frontmatter for Claude Code, and the Agent Skills spec does not allow it—an upload carrying it fails with `Unexpected key(s) in SKILL.md frontmatter: argument-hint` instead of ignoring it. `package_skills.rb` strips non-spec keys from the packages and leaves the source untouched. Pass `--skill focal` for one Skill, or `--check` to see what would be stripped.
 
 Enable **Code execution and file creation** in Settings → Capabilities, then upload the `.zip` under Settings → Capabilities → Skills. Repeat for each Skill you want. A holistic `/product-judgement` audit needs all five, because the orchestration Skill calls the four local methodologies.
 
@@ -299,10 +312,18 @@ Rerun the full `skills add` command when an update reports a failure, when a new
 
 The tooling under `scripts/` is Ruby, and it deliberately targets **Ruby 2.6** so it runs on the interpreter macOS ships, with nothing to install. CI pins 3.3, so a 2.7-only method such as `filter_map` passes CI and still fails on a stock Mac. Keep new code inside the 2.6 standard library; `/usr/bin/ruby scripts/verify.rb` is the check that matters. The Skills themselves stay pure Markdown, so this constraint never reaches anyone installing them.
 
+Two frontmatter facts govern where these Skills can be installed. `description` is capped at **1024 characters** by the Agent Skills spec; `scripts/verify.rb` enforces that ceiling, and Compass has previously exceeded it. `argument-hint` is a **Claude Code-only extension** that the spec does not allow, so an upload to Claude.ai or the Skills API fails hard rather than ignoring it—`Unexpected key(s) in SKILL.md frontmatter: argument-hint`. The release workflow therefore strips non-spec keys from the `.zip` packages it builds; keep the field in the source, and never add a non-spec key without teaching `scripts/package_skills.rb` about it.
+
 Bundles are build artifacts, regenerated from the source folders rather than edited directly:
 
 ```bash
 ruby scripts/build_bundles.rb
+```
+
+The behavioral fixtures in [`tests/`](./tests) have their own opt-in runner. It spends real model tokens, never runs in CI, and is not part of the verifier:
+
+```bash
+ruby scripts/eval.rb --dry-run
 ```
 
 Run the repository verifier before committing. It validates Skill frontmatter, relative links, scoring and boundary invariants, behavioral contract fixtures, the plugin manifests and installer, and exact bundle synchronization; CI runs the same command:
@@ -322,6 +343,10 @@ git tag v1.1.0 && git push origin v1.1.0
 ```
 
 The four are `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, and `.codex-plugin/plugin.json`. Pushing the `v*` tag runs the verifier, confirms the tag matches, builds the Skill `.zip` packages and combined bundle, and publishes the release that the [Claude Desktop and Claude.ai](#claude-desktop-and-claudeai) section links to.
+
+## Contributing
+
+Issues and pull requests are welcome. A change should sharpen one Skill's ownership of its own scale rather than broaden it: Focal owns the screen, Compass the path, Flywheel the relationship, Soul authored memory, and Product Judgement only the reconciliation between them. Run `/usr/bin/ruby scripts/verify.rb` before opening a pull request, and regenerate the bundles in the same commit as any source edit.
 
 ## License
 
