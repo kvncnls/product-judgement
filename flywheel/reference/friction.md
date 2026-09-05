@@ -46,7 +46,7 @@ Onboarding is not a set of introductory screens. It is the path from expectation
 | Reached the dashboard | Imported data and received an actionable insight |
 | Enabled notifications | Invited a collaborator who participated |
 
-**Validate it.** If people who complete the proposed activation event do not retain better than comparable people who do not, the event is weak evidence of value and the definition should be revisited. The cohort comparison shows association, not causation; control for acquisition, intent, and survivorship, and use experiments or research before claiming the event caused retention.
+**Validate it.** If people who complete the proposed activation event do not reach the product's intended success outcome more often than comparable people who do not, the event is weak evidence of value and the definition should be revisited. For recurring products, that outcome may be return; for finite or infrequent services, it may be completion, handoff, or safe exit. The cohort comparison shows association, not causation; control for acquisition, intent, and survivorship, and use experiments or research before claiming the event caused retention or completion.
 
 ## Design backward from first value
 
@@ -77,11 +77,11 @@ Sequence setup so only prerequisites for the next value-bearing step are require
 
 ## What to measure
 
-Onboarding completion, step-level abandonment, time to first value, sessions to first value, error rate, backtracking, repeated attempts, support contact during activation, and activation rate by acquisition source.
+Onboarding completion, step-level abandonment, time to first value, error rate, backtracking, repeated attempts, support contact during activation, and activation rate by acquisition source. For recurring products add meaningful return; for finite or infrequent services add completion, handoff, or safe exit.
 
 **Use distributions, not averages.** A median hides the tail of people who are stuck, and the tail is the leak.
 
-Compare retention of comparable activated and non-activated cohorts as one validation signal. Report it as association unless an experiment or stronger causal design isolates the activation event.
+Compare the intended success outcome for comparable activated and non-activated cohorts as one validation signal: retention or meaningful return when recurring, completion, handoff, or safe exit when finite or infrequent. Report the result as association unless an experiment or stronger causal design isolates the activation event.
 
 ## Anti-patterns
 

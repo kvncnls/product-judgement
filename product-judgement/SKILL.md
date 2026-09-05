@@ -1,6 +1,6 @@
 ---
 name: product-judgement
-description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Requires the four foundational Skills installed alongside it; it audits the scales it can load and marks any it cannot `N/E`. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+description: "Audit a product, feature, or flow across multiple UX scales: screen structure, journeys, relationship value, and memorable moments. Use for a holistic product audit, cross-scale critique, or prioritized UX review from a live product, codebase, prototype, frames, screenshots, or description. Use a local Skill when the question concerns only one scale. Requires the foundational Skills alongside it or in context. Produces an audit, not implementation, user research, analytics, or a compliance certification."
 license: MIT
 argument-hint: "[audit] <product, codebase, prototype, or frames>"
 ---
@@ -9,215 +9,107 @@ argument-hint: "[audit] <product, codebase, prototype, or frames>"
 
 **Audit the product as a connected system.**
 
-Product Judgement is the orchestration Skill for the four foundational Skills:
+Run Focal, Compass, Flywheel, and Soul against one evidence map. Preserve their methodologies and native scores, reconcile overlapping findings, and return one implementation sequence. Do not invent a fifth score or average the native totals together.
 
-- **Focal**—what belongs on a screen, what waits, and what wins attention.
-- **Compass**—how a person moves between screens without getting lost.
-- **Flywheel**—where momentum drops across the relationship and what earns the next stage.
-- **Soul**—which working moments deserve craft and memory.
+## Route by the decision
 
-It is not a fifth design lens and it does not replace the four local methodologies. It runs them against a shared evidence map, keeps their boundaries intact, reconciles their findings, and returns one prioritized audit. Do not invent a fifth score or average the native totals together.
+Scope follows the decisions involved, not the number of screens. One onboarding flow can require all four lenses when the question spans clarity, route integrity, first value, and authorship.
 
-## Use it when
+- **One scale only:** use Focal for screen structure, Compass for navigation and continuity, Flywheel for relationship value, or Soul for expressive treatment.
+- **Several scales or an explicitly holistic audit:** run this workflow, even for a single screen or flow. Do not narrow it merely because the artifact is small.
+- **Build or implement:** use the relevant local build methodology; this Skill only audits and reconciles.
+- **No artifact or usable description:** ask for the product and primary goal. Otherwise proceed with labeled assumptions and specific evidence gaps.
 
-Use Product Judgement when the question is larger than one screen, one flow, one relationship stage, or one expressive moment:
+`audit`, `review`, and `critique` all run the workflow below; audit is the default.
 
-- audit the whole app or a meaningful product area;
-- find why a working product feels incoherent, hard to navigate, low-value, or forgettable;
-- decide which UX problem to fix first when several Skills identify related issues;
-- reconcile screen, journey, relationship, and memory findings into one implementation sequence.
+## Frame the evidence
 
-For a question clearly confined to one scale, invoke the local Skill directly. A single dashboard belongs to Focal; a route-orientation problem belongs to Compass; a first-value or retention problem belongs to Flywheel; a happy-path authorship problem belongs to Soul. A single onboarding flow can still warrant Product Judgement when the question spans screen decisions, path integrity, first value, and memory—scope follows the decisions involved, not the number of screens.
+Establish the audience, user goal, product goal, stakes, intended first-value event, expected usage cadence, and constraints. Use available research, support themes, analytics, and prior experiments to explain the artifact; do not manufacture that context.
 
-## Evidence and context
+Combine evidence according to the claim. Rendered UI supports hierarchy and visible states; code exposes routes, validation, and state logic; interaction tests establish behavior; product data and user research inform outcomes. Static frames and code alone do not prove lived usability, retention, or memory. Preserve distinctions between **observed, inferred, walked, tested, and measured** claims.
 
-Accept a codebase, live product, clickable prototype, Figma or Paper frames, screenshots, or a product description. Also accept the surrounding product context: the PRD (Product Requirements Document), product brief, strategy or goal documents, user research, personas, journey maps, analytics or funnel data, support themes, experiment history, and technical, accessibility, legal, or safety constraints. The artifact tells you what exists; these materials explain why it exists, for whom, and what success means. The more relevant context available, the more specific and defensible the audit. Prefer the codebase when it is available because it can expose routes, components, state transitions, validation, persistence, re-entry behavior, copy, and implementation constraints that frames cannot.
+Map the relevant screens, ordered journeys and branches, lifecycle stages, and happy-path moments. Include consequential failure, permission, completion, interruption, and re-entry states when available. Mark missing evidence `not shown` and name the fastest check that would expose it. Missing evidence is a validation task, not proof that the product needs an implementation change.
 
-Before auditing, collect or infer the following and label assumptions:
+Use the narrowest defensible **Screen · Flow · State · Lifecycle** locator for findings, priorities, and handoffs. State means the rendered/system condition; lifecycle means when it occurs in use. A missing field stays `not shown`.
 
-- business goal, product requirements, success criteria, and the outcome that matters;
-- primary audience, expertise, situation, and stakes;
-- the user's intended first-value event;
-- the primary entry points and journeys;
-- known constraints, evidence, metrics, or unresolved questions.
+## Keep ownership clear
 
-Do not stall when context is missing. State the missing context in **Coverage** or **Basis**, use `not shown` for consequential states or lifecycle moments that the evidence does not expose, and name the fastest validating check.
+| Failure | Primary owner |
+|---|---|
+| Competing local intents, hidden decision context, or misdirected attention | Focal |
+| Unclear route, dead end, lost state, or failed recovery | Compass |
+| Untrusted promise, excessive effort before value, invisible value, or unearned return | Flywheel |
+| Misplaced, exhausting, or anonymous treatment on a working path | Soul |
 
-### Figma and Paper
+A coherent but over-demanding setup can be Flywheel; a broken route through that setup is Compass. Voluntary return because value compounds is Flywheel; how that working return is authored is Soul. Fixing hierarchy is Focal even when it affects activation.
 
-Frames are valid evidence for visible structure, hierarchy, copy, and the transitions they actually show. They are not proof of behavior. When auditing from frames:
+One condition may legitimately affect several local scores, but prints once in the issue ledger. For example, lost drafts on resume lower Compass Continuity and may damage Flywheel Emotion; Compass owns the state repair, and Flywheel cites its relationship consequence.
 
-1. Point the agent at one frame or component for Focal.
-2. Select the ordered set of frames, including branches and meaningful variants, for Compass. Say which frames are in sequence; do not make the agent guess the path order.
-3. Include first-run, success, error, empty, loading, permission, interruption, and re-entry frames when they exist.
-4. Mark persistence, validation, timing, and unseen lifecycle behavior as `not shown` unless the frames or prototype demonstrate them.
+## Run the local passes
 
-Useful prompts include `/focal audit this dashboard` and `/compass audit this flow`. A holistic pass is `/product-judgement audit this app` with the relevant frames selected.
+Load each relevant spine and its review contract. Follow its decision procedures and rubric, including conditionally needed references. Reuse a shared contract already in context rather than rereading identical material. This is the evidence order, not an automatic fix order:
 
-## Keep the four boundaries clear
-
-Use the failure's location and consequence to assign a primary owner. Several Skills may mention the same symptom, but the holistic audit prints one issue with one owner and any dependencies.
-
-| Question | Primary owner | Keep it out of this Skill |
-|---|---|---|
-| What belongs here, what waits, and what should draw attention? | **Focal**—the screen-local decision surface | Do not turn it into a navigation, retention, or expressive-treatment fix. |
-| Can the user reach the destination, know where they are, and keep their state? | **Compass**—the path and its seams | Do not score local hierarchy or call every extra step a retention problem. |
-| Does the relationship earn trust, first value, recognition, return, or advocacy? | **Flywheel**—the stage transition and lifecycle | Do not use it to replace a missing Back affordance, lost route, or screen-level action model. |
-| Once the floor holds, what deserves to be remembered? | **Soul**—the authored moment and its frequency | Do not decorate a maze, hide a trust failure, or treat novelty as a retention strategy. |
-
-### The two common overlaps
-
-**Compass vs Flywheel.** Compass asks whether the route is understandable, economical, reversible, and stateful: *Where do I go? What is next? How do I get back?* Flywheel asks whether the effort and uncertainty on that route earn the next relationship stage: *Why should I continue? Is this too much work or exposure before value?* A hidden step, dead end, or lost state is Compass. A coherent but over-demanding setup, premature ask, or effort that delays first value is Flywheel. Use both when both conditions are present; make the path defect the primary owner when it blocks access to the stage.
-
-**Flywheel vs Soul.** Flywheel owns whether value lands, is recognized, compounds, and creates a substantive reason to return. Soul owns where and how a working moment is authored and made memorable. Flywheel Emotion does not require novelty, motion, or recognizability without the logo; it asks whether re-entry restores momentum and repeated use becomes more valuable. If value lands and return is earned but the experience remains anonymous, use Soul. Soul may identify expressive treatment that strengthens a Flywheel win, but it waits behind trust, comprehension, accessibility, and path integrity.
-
-Focal has the same boundary rule: a confusing action surface is Focal; a misleading product promise or missing evidence across the relationship is Flywheel; a broken transition is Compass. Do not let a local symptom acquire the wrong owner just because it appears on a screen.
-
-## The audit workflow
-
-Run the four local methodologies in this order. This is the evidence order, not an automatic fix order.
+1. **Focal:** [spine](../focal/SKILL.md) and [review](../focal/reference/review.md). Review the decision surfaces and representative states. Preserve the Clear Intent verdict. For several screens, use the worst evaluated screen for the summary row, identify it, and report other issues separately; do not average screens.
+2. **Compass:** [spine](../compass/SKILL.md) and [review](../compass/reference/review.md). Trace primary journeys, branches, entry points, retreat, interruption, and recovery. Preserve the Never Lost verdict. Do not rescore local layout here.
+3. **Flywheel:** [spine](../flywheel/SKILL.md) and [review](../flywheel/reference/review.md). Establish first value and intended cadence. Evaluate Trust, Friction, Wins, and Emotion. Identify the earliest evidenced relationship problem, and make the ordering provisional when lifecycle evidence is missing. Healthy completion or infrequent use can be the intended outcome.
+4. **Soul:** [spine](../soul/SKILL.md) and [review](../soul/reference/review.md). Check unscored Readiness, then map treatment, restraint, frequency, and stakes. Record evaluable treatment even when Readiness is Deferred; sequence expression after structural, trust, or value repairs. Zero Net-New recommendations is valid.
 
 ### When a sibling Skill is not installed
 
-Every pass below loads a sibling spine by relative path. Those paths resolve when the four foundational Skills sit beside this one—the plugin, marketplace, and `install.sh` layouts all produce that—but not for a single-Skill upload, a lone `bundles/product-judgement.md`, or a partial `skills add`. Check before auditing, and never simulate a methodology you could not read: an invented Focal score is worse than a missing one, because the reader cannot tell the two apart.
+Check whether each methodology and its review contract are readable at the linked paths or already present in context. `bundles/all.md` contains them in one file; do not mistake absent filesystem paths for absent instructions. Never simulate a methodology you could not read.
 
-A single-file bundle is the exception that looks like this case but is not. `bundles/all.md` concatenates all five spines and their review contracts into one file, so the content is already in context even though `../focal/SKILL.md` resolves to nothing. Use the in-context sections and run the full audit. Report a scale unavailable only when its methodology is neither readable at its path nor present in context.
+Keep unavailable rows as `N/E—Skill not installed`, name the gap in Coverage, and make reconciliation provisional. With fewer than two available scales, stop the holistic pass and offer the available local review. The repository's complete plugin or `scripts/install.sh` installs all five; consult the installation guide for the current platform rather than inventing commands.
 
-When a spine or review contract is genuinely unavailable:
+### Shared evidence and scoring
 
-1. Name the unavailable scale and the reason in **Coverage**.
-2. Run the passes whose Skills are present, in the same order.
-3. Score the missing scale `N/E—Skill not installed` in the scorecard and leave its cross-scale finding empty. Keep the row: the gap is part of the result.
-4. Say what closes it—`claude plugin install product-judgement@product-judgement`, or `./scripts/install.sh`, installs all five.
-5. Keep the reconciliation and the priority sequence, and mark the ordering provisional. An unread scale can hide the real upstream owner.
+<!-- BEGIN SHARED: evidence -->
+Use `N/E—insufficient evidence` when the available artifact cannot support a dimension's rubric. A missing variant does not automatically make the whole dimension unevaluable. Report supported findings and the next evidence check; do not convert unknown behavior into a defect, an implementation recommendation, or a score. If any required dimension is N/E, omit the native total, average, band, and weakest-dimension ceiling.
 
-With fewer than two scales available, stop and say so. Reconciliation is this Skill's whole function, and there is nothing to reconcile.
+Before assigning `0`, `1`, or `2`, identify the observed condition that meets the negative rubric anchor. “Not shown,” “untested,” and “unknown” cannot supply that condition. If an essential part of the dimension is unsupported, use N/E rather than a lower score as a substitute for uncertainty. Supported strengths can still be described without a number.
+<!-- END SHARED: evidence -->
 
-### 1. Frame the audit and map coverage
+Preserve each evaluated component's integer and rationale: **evidence → consequence → rubric anchor → next-point change**. A next-point change can be an evidence check when the limitation is evidence; it must not assert missing functionality. Fully evaluated Focal, Compass, and Soul use `/12`; Flywheel uses `/16`. Scores are ordinal judgments within the named coverage, not percentages or measured product outcomes. Compare scores only with equivalent scope, evidence, rubric, and audience.
 
-Establish the product, audience, stakes, first value, business goal, and evidence basis. Build a compact map with four views:
+## Reconcile and prioritize
 
-- **Screens**—entry, first decision, first value, repeat use, re-entry, high-stakes actions, and failure or recovery states.
-- **Journeys**—the primary entry-to-outcome flows, branches, deep links, Back behavior, interruption, and resume behavior.
-- **Relationship**—arrival, trust, activation before value, first value, return, lapse, re-engagement, and advocacy.
-- **Memory**—the default happy path, its beats, frequency, ending, and any moments already carrying expressive treatment.
+Deduplicate conditions, assign one primary owner, preserve secondary score consequences, and record dependencies. Sort the ledger by severity, then consequence, reach, recoverability, and confidence. Do not prioritize a finding merely because its Skill ran first.
 
-Use the same four-part implementation locator throughout: **Screen · Flow · State · Lifecycle**. Keep rendered state separate from occurrence. For example, `Import screen · CSV upload flow · validation error · first-run activation` is precise; `onboarding` is not. If one field is not evidenced, write `not shown` and name the check that would expose it.
+Rank concrete changes: prevent material harm and loss of informed choice; repair upstream blockers to the user's outcome; clarify decision surfaces; make delivered value understandable; then consider expressive treatment. Evidence may change that sequence. A relationship problem does not outrank a state-loss defect just because retention is the business goal.
 
-### 2. Run Focal on the decision surfaces
-
-Load [Focal](../focal/SKILL.md) and its [review contract](../focal/reference/review.md). Review the screens that carry the primary decisions or expose the largest relationship stages. Include representative variants rather than pretending one screenshot proves every state. Preserve Focal's native `/12` score and **One Screen, One Clear Intent** verdict.
-
-Record which screen issue is local and which one is actually a path, lifecycle, or memory issue for the later reconciliation.
-
-### 3. Run Compass on the primary journeys
-
-Load [Compass](../compass/SKILL.md) and its [review contract](../compass/reference/review.md). Review the primary journeys as ordered paths, including the seams where state, context, or entry points can fail. Preserve Compass's native `/12` score and **Never Lost** verdict.
-
-Do not use Compass to rescore every screen. Use Focal for local structure and Compass for the route between those surfaces.
-
-### 4. Run Flywheel across the relationship
-
-Load [Flywheel](../flywheel/SKILL.md) and its [review contract](../flywheel/reference/review.md). Name first value before diagnosing. Evaluate all four plays—Trust, Friction, Wins, and Emotion—then identify the earliest evidenced leaking stage, not merely the largest downstream symptom. Preserve Flywheel's native `/16` only when all four plays are supportable; if a relationship stage is entirely unexposed, preserve `N/E—insufficient evidence`, omit the total, and make the ordering provisional.
-
-Use the Compass map as evidence for the route, but keep the question separate: Compass explains whether the user can traverse the path; Flywheel explains whether the path earns the next relationship stage.
-
-### 5. Run Soul after checking the floor
-
-Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable. Deferred Readiness is not by itself `N/E`: score the treatment the artifact actually shows, and use `N/E` only for a gate the structural failure genuinely prevents evaluating. Omit the total whenever any gate is `N/E`; never invent one.
-
-If Focal, Compass, or Flywheel finds a broken floor, still record the Soul findings, but sequence expressive treatment after the structural or lifecycle repair. Do not use delight to cover confusion, a maze, a trust break, or invisible value.
-
-### 6. Reconcile without flattening the Skills
-
-Create one issue ledger from the four native reports:
-
-1. Deduplicate findings that describe the same condition.
-2. Assign one primary owner using the boundary rules above.
-3. Keep the exact **Screen · Flow · State · Lifecycle** locator on every finding, recommendation, handoff, and priority change.
-4. Record dependencies, such as `Soul after Compass` or `Flywheel after Focal`.
-5. Preserve every local score, verdict, and component score rationale; do not average unlike totals into a false Product Judgement score.
-6. Separate observed, inferred, walked, tested, and measured claims.
-
-Order the ledger by severity, P0 first. Within one severity, order by owner in the run order above—Focal, then Compass, then Flywheel, then Soul—and then by that Skill's own tie-break. One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
-
-Set the priority changes by dependency and consequence. Rank concrete implementation changes, not just findings or Skill owners:
-
-1. Stop material harm, coercion, hidden cost, permission, or safety failures.
-2. Repair the earliest blocker on the route to first value—often trust or path integrity.
-3. Fix screen-local decision surfaces that keep the user from acting or understanding.
-4. Make delivered value visible and earn the next relationship stage.
-5. Spend Soul's expressive budget only after the path, value, and trust floor holds.
-
-This order can change when evidence shows a different upstream dependency. Do not force every product through the same backlog.
+Keep uncertain claims in validation work until supported. Preserve deliberate conventions and justified restraint. Do not fill a quota or reserve a priority slot for Soul.
 
 ## Holistic output
 
-Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes.
-
-The local contracts produce more than this wrapper prints, so five rules settle the surplus. **Several screens, one Focal row**—score the worst screen, name it in the Score rationale, and raise the others as separate cross-scale findings; never average screens. **Bands live in the rationale**—put each local quality band and its weakest-dimension ceiling at the end of that Skill's **Score rationale** bullet, since the scorecard has no band column. **One Blocker**—take the highest-consequence local blocker, name its owner, and record the rest as findings at their own severity. **Four slots, not six**—the local contracts mandate up to three Top moves each plus Flywheel's Fix this first and Soul's ranked moments; select for this wrapper by dependency and consequence, and say in **Handoffs** which owner's moves did not make the cut. **This wrapper supersedes local output instructions**—the local Voice sections, calibration reads of `reference/examples.md`, re-run advice, build-workflow trailers, and sibling handoffs do not apply to an orchestrated pass; their analysis still informs the scores. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
+This wrapper supersedes local output instructions. During an orchestrated pass, local Voice sections, example-calibration reads, build trailers, and sibling handoffs do not apply. Local analysis and rubrics still apply. Keep detailed local reports available; print them only when requested.
 
 ```markdown
-**Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship> · <one biggest cross-scale issue>
-
-**Product:** <what it is, for whom> · goal: <business or user outcome> · first value: <event, or "undefined"> · stakes: <low | medium | high>
-**Screen:** <exact screens, regions, or touchpoints reviewed>
-**Flow:** <named journeys and transitions reviewed>
-**State:** <exact rendered or system states reviewed>
-**Lifecycle:** <exact user/product relationship moments reviewed>
-**Coverage:** <screens, journeys, relationship stages, states, and lifecycle moments reviewed> · gaps: <material gaps, or "none">
-**Basis:** <observed from a screenshot or artifact | inferred from code | tested in a prototype or live product | walked from a description | measured from product data> · confirm with: <fastest validating check>
-**Blocker:** <None. | concise blocker reason>
+**Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship | provisional> · <largest supported issue or evidence gap>
+**Product:** <audience and goal> · first value: <event or undefined> · cadence: <intended usage> · stakes: <low | medium | high>
+**Coverage:** <Screen · Flow · State · Lifecycle reviewed> · gaps: <material missing evidence>
+**Basis:** <observed / inferred / walked / tested / measured, matched to claims> · confirm with: <specific check>
+**Blocker:** <None. | supported release-critical condition>
 
 ## Four-scale scorecard
-| Skill | Native verdict | Score | Cross-scale finding |
-|---|---|---:|---|
-| Focal | <Clear Intent verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
-| Compass | <Never Lost verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
-| Flywheel | <earliest evidenced leak | undetermined pending evidence | N/E—Skill not installed> | <_/16 · _._/4 | N/E> | <one line> |
-| Soul | <Readiness + authored-state verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Skill | Native verdict | Score | Principal finding or gap |
+|---|---|---|---|
+| Focal | <Clear Intent verdict or unavailable> | <total/12 or N/E> | <screen named> |
+| Compass | <Never Lost verdict or unavailable> | <total/12 or N/E> | <journey named> |
+| Flywheel | <earliest evidenced problem or undetermined> | <total/16 or N/E> | <stage named> |
+| Soul | <Readiness + authored-state verdict or unavailable> | <total/12 or N/E> | <moment named> |
 
 ## Score rationale
-- **Focal <_/12>:** Information Architecture _/4 — <evidence → consequence → rubric anchor → next-point change>; Progressive Disclosure _/4 — <evidence → consequence → rubric anchor → next-point change>; Visual Hierarchy _/4 — <evidence → consequence → rubric anchor → next-point change>.
-- **Compass <_/12>:** Orientation _/4 — <evidence → consequence → rubric anchor → next-point change>; Path Economy _/4 — <evidence → consequence → rubric anchor → next-point change>; Continuity _/4 — <evidence → consequence → rubric anchor → next-point change>.
-- **Flywheel <_/16 or N/E>:** Trust <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Friction <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Wins <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Emotion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>.
-- **Soul <_/12 or N/E> · Readiness <Ready | Deferred>:** Placement <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Proportion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Signature <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>.
+- **<Skill> · <component> · <integer/4 or N/E>:** <locator; evidence → consequence → rubric anchor → next-point change, or specific evidence gap>.
+- **<Skill> summary:** <average, band, and weakest-dimension ceiling only when complete>.
 
 ## Cross-scale findings
-- **[P0–P3 · <Focal | Compass | Flywheel | Soul> · <discipline, play, or beat>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
+- **[P0–P3 · <owner> · <dimension>]** **At:** <Screen · Flow · State · Lifecycle>. <Observed condition and consequence>. **Fix:** <supported change>. **Depends on:** <repair or none>.
 
 ## Priority changes (up to 4)
-1. **Priority 1 · <P0–P3> · Now — <primary owner and stage>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the concrete implementation change>. **Why now:** <the consequence and upstream reason>. **Depends on:** <owner or "none">.
-2. **Priority 2 · <P0–P3> · Next — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the change unlocked by Now>. **Why now:** <the consequence and dependency>. **Depends on:** <owner or "none">.
-3. **Priority 3 · <P0–P3> · Then — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the change that makes value, return, or comprehension stronger>. **Why now:** <the consequence and dependency>. **Depends on:** <owner or "none">.
-4. **Priority 4 · <P0–P3> · Later — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <a fourth warranted change>. **Why now:** <why it belongs after the earlier work>. **Depends on:** <owner or "none">.
+1. **<priority · owner>** **At:** <Screen · Flow · State · Lifecycle>. **Change:** <concrete warranted change>. **Why now:** <consequence and dependency>.
 
 ## Handoffs and validation
-- **Focal:** **At:** screen: <exact screen/region or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <screen(s) to review or rebuild>.
-- **Compass:** **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named journey or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <journey or seam to review or rebuild>.
-- **Flywheel:** **At:** screen: <exact touchpoint or `not shown`> · flow: <named journey or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <stage and first-value or return check to validate>.
-- **Soul:** **At:** screen: <exact beat/touchpoint or `not shown`> · flow: <named happy path or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <moment to author only after its dependency holds>.
-- **Validation:** <fastest behavior, user test, or metric for the highest-consequence claim>.
+- **<owner>:** **At:** <Screen · Flow · State · Lifecycle>. <remaining local work, omitted priorities, or dependency>.
+- **Validation:** <highest-consequence uncertain claim; evidence to obtain; what would confirm or change the recommendation>.
 ```
 
-Never emit a vague location such as `the onboarding` or `the dashboard` when **Screen, Flow, State, and Lifecycle** can be named. If the evidence cannot support that precision, say `not shown` for the missing field and name what would expose it.
-
-Emit one to four Priority changes, only when each is a concrete warranted change. Do not reserve a slot for Soul or invent filler to reach four. If Soul Readiness is Deferred, record the dependency in Handoffs rather than manufacturing an expressive priority.
-
-## Routing
-
-- **No argument** → explain that this is the whole-app audit and ask for the product, codebase, prototype, or selected frames plus the primary goal.
-- **`audit` / `review` / `critique`** → run the full workflow above. Treat `audit` as the default command.
-- **A single-screen request** → hand off to `/focal` and do not run the other three unless the user asks for a holistic pass.
-- **A single-flow request** → hand off to `/compass`; add `/flywheel` only when the question includes activation, value, return, or a relationship leak.
-- **A single moment or expressive-treatment request** → hand off to `/soul`, after checking whether the floor is sound.
-- **A build request** → use the relevant local build Skill; Product Judgement is an audit and reconciliation layer, not a replacement for the Screen, Flow, Stage, or Moment Specs.
-
-## Source files
-
-Read the sibling Skill spines and their review contracts when running the local passes:
-
-- [Focal](../focal/SKILL.md) · [review](../focal/reference/review.md)
-- [Compass](../compass/SKILL.md) · [review](../compass/reference/review.md)
-- [Flywheel](../flywheel/SKILL.md) · [review](../flywheel/reference/review.md)
-- [Soul](../soul/SKILL.md) · [review](../soul/reference/review.md)
+Repeat component rationale rows for every local dimension, including N/E rows. Native totals without component rationales are invalid. Emit zero to four warranted priority changes; if no implementation change is supported, say so and give the validating check. Keep empty sections concise instead of manufacturing findings.

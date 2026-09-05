@@ -1,0 +1,3 @@
+# Optional Skills CLI commands run from this checkout inherit this policy.
+# pnpm dlx honors project release-age settings from pnpm 11 onward.
+minimumReleaseAge: 1440

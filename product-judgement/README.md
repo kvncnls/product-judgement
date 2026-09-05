@@ -48,12 +48,12 @@ Product Judgement is audit-only. It returns:
 
 - **Verdict**—the largest cross-scale issue and the kind of work the product needs.
 - **Coverage and Basis**—the exact Screen · Flow · State · Lifecycle reviewed, material gaps, evidence type, and a confirming check.
-- **Four native scorecards**—Focal `/12`, Compass `/12`, Flywheel `/16` when all four plays are evaluable, and Soul `/12` when all three gates are evaluable, each with component rationales.
+- **Four native scorecards**—Focal `/12`, Compass `/12`, Flywheel `/16`, and Soul `/12` only when every required dimension is evaluable, each with component rationales.
 - **Cross-scale issue ledger**—deduplicated P0–P3 findings with one primary owner and exact implementation locators.
-- **Priority changes**—one to four concrete, warranted changes ordered by consequence and dependency; no filler and no reserved slot for any Skill.
+- **Priority changes**—zero to four concrete, warranted changes ordered by consequence and dependency; no filler and no reserved slot for any Skill.
 - **Handoffs and validation**—local work that belongs to a foundational Skill and the fastest check for the most consequential uncertain claim.
 
-Every component score must explain **evidence → consequence → rubric anchor → smallest next-point change**. Native totals are never averaged together. An entirely unexposed Flywheel play is `N/E—insufficient evidence`. Soul Readiness remains unscored; if Deferred Readiness makes a Soul gate genuinely unevaluable, it is also `N/E`, not zero. Any incomplete native scorecard receives no total or common band.
+Every component score must explain **evidence → consequence → rubric anchor → smallest next-point change**. Native totals are never averaged together. Any dimension unsupported by the available evidence is `N/E—insufficient evidence`, not zero. A missing variant need not invalidate an otherwise supported dimension. Soul Readiness remains unscored. Any incomplete native scorecard receives no total, average, common band, or weakest-dimension ceiling. Unknown behavior becomes a validation check, not an implementation fix.
 
 ## Use
 
@@ -73,19 +73,7 @@ Missing context does not stop the audit. It becomes an explicit assumption or ev
 
 ## Install and update
 
-Product Judgement needs all four foundational Skills. Install the complete collection globally for Claude Code, Codex, and Cursor:
-
-```bash
-npx skills add kvncnls/product-judgement --skill '*' -g -a claude-code -a codex -a cursor -y
-```
-
-Update the tracked global installation:
-
-```bash
-npx skills update -g product-judgement focal compass flywheel soul
-```
-
-See the root [installation and update guide](../README.md#install) for manual folders and generated single-file bundles.
+Product Judgement needs all four foundational Skills. Use the complete plugin or installer in the root [installation and update guide](../README.md#install). That guide includes native plugins, protected folder installation, upload packages, and generated single-file bundles.
 
 ## Boundaries
 

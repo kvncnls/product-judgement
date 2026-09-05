@@ -24,6 +24,8 @@ jobs:
           echo "System Ruby is ${version}"
           unset GEM_HOME GEM_PATH RUBYOPT RUBYLIB BUNDLE_GEMFILE
           /usr/bin/ruby scripts/verify.rb
+          /usr/bin/ruby scripts/test_install.rb
+          /usr/bin/ruby scripts/test_packages.rb
 
   release:
     runs-on: ubuntu-latest
@@ -38,7 +40,10 @@ jobs:
           ruby-version: "3.3"
 
       - name: Verify source contracts and generated bundles
-        run: ruby scripts/verify.rb
+        run: |
+          ruby scripts/verify.rb
+          ruby scripts/test_install.rb
+          ruby scripts/test_packages.rb
 
       - name: Confirm the tag matches the plugin manifests
         run: ruby scripts/check_version.rb "${GITHUB_REF_NAME#v}"
@@ -49,6 +54,9 @@ jobs:
         run: |
           ruby scripts/package_skills.rb --out dist
           cp bundles/all.md dist/product-judgement-complete-bundle.md
+
+      - name: Validate the downloadable archives
+        run: ruby scripts/verify_packages.rb --dir dist
 
       - name: Publish release
         uses: softprops/action-gh-release@v2

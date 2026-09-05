@@ -10,13 +10,13 @@ Two harnesses cover this repository, and the boundary between them matters. [`sc
 ruby scripts/eval.rb --dry-run
 ```
 
-`--dry-run` renders every prompt, resolves every argv, self-checks the excerpt verifier, and spends nothing. Run it first, every time. A real pass adds the baseline arm:
+`--dry-run` renders every audit and build prompt, resolves every argv, checks the excerpt verifier, verifies the namespaced invocation and ablation body, and checks that expected/reject text is withheld. It spends nothing. Run it first, every time. A real pass adds the baseline arm:
 
 ```bash
 ruby scripts/eval.rb --ablation --repeat 3
 ```
 
-`--ablation` is the option that decides whether the suite means anything. It runs each fixture a second time with the Skills unloaded; a fixture that passes in both arms is reported **NO SIGNAL**, because it is measuring the base model rather than these 30,000 words. Run it.
+`--ablation` is the option that decides whether the suite means anything. It runs each fixture a second time with the Skills unloaded; a fixture that passes in both arms is reported **NO SIGNAL**, because it is measuring the base model rather than these instructions. Use `--id` for a bounded representative run before attempting a larger sample.
 
 `scripts/eval.rb --help` lists the rest. The unit of measurement is `(fixture, assertion)` and the number is always `k/N` — the runner is non-deterministic, with no temperature or seed available, so a per-fixture boolean is a number the harness cannot honestly produce.
 
@@ -26,25 +26,28 @@ Exit codes separate what was learned from what was not: `0` green, `1` a behavio
 
 Read this before treating a green run as coverage.
 
-- **Roughly a dozen decision boundaries out of hundreds.** Untested: every rubric anchor at 0, 1, and 2; all four build modes; `patterns.md`, `moments.md`, `treatments.md`, and the four Flywheel play references; the routing tables. Green means "the boundaries we thought of still hold".
+- **Twenty-eight fixture scenarios out of hundreds of possible boundaries.** The set now includes static evidence gaps, named finite progress without numeric counters, finite user-chosen task lists, safe sensitive resume, contextual expert density, Soul moment selection, one-flow cross-scale routing, infrequent-service exits, and one representative build for each local Skill. It still does not cover every rubric anchor, reference, routing branch, or content shape. Green means "the boundaries we thought of still hold".
 - **The default mode skips the most common real failure.** `--invoke slash` hands the model the Skill. In production a Skill fires, or fails to, off its `description`. `--invoke auto` tests that, at higher variance and cost.
 - **`--repeat 3` is underpowered.** A regression that fails 20% of the time reads as PASS about half the time at N=3. It catches gross regressions and is blind to drift.
 - **The judge is a model, and its agreement with a human is unmeasured.** Excerpt verification catches fabricated quotes, not misreading. `--calibrate` grades hand-labeled transcripts in `tests/judge-calibration/` when that directory exists.
 - **One CLI, one model.** The collection also ships as `bundles/all.md` for ChatGPT Projects and custom GPTs — the artifact where progressive disclosure collapses into one flat file, and the one this harness never exercises.
-- **It scores compliance, not craft.** Every assertion is a boundary. A transcript can satisfy all of them and still be a vague, generic, useless audit. Nothing in this repository guards whether the output is worth reading.
+- **Usefulness is only a model-judged proxy.** Several assertions now require a situated locator, concrete evidence-to-consequence fix, preserved context or protection, and a named tradeoff. Those checks reject generic slogans, but they do not establish human usefulness, craft quality, or that a real team would act on the recommendation.
 - **Being opt-in means it will rarely run, and its existence is not coverage.** Record the last real run below and let it visibly go stale.
 
 ## Last full run
 
-Never run. `--ablation` has not been executed against this fixture set, so no fixture here is yet known to depend on the Skills rather than on the base model.
+No complete CLI ablation has finished. A bounded attempt on 2026-09-05 UTC stopped during provenance preflight because the local Claude OAuth session had expired. It produced no behavioral grades. A separate fresh-agent comparison and its limits are recorded in [the remediation validation note](validation-2026-09-05.md); it is not a completed CLI suite or human calibration.
 
 ## What the fixtures concentrate on
 
-- contextual Focal density instead of a hard item quota;
-- finite and open-ended Compass journeys, and an indicator bound to flow type;
-- platform-appropriate retreat behavior;
+- contextual Focal density instead of a hard item quota, including an expert row with more than eight needed facts;
+- finite and open-ended Compass journeys, named stages without a numeric counter, user-chosen task order, final submit, and conditional sensitive resume;
+- platform-appropriate retreat behavior and evidence-bounded missing states;
 - targeted versus full Flywheel scoring;
-- Soul restraint, Readiness, and zero-Net-New outcomes;
+- Soul restraint, Readiness, contextual early-versus-late moment selection, and zero-Net-New outcomes;
+- success and clean exit for an infrequent finite service without manufactured retention;
+- applicable completion, partial-failure, permission, and interruption/recovery states in representative builds for Focal, Compass, Flywheel, and Soul;
+- candidate prompt isolation: the mode and evidence reach the candidate, while grading assertions stay with the judge;
 - the orchestrated pass: each local Skill suppressing its own locked template while preserving its scores;
-- Product Judgement cross-scale deduplication, a missing sibling Skill, and skipping the local calibration reads;
+- Product Judgement cross-scale routing and deduplication, a missing sibling Skill, and skipping the local calibration reads;
 - the intentionally uncommon `4/4` threshold.

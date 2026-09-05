@@ -36,7 +36,7 @@ Coherence signals that someone is paying attention, which is the only proxy a ne
 The user knows the consequence and keeps agency.
 
 - Clear permissions, preview before commitment, visible fees, reversibility where it exists, honest limitations, explicit confirmation for consequential actions, a way to get help.
-- Raise this layer in finance, health, identity, and anything irreversible. **Explaining risk before requesting permission converts better than hiding it, and it is the only version that survives the second visit.**
+- Raise this layer in finance, health, identity, and anything irreversible. **Explaining risk before requesting permission supports informed completion and any later use; it is the only version that earns durable trust.**
 
 ## First impressions are not the homepage
 

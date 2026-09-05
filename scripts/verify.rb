@@ -197,10 +197,13 @@ else
 end
 
 # Relative Markdown links in source documentation must resolve. Generated bundles
-# intentionally preserve source-relative links verbatim, so they are checked by the
-# bundle synchronization test rather than by this path resolver.
+# rewrite them to internal source anchors, checked by the bundle generator.
+def runtime_output?(path)
+  %w[dist tests/results].any? { |directory| path.start_with?(File.join(ROOT, directory) + "/") }
+end
+
 markdown_files = Dir.glob(File.join(ROOT, "**", "*.md")).reject do |path|
-  path.include?("/.git/") || path.start_with?(File.join(ROOT, "bundles") + "/")
+  path.include?("/.git/") || runtime_output?(path) || path.start_with?(File.join(ROOT, "bundles") + "/")
 end
 
 markdown_files.each do |path|
@@ -219,50 +222,34 @@ markdown_files.each do |path|
   end
 end
 
-# Guard the behavioral decisions most likely to regress into rigid heuristics or
-# overlapping ownership.
-require_text(errors, "focal/SKILL.md", "Use four chunks as a task-screen diagnostic, not a universal limit.", "contextual chunk diagnostic")
-require_text(errors, "focal/SKILL.md", "not extra numeric weight", "equal discipline weighting")
-require_text(errors, "focal/reference/review.md", "not a stopwatch threshold or an automatic scoring failure", "quick-orientation probe")
-require_text(errors, "focal/reference/review.md", "Top moves (up to 3)", "non-quota top moves")
-require_text(errors, "focal/SKILL.md", "Every applicable state above designed", "contextual state gate")
-
-require_text(errors, "compass/SKILL.md", "The outcome-or-anchor test.", "finite/open-ended framing")
-require_text(errors, "compass/SKILL.md", "what remains when the journey is bounded", "bounded progress rule")
-require_text(errors, "compass/reference/review.md", "Browser Back can be sufficient", "platform-appropriate retreat rule")
-require_text(errors, "compass/reference/review.md", "A failed drop test is not automatically release-critical", "consequence-based drop-test severity")
-
-require_text(errors, "flywheel/SKILL.md", "full relationship diagnosis evaluates all four plays", "full diagnosis contract")
-require_text(errors, "flywheel/SKILL.md", "targeted stage review or build runs one play deeply", "targeted stage contract")
-require_text(errors, "flywheel/reference/review.md", "N/E—outside targeted scope", "targeted N/E output")
-require_text(errors, "flywheel/reference/review.md", "N/E—insufficient evidence", "evidence-gap N/E output")
-require_text(errors, "flywheel/reference/review.md", "A P0 at any stage overrides that order", "critical-severity precedence")
-require_text(errors, "flywheel/reference/review.md", "Missing internal terminology does not cap a UX score by itself", "evidence-based first-value scoring")
-require_text(errors, "flywheel/reference/emotion.md", "Boundary with Soul", "Flywheel/Soul boundary")
-
-require_text(errors, "soul/reference/review.md", "Readiness is deliberately **unscored**", "unscored Readiness")
-require_text(errors, "soul/reference/review.md", "## The three scored gates", "three-gate Soul scorecard")
-require_text(errors, "soul/reference/review.md", "zero Net-New moments as valid", "zero-Net-New outcome")
-require_text(errors, "soul/SKILL.md", "**Target:** <Expected | Elevated | Net-New>", "all three build targets")
-require_text(errors, "soul/reference/treatments.md", "Elevated is the default ceiling", "contextual frequency/stakes default")
-require_text(errors, "soul/reference/treatments.md", "Net-New is an exception, not an entitlement", "durable Net-New exception")
-
-require_text(errors, "product-judgement/SKILL.md", "scope follows the decisions involved, not the number of screens", "cross-scale scope rule")
-require_text(errors, "product-judgement/SKILL.md", "One condition may legitimately affect several local scores", "deduplication contract")
-require_text(errors, "product-judgement/SKILL.md", "Priority changes (up to 4)", "non-quota priorities")
-
-source_contract_files = Dir.glob(File.join(ROOT, "{focal,compass,flywheel,soul,product-judgement}", "**", "*.md")).map { |path| relative(path) }
-reject_text(errors, source_contract_files, "Never run all four plays by default", "Flywheel full-audit contradiction")
-reject_text(errors, source_contract_files, "A real Back on every screen", "universal Back requirement")
-reject_text(errors, source_contract_files, "declining is free", "absolute decline-cost claim")
-reject_text(errors, source_contract_files, "2–3 biggest moments", "Soul Net-New quota")
-reject_text(errors, source_contract_files, "Baseline, Placement, Proportion, and Signature", "obsolete four-gate Soul scorecard")
+# Verify structure here; scenario fixtures and opt-in evaluations test judgment.
+# Phrase matching cannot establish whether an instruction improves a real audit.
+(SKILLS - %w[product-judgement]).each do |skill|
+  spine = "#{skill}/SKILL.md"
+  %w[review build].each do |mode|
+    reference = "reference/#{mode}.md"
+    errors << "#{spine}: missing #{mode} reference" unless File.file?(File.join(ROOT, skill, reference))
+    require_text(errors, spine, "](#{reference})", "#{mode} reference link")
+  end
+end
+SKILLS.each do |skill|
+  spine = "#{skill}/SKILL.md"
+  errors << "#{spine}: exceeds the 500-line progressive-disclosure budget" if read(spine).lines.length > 500
+end
 
 # Public documentation must expose every Skill, the score contract, and the current
 # install/update path without claiming the repository has no maintainer build step.
+begin
+  pnpm_policy = YAML.safe_load(read("pnpm-workspace.yaml"), permitted_classes: [], aliases: false)
+  minimum_age = pnpm_policy.is_a?(Hash) ? pnpm_policy["minimumReleaseAge"] : nil
+  errors << "pnpm-workspace.yaml: minimumReleaseAge must be at least 1440 minutes" unless minimum_age.is_a?(Integer) && minimum_age >= 1440
+rescue Errno::ENOENT, Psych::SyntaxError => error
+  errors << "pnpm-workspace.yaml: #{error.message.lines.first.strip}"
+end
+
 required_docs = ["README.md"] + SKILLS.map { |skill| "#{skill}/README.md" }
 required_docs.each { |path| errors << "#{path}: missing" unless File.file?(File.join(ROOT, path)) }
-require_text(errors, "README.md", "npx skills update -g product-judgement focal compass flywheel soul", "global update command")
+require_text(errors, "README.md", "pnpm dlx skills update -g product-judgement focal compass flywheel soul", "global update command")
 require_text(errors, "README.md", "`/12` for Focal, Compass, and Soul", "native totals")
 require_text(errors, "README.md", "`N/E` means **not evaluated**, not zero", "N/E explanation")
 require_text(errors, "README.md", "no runtime build step", "runtime/build distinction")
@@ -291,6 +278,14 @@ begin
         errors << "tests/behavioral-contracts.yml: fixture #{index + 1} needs #{key}" unless value.is_a?(String) && !value.strip.empty?
       end
 
+      errors << "tests/behavioral-contracts.yml: fixture #{index + 1} names an unknown Skill" unless (SKILLS + ["shared"]).include?(fixture["skill"])
+      unless %w[audit build].include?(fixture.fetch("mode", "audit"))
+        errors << "tests/behavioral-contracts.yml: fixture #{index + 1} has an unsupported mode"
+      end
+      if fixture["skill"] == "product-judgement" && fixture["mode"] == "build"
+        errors << "tests/behavioral-contracts.yml: Product Judgement is audit-only"
+      end
+
       %w[evidence expected reject].each do |key|
         value = fixture[key]
         valid = value.is_a?(Array) && !value.empty? && value.all? { |item| item.is_a?(String) && !item.strip.empty? }
@@ -302,38 +297,10 @@ rescue Errno::ENOENT, Psych::SyntaxError => error
   errors << "tests/behavioral-contracts.yml: #{error.message.lines.first.strip}"
 end
 
-# The four review contracts each restate one shared audit contract, because every
-# Skill must be installable standalone. Nothing compared the copies, so Soul had
-# silently paraphrased the score anchors and dropped whole rules. These passages
-# are contract, not prose: they must be byte-identical in all four.
-REVIEW_CONTRACTS = SKILLS.reject { |skill| skill == "product-judgement" }.map { |skill| "#{skill}/reference/review.md" }.freeze
-
-SHARED_CONTRACT_TEXT = [
-  ["score anchor 0", "| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |"],
-  ["score anchor 1", "| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |"],
-  ["score anchor 2", "| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |"],
-  ["score anchor 3", "| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |"],
-  ["score anchor 4", "| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |"],
-  ["P0 severity definition", "| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |"],
-  ["P3 severity definition", "| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |"],
-  ["severity assignment rule", "Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0."],
-  ["ordering rule", "**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by"],
-  ["band ceiling rule", "Use the lower-quality result of the average band and this ceiling."],
-  ["blocker independence rule", "a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0"],
-  ["non-critical failures rule", "Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**."],
-  ["score rationale chain", "**evidence → consequence → rubric anchor → next-point change**"],
-  ["worst-failure rule", "score the *worst* one, then list the others as separate issues."],
-  ["holistic scoring rule", "let one severe material failure determine the score when the rubric warrants it"],
-  ["no-invented-behavior rule", "do not invent behavior."],
-  ["narrowest locator rule", "Use the narrowest defensible locator."],
-].freeze
-
-SHARED_CONTRACT_TEXT.each do |label, text|
-  missing = REVIEW_CONTRACTS.reject { |rel| read(rel).include?(text) }
-  next if missing.empty?
-
-  errors << "shared audit contract drifted: #{label.inspect} is missing from #{missing.join(", ")}"
-end
+# Shared fragments have a single maintained source and are copied inline so a
+# standalone install retains its complete evidence and scoring contract.
+stdout, stderr, status = Open3.capture3(RbConfig.ruby, File.join(ROOT, "scripts", "sync_contracts.rb"), "--check", chdir: ROOT)
+errors << "shared contracts: #{(stderr + stdout).strip}" unless status.success?
 
 # The /12 band table is shared by the three three-dimension Skills; Flywheel's
 # /16 rows are correct local arithmetic for four plays, not drift.
@@ -362,11 +329,10 @@ BAND_ROWS_16.each { |row| errors << "flywheel/reference/review.md: missing /16 b
   rel = "#{skill}/SKILL.md"
   content = read(rel)
   errors << "#{rel}: missing the orchestrated-pass override" unless content.include?("**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.**")
-  errors << "#{rel}: orchestrated pass must suppress the examples calibration read" unless content.include?("do not read [reference/examples.md](reference/examples.md)")
+  errors << "#{rel}: orchestrated pass must suppress the examples calibration read" unless content.downcase.include?("do not read [reference/examples.md](reference/examples.md)")
   errors << "#{rel}: orchestrated pass must forbid handing a cross-scale request back" unless content.include?("Never hand a cross-scale request back to Product Judgement")
 end
 
-require_text(errors, "product-judgement/SKILL.md", "### When a sibling Skill is not installed", "missing-sibling fallback")
 require_text(errors, "product-judgement/SKILL.md", "N/E—Skill not installed", "uninstalled-scale verdict")
 require_text(errors, "product-judgement/SKILL.md", "This wrapper supersedes local output instructions", "local-output supersession")
 require_text(errors, "README.md", "a scale whose Skill is not installed alongside Product Judgement", "third permitted N/E use")
@@ -384,16 +350,19 @@ else
   errors << "scripts/eval.rb: missing"
 end
 
-# The upload packages must be built by the script that strips non-spec
-# frontmatter, not by a bare zip that would ship a rejected argument-hint.
-package_script = File.join(ROOT, "scripts", "package_skills.rb")
-if File.file?(package_script)
-  errors << "scripts/package_skills.rb: must be executable" unless File.executable?(package_script)
-  _, pkg_stderr, pkg_status = Open3.capture3(RbConfig.ruby, "-c", package_script)
-  errors << "scripts/package_skills.rb: syntax error (#{pkg_stderr.strip})" unless pkg_status.success?
-  require_text(errors, ".github/workflows/release.yml", "scripts/package_skills.rb", "packaging step")
-else
-  errors << "scripts/package_skills.rb: missing"
+# Packaging and regression tools stay executable on the supported Ruby floor.
+%w[package_skills verify_packages test_packages test_install sync_contracts].each do |name|
+  rel = "scripts/#{name}.rb"
+  unless File.file?(File.join(ROOT, rel))
+    errors << "#{rel}: missing"
+    next
+  end
+  errors << "#{rel}: must be executable" unless File.executable?(File.join(ROOT, rel))
+  _, stderr, status = Open3.capture3(RbConfig.ruby, "-c", File.join(ROOT, rel))
+  errors << "#{rel}: syntax error (#{stderr.strip})" unless status.success?
+end
+%w[package_skills verify_packages].each do |name|
+  require_text(errors, ".github/workflows/release.yml", "scripts/#{name}.rb", "#{name} release step")
 end
 
 # Generated bundles must be exact products of the canonical source files.
@@ -402,7 +371,7 @@ errors << "bundles: #{(stderr + stdout).strip}" unless status.success?
 
 # Lightweight text hygiene catches drift that Markdown renderers often hide.
 text_files = Dir.glob(File.join(ROOT, "{README.md,*.md,**/*.md,**/*.rb,**/*.yml,**/*.yaml}"), File::FNM_EXTGLOB).uniq
-text_files.reject! { |path| path.include?("/.git/") }
+text_files.reject! { |path| path.include?("/.git/") || runtime_output?(path) }
 text_files.each do |path|
   content = File.binread(path)
   errors << "#{relative(path)}: must end with a newline" unless content.empty? || content.end_with?("\n")

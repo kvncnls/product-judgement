@@ -1,101 +1,89 @@
 # Compass Examples
 
-Two worked examples, captured from real runs of this skill and shown in the locked output templates—one **review**, one **build**. They share a narrative: the review finds a 7-step onboarding wall that traps the user twice over, and the build redesigns that same flow so the user is never lost. These set the bar for length, specificity, and tone; the templates set the shape.
+These examples calibrate the native review and build shapes. The review demonstrates partial evidence and per dimension `N/E`; the build demonstrates a finite task list with user chosen order, Save and return, and final submit. They are examples, not universal requirements.
 
----
+## Example 1 — Review: a task list with an unseen re entry seam
 
-## Example 1—Review: a 7-step onboarding wall
-
-**Input:** a team-collaboration app's new-user onboarding, 7 steps: (1) Create account, (2) Verify email—shows "check your email" and dead-ends with no resend and no way back, (3) Choose a plan (free tier present but visually buried, prices shown here for the first time), (4) Invite teammates (required, minimum one), (5) Pick integrations from a grid of 24, (6) Name your first project, (7) a 4-slide feature tour. Only then does the user see the product. No progress indicator. Browser Back restarts at step 1 with all fields empty. The onboarding email's "Continue setup" link always opens step 1.
+**Input:** A municipal license renewal service shows a start page, a task hub, and one task detail screen. The hub lists “Applicant details,” “Supporting evidence,” and “Review and submit”; the first task is marked Completed and the other tasks Incomplete. The description says users may choose their task order and return to the hub after each task. No frame or test shows Back, refresh, Save and return, expiry, permission changes, re entry, validation, or final submission.
 
 **Compass's output:**
 
-```
-**Verdict:** No · the email-verification screen is a dead end with no resend, no Back, and no way forward · **1/12**
+```text
+**Verdict:** N/E · the final outcome and re entry seam are not shown
 
-**Flow:** Team-collaboration app new-user onboarding · type: linear · audience: novice
-**Outcome / anchor:** first real action completed inside a live workspace
-**Screen:** Email verification, onboarding steps, and resume seam
-**State:** waiting for code, attempted exit, default progression, and back-navigation reset
-**Lifecycle:** first-run activation before workspace entry, before value, and interruption/resume
-**Context:** a first-timer evaluating the product, patience near zero · bar: Linear's and Notion's first-run
-**Coverage:** first-run steps 1–7, verification waiting, browser Back, and email-link resume · gaps: validation errors, resend/retry, refresh recovery, and returning-user bypass not shown
-**Basis:** walked from a description · confirm with: walk the prototype through Back, refresh, and the onboarding resume/deep links at every step
-**Blocker:** Verification dead end; no exit from the gated wall; buried pricing; Back and resume links reset entered state.
+**Flow:** Municipal license renewal · type: task-list · audience: mixed
+**Outcome / anchor:** submitted renewal application
+**Screen:** start page → task hub → Applicant details task
+**State:** task hub default, one completed task, one incomplete task, and task detail default; Save and return and final submit not shown
+**Lifecycle:** first-run application setup before submission
+**Context:** applicant completing work across tasks · bar: a clear government service with task statuses and a visible final review
+**Coverage:** start page, task hub, task order statement, task detail, and hub return · gaps: Back, refresh, validation, permission, expiry, Save and return, re entry, final review, and submit not shown
+**Basis:** walked from a description and selected frames · confirm with: complete two tasks in different orders, leave and re-enter, then review and submit
+**Blocker:** None observed. The final submission and re-entry behavior are not shown.
 
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Orientation | 0/4 | Step 2 is a true dead end and the 7-step wall has no Cancel or skip; a first-timer cannot recover or exit, so the Never-Lost promise fails outright. | Add resend, change-email, Back, and Finish later to verification, then provide a visible exit on every remaining step. |
-| Path Economy | 1/4 | Only account creation and verification are load-bearing, while five configuration steps precede first value and pricing appears after sunk effort; the path is technically traversable but seriously wasteful and misleading. | Cut to the two honest steps and move plans, invites, integrations, naming, and the tour into dismissible in-product prompts. |
-| Continuity | 0/4 | Browser Back erases every field and the resume link returns to step 1; the flow destroys state at both exit seams, so interruption and re-entry cannot work. | Persist pending signup state, create real history entries, and deep-link users back to the step they left. |
-| **Total** | **1/12 · 0.3/4** | **Broken; exact sum of justified component scores** | Weakest-discipline ceiling applied |
+| Orientation | 3/4 | The task hub names the finite application, shows Completed and Incomplete statuses, and the shown task returns to the hub; this is Strong for the evidenced route, while the final submit and error escape are not shown. | Walk final review and submit plus error and permission states; change only what that evidence warrants. |
+| Path Economy | 3/4 | The service lets users choose task order and return to the hub, so it avoids an arbitrary linear funnel; the unseen task dependencies and final route prevent an exemplary judgment. | Confirm task dependencies and final review hops before proposing a cut. |
+| Continuity | N/E—insufficient evidence | The selected frames expose no Back, Save and return, refresh, expiry, permission, or re-entry seam, so this rubric cannot be judged without turning unknown behavior into a defect. | N/E—walk Save and return, expiry, permission, revalidation, and re-entry before proposing a change. |
 
 ## Issues (most severe first)
-- **[P0 · Orientation]** **At:** screen: Step 2, email verification · flow: new-user onboarding · state: waiting for code/email · lifecycle: first-run activation before workspace entry. The verification dead end—step 2 shows "check your email" and stops: no resend, no "change email", no Back, no way forward inside the app. A first-timer whose mail is slow, spam-filtered, or mistyped by one character has exactly one move left, which is closing the tab; the screen can be reached and not left, so it fails the drop test outright and breaks the promise at the earliest possible moment. **Fix:** make step 2 a live screen—a 6-digit code field that auto-advances on paste, "Resend code" on a 30-second countdown, "Change email", a real Back to step 1 with the address intact, and "Finish later" that saves the pending account and mails a resume link.
-- **[P0 · Orientation]** **At:** screen: Steps 1–7 · flow: new-user onboarding · state: attempted exit · lifecycle: first-run activation before value. No exit from a 7-step wall—there is no Cancel, Close, "Skip for now", or "Save & exit" on any step, and step 4 cannot be skipped and demands a minimum of one teammate invite. A user who wants to see the product before handing over a colleague's email address has no legal move; a wizard with no Cancel is a trap with a polite face, and a required invite makes the trap cost someone else's data. **Fix:** put an escape hatch on every step ("Skip" / "Finish later"), and delete the invite gate—invites become an in-product action prompted when sharing actually matters.
-- **[P0 · Path Economy]** **At:** screen: Step 3, plan choice · flow: new-user onboarding · state: first price disclosure after verification · lifecycle: new user committed but still pre-value. The buried price—prices appear for the first time at step 3, after the user has already created an account and verified an email, and the free tier is visually de-emphasized against the paid options. Cost disclosed only after sunk investment, with the free option down-weighted, is a trust break dressed as a conversion tactic; this is a dark pattern, not economy. **Fix:** disclose pricing before or at account creation, with the free tier as a visually equal, pre-selected default and no card required.
-- **[P0 · Continuity]** **At:** screen: Any onboarding step → browser Back · flow: new-user onboarding · state: back-navigation reset · lifecycle: interrupted first-run activation. The state-eating Back—pressing browser Back at any step restarts at step 1 with all fields empty. Up to six screens of work vanish on one keystroke, and after it happens once the user distrusts the only retreat they had; a Back that resets is the anti-pattern the safety net is supposed to prevent. **Fix:** make each step a real history entry, persist entered values server-side against the pending signup, and restore every field on Back and on forward.
-- **[P0 · Continuity]** **At:** screen: Continue-setup email → onboarding · flow: new-user onboarding · state: deep-linked reset to step 1 · lifecycle: return after interruption. The deep link to step one—the onboarding email's "Continue setup" link always opens step 1, so the one channel built to recover an interrupted user resets them instead. A "continue" that starts over is worse than no link, because it promised; every interrupted signup becomes a re-signup. **Fix:** sign a resume token into the link and land the user on the step they left with prior input intact, and make the verification link complete verification and land them in the workspace.
-- **[P1 · Orientation]** **At:** screen: Steps 1–7 chrome · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value. Hidden progress across all 7 steps—no stepper, no named stages, no count; standing on step 4 the user cannot tell whether one screen is left or six. An unbounded flow reads as endless, and endless is where people quit; combined with the missing signage, the drop test fails on every screen. **Fix:** once the path is cut, carry a milestone stepper with named stages on every remaining gated step ("Step 1 of 2 · Create account"), and never a tally.
-- **[P1 · Path Economy]** **At:** screen: Steps 3–7 · flow: new-user onboarding · state: required pre-product setup · lifecycle: first-run activation before first value. The setup wall—all 7 steps sit before the user ever sees the product: a plan choice, a forced invite, a 24-tile integration grid, a project name, and a 4-slide tour. Only two are load-bearing (create account, verify email)—this is a 7-step flow that needs 2. Every configuration screen before the first win asks a question the user has no context to answer. **Fix:** cut to account + verify, land the user in a pre-seeded workspace, and move plan, invites, integrations, project naming, and the tour into the product as contextual, dismissible prompts—offer 3 relevant integrations with "Browse all", not a grid of 24.
+None above P3.
 
 ## Top moves (up to 3)
-1. **At:** screen: onboarding steps 1–7 · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value · Cut the wall to 2 gated steps—create account, verify email—then put the user in a live, pre-seeded workspace; plan, invites, integrations, project name, and tour all become in-product prompts they can dismiss and return to.
-2. **At:** screen: verification and all gated steps · flow: new-user onboarding · state: waiting, attempted exit, and resume · lifecycle: interruption/resume · Make every step recoverable: a persistent 2-stage stepper, a real Back that preserves state, "Finish later" on both steps, and a verification screen with a code field, resend countdown, and change-email—so no screen can be reached and not left.
-3. **At:** screen: onboarding → resume link · flow: new-user onboarding · state: deep-linked resume · lifecycle: return after interruption · Fix the seams: persist the pending signup so refresh and return-tomorrow resume in place, and re-point the "Continue setup" and verify links at the step the user actually left instead of step 1.
+1. **At:** screen: task hub → task detail → task hub · flow: municipal license renewal · state: task order and return · lifecycle: first-run application setup · Walk the final review and submit path and the Save and return/re-entry seam before prescribing a change.
 
 ## Next
-- **Structural** (do first): **At:** screen: verification and onboarding steps · flow: new-user onboarding · state: dead end and attempted exit · lifecycle: first-run activation · close the verification dead end, add an exit to every step, cut 5 of the 7 steps into in-product prompts, persist pending-signup state across Back and refresh, and re-point both email links at the step the user left.
-- **Executional** (after): **At:** screen: onboarding chrome and plan choice · flow: new-user onboarding · state: default progression and price disclosure · lifecycle: first-run activation before value · the stepper's visual weight, the resend countdown's copy, the free-tier's equal visual treatment on the plan disclosure, and the transition between the two gated steps.
-- **Hand off**: **At:** screen: plan-disclosure screen · flow: new-user onboarding · state: free-vs-paid ranking · lifecycle: first-run activation · the plan-disclosure screen's internal layout and the free-vs-paid visual ranking are single-screen problems—Focal's, once the path is cut.
+- **Structural** (do first): **At:** screen: final review and submit · flow: municipal license renewal · state: not shown · lifecycle: first-run application setup before submission · Confirm the finite completion event and required task dependencies.
+- **Executional** (after): **At:** screen: task hub · flow: municipal license renewal · state: default task statuses · lifecycle: first-run application setup · None—no executional issue is evidenced.
+- **Hand off**: **At:** screen: task hub rows · flow: municipal license renewal · state: default status labels · lifecycle: first-run application setup · None—single-screen hierarchy is not being judged here.
 ```
 
----
+The missing variants do not erase the supported Orientation and Path Economy findings. Continuity is N/E because the available artifact contains no continuity seam to evaluate; the output names the next evidence check instead of inventing a persistence defect or implementation.
 
-## Example 2—Build: the redesigned first run
+## Example 2 — Build: a finite task-list service
 
-**Input:** "Redesign the onboarding flow we just reviewed—fewest honest steps, nothing lost, no dead ends."
+**Input:** “Design a license renewal service for mixed-expertise applicants. They must complete three tasks in whatever order works, may save a safe draft and return, and must review and submit the renewal.”
 
 **Compass's output:**
 
-```
-**Flow:** Team-collaboration app first run—gets the user from a signup click to their first real action inside a live workspace.
-**Type:** linear   ·   **Audience:** novice
-**Outcome / anchor:** first real action completed inside the live workspace
+```text
+**Flow:** License renewal—gets the user from the service start page to a submitted renewal.
+**Type:** task-list   ·   **Audience:** mixed
+**Outcome / anchor:** renewal submitted after all required tasks are complete
 
 ## Steps
-1. Create account—email + password or SSO, with plan tiers stated in plain view ("Free forever · Pro $X/user/month—start free, switch anytime"), free pre-selected, no card. [skip: none—this is the entry]
-2. Verify email—a 6-digit code field that auto-advances on paste, plus a magic link in the same mail; "Resend code" on a 30s countdown, "Change email", Back to step 1, "Finish later". [skip: the magic link completes this step from the inbox, so a user who clicks it never types anything]
-3. Workspace—the product itself, live: a workspace named from the email domain, one pre-seeded project, and the first real action (post, task, doc) available immediately. [skip: workspace and project names are inferred and renamed inline, which removes the old naming step]
+1. Task list hub—shows the three finite tasks, their Completed or Incomplete status, the task the user can choose next, and the final Review and submit condition. Users choose order and return here after each task.
+2. Task detail—completes Applicant details, Supporting evidence, or Renewal dates, then offers Save and return when safe and permitted; Back returns to the hub with safe values intact. [repeat: one task at a time in user-chosen order]
+3. Review and submit—shows the completed task summary, fee, effective date, and renewal consequence; the user corrects errors, confirms the consequential values, and submits.
+
+## State / transition inventory
+- States: hub default with mixed statuses; task detail default, loading, validation error, permission denied, saved draft, expired draft, and success; review with unresolved validation; submit confirmation and submitted success.
+- Transitions: start → hub; hub → any incomplete task; task → hub; Back; Save and return; authenticated re-entry; expired or unauthorized draft recovery; hub → review when required tasks are complete; review → correction or submit; submit → success/home.
 
 ## Cut
-- Merged: the plan step (old 3) → folded into step 1 as plain-view disclosure, so price is stated before any investment rather than after two screens.
-- Merged: the project-name step (old 6) → inference from the email domain plus inline rename inside step 3.
-- Removed: the required teammate invite (old 4)—a gate that cost a third party's data to pass; it becomes an in-product prompt at the moment sharing matters.
-- Removed: the 24-tile integration grid (old 5)—replaced by a contextual "3 suggested · Browse all" prompt inside the workspace, asked when the user has context to answer.
-- Removed: the 4-slide feature tour (old 7)—replaced by a dismissible 3-item checklist that survives dismissal and stays reachable.
-- Kept as protection: email verification—it protects the account and the address is needed for recovery, so it is not waste. Price disclosure moved *earlier*, never hidden to shorten the felt path.
+- Merged: task completion and return → one task detail → hub loop, so each task can be completed without a confirmation round trip.
+- Removed: a forced task order and a setup tour—neither protects the renewal and both delay the service outcome.
+- Kept as protection: the final review and submit step, fee and effective-date disclosure, validation, permission checks, and confirmation of consequential values.
 
 ## Orientation
-- Position/progress: both gated steps carry a two-stage milestone stepper with named stages—"Step 1 of 2 · Create account", "Step 2 of 2 · Verify email"—so the end is visible from the first screen. On arrival, the product's own nav is the position signal: workspace name as the active anchor, plus a "Get started" card reading "1 of 3 done" that honors progress rather than gating it.
-- Retreat/home + exit: step 1 has "Back to site"; step 2 has a real Back to step 1 with the email still filled, plus "Finish later" which saves the pending account and mails a resume link. Step 2 can never dead-end—resend, change email, paste code, Back, and exit are all live on it. Inside the workspace every deferred prompt is dismissible and permanently reachable: Invite in the header, Integrations in the sidebar, and the checklist collapses rather than disappearing.
+- Position/progress: the hub states “Renewal application” and the finite outcome. Task statuses show what is complete and actionable. A named three-stage cue—“Tasks → Review → Submit”—shows the journey without requiring a numeric counter.
+- Retreat/home + exit: each task has Back to task list and Save and return where supported; the start page has Exit service; review has Back to task list and Cancel; success returns to the application home.
 
 ## Continuity
-- Carries forward: the address typed on step 1 is shown verbatim on step 2 ("We sent a code to kevin@acme.com") with a change link, so no code or address is carried in the user's head; the email domain becomes the suggested workspace name on step 3; the plan chosen on step 1 carries to billing and is never re-asked.
-- Survives: Back restores every field on both steps; a refresh, a closed tab, or a return tomorrow resumes on the last step reached with prior input intact, because the pending signup is persisted server-side rather than held in the page; the workspace checklist state persists per user, so a dismissed prompt stays dismissed and a half-done item stays half-done.
-- Entry points: the "Continue setup" email link carries a signed resume token and opens the exact step the user left, never step 1; the verification magic link completes verification and lands the user in the workspace; a teammate's invite link lands the invitee on that workspace's join screen and, after account creation, inside that workspace rather than a fresh empty one.
+- Carries forward: the task name, entered values, evidence status, fee, and effective date appear where needed. Any inferred date or applicant detail is labeled with its source and can be corrected before review.
+- Survives: Back keeps safe task values in the current activity. Save and return stores only permitted draft fields after the user chooses it, shows what was saved and the expiry date, requires authenticated and authorized re-entry, and revalidates permissions, dates, fee, and stale evidence before review or submit. An expired or revoked draft explains the limit and offers a recoverable new start; it does not promise that everything resumes tomorrow.
+- Entry points: a signed resume link opens the authorized task hub or named task with status and expiry visible; an unauthorized or expired link explains the result and routes to the service start.
+- Consequence checks: before submit, show the final task summary, fee, effective date, and permission to submit; ask for explicit confirmation and keep correction routes available.
 
 ## Gates
 - [x] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
 - [x] Every step earns its place; nothing protective cut
-- [x] Where-am-I + platform-appropriate retreat/home + exit throughout
-- [x] No memory bridge; state survives; deep links land in context
-- [x] Drop test passes on every screen
+- [x] Where-am-I + journey-appropriate progress or location + retreat/home + exit throughout
+- [x] No memory bridge; safe state handling; deep links land in context
+- [x] Inferred defaults are visible and correctable; consequential values are confirmed
+- [x] Drop test passes on every applicable screen and transition
 ```
 
----
-
-**Why these two:** the review never just lists problems—it ties every issue to a discipline, ends on a short ranked set of real moves, and sorts the work structural-before-executional. The build never returns prose—it returns the same Flow Spec every time. And the second resolves the first: "cut the wall to 2 gated steps and make every one recoverable" becomes an actual three-screen flow where the user always knows where they are, what's left, and how to get back or out.
-
-Note the honest-path line running through both: the review's fix for the buried price is to disclose it *earlier*, and the build states it on step 1. Shortening the felt path by hiding cost, or dropping verification to save a screen, would be a dark pattern rather than Path Economy—which is why `## Cut` names what was kept as protection alongside what was removed as waste.
+The task list remains finite without pretending that users follow one sequence. Its Save and return behavior is specified with safety, permission, expiry, revalidation, and recovery conditions; the W3C redundant-entry guidance is not used as a claim that every service must persist across sessions.

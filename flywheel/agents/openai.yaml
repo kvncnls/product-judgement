@@ -1,4 +1,4 @@
 interface:
   display_name: "Flywheel"
-  short_description: "Find where a product loses the users it won"
-  default_prompt: "Diagnose this product with Flywheel: where trust, first value, or return leaks first."
+  short_description: "Find where a product loses value"
+  default_prompt: "Diagnose this product with Flywheel: establish cadence and success outcome, then find the first supported leak or report no leak observed."

@@ -1,125 +1,87 @@
-# Compass Patterns—techniques and anti-patterns
+# Compass Patterns: techniques and anti patterns
 
-The working catalog behind the three disciplines. Pull from here when building a flow or when prescribing a fix in a review. Ordered the way the disciplines apply: Orientation → Path Economy → Continuity.
+Use this catalog when building a journey or prescribing a fix that the evidence supports. It follows the three disciplines: Orientation, Path Economy, and Continuity.
 
-Orientation is the load-bearing discipline—the literal promise. When two fixes have equal consequence and dependency, restore the user's bearings first. This is prioritization, not extra numeric weight.
+## Evidence anchors (not compliance certification)
 
----
+- [GOV.UK task list](https://design-system.service.gov.uk/components/task-list/) describes a finite service where users can complete tasks in whatever order works for them, see task statuses, return to the task list, and move on only when the required tasks are complete. It also says to consider Save and return when a service spans multiple sessions. Use this as a pattern reference, not as a universal product requirement.
+- [W3C WCAG 2.2 Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html) covers information repeated within the same process and allows essential, security, and invalid-data exceptions. It explicitly does not add a requirement to store information between sessions. Use it to avoid memory bridges, not to certify a product or prescribe cross session persistence.
 
-## Orientation patterns (Discipline 1—load-bearing)
+## Orientation patterns
 
-How to make sure the user can always answer *Where am I? How far is left? How do I get back, or out?*
+The goal is a user who can answer *Where am I? What remains when bounded? How do I get back, home, or out?*
 
-- **Progress as milestones, not a tally.** A stepper that reads "Step 2 of 4" promises an end the user can picture. "12 of 47 complete" reads as a sentence. Frame progress as a small count of named, achievable stages; if the real count is large, group it ("Account → Payment → Review", not "field 14 of 38"). Defer to [Focal](../../focal) for whether any one step is overloaded—Compass owns the count of steps, not the contents of one.
-- **Breadcrumbs and active state.** On hub-and-spoke and any nested structure, the user must be able to point at where they are: a breadcrumb trail back to the hub, a highlighted nav item, a screen title that matches the link they followed. Recognition beats recall—the path home should be readable, not remembered.
-- **A platform-appropriate retreat.** Use in-product Back where the product owns the stack, browser Back where history is expected and state-safe, a hub or breadcrumb in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate controls without adding clarity. If retreat loses work, that is also a Continuity failure.
-- **Escape hatches and Cancel.** Every flow needs a way *out*, not just back: Cancel, Close, "Save & exit," or "Do this later." Back retreats one step; the escape hatch leaves the flow entirely. A multi-step wizard with no Cancel is a trap with a polite face.
-- **Never-trap modals.** A modal is the easiest place to strand someone. Every modal closes—an X, an explicit Cancel, click-outside, or Esc—and closing it returns the user to a known place, not a blank. A modal that opens another modal that has no close is the canonical maze.
-- **No dead ends.** Every screen has a clear next step *or* a clear way out. A screen the user can reach but not leave is a bug, not a state—success screens, error screens, and edge-case screens included.
-- **The drop test.** Drop the user onto any screen mid-journey with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? Run the applicable questions on every screen. The screen that fails them is where users become lost.
+- **Outcome based progress, not a widget quota.** For a bounded journey, make the outcome and remaining work legible through the cue that fits the actual work: named stages, task statuses, a checklist, a stable count, or a concise summary. A counter is optional. A named three stage stepper such as `Account → Details → Submit` is valid without a numeric count. For open ended work, show position in the space and a known home instead of fake completion progress.
+- **Task list as a finite hub.** When users need to complete several tasks in a user chosen order, show every task, its actionable status, and the finite completion condition. Let each task return to the hub. Add Save and return only when the service has a safe, permitted retention and re entry path; final review and submit close the finite journey.
+- **Branch and hub cues.** Name a branch when a choice changes the route. In a hub-and-spoke journey, show the active hub location and a labeled route back to the center. Do not require a progress bar where the journey has no endpoint.
+- **Platform appropriate retreat.** Use product Back when the product owns the stack, browser Back when history is expected and state safe, a breadcrumb or hub link in nested spaces, and Cancel, Close, or Save and return when the service supports it. Do not duplicate controls without adding clarity.
+- **Escape and no dead ends.** Back retreats one step; an escape hatch leaves the bounded flow. Every shown screen, error, success state, and modal has a clear next step or a way out.
+- **Drop test.** Remove the content and leave only title, position cue, applicable progress or task status, retreat/home path, and exit. A stranger should still identify the journey and leave or return home.
 
-**Test:** strip a screen of its content and leave only its signage—the title, any journey-appropriate position or progress cue, retreat/home path, and exit. Can a stranger say what journey this is, where they sit, and how to leave or return home? If not, orientation has failed before any step is taken.
+## Path Economy techniques
 
----
-
-## Step-reduction techniques (Discipline 2—Path Economy)
-
-Every screen in a flow is a tax on the user. Cut the tax to the minimum the task *honestly* requires. Match the technique to *why* a step exists.
+Every screen is effort. Remove waste while keeping protection and informed choice.
 
 | Technique | Use when | Example |
-|-----------|----------|---------|
-| **Merge round-trips** | Two screens bounce the user back and forth, each doing half a job | Pick item → separate confirm screen → back to list, collapsed into pick-and-confirm in place |
-| **Smart defaults that skip a step** | One choice is right for most users | Pre-selected shipping method, pre-filled country from locale, "remember this" honored |
-| **Infer rather than ask** | The system already knows or can derive the answer | Detect card type from the number; pull name from the signed-in account; geolocate the city |
-| **First value before setup** | Value is gated behind configuration | Show the populated app with sensible defaults, defer settings to when they're relevant |
-| **Prune dead branches** | A fork leads somewhere with no real continuation | Remove the option that dead-ends; or give that branch a real next step |
-| **Collapse adjacent steps** | Two thin screens fit comfortably on one without overload | Merge name + email into one screen—*defer to [Focal](../../focal) for whether the merged screen is now too heavy* |
+|---|---|---|
+| **Merge round trips** | Two screens bounce the user back and forth | Pick an item and confirm in place, then return to the list |
+| **Safe visible default** | One value is right for most users and easy to change | Preselect locale, show why, and offer Edit before continuing |
+| **Visible, correctable inference** | The system can derive a value | Show “Suggested workspace: Acme” with Change, rather than silently committing it |
+| **Consequential confirmation** | A value changes money, identity, permission, destination, quantity, legal status, or an irreversible action | Show the interpreted value and effect before Submit |
+| **First value before setup** | Configuration is blocking the first useful result | Open a usable workspace, then ask for optional setup in context |
+| **Task list** | Several tasks are finite, independently completable, and users need order freedom | Task hub with Incomplete/Completed statuses, task detail, return, and final review |
+| **Prune dead branches** | A choice has no real continuation | Remove it or give it a complete route |
+| **Collapse adjacent steps** | Two thin screens fit without overloading one screen | Merge name and email; ask Focal to judge the resulting screen density |
 
-**Choosing well:**
-- The best step is the one the user never has to take. Before adding a screen, ask whether its answer can be inferred, defaulted, or deferred.
-- Count honestly. "This is a 7-step flow that needs 3" is a finding; "feels long" is a feeling.
-- Shortening a path is a [Focal](../../focal) handoff at the boundary: Compass merges *screens*, Focal judges whether the merged screen overloads. Don't collapse steps so aggressively that a screen loses its clear organizing intent.
+Count the honest work for the journey type. User chosen task order is not waste. A step that protects the user or earns informed consent is not waste. Hiding cost, risk, permission, consequence, or a needed confirmation to make a path look shorter is a dark pattern, not economy.
 
-**The honesty caveat—read this.** Shorten the path by removing *waste*, never by removing *protection*. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, auto-opting the user into something, or burying the price to "reduce friction" is a **dark pattern, not economy**. A step that protects the user or earns their trust is not waste—it is load-bearing. If removing a step makes the flow shorter but the user worse off, you have not practiced Path Economy; you have laundered a trap as a convenience.
+## Continuity patterns
 
----
+Moving between screens should not cost users context or safe work they already provided.
 
-## Continuity patterns (Discipline 3)
+- **No memory bridge.** Show a code, amount, choice, or destination where it is needed. Within one process, make repeated information visible or available to select, while allowing essential, security, and invalid-data exceptions.
+- **Back is a retreat.** Preserve entered state across Back when retaining it is safe. If a sensitive value cannot remain, say so before the user leaves and provide the safe recovery the service supports.
+- **Conditional Save and return.** Decide retention from the data and journey, not from a blanket promise. Save only where the service may safely store the data, the user has the required permission, the retention and expiry are clear, re entry has the authentication and authorization the data requires, stale or consequential data is revalidated, and revoked access or conflicts can recover. Show what was saved and what will expire. If the conditions are absent, explain the limit and offer a recoverable re entry or safe alternative.
+- **Deep links land in context.** A notification, shared URL, or email opens the relevant task or object with its route, permissions, and current state clear. If access has expired, explain it and route to a recoverable place.
+- **Stable mental model.** Keep layout anchors, focused object, and transition direction coherent across a seam. A visual jump that loses context is a continuity issue even when the data remains.
 
-Moving between screens shouldn't cost the user anything they already gave or already knew. The seams between screens are where flows leak.
+At each seam, ask what the user knew and had on the source screen that the destination needs. If it must be re entered, re found, or re remembered, close the leak or explain why re entry is essential, security required, or invalidated.
 
-- **No memory bridge.** Never make the user carry a fact from one screen to the next in their head. If step 3 needs the code, the amount, or the choice from step 1, *show it on step 3*. The tell is any instruction shaped like "remember this for later."
-- **Preserve state on Back.** Back is a retreat, not a reset. Returning to a previous step shows everything the user already entered, still filled in. A Back that wipes the form teaches users to fear the button that's supposed to be their safety net.
-- **Survive refresh and resume.** An accidental reload, a closed tab, a return tomorrow—the flow picks up where it was left, not at step one. Persist progress so "resume" actually resumes. A "resume" that resets is worse than no resume, because it promised.
-- **Land deep links in context.** A notification, a shared URL, a search result, or an email link drops the user *on the relevant screen, mid-flow*—already oriented—not dumped at the entrance to find their own way back. If the link says "your order shipped," it lands on that order, not the home screen.
-- **Preserve the mental model across transitions.** Each screen should feel like it came from the last: stable layout anchors, the same object kept in focus, predictable forward/back motion. A jarring jump—a different layout, a lost selection, a surprise full-screen takeover—breaks the sense of one continuous task even when no data was lost.
+## Flow type playbooks
 
-**Test:** at each seam between two screens, ask what the user knew and had on the first that they need on the second. If anything required must be re-entered, re-found, or re-remembered, the seam leaks—close it by carrying it forward.
+- **Linear:** one path to one outcome. Use outcome based milestones, a task appropriate cue, and safe Back with an escape from the whole flow.
+- **Branching:** a user choice creates a distinct sequence. Name the branch, make switching possible, default the common safe route, and remove dead branches.
+- **Task-list:** a finite task hub leads to independently completable task details in user chosen order, back to the hub, then to final review and submit. Status tells users what is complete and actionable. Save and return, expiry, permission, revalidation, and recovery are part of the design only when the service needs or exposes them.
+- **Hub-and-spoke:** center → detail → center. Keep the center as home and preserve the hub state on return. No progress counter is needed without a finite endpoint.
+- **Open-ended:** browse, search, or explore with no fixed completion. Show location, active refinements, and home. Do not force a funnel or invent progress.
 
----
+## Flow state care
 
-## Flow-type playbooks
+- **Loading, validation, error, and retry:** keep the user on the relevant route, identify the issue, preserve safe work, and keep Back and exit live. Do this only for states the service has or the build explicitly requires.
+- **Permission and expiry:** explain what cannot be done, what data or access is affected, and the route to recover. Recheck permission and freshness before a consequential action.
+- **Interruption and re entry:** if Save and return is supported, show the saved point, retention/expiry, required authentication, and any revalidation. If it is not safe or permitted, state the boundary and provide the supported re entry path.
+- **Final review and success:** make the final consequence and submitted values clear, confirm consequential changes, and give the user a next move or route home after success.
 
-The disciplines assume a **linear** flow by default. The other three shapes are legitimate; one short play each.
+## Anti pattern library
 
-**Linear**—*one path, start to end (checkout, onboarding, setup).*
-Make the end visible from the start: a milestone stepper so "how far is left" is answerable on every screen. Spend your Economy budget on the single path—every step you cut is felt by every user. Back walks the path in reverse with state intact; the escape hatch leaves the whole flow.
+- **The mandatory widget:** a flow is judged against a prescribed counter, progress bar, or breadcrumb even though its outcome is better expressed by named stages, task status, or location. *(Orientation)* Use the clearest outcome based cue; a named three stage stepper may omit a counter.
+- **The hidden progress bar:** a bounded journey gives no clue about its outcome or remaining work. *(Orientation)* Add a meaningful named milestone, task status, checklist, or count when stable.
+- **The task-list funnel:** independently completable tasks are forced into an arbitrary order or the hub hides the final completion condition. *(Orientation + Path Economy)* Preserve user chosen order, status, return to hub, and final review/submit.
+- **The phantom Back:** Back resets entered data. *(Orientation + Continuity)* Preserve safe state or disclose the retention boundary before retreat.
+- **The over persistent draft:** sensitive or stale data is retained indefinitely or reopens without permission, expiry, or revalidation. *(Continuity)* Limit retention, authenticate and authorize re entry, surface expiry, and revalidate before commit.
+- **The opaque inference:** a consequential value is silently guessed. *(Path Economy)* Show the value and meaning, let the user correct it, and provide a manual fallback.
+- **The unconfirmed consequence:** Submit silently applies a material amount, identity, permission, destination, quantity, or irreversible change. *(Path Economy)* Show the effect and require confirmation before commit.
+- **The deep link to nowhere:** a notification or shared URL lands at an unrelated start screen. *(Continuity)* Land in context or explain the expired/unauthorized route and provide recovery.
+- **The unseen-state fix:** a missing loading, error, permission, or resume state is treated as a defect. *(Evidence discipline)* Mark it `not shown`, name the fastest check, and do not propose implementation until evidence exists.
 
-**Branching**—*path forks on user choice (conditional signup, "what brings you here?").*
-Orientation owns two extra jobs: show *which branch* the user is on, and offer a cheap way to *switch it* if they forked wrong. Economy means defaulting the common branch and pruning any branch that dead-ends. The drop test is sharpest here—a user dropped mid-branch must still know which fork they took.
+## Quick reference
 
-**Hub-and-spoke**—*center → detail → back to center (dashboard → record → dashboard).*
-"Back to center" is sacred: the hub is home base, and every spoke returns to it predictably (breadcrumb, a persistent "Back to dashboard," the same hub state they left). Economy is measured in *hops*—minimize the taps to reach a record and return. Don't trap the user deep in a spoke with no clear road home.
-
-**Open-ended**—*wander a space, no fixed end (browse, search-and-refine, exploration).*
-The exception that proves the rule: there's no single destination, so "how far is left" doesn't apply, and **Never Lost reduces to *always know where you are and how to get home*.** Orient by position-in-space (filters applied, current view, breadcrumb) and guarantee an easy return to a known anchor. Don't force a funnel onto a space meant for roaming. (Journey-level sibling of [Focal](../../focal)'s exploration register.)
-
----
-
-## Flow-state care
-
-The states most flows neglect—where a journey is interrupted, aborted, broken, or finished. Each is a Compass surface with its own orientation, economy, and continuity demands.
-
-- **Interruption and resume.** Users leave mid-flow—a call, a closed laptop, a dead battery. Persist progress and let them re-enter where they stopped, oriented ("You're on step 3 of 4"), with prior input intact. Resume is a Continuity promise; breaking it is the single most common reason a started flow is never finished.
-- **Partial completion.** A flow abandoned at step 3 isn't a failure to discard—it's progress to honor. Save the draft, the half-filled cart, the in-progress application; surface it on return so the user picks up rather than starts over. The fastest path to finishing is not making them re-do what's done.
-- **Error mid-flow.** When a step fails (payment declined, validation, a server error), keep the user *in the flow* and *in place*. Name the actual problem, offer the fix, preserve everything already entered, and keep Back and exit live. An error that boots the user to step one, or to a dead screen, converts a recoverable hiccup into an abandonment.
-- **Returning from a success screen.** The end of a flow is a transition, not a wall. A success screen needs a clear next move—back to the hub, on to the obvious next task, or out—never a celebratory dead end the user has to use the browser Back to escape. End on a high *and* on a door (peak-end, the journey-level sibling of [Focal](../../focal)'s peak-end care).
-
----
-
-## Anti-pattern library
-
-Each entry: the tell—the discipline it breaks—the fix.
-
-- **The trapped modal**—a dialog with no X, no Cancel, no Esc, no click-outside. *(Orientation)* Give every modal a close that returns to a known place.
-- **The dead-end screen**—a screen the user can reach but not leave; no next step, no way out. *(Orientation)* Every screen gets a clear next step or an exit—success and error screens included.
-- **The hidden progress bar**—a multi-step flow with no indication of position or length. *(Orientation)* Add a milestone stepper; show where they are and how far is left.
-- **The demoralizing tally**—progress shown as "12 of 47" instead of named stages. *(Orientation)* Reframe as a small count of achievable milestones; group the rest.
-- **The phantom Back**—a Back button that resets the flow or wipes entered data. *(Orientation + Continuity)* Make Back a true retreat that preserves state.
-- **The mystery location**—nested screens with no breadcrumb or active state; "how did I get here?" *(Orientation)* Add a trail or active nav so the user can point at where they are.
-- **The setup wall**—first value gated behind six configuration screens. *(Path Economy)* Get the user to one real win on sensible defaults; defer setup to when it's relevant.
-- **The phantom flow**—a 7-step flow that's honestly 3, padded with redundant confirm-and-return screens. *(Path Economy)* Merge the round-trips; cut the steps the task doesn't require.
-- **The needless round-trip**—two screens bounce the user back and forth, each doing half a job. *(Path Economy)* Collapse into one—then check with [Focal](../../focal) that the merged screen isn't overloaded.
-- **The dead branch**—a fork leads to a screen with no real continuation. *(Path Economy)* Remove the branch, or give it a genuine next step.
-- **The friction-hiding shortcut**—a step removed by burying the price, skipping a confirmation, or auto-opting the user in. *(Path Economy)* Restore it. This is a dark pattern, not economy—protection is never waste.
-- **The memory bridge**—step 3 needs a fact only shown on step 1. *(Continuity)* Carry the context forward; show it where it's needed.
-- **The state-eating Back**—returning to a step shows it blank instead of as the user left it. *(Continuity)* Persist input across Back and forward.
-- **The amnesiac resume**—a "resume" or refresh that drops the user back at step one. *(Continuity)* Persist progress so resume actually resumes.
-- **The deep link to nowhere**—a notification or shared URL dumps the user at the home screen instead of the relevant screen. *(Continuity)* Land them in context, mid-flow, already oriented.
-- **The jarring jump**—a transition that changes layout, loses the focused object, or surprises with a takeover. *(Continuity)* Keep layout anchors and the in-focus object stable across the seam.
-
----
-
-## Quick reference card
-
-```
-OUTCOME      finite: "from ___ to ___" · open-ended: one intent + one home anchor
-STEPS        fewest honest steps · merge round-trips · default/infer/defer · no dead branches
-ORIENT       location + progress when bounded + expected retreat/home + an exit
-CARRY        no memory bridge · state survives Back/refresh/resume · deep links land in context
-NEVER        trap a modal · hide progress · shorten by hiding cost or skipping protection
+```text
+FRAME      finite: entry → outcome · task-list: tasks → hub → final submit · open-ended: intent + home
+ORIENT     outcome based position/progress or location · retreat/home · exit · no widget quota
+ECONOMY    fewest honest steps · safe visible defaults · correctable inference · confirmed consequence
+CARRY      context across seams · safe/permissioned state · expiry and revalidation · recoverable re entry
+NEVER      dead ends, traps, silent resets, opaque consequence, or invented behavior
 ```
 
-*Defaults for a linear flow. On hub-and-spoke, "back to center" is sacred; on open-ended, drop "how-far-left" and guarantee a way home.*
-
-See [../SKILL.md](../SKILL.md) for the disciplines and the Flow Spec, and [review.md](review.md) for the three-discipline audit and scorecard.
+See [SKILL.md](../SKILL.md) for the methodology and routing, [build.md](build.md) for the conditional Flow Spec, and [review.md](review.md) for the native scorecard.

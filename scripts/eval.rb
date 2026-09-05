@@ -30,6 +30,8 @@ require "tmpdir"
 require "yaml"
 
 ROOT = File.expand_path("..", __dir__)
+PLUGIN_MANIFEST_PATH = File.join(ROOT, ".claude-plugin", "plugin.json")
+SUPPORTED_MODES = %w[audit build].freeze
 
 # "shared" in a fixture names no runnable Skill. It expands to the four local
 # Skills and the fixture passes only if all four arms pass; each arm is its own row.
@@ -64,6 +66,18 @@ EXIT_FIXTURE_QUALITY = 4
 
 class RunnerError < StandardError; end
 class JudgeError < StandardError; end
+
+def load_plugin_name
+  raw = JSON.parse(File.read(PLUGIN_MANIFEST_PATH, encoding: "UTF-8"))
+  name = raw["name"]
+  unless name.is_a?(String) && !name.strip.empty? && name.match?(/\A[a-z0-9][a-z0-9._-]*\z/)
+    raise RunnerError, "#{PLUGIN_MANIFEST_PATH}: name must be a non-empty CLI-safe string"
+  end
+
+  name
+rescue Errno::ENOENT, Errno::EACCES, JSON::ParserError => error
+  raise RunnerError, "cannot read plugin manifest #{PLUGIN_MANIFEST_PATH}: #{error.message}"
+end
 
 # ---------------------------------------------------------------------------
 # Judge contract
@@ -101,6 +115,12 @@ JUDGE_SYSTEM_PROMPT = <<~PROMPT
   6. Judge each assertion independently. Do not let a strong overall impression carry
      a specific assertion, and do not let one failure drag down the others.
   7. Output only the JSON object. No preamble, no code fence, no commentary.
+  8. When an assertion asks for a useful or actionable audit, pass requires a
+     concrete, situated change grounded in the transcript's evidence. A generic
+     principle, a keyword, or an unlocated recommendation is not enough. If the
+     assertion asks to preserve context, safety, permission, or informed choice,
+     the excerpt must show that protection and its relevant boundary. If it asks for
+     a tradeoff, the excerpt must name both sides of the decision.
 PROMPT
 
 JUDGE_SCHEMA = {
@@ -132,22 +152,29 @@ JUDGE_SCHEMA = {
 # ---------------------------------------------------------------------------
 
 # THE CARDINAL RULE. This is the only function in the file that builds a candidate
-# prompt, and it takes exactly three values: the Skill name, the scenario, and the
-# evidence list. It has no parameter through which a fixture's `expected` or `reject`
-# list could reach the model, and no caller passes it a whole fixture. That is
-# deliberate and structural: handing the grading contract to the thing being graded
-# would turn the entire suite into a leak, and a reader should be able to see in one
-# screen that it cannot happen.
+# prompt, and it takes only the Skill name, mode, scenario, evidence list, invocation
+# mode, and plugin name. It has no parameter through which a fixture's `expected` or
+# `reject` list could reach the model, and no caller passes it a whole fixture. That
+# is deliberate and structural: handing the grading contract to the thing being
+# graded would turn the entire suite into a leak, and a reader should be able to see
+# in one screen that it cannot happen.
 #
 # The "do not ask clarifying questions" line is necessary rather than leading: every
 # Skill's routing section says to ask for the product when given no argument, and a
 # clarifying question back is a null result, not a failure. "Use your contract's own
 # convention" deliberately avoids naming "not shown" or "N/E", both of which are the
 # answer to several fixtures.
-def render_candidate_prompt(skill_name, scenario, evidence, invoke)
-  prefix = invoke == "slash" ? "/#{skill_name} " : ""
+# Candidate prompts intentionally carry only the mode, scenario, and evidence. The
+# fixture's expected/reject lists are grading instructions for the judge and must not
+# reach the candidate. Keep the invocation prefix as a separate first token so the
+# ablation body remains byte-identical to the Skill arm after that prefix is removed.
+def render_candidate_prompt(skill_name, mode, scenario, evidence, invoke, plugin_name)
+  raise ArgumentError, "unsupported candidate mode #{mode.inspect}" unless SUPPORTED_MODES.include?(mode)
+
+  prefix = invoke == "slash" ? "/#{plugin_name}:#{skill_name} " : ""
+  verb = mode == "build" ? "Build" : "Audit"
   lines = []
-  lines << "#{prefix}Audit this. Produce your normal output from the evidence below."
+  lines << "#{prefix}#{verb} this. Produce your normal output from the evidence below."
   lines << "Do not ask clarifying questions; if a field is unevidenced, use your contract's"
   lines << "own convention for that."
   lines << ""
@@ -311,6 +338,46 @@ def excerpt_selftest
   cases << ["clean reject pass is untouched", verdicts[4]["verdict"] == "pass" && verdicts[4]["adjusted_from"].nil?]
   cases << ["counters split fabrication from emptiness", fabricated == 2 && empties == 1]
   cases
+end
+
+# The candidate must never see the grading contract. Keep this as a concrete
+# self-test as well as a structural property of render_candidate_prompt: a slash
+# prompt is the same body as its baseline after removing the namespaced invocation,
+# and neither arm contains the synthetic expected/reject answers below.
+def candidate_prompt_selftest(plugin_name)
+  scenario = "A static review with one supported state."
+  evidence = ["The default state is visible."]
+  expected_text = "Award the score named by this hidden assertion."
+  reject_text = "Do not reveal this hidden rejection."
+  slash_audit = render_candidate_prompt("compass", "audit", scenario, evidence, "slash", plugin_name)
+  auto_audit = render_candidate_prompt("compass", "audit", scenario, evidence, "auto", plugin_name)
+  slash_build = render_candidate_prompt("compass", "build", scenario, evidence, "slash", plugin_name)
+  auto_build = render_candidate_prompt("compass", "build", scenario, evidence, "auto", plugin_name)
+  prefix = "/#{plugin_name}:compass "
+
+  [
+    ["namespaced slash invocation", slash_audit.start_with?(prefix)],
+    ["slash and baseline audit bodies match", slash_audit.sub(/\A#{Regexp.escape(prefix)}/, "") == auto_audit],
+    ["slash and baseline build bodies match", slash_build.sub(/\A#{Regexp.escape(prefix)}/, "") == auto_build],
+    ["audit mode renders audit instruction", auto_audit.lines.first.start_with?("Audit this.")],
+    ["build mode renders build instruction", auto_build.lines.first.start_with?("Build this.")],
+    ["synthetic expected assertion is withheld", !slash_audit.include?(expected_text) && !auto_audit.include?(expected_text)],
+    ["synthetic reject assertion is withheld", !slash_audit.include?(reject_text) && !auto_audit.include?(reject_text)]
+  ]
+end
+
+def candidate_prompt_leak_selftest(rows)
+  rows.map do |row|
+    prompts = [row["prompt"], row["ablation_prompt"]]
+    leaked = row["assertions"].select do |assertion|
+      prompts.any? { |prompt| prompt.to_s.include?(assertion["text"].to_s) }
+    end
+    ["#{row["label"]} has no expected/reject text in candidate prompt", leaked.empty?]
+  end
+end
+
+def all_prompt_selftests(rows, plugin_name)
+  candidate_prompt_selftest(plugin_name) + candidate_prompt_leak_selftest(rows)
 end
 
 # ---------------------------------------------------------------------------
@@ -745,9 +812,9 @@ def build_provenance_plan(skill_name)
   plan
 end
 
-def render_provenance_prompt(skill_name, prefix)
+def render_provenance_prompt(skill_name, prefix, plugin_name)
   lines = []
-  lines << "/#{skill_name} PROVENANCE CHECK. Do not run an audit. Do not read any files."
+  lines << "/#{plugin_name}:#{skill_name} PROVENANCE CHECK. Do not run an audit. Do not read any files."
   lines << "One line of your loaded instructions contains this phrase:"
   lines << "  #{prefix}"
   lines << "Reply with that entire line, copied verbatim from your instructions, on a single"
@@ -780,8 +847,11 @@ def load_fixtures(path)
   fixtures.each_with_index do |fixture, index|
     raise "#{path}: fixture #{index + 1} is not a mapping" unless fixture.is_a?(Hash)
 
-    %w[id skill scenario].each do |key|
+    %w[id skill mode scenario].each do |key|
       raise "#{path}: fixture #{index + 1} needs a #{key}" unless fixture[key].is_a?(String) && !fixture[key].strip.empty?
+    end
+    unless SUPPORTED_MODES.include?(fixture["mode"])
+      raise "#{path}: fixture #{fixture["id"]} mode must be one of #{SUPPORTED_MODES.join(", ")}"
     end
     %w[evidence expected reject].each do |key|
       value = fixture[key]
@@ -806,7 +876,7 @@ def assertion_label(assertions, assertion)
   "#{kind_letter}#{ordinal}"
 end
 
-def expand_rows(fixtures, opts)
+def expand_rows(fixtures, opts, plugin_name)
   rows = []
   fixtures.each do |fixture|
     declared = fixture["skill"]
@@ -820,6 +890,7 @@ def expand_rows(fixtures, opts)
         "slug" => declared == "shared" ? "#{fixture["id"]}.#{skill_name}" : fixture["id"],
         "declared_skill" => declared,
         "skill" => skill_name,
+        "mode" => fixture["mode"],
         "scenario" => fixture["scenario"],
         "evidence" => fixture["evidence"],
         "assertions" => build_assertions(fixture),
@@ -831,13 +902,14 @@ def expand_rows(fixtures, opts)
   end
 
   rows.each do |row|
-    prompt = render_candidate_prompt(row["skill"], row["scenario"], row["evidence"], opts[:invoke])
+    prompt = render_candidate_prompt(row["skill"], row["mode"], row["scenario"], row["evidence"], opts[:invoke], plugin_name)
     row["prompt"] = prompt
     row["prompt_sha256"] = Digest::SHA256.hexdigest(prompt)
     # The ablation arm carries the same body without the slash invocation: with
-    # --safe-mode the Skills are off, so a leading /focal is inert text that can only
-    # confuse the base model. Everything after that first token is byte-identical.
-    ablation = render_candidate_prompt(row["skill"], row["scenario"], row["evidence"], "auto")
+    # --safe-mode the Skills are off, so the namespaced slash invocation is inert
+    # text that can only confuse the base model. Everything after that first token is
+    # byte-identical.
+    ablation = render_candidate_prompt(row["skill"], row["mode"], row["scenario"], row["evidence"], "auto", plugin_name)
     row["ablation_prompt"] = ablation
     row["ablation_prompt_sha256"] = Digest::SHA256.hexdigest(ablation)
   end
@@ -969,6 +1041,13 @@ unless opts[:runner] == "claude"
   exit EXIT_HARNESS
 end
 
+begin
+  plugin_name = load_plugin_name
+rescue RunnerError => error
+  warn "scripts/eval.rb: #{error.message}"
+  exit EXIT_HARNESS
+end
+
 # ---------------------------------------------------------------------------
 # Environment facts
 # ---------------------------------------------------------------------------
@@ -1036,7 +1115,7 @@ rescue StandardError => error
 end
 
 fixtures_sha = Digest::SHA256.hexdigest(File.read(FIXTURE_PATH, encoding: "UTF-8"))
-all_rows = expand_rows(fixtures, opts)
+all_rows = expand_rows(fixtures, opts, plugin_name)
 rows = filter_rows(all_rows, opts)
 
 # --calibrate replaces the fixture run rather than adding to it: it grades the judge
@@ -1130,7 +1209,7 @@ end
 
 if opts[:dry_run]
   puts "product-judgement eval --dry-run - no model calls, nothing written"
-  puts "candidate #{opts[:model]} - judge #{opts[:judge_model]} - cli #{cli_version}"
+  puts "candidate #{opts[:model]} - judge #{opts[:judge_model]} - cli #{cli_version} - plugin #{plugin_name}"
   puts "#{opts[:repeat]} repeats - invoke=#{opts[:invoke]} - ablation=#{opts[:ablation] ? "on" : "off"} " \
        "- jobs=#{opts[:jobs]} - timeout=#{opts[:timeout]}s - fail-under=#{opts[:fail_under]}"
   puts "fixtures #{FIXTURE_PATH.sub(ROOT + "/", "")} sha #{fixtures_sha[0, 8]} - git #{git_sha}#{git_dirty ? " (dirty)" : ""}"
@@ -1142,6 +1221,16 @@ if opts[:dry_run]
   failed = selftest.reject { |_label, ok| ok }
   unless failed.empty?
     warn "scripts/eval.rb: the excerpt verifier is broken (#{failed.length} self-check failure(s)). Refusing to go further."
+    exit EXIT_HARNESS
+  end
+  puts
+
+  puts "CANDIDATE PROMPT LEAK SELF-CHECK"
+  prompt_selftest = all_prompt_selftests(rows, plugin_name)
+  prompt_selftest.each { |label, ok| puts "  #{ok ? "ok  " : "FAIL"} #{label}" }
+  failed = prompt_selftest.reject { |_label, ok| ok }
+  unless failed.empty?
+    warn "scripts/eval.rb: candidate prompt leak self-check failed (#{failed.length} failure(s)). Refusing to go further."
     exit EXIT_HARNESS
   end
   puts
@@ -1175,7 +1264,7 @@ if opts[:dry_run]
       puts "    needle asserted in the reply (working tree only):"
       puts "      #{plan["needle"]}"
       puts "    probe prompt:"
-      print_block(render_provenance_prompt(plan["skill"], plan["prefix"]), "      ")
+      print_block(render_provenance_prompt(plan["skill"], plan["prefix"], plugin_name), "      ")
     end
   end
   undecidable = provenance_plans.select { |plan| plan["status"] == "undecidable" }
@@ -1187,7 +1276,7 @@ if opts[:dry_run]
   puts "ROWS (#{rows.length} of #{all_rows.length}, from #{fixtures.length} fixtures)"
   rows.each do |row|
     puts "  #{row["label"]}"
-    puts "    skill=#{row["skill"]} declared=#{row["declared_skill"]} " \
+    puts "    skill=#{row["skill"]} declared=#{row["declared_skill"]} mode=#{row["mode"]} " \
          "assertions=#{row["assertions"].length} " \
          "(#{row["assertions"].count { |a| a["kind"] == "expected" }} expected / " \
          "#{row["assertions"].count { |a| a["kind"] == "reject" }} reject)"
@@ -1247,6 +1336,14 @@ selftest_failures = selftest.reject { |_label, ok| ok }
 unless selftest_failures.empty?
   warn "scripts/eval.rb: the excerpt verifier failed its own self-check " \
        "(#{selftest_failures.map { |label, _ok| label }.join("; ")}). Refusing to grade anything."
+  exit EXIT_HARNESS
+end
+
+prompt_selftest = all_prompt_selftests(rows, plugin_name)
+prompt_selftest_failures = prompt_selftest.reject { |_label, ok| ok }
+unless prompt_selftest_failures.empty?
+  warn "scripts/eval.rb: candidate prompt leak self-check failed " \
+       "(#{prompt_selftest_failures.map { |label, _ok| label }.join("; ")}). Refusing to grade anything."
   exit EXIT_HARNESS
 end
 
@@ -1387,18 +1484,18 @@ unless provenance_undecidable.empty?
   warn ""
   warn "This machine has these Skills installed globally. If --plugin-dir loses to an installed"
   warn "copy, this harness grades the last release and reports green on code you just changed."
-  warn "Remedies: uninstall or move the global copy (~/.agents/skills, ~/.claude/skills), or make"
-  warn "any prose edit inside the affected SKILL.md so a working-tree-only line exists to probe."
+  warn "Use an isolated test installation whose source can be identified. Preserve existing"
+  warn "installations; do not change Skill prose solely to make this probe pass."
   exit EXIT_HARNESS
 end
 
 provenance_plans.each do |plan|
   next unless plan["status"] == "pending"
 
-  prompt = render_provenance_prompt(plan["skill"], plan["prefix"])
+  prompt = render_provenance_prompt(plan["skill"], plan["prefix"], plugin_name)
   result = call_candidate.call(candidate_argv(opts), prompt, "provenance.#{plan["skill"]}")
   if result["error"]
-    plan["status"] = "unproven"
+    plan["status"] = "runner-error"
     plan["note"] = "provenance probe failed: #{result["error"]}"
     next
   end
@@ -1414,14 +1511,22 @@ provenance_plans.each do |plan|
   end
 end
 
-unproven = provenance_plans.select { |plan| plan["status"] == "unproven" }
+unproven = provenance_plans.select { |plan| %w[unproven runner-error].include?(plan["status"]) }
 unless unproven.empty?
   warn "scripts/eval.rb: provenance preflight FAILED for #{unproven.map { |plan| plan["skill"] }.join(", ")}."
   unproven.each { |plan| warn "  #{plan["skill"]}: #{plan["note"]}" }
   warn ""
-  warn "Refusing to grade. A green run against the installed release is worse than no run:"
-  warn "it reports confidence about code that never executed. Either remove the installed copies"
-  warn "(~/.agents/skills, ~/.claude/skills) or stop using --plugin-dir and inline from bundles/."
+  if unproven.any? { |plan| plan["status"] == "runner-error" }
+    warn "No behavioral output was graded. Resolve the reported runner or authentication error"
+    warn "before retrying; a failed call is not evidence of an installation-precedence problem."
+  else
+    warn "No behavioral output was graded because working-tree provenance was not established."
+    warn "Inspect plugin resolution or use an isolated test installation; preserve existing copies."
+  end
+  File.write(File.join(out_dir, "preflight.json"), JSON.pretty_generate({
+    "status" => "harness-error", "started_at" => started_at.to_s,
+    "candidate_model" => opts[:model], "provenance" => provenance_plans
+  }) + "\n")
   warn "Artifact of the failed preflight: #{out_dir}"
   exit EXIT_HARNESS
 end
@@ -1637,7 +1742,7 @@ rows.each do |row|
     end
 
   report_rows << {
-    "id" => row["id"], "label" => row["label"], "skill" => row["skill"], "arm" => "with-skill",
+    "id" => row["id"], "label" => row["label"], "skill" => row["skill"], "mode" => row["mode"], "arm" => "with-skill",
     "fixture_sha256" => row["fixture_sha256"], "prompt_sha256" => row["prompt_sha256"],
     "status" => status.downcase.tr(" ", "_"), "status_label" => status,
     "attempted" => attempted, "judged" => judged,
@@ -1668,7 +1773,7 @@ end
 finished_at = Time.now.utc
 duration_s = (finished_at - started_at).round
 
-puts "product-judgement eval - candidate #{opts[:model]} - judge #{opts[:judge_model]}"
+puts "product-judgement eval - candidate #{opts[:model]} - judge #{opts[:judge_model]} - plugin #{plugin_name}"
 puts "#{opts[:repeat]} repeats - invoke=#{opts[:invoke]} - ablation=#{opts[:ablation] ? "on" : "off"} " \
      "- cli #{cli_version} - fixtures sha #{fixtures_sha[0, 8]} - #{started_at.strftime("%Y-%m-%dT%H:%M:%SZ")}"
 puts
@@ -1776,6 +1881,7 @@ artifact = {
   "runner" => {
     "kind" => opts[:runner],
     "cli_version" => cli_version,
+    "plugin_name" => plugin_name,
     "candidate_model" => opts[:model],
     "judge_model" => opts[:judge_model],
     "invoke" => opts[:invoke],

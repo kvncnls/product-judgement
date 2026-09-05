@@ -1,24 +1,19 @@
 ---
 name: flywheel
-description: Use when improving how a product converts attention into durable value—the growth and retention side of design. Flywheel finds where a product loses the people it already earned, then applies the play that fixes that relationship stage across four ordered plays—Trust, Friction, Wins, and Emotion. A full relationship diagnosis evaluates all four plays and reports /16 only when each is supportable; a targeted stage review scores one play without fabricating a cross-play total. Triggers on growth, retention, activation, onboarding, conversion, churn, drop-off, first impression, time to value, empty state, upgrade prompt, referral, advocacy, "why do users leave", "nobody comes back", or "they sign up but never return". Not for screen-local structure (use Focal), route mechanics or journey orientation (use Compass), expressive treatment (use Soul), paid channels, campaign copy, analytics instrumentation, or research protocols.
+description: Use when improving how a product turns attention into a valuable relationship—the growth and retention side of design. Establish cadence and success outcome, then find the loss across four ordered plays—Trust, Friction, Wins, and Emotion. Full diagnosis evaluates all four and reports /16 only when each is supportable; targeted review scores one play without a fabricated total. Recurring products may need return and advocacy; finite or infrequent services may succeed through completion, handoff, and exit. Triggers on growth, retention, activation, onboarding, conversion, churn, drop-off, first impression, time to value, empty state, upgrade prompt, referral, advocacy, "why do users leave", "nobody comes back", or "they sign up but never return". Not for screen structure (Focal), route mechanics (Compass), expressive treatment (Soul), paid channels, campaign copy, analytics instrumentation, or research protocols.
 license: MIT
 argument-hint: "[build | diagnose] <product, stage, or symptom>"
 ---
 
 # Flywheel
 
-**Earn the second visit.**
+**Earn the next valuable step.**
 
-A product's journey is usually drawn as a funnel—attention narrowing to trust, to activation, to value, to payment. But look at the last stage. People who return and bring others feed the top again. The chain closes. It is not a funnel, it is a wheel.
+A product's journey is usually drawn as a funnel—attention narrowing to trust, to activation, to value, to payment. For a recurring product, people who return and bring others can feed the top again. For a finite or infrequent service, the intended success may be a completed task, safe handoff, and clean exit. Start with that product-specific outcome before assuming the chain should close. The useful question is whether the relationship stores value for the next step the product actually promises.
 
-That changes what design is for. A funnel asks how to lose fewer people on the way down. A wheel asks how much energy the system stores, and whether each turn is easier than the last.
+That changes what design is for. A funnel asks how to lose fewer people on the way down. A wheel asks how much energy the system stores, and whether the next intended step is easier, safer, or more valuable. For a one-off service, completion and exit can be the correct endpoint rather than a failed first turn.
 
-Four properties of a real flywheel decide everything here:
-
-- **It is hardest to start.** At rest, inertia is highest, and the first turn costs the most.
-- **Every push adds to what is already stored.** Force accumulates rather than dissipating.
-- **Its mass keeps it turning between pushes.** A heavy wheel coasts; a light one stops the moment you stop pushing.
-- **Friction steals what is stored.** An unmaintained wheel slows even while you push.
+A real flywheel is hardest to start, stores useful value between pushes, and loses momentum when friction or forgettability outweighs what it gives back. That metaphor is a diagnostic tool, not a requirement that every product create recurring use.
 
 **The four plays are the four parts of the wheel**, and they run in this order:
 
@@ -35,15 +30,9 @@ The order is not a preference. Emotional polish cannot rescue a product that fee
 
 ## When to use
 
-Flywheel is for **what attention becomes**—turning arrival into trust, trust into activation, activation into value, value into return, and return into new arrivals. That last clause is not a flourish: the wheel closes, so the moments that earn word of mouth are in scope alongside the ones that earn a second visit. Onboarding, first-run, activation paths, empty states, success states, upgrade and referral moments, re-entry, win visibility.
+Flywheel is for **what attention becomes**—turning arrival into trust, trust into activation, activation into value, and value into the next intended outcome. In recurring products that includes return, preference, and useful advocacy; in finite or infrequent services it may end with completion, handoff, and exit. Onboarding, empty states, success states, asks, re-entry, and win visibility are in scope only when the intended outcome calls for them.
 
-It is **not** for:
-- Single-screen structure, hierarchy, or clutter—that is [Focal](../focal).
-- Getting the user through a multi-screen path without getting lost—that is [Compass](../compass).
-- **Buying** attention—paid channels, budget allocation, bidding, SEO, campaign copy. Flywheel designs what attention meets when it arrives, and what makes people bring more of it. It does not buy it. Earned acquisition is in scope; paid acquisition is not.
-- Analytics instrumentation, event schemas, research protocols, or experiment statistics. It tells you which measurement would settle a question; it does not build the measurement.
-
-**Scope.** Flywheel is a *lens* for the transitions between stages of a relationship—where value is lost and how a stage earns the next one. It decides which stage is leaking, why, and what to change. The execution of color, typography, spacing, and motion is left to your own design system.
+It is **not** for screen structure (use [Focal](../focal)), multi-screen route clarity (use [Compass](../compass)), expressive treatment (use [Soul](../soul)), paid channels or campaign copy, analytics instrumentation, research protocols, or experiment statistics. Flywheel decides which relationship stage is leaking, why, and what to change; the design system owns execution.
 
 **Flywheel cannot manufacture product-market fit.** It prevents a valuable product from hiding its value behind uncertainty, effort, silence, or forgettability. If the product does not solve a real problem, every play below will make a well-designed thing nobody wants.
 
@@ -51,71 +40,71 @@ It is **not** for:
 
 ## Diagnose first—which play do you need?
 
-A **full relationship diagnosis evaluates all four plays**, because the earliest leak can sit upstream of the symptom the user named. It scores every play supported by evidence and reports `/16` only when all four are evaluable. It still selects only one stage to fix first; scanning four is not permission to redesign four. A **targeted stage review or build runs one play deeply** and does not invent a `/16` total. Walk this tree top to bottom and take the first evidenced match.
+A **full relationship diagnosis evaluates all four plays**, because the earliest leak can sit upstream of the symptom. It scores supported plays and reports `/16` only when all four are evaluable, while selecting one stage to fix first when a leak is evidenced. A **targeted stage review or build runs one play deeply** and never invents a `/16` total. Walk this tree top to bottom and take the first evidenced match; if the intended outcome is met and no supported loss appears, report `No leak observed` with a validation check.
 
 ```
-Where does the product lose people?
+Where does the product lose value?
 ├── They arrive and leave without engaging ............... TRUST
 │     the wheel never starts
 ├── They engage but never reach first value ............. FRICTION
 │     drag steals the push
-├── They reach value but do not return or convert ....... WINS
-│     the power stroke lands and nothing is stored
-└── They return for a while, then drift away ............ EMOTION
-      the wheel has no mass
+├── They reach value but do not recognize or complete the intended next outcome ... WINS
+│     the power stroke lands and nothing useful is stored
+└── In a recurring relationship, they return for a while, then drift away ......... EMOTION
+      the wheel has no useful mass
 ```
 
-**Name first value before you walk the tree.** Branches 2 and 3 are separated by exactly that line, and nothing else—so an undefined first value makes the tree unwalkable, and undefined is the common case. If the team has not named it, use the strictest outcome the available product evidence can defend: the moment the user's situation changes, not the moment setup ends. Say which definition you used, because a looser one moves the whole diagnosis from Friction to Wins and changes every fix that follows. Missing internal terminology is context to align, not an automatic UX score penalty; score the experience the user actually receives.
+**Name first value, cadence, and success before you walk the tree.** Branches 2 and 3 are separated by first value, while downstream judgments depend on whether the product expects return, infrequent use, or completed exit. Use the strictest evidence-backed value event, then record cadence—finite, one-off, infrequent, recurring, or unknown—and its success outcome. A finite service may succeed by completing and exiting; absent return, conversion, engagement, or sharing is not a defect unless evidence establishes that outcome. State the definitions used. Missing internal terminology is context to align, not an automatic UX score penalty.
 
 **If two stages both leak, take the earliest among non-critical improvements.** Loss compounds downstream: a fix at Wins is wasted on people who never got past Friction. A P0 at any stage overrides that investment order for immediate stop or repair; once the critical condition is removed, resume from the earliest remaining leak.
 
 ### Diagnosing with data, and without it
 
-**With funnel data**, the leak is where the drop-off is. Compare stage-to-stage conversion, and prefer cohorts with a shared start point over aggregate averages. Read distributions, not means—a median time-to-value can hide a long tail of people who are stuck.
+**With data**, locate drop-off relative to the intended outcome: stage conversion for recurring products, or completion, handoff, and safe exit for finite or infrequent services. Prefer shared-start cohorts and distributions over aggregate averages; a median time-to-value can hide a stuck tail.
 
-**Without data**, which is the common case, diagnose from the artifact using the play's own audit checks, and say plainly which measurement would confirm it. Never stall for want of numbers, and never present a heuristic finding as a measured one—say the finding was diagnosed from the artifact, and name the metric that would confirm it. Both output templates have a slot for exactly that.
+**Without data**, diagnose from the artifact using the play's checks. Label the finding as diagnosed, name the measurement that would confirm it, and never present a heuristic as measured. Both output templates provide a slot for this.
 
-**Pick the confirming metric by what would change the verdict.** Each play's *What to measure* section is a menu; this rule picks from it, and it picks **one**. State it as a comparison, not only a level: the completion rate of the exact step you blamed, and the return or conversion rate of people who clear it versus those who do not. That comparison can support or weaken the diagnosis, but observational cohorts show association, not causation; use an experiment or additional evidence before claiming the step caused the outcome.
+**Pick one confirming metric by what would change the verdict.** Compare completion of the blamed step with the intended outcome—return or conversion for recurring relationships, completion, handoff, or safe exit for finite or infrequent services. Observational cohorts show association, not causation; use an experiment or added evidence before claiming the step caused the outcome.
 
 ### Two modifiers
 
-**Stakes.** In finance, health, children's products, employment, housing, education, identity, and safety, raise the standard. Protective friction is a growth foundation in these contexts, not a conversion problem—durable trust matters more than immediate completion, and a removed safeguard costs more than it earns.
+**Stakes.** In finance, health, children's products, employment, housing, education, identity, and safety, protective friction is a growth foundation, not a conversion problem. Durable trust matters more than immediate completion.
 
-**Motivation.** Effort must stay proportional to how much the user currently wants the outcome. The same form is reasonable at high motivation and fatal at low. Ask where in the journey the user is before judging whether a step is too much.
+**Motivation.** Effort must match how much the user currently wants the outcome. Ask where they are before judging a step. Do not manufacture a habit, upgrade, or share ask for a service whose success is completion and exit.
 
 ---
 
 ## The four plays
 
-Each play has its own reference file. The review contract contains the light scan for all four. Read the selected play's reference for the deep diagnosis or build; read another only when evidence identifies a second independent issue. This keeps the work stage-focused without hiding upstream context.
+Each play has its own reference file. The review contract scans all four; read a selected play deeply, and read another only for a second independent issue.
 
 ### 1. Trust—the first push
 *Read [reference/trust.md](reference/trust.md).*
 
-The user is deciding whether this is relevant, credible, and worth another minute. Five layers, in order: **relevance** (I recognize the problem), **comprehension** (I understand the mechanism and the next step), **credibility** (the promise is supported), **craft** (this is coherent and maintained), **safety** (I know what will happen and keep control).
+The user is deciding whether this is relevant, credible, and worth continuing. Check five layers in order: **relevance**, **comprehension**, **credibility**, **craft**, and **safety/control**.
 
 Craft is not a substitute for truth. Its job is to make the product's real quality legible.
 
 ### 2. Friction—drag on the bearing
 *Read [reference/friction.md](reference/friction.md).*
 
-The goal is not zero friction. It is **useful momentum**. Six kinds of friction, and only two of them are waste: accidental and cognitive friction should go, procedural friction should be automated or explained, commitment friction should move after value, and **protective and productive friction should stay**. Removing a safeguard is not a speed improvement; it is the bearing coming out of the wheel.
+The goal is **useful momentum**, not zero friction. Remove accidental drag, reduce or explain cognitive drag, automate safe procedural work, move commitment after value, and keep **protective and productive friction**. Removing a safeguard transfers cost to the user.
 
-Define first value before redesigning onboarding. Activation is experiencing value, not completing setup.
+Define first value before redesigning onboarding: activation is experiencing value, not completing setup.
 
 ### 3. Wins—the power stroke
 *Read [reference/wins.md](reference/wins.md).*
 
-Products deliver value silently and then wonder why nobody noticed. A win is a moment the user's situation measurably improves. Find them, make them visible, size the feedback to the magnitude, and place every ask *after* the value it relates to.
+Find the moments the user's situation measurably improves, make them visible, match feedback to magnitude, and place every ask *after* the value it extends.
 
-An ask before value converts stored momentum into resistance. That is braking your own wheel.
+An ask before value converts momentum into resistance.
 
 ### 4. Emotion—the mass
 *Read [reference/emotion.md](reference/emotion.md).*
 
-What makes the wheel keep turning between visits. Name the relationship state the job calls for—confidence, control, momentum, mastery—and test whether it changes future behavior. Restore context on re-entry, show accumulated value, and give the user a real reason to continue rather than a novelty prompt.
+For recurring products, Emotion makes return easier or more valuable; for finite services, it can make completion, handoff, and exit feel controlled. Name the state and success behavior—confidence, control, momentum, or mastery—and test it. Restore context on re-entry only when re-entry is intended.
 
-Flywheel owns whether the relationship earns return, preference, and advocacy. Soul owns the expressive treatment of memorable moments. A product can have strong relationship mass through useful continuity and compounding value without being visually distinctive.
+Flywheel owns relationship value and intended return, preference, or advocacy; Soul owns expressive treatment. Quiet continuity can create mass, while a finite service can earn trust through a complete, controlled ending without creating a habit.
 
 ---
 
@@ -126,79 +115,30 @@ Flywheel owns whether the relationship earns return, preference, and advocacy. S
 - **No argument** → explain the wheel and the four plays briefly, then ask: diagnosing an existing product, or designing a relationship stage?
 - **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Flywheel with Focal, Compass, and Soul and reconciles the results.
 - **`diagnose` / `audit` / `review` of the product or relationship** → load and follow [reference/review.md](reference/review.md). A full diagnosis evaluates all four plays, scores every supported play 0–4, reports `/16` only when all four are evaluable, and selects the earliest evidenced leak. A request explicitly limited to one stage uses the same rubric but reports that play `/4` with no fabricated `/16` total. Both modes require evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators.
-- **`build` (a relationship stage to design)** → name first value, walk the diagnosis tree to confirm which stage, read that play's reference, then follow **Design** below. That order is fixed: the tree cannot be walked before first value is named.
+- **`build` (a relationship stage to design)** → name first value, intended cadence, and success outcome; walk the diagnosis tree to confirm which stage; then read that play's reference and [reference/build.md](reference/build.md). That order is fixed: the tree cannot be walked before first value and the intended endpoint are named.
 - **A question about one play** → read that play's reference file.
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well.
-
----
-
-## Design a relationship stage: the five moves
-
-Designing a relationship stage needs one input Focal and Compass do not: you cannot design trust or activation in the abstract. Establish the frame first.
-
-1. **Frame it.** What is the product, who is this stage for, and **what is the first-value event?** Name it as something that changes the user's situation, not as setup completed. "Created an account" is not first value; "imported data and got an actionable insight" is. Name it even when the stage sits after value—the Stage Spec has a slot for it either way, and a stage designed without knowing what value it follows is a stage designed blind.
-2. **Name the stage and its leak.** Which of the four is this, and what is being lost there today (or what would be, if this ships wrong).
-3. **Run the play.** Read that reference and apply it. One play, not four.
-4. **Place the ask.** If this stage contains a commercial or social ask—upgrade, invite, share, rate, connect—state what value lands before it and why accepting extends that value. If no value lands first, move the ask or cut it.
-5. **Run the gates.** Self-check against the **`## Gates`** block of the Stage Spec template below. That block is the single canonical list—read them there, and emit them there. Never restate them in your own words.
-
-**Output—the Stage Spec (use this exact structure).** Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-```
-**Stage:** <name>—the <trust | friction | wins | emotion> play, for <who>.
-**First value:** <the event that changes the user's situation>   ·   **Stakes:** low | medium | high
-
-## The leak
-- Today: <what is lost here, and the evidence—measured or diagnosed from the artifact>
-- Confirm with: <the specific metric that would settle it>
-
-## The design
-- <what the user encounters, in order>
-- <each element and the job it does for this stage>
-
-## Friction kept
-- <any effort deliberately preserved—protective or productive—and why removing it would cost more than it saves>
-- None, if nothing here protects the user.
-
-## The ask
-- Ask: <the commercial or social ask on this stage, or "None">
-- Lands after: <the value the user has just received>
-- Declining changes: <what already-earned value remains, plus any explicit foregone benefit or real consequence>
-
-## Gates
-- [ ] First value named as an outcome, not setup
-- [ ] The leak is stated with evidence, and the confirming metric is named
-- [ ] Every required step has a purpose the user could be told
-- [ ] Protective and productive friction preserved
-- [ ] Any ask lands after the value it extends; declining preserves value already earned; any foregone benefit is explicit and noncoercive
-- [ ] Nothing here hides cost, consequence, permission, or reversibility
-```
-
-**Gates ship unchecked.** Mark `[x]` only for gates the spec actually satisfies; leave `[ ]` with a short reason for any it does not.
+Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well. The orchestrated pass skips that read as stated above.
 
 ---
 
 ## Voice (when giving feedback)
 
-- **Emit the exact output template.** The `build` and `diagnose` modes each have a locked structure—the Stage Spec is above, and the diagnosis template is in [reference/review.md](reference/review.md). Use them verbatim: same sections, same order, same headers, same table columns, same issue-line format. Don't add, remove, reorder, or rename sections; if a section has nothing, keep its header and write "None."
-- **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks you to produce something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill, not a judgment call: name it in one line after the output so it can be fixed. Analysis the template has no room for is still worth doing; it informs the scores even when it isn't printed.
-- **Separate measured from diagnosed.** Say which findings come from data and which from reading the artifact. Confidence stated honestly is worth more than confidence borrowed.
-- **Be specific and quantitative.** "Six fields before any value is shown" beats "onboarding is too long." Count the steps, name the moment, quote the copy.
-- **Name the mechanism, not the symptom.** "Conversion is low" is not a diagnosis. Trust, comprehension, effort, confidence, motivation, value recognition, timing, memory, attachment—pick the one that explains the loss, then fix that.
-- **No hedging when the finding is clear.** Severity does the hedging work.
-- **Locate every issue.** Name the exact touchpoint, rendered or system state, and relationship lifecycle stage where the loss occurs and the change belongs.
+- **Emit the exact template.** `build` uses [reference/build.md](reference/build.md); `diagnose` uses [reference/review.md](reference/review.md). Preserve each template's sections, order, labels, columns, and issue-line format; retain empty headers with `None.`
+- **Template precedence.** Put analysis in the nearest available slot; never invent a section or claim an unshown behavior. A missing fact belongs in evidence or a validating check.
+- **Separate measured from diagnosed.** State the evidence basis and the diagnostic hypothesis: observation → mechanism → consequence → smallest confirming check.
+- **Be specific.** Count steps, name moments, quote copy, and locate every issue by exact touchpoint, rendered/system state, and lifecycle stage.
 
 ---
 
 ## Absolute don'ts
 
-Match-and-refuse. These are not aggressive growth tactics; they are the ways a wheel gets destroyed while appearing to spin faster.
+Match-and-refuse. These are ways a wheel is damaged while appearing to spin faster.
 
-- **Hiding material consequence to increase action.** Cost, renewal, permissions, risk, data use, irreversibility, cancellation. Obscuring a material one removes informed choice and is P0 regardless of what it does to the metric.
-- **An extractive ask before relevant value.** A rating prompt on first launch, an invite request before collaboration is understood, or an unrelated upsell at task entry brakes the wheel. An honest purchase decision can precede product use when payment is the transaction itself; disclose the value, cost, terms, and alternative before commitment.
+- **Hiding material consequence to increase action.** Cost, renewal, permissions, risk, data use, irreversibility, or cancellation. This removes informed choice and is P0.
+- **An extractive ask before relevant value.** Rating on first launch, an invite before collaboration is understood, or an unrelated upsell at task entry. A purchase may precede use when payment is the transaction; disclose value, cost, terms, and alternatives.
 - **Weaponized emotion.** Shame, artificial urgency, fear of missing out around risky behavior, loss-chasing, punitive streaks, guilt-based cancellation flows.
-- **Celebration disproportionate to the moment.** Confetti on a routine action reads as juvenile; confetti on a high-stakes financial action before confirming safety reads as a casino.
+- **Celebration disproportionate to the moment.** Confetti on routine work is juvenile; confetti on a high-stakes action before safety confirmation is a casino signal.
 - **Optimizing screen count instead of understanding.** Combining screens that each held one real decision does not reduce effort, it concentrates it.
 - **Claiming value you cannot substantiate.** Invented time-saved numbers, inflated estimates, generic testimonials.
 - **Treating every pause as a conversion problem.** Some pauses are people thinking, which is what you want before a consequential choice.
@@ -208,9 +148,9 @@ Match-and-refuse. These are not aggressive growth tactics; they are the ways a w
 
 ## References
 
-- [reference/review.md](reference/review.md)—the four-play audit, the Flywheel scorecard (0–4 per play, /16), severity, and output format.
-- [reference/trust.md](reference/trust.md)—the trust stack, first-impression touchpoints, message match, performance and accessibility as trust signals.
-- [reference/friction.md](reference/friction.md)—the six-type friction taxonomy, the friction decision test, defining activation, designing backward from first value.
-- [reference/wins.md](reference/wins.md)—win types, the win map, making value visible, proportional amplification, timing asks, shareable artifacts.
-- [reference/emotion.md](reference/emotion.md)—the emotional arc, choosing the emotion, baseline vs peaks, endings and re-entry.
-- [reference/examples.md](reference/examples.md)—a worked diagnosis and a worked relationship-stage design, in the locked output templates.
+- [reference/review.md](reference/review.md)—audit rubric, scorecard, severity, and output format.
+- [reference/trust.md](reference/trust.md)—trust stack and first-impression checks.
+- [reference/friction.md](reference/friction.md)—friction taxonomy and first-value checks.
+- [reference/wins.md](reference/wins.md)—win map, visibility, endings, asks, and shareable artifacts.
+- [reference/emotion.md](reference/emotion.md)—relationship state, continuity, accumulation, and re-entry.
+- [reference/examples.md](reference/examples.md)—worked diagnosis and stage design.

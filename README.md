@@ -6,7 +6,7 @@ The umbrella is **coherence**: focused within a screen, navigable across a journ
 
 ## Quick install
 
-All five Skills, in one command, on the agent you already use:
+Install all five Skills through your agent’s plugin system:
 
 ```bash
 claude plugin marketplace add kvncnls/product-judgement && claude plugin install product-judgement@product-judgement
@@ -19,6 +19,8 @@ cursor-agent plugin marketplace add https://github.com/kvncnls/product-judgement
 ```bash
 codex plugin marketplace add kvncnls/product-judgement && codex plugin add product-judgement@product-judgement
 ```
+
+For Cursor, marketplace registration is the first step: open **Customize → Plugins**, select **Product Judgement**, choose **Install**, and select user or project scope.
 
 Then ask for an audit: `audit this dashboard with Focal`, or `audit this app with Product Judgement`.
 
@@ -46,7 +48,7 @@ It is not user research, analytics, experimentation, marketing, or product strat
 
 | Skill | What it does | Reach for it when |
 |-------|--------------|------------------|
-| [**product-judgement**](./product-judgement) | Holistic audit. Runs all 4 Skills below against a shared evidence map, then reconciles their findings into one prioritized fix sequence. | The question spans the app, or several Skills identify related issues and you need to decide what to fix first. |
+| [**product-judgement**](./product-judgement) | Holistic audit. Runs all 4 Skills below against a shared evidence map, then reconciles their findings into one prioritized fix sequence. | The decisions span two or more scales, even within one flow, or related findings need a shared fix order. |
 | [**focal**](./focal) | One screen, one clear intent. Declutters and structures app/dashboard screens through three disciplines—Information Architecture, Progressive Disclosure, and Visual Hierarchy. Its action model adapts to task, hub, and exploration screens. | A screen feels crowded, unclear, or unable to make its organizing intent and action model legible. Use it to decide what belongs, what waits, and what wins attention. |
 | [**compass**](./compass) | Never lost. Guides multi-screen flows and navigation through three disciplines—Orientation, Path Economy, and Continuity. Build new flows or review existing ones. Pairs with Focal (single screens). | A task spans screens and users may be lost, facing too many steps, dead ends, retreat that resets or loses context, missing progress in a bounded flow, or lost state. |
 | [**flywheel**](./flywheel) | Earn the second visit. Growth and retention: finds where a product loses the users it already earned, across four ordered plays—Trust, Friction, Wins, and Emotion. Diagnose where value is leaking, or design the experience that earns the next stage of the relationship. | People arrive but do not trust, reach value, recognize value, return, or bring others. Use it to find the earliest relationship leak or design the stage that earns the next step. |
@@ -68,7 +70,7 @@ For Flywheel, a **leak** is not just churn. It is the first point where momentum
 
 ## Shared audit contract
 
-Build outputs are proposals, so their gates remain binary and unscored. Audit-style outputs evaluate something that already exists, so every evaluated local dimension receives an integer score from `0–4`:
+Build outputs are proposals, so their gates remain unscored. Mark a gate pass, fail, or N/A with a reason; identify the states that apply to the proposed interaction. Audit-style outputs evaluate something that already exists, so every evaluated local dimension receives an integer score from `0–4`:
 
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
@@ -82,7 +84,7 @@ These are ordinal quality levels, not percentages or school grades. A `3/4` is t
 
 Do not optimize every audit toward a perfect total. Eliminate `0`s and `1`s, improve consequential `2`s, establish `3` as the dependable baseline, then pursue selected `4`s only where deeper investment supports the product's goals or creates meaningful differentiation. Scores describe the quality profile; they do not decide release readiness by themselves. A P0 or explicit blocker still requires action regardless of the total.
 
-The scorecard keeps each foundational Skill's native total—`/12` for Focal, Compass, and Soul, and `/16` for a complete Flywheel diagnosis—and also displays `total ÷ evaluated dimensions` as a normalized `/4` average rounded to one decimal place. A targeted Flywheel stage review reports one `/4` score and marks the other plays `N/E—outside targeted scope`; a full diagnosis marks an entirely unexposed play `N/E—insufficient evidence`. Neither case invents a `/16` total. Product Judgement preserves native totals and does not average them into a misleading collection-wide score.
+When all required dimensions are evaluable, the scorecard keeps each foundational Skill's native total—`/12` for Focal, Compass, and Soul, and `/16` for a complete Flywheel diagnosis—and displays `total ÷ required dimensions` as a normalized `/4` average rounded to one decimal place. A targeted Flywheel stage review reports one `/4` score and marks the other plays `N/E—outside targeted scope`; a full diagnosis marks a play whose rubric is unsupported `N/E—insufficient evidence`. Neither case invents a `/16` total. Product Judgement preserves native totals and does not average them into a misleading collection-wide score.
 
 | Common band | Average | `/12` total | `/16` total |
 |---|---:|---:|---:|
@@ -91,9 +93,9 @@ The scorecard keeps each foundational Skill's native total—`/12` for Focal, Co
 | **Solid** | `≥ 2.5` and `< 3.5` | `8–10` | `10–13` |
 | **Excellent** | `≥ 3.5` | `11–12` | `14–16` |
 
-The weakest dimension then caps the overall quality band: a lowest score of `0` caps it at **Broken**, `1` at **Significant rework**, `2` at **Solid**, and `3–4` adds no ceiling. This prevents a high total from hiding one failed dimension.
+For complete scorecards, the weakest dimension then caps the overall quality band: a lowest score of `0` caps it at **Broken**, `1` at **Significant rework**, `2` at **Solid**, and `3–4` adds no ceiling. This prevents a high total from hiding one failed dimension.
 
-`N/E` means **not evaluated**, not zero. Use it only where the local contract permits it: a Flywheel play outside targeted scope or entirely unsupported by evidence, a Soul gate made genuinely unevaluable by Deferred Readiness, or a scale whose Skill is not installed alongside Product Judgement. When a native scorecard is incomplete, report the evaluated rows and the evidence gap, but do not calculate its native total or common band.
+`N/E` means **not evaluated**, not zero. Any dimension whose rubric cannot be supported by the available evidence uses `N/E—insufficient evidence`. A missing variant does not automatically invalidate an otherwise supported dimension. Targeted reviews may mark other plays `N/E—outside targeted scope`; a scale whose Skill is not installed alongside Product Judgement uses `N/E—Skill not installed`. When any required dimension is unevaluable, report supported findings and the evidence check, but no native total, average, common band, or weakest-dimension ceiling. Do not turn unknown behavior into a defect or an implementation recommendation.
 
 ### Scores must explain themselves
 
@@ -102,7 +104,7 @@ A score without an explanation is invalid. Every scorecard row must show the cha
 - **Evidence**—what was observed, inferred, tested, walked, or measured, anchored to the relevant surface or transition, app state, and lifecycle moment.
 - **Consequence**—what that condition costs the user or product in the Skill's terms.
 - **Rubric anchor**—why the evidence earns this integer and what keeps it from the next higher integer. A `2` says what works and names the material weakness; a `3` names the remaining gap; a `4` explains why the dimension is exemplary.
-- **Next-point change**—the smallest concrete change that would raise the score by one point; a `4` says `None—already exemplary.`
+- **Next-point change**—the smallest supported improvement or evidence check needed to establish the next score; a `4` says `None—already exemplary.`
 
 Do not award credit for behavior the artifact does not expose, and do not turn an unseen state into a failure without a rubric basis. Mark it `not shown` in Coverage/Basis and name the validating check. The total is the exact sum of the justified component scores; never derive component scores from the total.
 
@@ -185,10 +187,10 @@ Each Skill is a folder with a `SKILL.md` at its root, which is the shape Claude 
 
 | Environment | How it installs | Invocation |
 |---|---|---|
-| Claude Code, Cursor, Codex | Plugin, from this repository | `/product-judgement:focal`, `/product-judgement:compass`, … |
-| Claude Desktop, Claude.ai | Upload a Skill `.zip` | `/focal`, `/compass`, … |
+| Claude Code, Cursor, Codex | Plugin, from this repository | Ask for the Skill by name; Claude Code also supports `/product-judgement:focal`, etc. |
+| Claude Desktop, Claude.ai | Upload a Skill `.zip` | Ask for the Skill by name |
 | ChatGPT, custom GPTs | Upload the combined Markdown bundle | Ask for the Skill by name |
-| Anything else, or a project-scoped setup | `scripts/install.sh` | `/focal`, `/compass`, … |
+| Anything else, or a project-scoped setup | `scripts/install.sh` | Ask for the Skill by name or use the agent’s Skill picker |
 
 ### Claude Code, Cursor, and Codex
 
@@ -214,9 +216,9 @@ codex plugin marketplace add kvncnls/product-judgement
 codex plugin add product-judgement@product-judgement
 ```
 
-Claude Code and Cursor also accept the same commands from inside a session as `/plugin marketplace add kvncnls/product-judgement` followed by `/plugin install`. Pin a release by appending a tag to the source, as in `kvncnls/product-judgement@v1.0.0`.
+In Claude Code, the equivalent session commands are `/plugin marketplace add kvncnls/product-judgement` and `/plugin install`. In Cursor, open **Customize → Plugins**, select **Product Judgement**, choose **Install**, then choose user or project scope after registering the marketplace. Confirm that the plugin lists all five Skills. See [Cursor’s plugin instructions](https://prod.cursor.com/docs/plugins) for the current UI.
 
-Plugin Skills are namespaced by their plugin, so the audit commands appear as `/product-judgement:focal` rather than `/focal`. If you would rather type the bare names, use [the install script](#any-other-agent-or-a-project-scoped-install) instead.
+In Claude Code, plugin Skills use namespaced commands such as `/product-judgement:focal`. Folder installs use bare Skill names such as `/focal`. Other agents expose their own picker or invocation syntax; asking for Focal by name also makes the intended lens clear. Use [the install script](#any-other-agent-or-a-project-scoped-install) for folder installs.
 
 Update or remove an installed plugin with its own tooling:
 
@@ -228,10 +230,13 @@ cursor-agent plugin marketplace update product-judgement
 
 ### Claude Desktop and Claude.ai
 
-Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Download the packages from the [latest release](https://github.com/kvncnls/product-judgement/releases/latest), or build them yourself:
+Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Build verified packages from the current checkout:
+
+The published `v1.0.0` ZIPs predate the frontmatter compatibility fix. Do not use those archives for uploads. A newer release must pass the archive checks below before replacing this source-build recommendation.
 
 ```bash
 ruby scripts/package_skills.rb --out dist
+ruby scripts/verify_packages.rb --dir dist
 ```
 
 Build them with that script rather than a bare `zip`. These Skills carry `argument-hint` in their frontmatter for Claude Code, and the Agent Skills spec does not allow it—an upload carrying it fails with `Unexpected key(s) in SKILL.md frontmatter: argument-hint` instead of ignoring it. `package_skills.rb` strips non-spec keys from the packages and leaves the source untouched. Pass `--skill focal` for one Skill, or `--check` to see what would be stripped.
@@ -246,14 +251,7 @@ Some tools accept only one Markdown file. [`bundles/all.md`](./bundles/all.md) i
 cp bundles/all.md ~/Desktop/product-judgement.md
 ```
 
-Upload it as a ChatGPT Project or custom GPT knowledge file, or attach it to a Claude Project. For a single Skill, use its own bundle instead:
-
-```bash
-cat bundles/focal.md >> AGENTS.md
-cp bundles/focal.md .cursor/rules/focal.md
-```
-
-At roughly 320 KB, the combined bundle suits an uploaded knowledge file rather than an always-loaded instruction file. Append a single-Skill bundle to `AGENTS.md` instead when the whole file is read on every request.
+Upload it as a ChatGPT Project or custom GPT knowledge file, or attach it to a Claude Project. For a single Skill, upload its own bundle, such as `bundles/focal.md`, and ask for that Skill when needed. Prefer native Skill installation when supported so references load only for the selected mode. Avoid appending a full bundle to `AGENTS.md` or another always-loaded rules file: doing so loads the methodology on unrelated requests and removes progressive disclosure.
 
 ### Any other agent, or a project-scoped install
 
@@ -265,7 +263,7 @@ cd product-judgement
 ./scripts/install.sh
 ```
 
-It targets Claude Code, Cursor, Codex, Gemini CLI, and opencode, and installs the bare `/focal`-style names rather than namespaced plugin ones. Useful variations:
+It targets Claude Code, Cursor, Codex, Gemini CLI, and opencode, and installs the bare Skill folders. Useful variations:
 
 ```bash
 ./scripts/install.sh --agent claude --agent cursor   # only these agents
@@ -273,8 +271,12 @@ It targets Claude Code, Cursor, Codex, Gemini CLI, and opencode, and installs th
 ./scripts/install.sh --scope project                 # into ./.claude/skills and friends
 ./scripts/install.sh --copy                          # independent copies, not symlinks
 ./scripts/install.sh --list                          # print target directories, change nothing
-./scripts/install.sh --uninstall                     # remove what it installed
+./scripts/install.sh --uninstall                     # remove recognized installations
 ```
+
+The installer recognizes any symlink resolving exactly to a Skill in this checkout as an installation, including a link you created manually. It replaces or removes those links and unchanged copies carrying its provenance marker. It stages replacements and checks copy integrity before switching. Unknown entries, older unmarked copies, and customized copies are preserved with an explanation. If one conflicts, move it to a backup location you choose, review any customizations, and rerun; the installer does not delete it for you. A failed or interrupted replacement restores the original when possible or reports the retained rollback path.
+
+OpenCode user installs go to `~/.config/opencode/skills`; project installs use `.opencode/skills` inside the project root.
 
 Run `./scripts/install.sh --help` for the full set. Restart your agent afterwards so it reloads Skill metadata.
 
@@ -288,35 +290,36 @@ Consult the agent's current documentation, because discovery paths change.
 
 ### Skills CLI
 
-The [Skills CLI](https://skills.sh/docs/cli) is an alternative that keeps one canonical copy and links supported agents to it. It requires Node:
+The [Skills CLI](https://skills.sh/docs/cli) is an alternative that keeps one canonical copy and links supported agents to it. It requires Node and pnpm **11 or newer** for the `dlx` examples below: this is the first pnpm version whose [dlx execution respects project release-age policy](https://pnpm.io/cli/dlx#security-and-trust-policies). Run these commands from this checkout, whose `pnpm-workspace.yaml` requires `minimumReleaseAge: 1440` (24 hours). Preserve any stricter policy in your own environment.
 
 ```bash
-npx skills add kvncnls/product-judgement --skill '*' -g -a claude-code -a codex -a cursor -y
+pnpm dlx skills add kvncnls/product-judgement --skill '*' -g -a claude-code -a codex -a cursor -y
 ```
 
-Run `npx skills add kvncnls/product-judgement` to be asked which Skills, agents, and scope you want, or name one Skill directly:
+Run `pnpm dlx skills add kvncnls/product-judgement` to be asked which Skills, agents, and scope you want, or name one Skill directly:
 
 ```bash
-npx skills add kvncnls/product-judgement --skill focal -g
+pnpm dlx skills add kvncnls/product-judgement --skill focal -g
 ```
 
-Check for upstream changes with `npx skills check`, then update this collection's five globally installed Skills:
+Check for upstream changes with `pnpm dlx skills check`, then update this collection's five globally installed Skills:
 
 ```bash
-npx skills update -g product-judgement focal compass flywheel soul
+pnpm dlx skills update -g product-judgement focal compass flywheel soul
 ```
 
-Rerun the full `skills add` command when an update reports a failure, when a new Skill is added to the repository, when an agent link is missing, or when an installation predates the CLI lock record. Use `npx skills list -g` to inspect what is installed.
+Rerun the full `skills add` command when an update reports a failure, when a new Skill is added to the repository, when an agent link is missing, or when an installation predates the CLI lock record. Use `pnpm dlx skills list -g` to inspect what is installed.
 
 ### For maintainers
 
-The tooling under `scripts/` is Ruby, and it deliberately targets **Ruby 2.6** so it runs on the interpreter macOS ships, with nothing to install. CI pins 3.3, so a 2.7-only method such as `filter_map` passes CI and still fails on a stock Mac. Keep new code inside the 2.6 standard library; `/usr/bin/ruby scripts/verify.rb` is the check that matters. The Skills themselves stay pure Markdown, so this constraint never reaches anyone installing them.
+Maintainer tooling targets **Ruby 2.6 or newer** and uses only the standard library. Packaging also requires the system `zip` and `unzip` commands. CI tests current Ruby and the macOS system interpreter; keep new code inside the 2.6 API floor. The installed Skills themselves stay pure Markdown and have no runtime build step.
 
 Two frontmatter facts govern where these Skills can be installed. `description` is capped at **1024 characters** by the Agent Skills spec; `scripts/verify.rb` enforces that ceiling, and Compass has previously exceeded it. `argument-hint` is a **Claude Code-only extension** that the spec does not allow, so an upload to Claude.ai or the Skills API fails hard rather than ignoring it—`Unexpected key(s) in SKILL.md frontmatter: argument-hint`. The release workflow therefore strips non-spec keys from the `.zip` packages it builds; keep the field in the source, and never add a non-spec key without teaching `scripts/package_skills.rb` about it.
 
-Bundles are build artifacts, regenerated from the source folders rather than edited directly:
+Shared evidence rules, score anchors, and severity definitions are maintained in `contracts/` and copied into each standalone Skill with `sync_contracts.rb`. Edit the canonical fragment, then regenerate its inline copies and the bundles. Build instructions live in mode-specific references, so an audit does not need to load a build template. Bundles are generated artifacts:
 
 ```bash
+ruby scripts/sync_contracts.rb
 ruby scripts/build_bundles.rb
 ```
 
@@ -326,23 +329,27 @@ The behavioral fixtures in [`tests/`](./tests) have their own opt-in runner. It 
 ruby scripts/eval.rb --dry-run
 ```
 
-Run the repository verifier before committing. It validates Skill frontmatter, relative links, scoring and boundary invariants, behavioral contract fixtures, the plugin manifests and installer, and exact bundle synchronization; CI runs the same command:
+Run the repository checks before committing. The verifier validates frontmatter, relative links, shared contracts, score arithmetic, fixture structure, plugin manifests, and exact bundle synchronization. Separate regression tests exercise installer preservation and downloadable archive integrity; CI runs all three:
 
 ```bash
 ruby scripts/verify.rb
+ruby scripts/test_install.rb
+ruby scripts/test_packages.rb
 ```
 
 #### Cutting a release
 
-The version appears in four manifests, and `scripts/check_version.rb` fails the release if any of them disagrees with the tag. Bump all four first, then tag:
+The version appears in four manifests, and `scripts/check_version.rb` fails the release if any of them disagrees with the tag. Bump all four, rebuild and inspect packages, and review the intended commit before publishing a new tag. Never move an existing release tag. For the prepared 1.1.0 release:
 
 ```bash
+ruby scripts/build_bundles.rb
+ruby scripts/verify.rb
+ruby scripts/package_skills.rb --out dist
+ruby scripts/verify_packages.rb --dir dist
 ruby scripts/check_version.rb 1.1.0
-git commit -am "Release 1.1.0" && git push
-git tag v1.1.0 && git push origin v1.1.0
 ```
 
-The four are `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, and `.codex-plugin/plugin.json`. Pushing the `v*` tag runs the verifier, confirms the tag matches, builds the Skill `.zip` packages and combined bundle, and publishes the release that the [Claude Desktop and Claude.ai](#claude-desktop-and-claudeai) section links to.
+The four are `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, and `.codex-plugin/plugin.json`. After the reviewed changes are committed and pushed, publishing a new `v*` tag runs the verifier, confirms the tag matches, builds and validates the Skill `.zip` packages and combined bundle, and publishes the new release. Verify the published asset contents before restoring a download recommendation in the [Claude Desktop and Claude.ai](#claude-desktop-and-claudeai) section.
 
 ## Contributing
 

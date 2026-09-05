@@ -6,10 +6,12 @@ The complete Compass Skill, including its `/12` audit rubric, patterns, and work
 
 If your agent supports multi-file Skills, install the `compass/` folder instead so references can load on demand. Use this bundle when the environment accepts only one Markdown instruction file.
 
-Common uses include an instruction file, a rules file, or an uploaded knowledge file. The source sections are concatenated verbatim so the bundle cannot silently drift from the folder Skill.
+Common uses include an instruction file, a rules file, or an uploaded knowledge file. Source instructions are generated from the folder Skill. Relative links become links to included source sections (or repository sources when absent); identical shared contracts appear once per bundle.
 
 ---
 
+
+<a id="source-compass-skill-md"></a>
 
 ## Source: `compass/SKILL.md`
 
@@ -17,7 +19,7 @@ Common uses include an instruction file, a rules file, or an uploaded knowledge 
 
 ---
 name: compass
-description: Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, or navigation in any functional product, app, dashboard, or tool. Compass is the cross-screen lens—it owns the path between screens—navigation, step count, routing, retreat/home behavior, state, and entry points. Its promise is Never Lost—at every step the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Three disciplines—Orientation (load-bearing), Path Economy (fewest honest steps or least needless effort), and Continuity (context and state survive the seams). Pairs with Focal, which designs the individual screens. Triggers on flow, journey, navigation, onboarding, checkout, wizard, multi-step, "too many steps", "back button", "where am I", lost, dead end, routing, breadcrumb, progress. Not for single-screen layout (use Focal), visual styling, copy, code, marketing/landing pages, backend, or non-UI work.
+description: "Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, finite task-list service, or navigation in a functional product, app, dashboard, or tool. Compass owns the path between screens, states, entry points, progress, retreat, and recovery. Its promise is Never Lost: the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Pairs with Focal for single-screen structure. Not for visual styling, copy, code, marketing pages, backend work, or a speculative whole-app sitemap."
 license: MIT
 argument-hint: "[build | review] <flow, journey, or description>"
 ---
@@ -26,295 +28,177 @@ argument-hint: "[build | review] <flow, journey, or description>"
 
 **Never lost.**
 
-A journey is a sequence of screens governed by one intent. Most flows have a destination; open-ended journeys such as browsing have a stable home or anchor instead. Good cross-screen UX means the user never has to wonder *Where am I? What remains, when this journey has an end? How do I retreat, get home, or leave?* The moment those answers disappear, the journey becomes a maze.
+Compass is the cross-screen lens. A journey is a sequence of screens and transitions governed by one intent. At every applicable point, the user can answer: *Where am I? What remains when this journey has an end? How do I retreat, get home, or leave?* Focal owns structure inside a screen; Compass owns the path, its seams, and its recovery.
 
-Where [Focal](../focal) sharpens a single screen, Compass guides the **path between screens**. Focal is *within* a screen; Compass is *between* them. They cover structure and movement; Flywheel and Soul address the relationship and memory at their own scales.
+Compass uses three equally weighted disciplines. **Orientation** makes position, meaningful progress or location, and retreat or home legible. **Path Economy** removes needless effort while retaining protection and informed choice. **Continuity** carries context and handles state across transitions, interruption, and re entry when that retention is safe and permitted.
 
-Three disciplines, treated as top priorities, keep the user oriented:
-
-- **Orientation**—at every step, position, progress when bounded, and a way to retreat, get home, or leave.
-- **Path Economy**—the fewest honest steps for a finite outcome, or the least needless effort in an open-ended space.
-- **Continuity**—context and state survive the seams between screens.
-
-**Orientation is the load-bearing discipline**—it is the literal promise. Economy and Continuity can make a journey short and seamless, but not understandable. This makes Orientation a prerequisite for the Never-Lost verdict, not extra numeric weight; all three disciplines still use the same 0–4 scale.
-
----
+Orientation is the load bearing promise for the Never Lost verdict, but it does not receive extra numeric weight. The native Compass score remains one `0–4` score for each discipline and a `/12` total only when all three are evaluable.
 
 ## When to use
 
-Compass is for **cross-screen flows** in functional products—any platform, any user. Onboarding, signup, checkout, multi-step setup, wizards, dashboards with drill-down, account flows, anything that spans more than one screen. If the user has to *move between screens* to get something done, Compass applies.
+Use Compass for onboarding, signup, checkout, setup, wizards, finite task-list services, hub-and-spoke work, drill downs, search and discovery, and any experience where people move between screens to complete or pursue something.
 
-It is **not** for:
-- Single-screen layout and structure—that's [Focal](../focal). Compass assumes each screen is already sound and focuses on the joins.
-- Marketing pages, landing pages, campaigns—persuasion and narrative, not task completion.
-- Whole-app sitemaps generated from a spec (deciding *which* screens exist before any flow is drawn).
-- Backend, infra, or non-UI work.
+Do not use it for screen-local hierarchy or composition ([Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md)), relationship momentum ([Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md)), expressive treatment ([Soul](https://github.com/kvncnls/product-judgement/blob/main/soul/SKILL.md)), visual styling, backend behavior, or a speculative whole-app sitemap. Use [Product Judgement](https://github.com/kvncnls/product-judgement/blob/main/product-judgement/SKILL.md) when the decision crosses several scales.
 
-**Scope.** Compass is a *lens* for movement and orientation—*the path, the signage, and the seams between screens*—not a renderer. It decides the steps, where the user is told what, and how state carries across. The execution of color, type, motion, and copy is left to your own design system and tooling, and the design of each individual screen is left to Focal.
+## Methodology: Never Lost
 
----
+The outcome-or-anchor test. For a finite journey, name one outcome: *“This flow gets the user from ___ to ___.”* If two outcomes can succeed independently, split the flow. For an open ended journey, name one organizing intent and a stable home: *“This space lets the user ___, and ___ is home.”* Do not invent an endpoint for browsing.
 
-## The methodology—Never Lost
+The **drop test.** Place the user on each evidenced screen or transition with no memory of arrival. Can they identify their position, what remains when the journey is bounded, and how to proceed, retreat, get home, or leave? Apply only the questions that fit the journey shape.
 
-The north star. At every step of a flow, the user can answer three questions without thinking:
+### Orientation
 
-1. **Where am I?** (position in the journey)
-2. **What remains?** (progress and scope when the journey has an end; not applicable to open-ended exploration)
-3. **How do I retreat, get home, or leave?** (a platform-appropriate path that never traps them)
+- Signpost the actual outcome and remaining work. A bounded journey may use named stages, task statuses, a checklist, a stable count, or another clear cue. A counter is optional: a named three stage stepper is valid without one. Open ended work needs position in the space and a route home, not completion progress.
+- Show the branch when a choice changes the route; show the hub relationship when a detail screen returns to a center; show task status, available tasks, and the final completion condition in a finite task list.
+- Give every owned flow a platform appropriate retreat and escape: in product Back, browser Back when history is meaningful and state safe, a breadcrumb or hub link, Cancel, Close, or Save and return as the service supports. Every screen has a next step or a way out.
 
-A journey that answers every applicable question feels effortless. A bounded flow that hides remaining scope, or any journey that drops position or recovery, feels like being lost in a building with no signs.
+### Path Economy
 
-- **The outcome-or-anchor test.** For a finite flow, name one outcome: *"This flow gets the user from ___ to ___."* If it has two independently successful outcomes, split it. For an open-ended journey, name one organizing intent and home anchor: *"This space lets the user ___, and ___ is home."* Do not invent an endpoint for browsing just to satisfy the template.
-- **The drop test.** Drop the user onto any screen in the middle of the journey with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? If not, orientation has failed at that step.
+- Count the honest work for the journey shape. Merge redundant screens and round trips, default the common route, and defer setup until users have context. A task list may let users choose task order; do not call that freedom waste or force it into a linear count.
+- Infer only safe, useful values. Show the inferred value and its source or meaning, let the user correct it, and provide a manual route when confidence is low. Confirm financial, identity, permission, legal, security, destination, quantity, destructive, or otherwise consequential values before commit.
+- Never shorten a path by hiding cost, risk, permission, consequence, or protective confirmation. That is a dark pattern, not economy.
 
----
+### Continuity
 
-## The three disciplines
+- Show required context at the point of use; do not make the user remember a code, choice, amount, or destination across screens. Within one process, avoid redundant entry while honoring essential, security, and invalid-data exceptions.
+- Preserve state across Back when it is safe. Cross session save and return is conditional, not a universal requirement: retain only data the service may safely and permissibly store, with clear expiry, the authentication and authorization appropriate to the data and service at re entry, stale-data revalidation, and a recoverable route when access or retention changes. Explain what will be lost when it cannot be retained.
+- Land deep links, notifications, and search results in context. Keep the mental model and focused object stable across the seam. Do not claim persistence, validation, permission, or re entry behavior that the artifact or requirements do not expose.
 
-### 1. Orientation—where am I, and how do I get out *(load-bearing)*
+## Registers: journey types
 
-The user is never without their bearings. This is the promise; the other two disciplines serve it.
-
-- **Show position and progress when the journey is bounded.** The mechanism follows the flow type, never taste. **Linear**—a step counter (`Step 2 of 4`). **Branching**—name the branch and count within it; a global count becomes a lie the moment the path forks. **Hub-and-spoke**—an active nav state plus a labeled route back to the center, because the center *is* the position. **Open-ended**—location in the space (breadcrumb, active filter, or anchor) and no counter at all. Frame bounded progress as achievable milestones, never a demoralizing tally. Open-ended spaces need position and home, not fake completion.
-- **Always a way to retreat or leave.** Use the platform's expected mechanism: an in-product Back where the product owns the stack, browser Back where history is meaningful and state-safe, a breadcrumb or hub link in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate a platform control without adding clarity; do ensure every modal and owned flow has an obvious escape.
-- **No dead ends.** Every screen has a clear next step or a clear way out. A screen the user can reach but not leave is a bug, not a state.
-- **Signal the current location.** The user should always be able to point at where they are in the app's structure.
-
-> **Fails:** no usable retreat; trapped modals; hidden progress in a bounded flow; dead-end screens; "wait, how did I get here?"; an owned task with no exit.
-
-### 2. Path Economy—the fewest honest steps
-
-Every screen in a flow is a tax on the user. Cut the tax to the minimum the task honestly requires.
-
-- **Fewest honest steps for the journey type.** In a finite flow, cut redundant screens and merge needless round-trips where the result stays comprehensible. In an open-ended space, remove needless hops without forcing exploration into a funnel. Defer to Focal when a proposed merge may overload one screen.
-- **Defaults skip steps.** Don't ask what you can infer or pre-fill. The best step is the one the user never has to take.
-- **No setup walls.** Don't gate the value behind six configuration screens. Get the user to the first real win, then deepen.
-- **The honest-path caveat (read this).** Shorten the path by removing *waste*, never by removing *protection*. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, or burying the price to "reduce friction" is a dark pattern, not economy. A step that protects the user or earns their trust is not waste.
-
-> **Fails:** the 7-step flow that's really 3; redundant confirmations; setup walls before first value; branches that dead-end; "friction reduction" that hides cost or consequence.
-
-### 3. Continuity—the seams hold
-
-Moving between screens shouldn't cost the user anything they already gave or already knew.
-
-- **No memory bridge.** A fact the user needs at step 3 is shown at step 3—never "remember the code from the previous screen."
-- **State survives.** Back never wipes entered data. A refresh, an interruption, or a return tomorrow resumes where they left off, not at the start.
-- **Honor the entry point.** A deep link, a notification, or a search result lands the user *in context*—on the relevant screen mid-flow—not dumped at step one.
-- **Preserve the mental model.** Each screen should feel like it came from the last: consistent layout anchors, predictable transitions, the same object in focus.
-
-> **Fails:** form data lost on Back; deep links dumping you at the start; the memory bridge; a "resume" that resets; jarring jumps that break the sense of one continuous task.
-
----
-
-## How they combine—order of operations
-
-1. **Name the outcome or anchor** (methodology). One finite outcome, or one open-ended intent plus home.
-2. **Map the path or space** (Path Economy). The fewest honest steps to the outcome, or the least needless effort while roaming.
-3. **Signpost it** (Orientation). Position, progress when bounded, and platform-appropriate retreat, home, and exit behavior.
-4. **Join the seams** (Continuity). Carry context and state across each transition.
-
-You cannot signpost or join a journey you have not mapped. A finite flow needs an end; an open-ended journey needs a stable anchor and boundaries. Orientation leads the *promise* but comes after the journey shape exists—the signage goes up once the road or space is understood.
-
----
-
-## Registers—flow types
-
-The disciplines assume a **linear** flow by default. Three other shapes are legitimate, and the rules bend for them.
-
-**Classify with this tree.** Walk it top to bottom and take the first match. Answer about the journey the user is actually on, not about how the screens are built.
+Classify the journey users are actually on. Take the first match:
 
 ```
 Is roaming or discovery itself the intent, with no completion event?
 ├── Yes → OPEN-ENDED
-└── No—name the one finite outcome
-    ├── Does the user leave a center and come back to it, repeatedly?
+└── No—name one finite outcome
+    ├── Are several tasks independently completable in user-chosen order before one final outcome?
+    │   └── Yes → TASK-LIST
+    ├── Does the user leave a center and return to it repeatedly, with no endpoint beyond the loop?
     │   └── Yes → HUB-AND-SPOKE
     └── Does the path fork on a choice the user makes?
         ├── Yes → BRANCHING
         └── No → LINEAR
 ```
 
-Two ties worth naming, because they recur:
-- **A wizard with optional steps** is still **linear**—skippable is not the same as forked. A choice that inserts or removes a screen and then rejoins the same path is also **linear**; treat the inserted screen as a conditional step. It is **branching** only when a choice sends the user down a genuinely different *sequence* that does not simply rejoin.
-- **A drill-down inside a longer flow** (checkout that dips into "edit address" and returns) is **linear** overall; treat the dip as one step, not as a hub. It is **hub-and-spoke** only when returning to the center *is* the loop, with no endpoint beyond it.
+| Type | Shape | Compass emphasis |
+|---|---|---|
+| Linear | One path from entry to outcome | Make the outcome and remaining milestones legible; Back retreats with safe state. |
+| Branching | A choice sends the user down a distinct route | Name the branch, show how to change it, and prune dead branches. |
+| Task-list | Finite task hub → independently completable task details → hub → final review and submit | Let users choose order; show task status and the finite outcome; represent Save and return, expiry, permission, revalidation, and final submit when applicable. |
+| Hub-and-spoke | Center → detail → center loop | Keep the hub as home and make the return route explicit; no progress counter is required. |
+| Open-ended | Explore a space with no fixed completion | Show location, active refinements, and home; do not invent progress. |
 
-| | Linear | Branching | Hub-and-spoke | Open-ended |
-|---|---|---|---|---|
-| **Shape** | one path, start to end | path forks on user choice | center → detail → back to center | wander a space, no fixed end |
-| **Examples** | checkout, onboarding, setup | conditional signup, "what brings you here?" | dashboard → record → dashboard | browse, search-and-refine, exploration |
-| **Orientation focus** | progress to the end | which branch + how to switch it | "back to center" is sacred; the hub is home base | "where am I in the space" + easy return, not progress |
-| **Economy focus** | cut steps on the one path | prune dead branches; default the common branch | minimize hops to a record and back | let the user roam; don't force a funnel |
-
-**Open-ended is the exception that proves the rule:** there's no single destination, so "how far is left" doesn't apply and "Never Lost" reduces to *always know where you are and how to get home*. (This is the journey-level sibling of Focal's exploration register.)
-
-**Expertise dial:** novices want guardrails—guidance, confirmations, one clear path. Experts want skips, shortcuts, remembered choices, and not to be re-asked. How many steps feel "economical" scales with who's traveling.
-
----
+A wizard with optional steps remains linear when it rejoins the same path. A drill down remains part of the surrounding journey unless returning to the center is itself the complete loop. A task list is distinct because it has a finite outcome while allowing independently completed tasks in user chosen order.
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](https://github.com/kvncnls/product-judgement/blob/main/product-judgement/SKILL.md) orchestrates a cross scale audit, treat Compass as a `review` over the evidence supplied. Do not ask a framing question, invent a state, or emit Compass's standalone template; return Compass findings through Product Judgement's wrapper and its Handoffs section. Never hand a cross-scale request back to Product Judgement; do not read [reference/examples.md](#source-compass-reference-examples-md) during this pass. Use [reference/review.md](#source-compass-reference-review-md) for the native contract and score only what the evidence supports.
 
-- **No argument** → explain Never Lost and the three disciplines briefly, then ask: building a new flow, or reviewing an existing one?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Compass with Focal, Flywheel, and Soul and reconciles the results.
-- **`build` (or a description of a flow to design)** → follow **The four moves** below. Pull techniques from [reference/patterns.md](reference/patterns.md).
-- **`review` / `audit` (a flow, a set of screens, a prototype, or a description)** → load and follow [reference/review.md](reference/review.md). It scores each discipline 0–4 against a written rubric, requires an evidence-based rationale and next-point change for every score, totals to /12, displays a normalized /4 average and common quality band with a weakest-dimension ceiling, tags issues P0–P3, and anchors every issue and suggested move to the exact **Screen · Flow · State · Lifecycle** locator before closing on a Never-Lost verdict. That file defines the rubrics, scoring contract, bands, severities, and audit locator—all of them, and nowhere else.
-- **A question about a specific technique or anti-pattern** → consult [reference/patterns.md](reference/patterns.md).
+- **No argument:** explain Never Lost and ask whether the user is building or reviewing a journey.
+- **`build` or a flow description:** read [reference/build.md](#source-compass-reference-build-md), then return its Flow Spec. Use [reference/patterns.md](#source-compass-reference-patterns-md) for techniques.
+- **`review` or `audit`:** read [reference/review.md](#source-compass-reference-review-md). It defines the native scorecard, N/E handling, severity, locators, and output.
+- **A technique or anti pattern question:** read [reference/patterns.md](#source-compass-reference-patterns-md).
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well—the templates define the shape, the examples set the bar.
-
----
-
-## Build: the four moves
-
-For each flow, in order. Write the answers down—they are the spec.
-
-1. **Name the outcome or anchor.** For a finite flow: *"This flow gets the user from ___ to ___."* For open-ended: *"This space lets the user ___, and ___ is home."* Note the flow type and audience.
-2. **Map the path or space.** For a finite flow, list every screen required to reach the outcome. For open-ended, map entry points, home, refinements, details, and return loops. Remove needless effort, but keep every step that protects or informs.
-3. **Signpost every step.** For each screen: position; progress when bounded; and the platform-appropriate retreat, home, or exit. No dead ends.
-4. **Join the seams.** For each transition: what context carries forward, what state must survive Back/refresh, and where entry points (deep links) land.
-
-Then run the gates: self-check against the five gates in the **`## Gates`** block of the Flow Spec template below. That block is the single canonical list—read them there, and emit them there. Never restate them in your own words.
-
-A flow that passes is sound by Compass's standard. Then design each screen with [Focal](../focal), and apply visual styling and motion on top.
-
----
-
-## Voice (when giving feedback)
-
-- **Lead with the answer, then structure it.** Open every build or review with one line—the verdict, or the flow's destination—then the locked template (the build template is below; the review template is in [reference/review.md](reference/review.md)). Use it verbatim; don't add, remove, reorder, or rename sections.
-- **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks you to produce something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill, not a judgment call: name it in one line after the output so it can be fixed. Analysis the template has no room for is still worth doing; it informs the scores even when it isn't printed.
-- **Be specific and quantitative.** "This is a 7-step flow that needs 3" beats "too many steps." Count the steps, name the dead ends, quote the labels.
-- **Be decisive.** "The user is trapped on step 3"—not "the user might feel stuck."
-- **Factual first, then judgment, then the fix.** What happens, why it loses the user, what it should be.
-- **Tie every issue to a discipline,** and to how it costs the user their bearings.
-- **Locate every issue.** Name the exact step, entry point, or transition; the interaction state; and the journey lifecycle moment where the change belongs.
-
----
-
-## Build output—the Flow Spec (use this exact structure)
-
-Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-Filling it: for a finite flow, number **only the screens the user passes through**, including the one where the outcome is reached, so before/after counts use the same unit. For open-ended, number the representative entry → explore/refine → detail → home loop and say that it is a loop, not a completion funnel. Repeat labeled bullets as needed. **Gates ship unchecked**—mark `[x]` only for gates the spec actually satisfies, and leave `[ ]` with a short reason for any it does not. If a labeled bullet has nothing, keep the label and write "None."
-
-```
-**Flow:** <name>—<finite: gets the user from entry to outcome | open-ended: lets the user pursue one intent while keeping one named place as home>.
-**Type:** linear | branching | hub-and-spoke | open-ended   ·   **Audience:** novice | mixed | expert
-**Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
-
-## Steps
-1. <screen>—<its job> [skip: <the default that removes this step, if any>]
-2. <screen>—<its job>
-
-## Cut
-- Merged: <the steps you collapsed> → <the one step they became>
-- Removed: <steps cut as waste>—<why they were not protection>
-- Kept as protection: <any step that looks like waste but stays, and why>
-
-## Orientation
-- Position/progress: <how each step shows location and, only when bounded, remaining scope>
-- Retreat/home + exit: <the platform-appropriate retreat, home, and escape behavior>
-
-## Continuity
-- Carries forward: <context passed across steps>
-- Survives: <state kept on Back / refresh / resume>
-- Entry points: <where deep links / notifications land>
-
-## Gates
-- [ ] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
-- [ ] Every step earns its place; nothing protective cut
-- [ ] Where-am-I + platform-appropriate retreat/home + exit throughout
-- [ ] No memory bridge; state survives; deep links land in context
-- [ ] Drop test passes on every screen
-```
-
----
-
-## Absolute don'ts
-
-- **Dead ends.** (Orientation) Every screen has a next step or a way out.
-- **No retreat, or a trapped modal.** (Orientation) Supply the expected retreat/home behavior and an escape from every owned modal or bounded task.
-- **Hidden progress.** (Orientation) In a bounded multi-step flow, show where they are and what remains. Do not invent progress for open-ended exploration.
-- **The setup wall.** (Path Economy) Don't gate first value behind a pile of configuration.
-- **Shortening the path by hiding cost or skipping protection.** (Path Economy) That's a dark pattern, not economy.
-- **The memory bridge.** (Continuity) Never make the user carry a fact between screens in their head.
-- **Losing state on Back.** (Continuity) Back is not a reset.
-- **Deep link to step one.** (Continuity) Land the user where they were headed, in context.
-
----
+Before a standalone build, read [reference/build.md](#source-compass-reference-build-md) and the relevant patterns. Before a standalone review, read [reference/review.md](#source-compass-reference-review-md) and [reference/examples.md](#source-compass-reference-examples-md) for calibration. The orchestrated Product Judgement pass follows its own evidence and output rules.
 
 ## References
 
-- [reference/review.md](reference/review.md)—the three-discipline flow audit, the Compass scorecard (0–4 per discipline), severity, and output format.
-- [reference/patterns.md](reference/patterns.md)—orientation patterns, step-reduction techniques, continuity/state patterns, flow-type playbooks, and the anti-pattern library with fixes.
-- [reference/examples.md](reference/examples.md)—a worked flow review and a worked flow build, in the locked output templates.
+- [reference/build.md](#source-compass-reference-build-md): conditional build workflow, state and transition inventory, and Flow Spec.
+- [reference/review.md](#source-compass-reference-review-md): native three discipline audit, scoring, evidence gaps, severity, and output format.
+- [reference/patterns.md](#source-compass-reference-patterns-md): orientation, task list, path, continuity, and anti pattern techniques.
+- [reference/examples.md](#source-compass-reference-examples-md): one evidence bounded review and one finite task list build.
 
 <!-- END GENERATED SOURCE: compass/SKILL.md -->
 
+
+<a id="source-compass-reference-review-md"></a>
 
 ## Source: `compass/reference/review.md`
 
 <!-- BEGIN GENERATED SOURCE: compass/reference/review.md -->
 
-# Compass Review—the three-discipline flow audit
+# Compass Review: the three discipline flow audit
 
-Evaluate a flow (or a set of screens) against the three disciplines and the overarching methodology, then return a scorecard with prioritized, concrete fixes. Use when the user asks to review, critique, audit, or "what's wrong with" any multi-screen flow, journey, or navigation in a functional product, app, or tool.
+Use this reference for a `review` or `audit` of an existing flow, journey, finite task-list service, or navigation. Judge the route and its seams with evidence. Compass can report a supported finding without claiming that an unseen state exists.
 
-## Input modes
+## Input contract and modes
 
-- **A described flow**—the user narrates the steps ("they sign up, pick a plan, then…"). Map it as a sequence, name the finite outcome or open-ended intent and home anchor, and audit the journey you reconstruct. If the narration is ambiguous, restate the sequence and ask before scoring—that is a clarifying exchange, not part of the emitted review.
-- **A set of screens or screenshots**—read them in order, infer the transitions between them, and critique the joins. You're judging the *seams*, not each screen—a beautiful screen in the wrong order, or one that drops state on the way in, still fails. Per individual screen layout, defer to [Focal](../../focal).
-- **A clickable prototype / live URL**—if browser automation is available, walk the flow: click through, hit Back, refresh mid-flow, follow a deep link cold. Otherwise audit the described or captured steps. Always test the transitions, not just the destinations—the failures live between screens.
+Provide the journey's entry points, intended finite outcome or open ended intent and home, audience, stakes, and the screens or routes in order. Include branches and the transitions that matter. When available, include loading, validation and error, retry, permission, Back, refresh, interruption, save and return, re entry, deep link, review, and final submit states. Mark a state or seam as `not shown` when the artifact does not expose it.
 
-## Step 0—Notice the journey, name the outcome or anchor, classify the flow
+Use the mode that matches the evidence:
 
-Before judging, *walk it*. Most people glance at one screen; a reviewer traces the whole path. Count the steps. Read the progress indicators and Back affordances verbatim. Note what each transition carries and what it drops. Try to get lost. The specificity of your observation is the ceiling on the quality of your critique.
+- **A described flow:** reconstruct only the narrated sequence, name its outcome or anchor, and keep uncertain transitions `not shown`. If the description cannot establish the journey shape, ask before scoring.
+- **Screens or screenshots:** read the selected screens in order and judge the transitions they actually show. Screens prove visible structure and selected seams; they do not prove persistence, validation, timing, permission, or lifecycle behavior that is absent.
+- **Clickable prototype or live URL:** walk the route, branches, Back, refresh, a relevant deep link, and any save, re entry, error, or submit states that the product exposes. Record what was actually tested.
+- **Codebase:** inspect routes, state transitions, validation, persistence, permissions, expiry, revalidation, and re entry before making a claim. Treat code as evidence of behavior only where the path and state are reachable or otherwise verified.
+- **Finite task-list service:** model a finite outcome composed of independently completable tasks. Capture the task hub, task names and statuses, user chosen order, task detail → hub returns, Save and return behavior, final review and submit, and any task dependencies or permission gates. Do not force this journey into a linear screen count.
 
-Then frame, in one or two sentences each:
-- **What is this journey?** Product type, what the journey is for, and its entry plus outcome or home anchor.
-- **Name the outcome or anchor.** For a finite flow, settle *"This flow gets the user from ___ to ___."* If two outcomes can succeed independently, split them. For an open-ended journey, settle *"This space lets the user ___, and ___ is home."* Do not invent an end for browsing.
-- **What's the user's state?** Anxious, rushed, first-time, returning, interrupted, one-handed? A checkout under time pressure tolerates fewer steps than a leisurely setup. A flow resumed after a phone call must survive the interruption. Name it; the critique must respect it.
-- **Which journey states and lifecycle paths are covered?** Inventory the exact conditions walked: first run, returning, Back, refresh, validation error, retry, interruption/resume, deep link, branch change, or recovery. Mark important paths `not shown` when the artifact does not expose them.
-- **What's the bar?** Every flow category has an invisible standard set by its best-in-class journey. A checkout is judged against the cleanest checkouts; an onboarding against the clearest onboardings; a multi-step setup against the cleanest wizard in the category. Ask: *what would the best-in-class flow do at this seam?*
-- **The flow type.** Classify it by walking the decision tree in **Registers** in [SKILL.md](../SKILL.md)—take the first match, and don't re-derive the categories here. This sets how the gates should be read; see *Adjust for flow type* below. If the tree lands on linear but an unmanaged fork is bolted on, score it linear and flag the rogue fork under Gate 1.
+## Step 0: frame and inventory the journey
+
+Walk the actual path before judging it. Count screens only when a count is meaningful; for a task list, count the task level work and hops rather than pretending each user chosen task order is one fixed sequence. Read position cues and retreat labels verbatim. Record what each transition carries, drops, or makes the user re-enter.
+
+Name, in one or two sentences each:
+
+- **The journey:** product, purpose, entry, and finite outcome or open ended home anchor.
+- **The user:** first time, returning, interrupted, rushed, one handed, expert, or another evidenced situation; include stakes.
+- **The covered states and lifecycle paths:** only conditions walked or shown, such as default, loading, validation, retry, permission, Back, refresh, branch change, task order, save and return, interruption, re entry, deep link, review, or final submit.
+- **The bar:** the best in category journey used as a comparator, when one is known.
+
+Build a compact state and transition inventory before scoring. Use one row per evidenced surface or seam and keep the last column as a check when the behavior is not shown:
+
+| Screen or transition | State and lifecycle | What is evidenced | Next evidence check |
+|---|---|---|---|
+| <source → destination> | <state · lifecycle> | <visible or tested behavior> | <fastest check, or `none`> |
+
+Include only states appropriate to the actual flow. A task list usually needs task status, task detail → hub, order freedom, save and return, and final review → submit; a linear checkout may need payment retry and confirmation instead. Do not turn an exhaustive state checklist into a requirement.
+
+### Evidence and N/E policy
+
+<a id="shared-evidence"></a>
+
+<!-- BEGIN SHARED: evidence -->
+Use `N/E—insufficient evidence` when the available artifact cannot support a dimension's rubric. A missing variant does not automatically make the whole dimension unevaluable. Report supported findings and the next evidence check; do not convert unknown behavior into a defect, an implementation recommendation, or a score. If any required dimension is N/E, omit the native total, average, band, and weakest-dimension ceiling.
+
+Before assigning `0`, `1`, or `2`, identify the observed condition that meets the negative rubric anchor. “Not shown,” “untested,” and “unknown” cannot supply that condition. If an essential part of the dimension is unsupported, use N/E rather than a lower score as a substitute for uncertainty. Supported strengths can still be described without a number.
+<!-- END SHARED: evidence -->
+
+If a dimension has enough evidence to judge its rubric, score the supported behavior and put the unshown variants in **Coverage** or **Basis**. If the evidence cannot support its rubric, mark only that row N/E and name the behavior needed to evaluate it. Never create an issue, fix, or score from a missing state. For an unseen behavior, the next action is an evidence check, not an implementation recommendation.
+
+Check the evidence needed by each discipline before choosing its integer. A position cue supports an Orientation strength, but not a whole-discipline score when retreat or home is essential and unknown. Named stages establish the advertised journey shape; Path Economy needs the actual actions, hops, and consequential commitments, supplied through a sufficiently concrete description, code, or a walked path. Continuity needs evidence of what crosses a relevant seam. Describe supported strengths without a number when these essentials are absent; do not treat an unshown problem as proof that the path is lean or safe.
 
 ## Locate every finding
 
-Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Top move, Next item, and handoff must carry the same locator:
+Every issue, Top move, Next item, and handoff carries the same four part locator:
 
-1. **Screen**—the exact source screen, destination screen, entry point, or transition seam.
-2. **Flow**—the named journey and transition being evaluated.
-3. **State**—the interaction or system condition: waiting, validation error, retry, Back, refresh, deep-linked, resumed, and so on.
-4. **Lifecycle**—the journey moment: first-run activation, returning completion, interruption/resume, recovery, or another specific path.
+1. **Screen**: exact source, destination, entry point, or transition seam.
+2. **Flow**: named journey and transition.
+3. **State**: exact interaction or system condition.
+4. **Lifecycle**: exact journey moment, such as first run, returning completion, interruption and re entry, recovery, or final submit.
 
-Use the narrowest defensible locator. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not invent behavior.
+Use the narrowest defensible locator supported by the evidence. If one field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**. Do not fill an unknown locator with a guessed behavior. The rule is simple: do not invent behavior.
 
-## Adjust for flow type
+## Adjust for journey type
 
-Read the gates through the flow type you classified in Step 0. The disciplines still apply; their targets move. Scoring a hub-and-spoke or an open-ended space by linear rules produces false failures.
+Classify with the decision tree in [SKILL.md](#source-compass-skill-md), taking its first match. The journey type changes what counts as progress and recovery:
 
-- **Linear** (default—checkout, onboarding, setup, wizards): score exactly as the gates describe. Progress to the end is sacred. A skippable step is waste only when skipping it loses no protection, comprehension, preference, or branch-specific value; optional does not automatically mean unnecessary.
-- **Branching** (conditional signup, "what brings you here?", plan-dependent paths): Orientation must also tell the user *which branch they're on* and *how to change it*—a fork the user can't see or undo fails Gate 1. Under Path Economy, judge whether dead or rarely-taken branches are pruned and whether the common branch is defaulted. Don't penalize the existence of branches; penalize unmanaged ones.
-- **Hub-and-spoke** (dashboard → record → dashboard, settings index → detail → index): *"back to the hub" is sacred*—the center is home base, and losing the way back to it is a Gate 1 failure even mid-spoke. Don't score it as a broken linear flow for "having no progress bar"; a hub has no single end. Under Path Economy, count hops out to a spoke and back—minimize them, don't funnel.
-- **Open-ended** (browse, search-and-refine, exploration, infinite spaces): the exception that proves the rule. There's no single destination, so *"how far is left" does not apply*—do **not** penalize the absence of a progress indicator under Gate 1. "Never Lost" reduces to *always know where you are in the space, and how to get home*. Under Path Economy, let the user roam; don't force a funnel onto a wander. (This is the journey-level sibling of Focal's exploration register.)
-- **Audience / expertise:** weigh who's traveling. Novices want guardrails—guidance, confirmations, one visible path; re-asking a novice is safer than stranding them. Experts want skips, shortcuts, remembered choices, and not to be re-asked; making an expert re-confirm a known step is the economy failure. How many steps feel "economical," and how much signposting feels like hand-holding, both scale with the audience. Don't score a pro flow's terse, skip-heavy path as under-oriented if its users have the route memorized; do score a first-run flow strictly.
+- **Linear:** one path to one outcome. Make the outcome and remaining work legible with a cue that fits the journey; a counter is optional. Back and exit should preserve safe state.
+- **Branching:** a choice sends the user down a distinct sequence. Name the branch, show how to change it, and prune dead branches. Do not require one global progress count when the path differs.
+- **Task-list:** a finite service has a task hub, independently completable tasks in user chosen order, returns to the hub, and one final review or submit outcome. Task statuses and the completion condition can orient the user; a linear step counter is not required. Judge Save and return, expiry, permission, stale-data revalidation, and recoverable re entry only when the service needs or exposes them.
+- **Hub-and-spoke:** a center → detail → center loop. The hub is home and the return route must be explicit; a progress counter is not required when there is no endpoint beyond the loop.
+- **Open ended:** browse, search, or explore without a fixed completion event. Judge position and home; do not penalize the absence of a progress indicator or invent a finish line.
 
-A flow you can't classify is usually a linear flow with an unmanaged branch or a hidden hub—score it as linear and flag the structural confusion under Gate 1.
+An optional step that rejoins the same path remains linear. A drill down inside a longer journey remains part of that journey. A task list is distinct from an unbounded hub because its task set and final outcome are finite.
 
-## The three gates
+## Gate 1: Orientation (load bearing)
 
-Run each gate in turn. Orientation leads—it's the load-bearing promise. Each produces a 0–4 score and the specific findings behind it.
+*At every evidenced step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
 
-### Gate 1—Orientation *(load-bearing)*
-
-*At every step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
-
-- Run the **drop test** on every screen: drop the user onto it with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? A screen that fails those applicable questions fails Orientation.
-- Check **position and progress** against the mechanism the flow type requires, in **Orientation** in [SKILL.md](../SKILL.md): a counter for linear, a named branch counted within itself for branching, an active nav state plus a labeled route to the center for hub-and-spoke, location without a counter for open-ended. A mechanism borrowed from the wrong flow type is a finding even when something is displayed. Is bounded progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
-- Check for a **platform-appropriate retreat or home path** and an **escape hatch** from every owned bounded flow—especially modals and wizards. Browser Back can be sufficient when history and state behave correctly; a product-owned stack needs its own visible retreat. Do not demand duplicate controls that add no clarity.
-- Hunt for **dead ends**: a screen the user can reach but not leave is a bug, not a state.
-- For branching/hub flows, check that the user can see **which branch they're on** or **how to get back to the hub**.
+- Run the drop test on each evidenced screen and seam, applying only the questions that fit its journey type.
+- Check that the outcome and remaining work are legible through an appropriate cue: named stages, task statuses, a checklist, a stable count when meaningful, or location and home. A named three stage stepper can be valid without a numeric counter.
+- Check branch identity, the task hub and return route, or the home anchor as applicable. Browser Back can be sufficient when history is expected, discoverable, and state safe.
+- Check a platform appropriate retreat and an escape from every owned bounded flow, modal, success, and error state that is shown. Do not demand duplicate controls that add no clarity.
+- Hunt for dead ends. A screen the user can reach but not leave is a bug, not an assumed state.
 
 | Score | Criteria |
 |-------|----------|
@@ -324,47 +208,51 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 | 3 | Clear position, platform-appropriate retreat/home, and exit throughout; minor signposting gaps |
 | 4 | At every step the user knows where they are, what remains when bounded, and how to proceed, retreat, get home, or escape—the journey-appropriate drop test passes everywhere |
 
-Because this discipline is load-bearing, a true dead end on the core path is a blocker. A failed drop test is not automatically release-critical: assign severity from consequence, reach, and recoverability, and reserve blocker status for a key state where the user cannot orient, proceed, retreat, or recover.
+A failed drop test is not automatically release-critical: assign severity from consequence, reach, and recoverability, and reserve blocker status for a key state where the user cannot orient, proceed, retreat, or recover.
 
-### Gate 2—Path Economy
+## Gate 2: Path Economy
 
 *For this journey type, is this the least needless effort without cutting protection?*
 
-- **Count the steps**, then count how many the task *honestly* requires. "This is a 7-step flow that needs 3" is the finding.
-- Check for **redundant screens**, needless round-trips, and steps that could **merge** without overloading a single screen (defer to Focal for whether the merged screen is too dense).
-- Check whether **defaults skip steps**: is the flow asking what it could infer or pre-fill?
-- Check for a **setup wall**: is first value gated behind a pile of configuration?
-- **Honesty guardrail:** a step that protects the user or earns trust is not waste. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, or burying the price to "reduce friction" is a **dark pattern, not economy**—score that as a failure, not a saving.
+- Count the honest work. For a task list, include task completion and the hops through the hub, but respect user chosen order and do not invent one canonical route.
+- Merge redundant screens and round trips where the result remains comprehensible. Defer screen density questions to Focal.
+- Infer or default only safe, useful values. The inferred value and its source or meaning must be visible and correctable; provide a manual route when confidence is low.
+- Confirm financial, identity, permission, legal, security, destination, quantity, destructive, or otherwise consequential values before commitment.
+- Keep protective work. Hiding cost, risk, permission, consequence, or a required confirmation is a dark pattern, not economy.
 
 | Score | Criteria |
 |-------|----------|
 | 0 | The path cannot be completed as designed—branches that dead-end, or a required step the user cannot satisfy |
 | 1 | Completable but badly bloated (roughly double the honest step count), a setup wall before first value, or a "shortcut" that hides cost or skips protection |
 | 2 | Some waste—one or two redundant steps, or a round-trip that should be one screen |
-| 3 | Lean path; a default or two could still be inferred |
+| 3 | Lean, purposeful path with protection intact; only minor opportunities, if any, remain |
 | 4 | The fewest honest steps; every screen earns its place; nothing protective was cut |
 
-### Gate 3—Continuity
+## Gate 3: Continuity
 
 *Do context and state survive the seams between screens?*
 
-- Check for the **memory bridge**: does any step ask the user to carry a fact (a code, a choice, a number) from an earlier screen in their head, rather than showing it where it's needed?
-- Test **state on Back and refresh**: does Back wipe entered data? Does a refresh or interruption resume where they left off, or reset to step one?
-- Test **entry points**: does a deep link, notification, or search result land the user *in context* on the relevant screen, or dump them at the start?
-- Check the **mental model**: do consecutive screens feel like one continuous task—consistent anchors, predictable transitions, the same object in focus—or like jarring jumps?
+- Check for a memory bridge. Within the same process, previously entered information that is required again should be visible or available to select, subject to essential, security, and invalid-data exceptions. See [W3C's Redundant Entry guidance](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html); it does not require storage between sessions.
+- Test state on Back and refresh where those transitions are exposed. Back is a retreat, not a reset, when retaining that state is safe.
+- Treat cross session save and return as conditional. Evaluate whether the service safely and permissibly stores the data, tells the user what is retained and when it expires, applies the authentication and authorization appropriate to the data and service at re entry, revalidates stale or consequential data, handles revoked access or conflicts, and offers a recoverable re entry path. Do not make “return tomorrow resumes everything” a universal requirement.
+- Test deep links, notifications, and search results where shown. They should land in context rather than at an unrelated start screen.
+- Check whether consecutive screens keep the same object, anchors, and mental model.
 
 | Score | Criteria |
 |-------|----------|
-| 0 | The seams break the task—state lost on Back, deep links dump to step one, the user re-enters everything |
+| 0 | The seams break the task through avoidable context or state loss, broken entry points, or unrecoverable re-entry |
 | 1 | A memory bridge on a key step, or a "resume" that resets |
 | 2 | Mostly continuous, but one transition drops context or state |
-| 3 | Context and state carry well; one rough seam or jarring jump |
-| 4 | Nothing the user gave or knew is lost across any seam; every entry point lands in context; the journey feels like one continuous task |
+| 3 | Context and permitted state carry dependably across the evidenced seams; only minor roughness, if any, remains |
+| 4 | Context and permitted state carry dependably across relevant seams and entry points; expiry, security-driven reset, and recovery remain understandable and effective |
 
 ## Scoring rules
 
-Every discipline uses the same integer anchors:
+Every discipline uses these shared integer anchors:
 
+<a id="shared-anchors"></a>
+
+<!-- BEGIN SHARED: anchors -->
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
 | **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
@@ -373,13 +261,14 @@ Every discipline uses the same integer anchors:
 | **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
 | **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each discipline holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the dimension overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the dimension being scored; it does not universally require novelty.
+Meeting the ordinary requirements of the task supports `3`, not automatically `4`. A `4` rationale must identify a specific unusually effective quality visible in the evidence, beyond listing correct ingredients or repeating the rubric. It need not be novel or backed by analytics, but “no defect was shown” is not enough.
+<!-- END SHARED: anchors -->
 
-### Score rationale—required
+Score each evaluable discipline holistically against its local rubric. Do not use hidden sub scores, checklist subtraction, averaging, or half points; let one severe material failure determine the score when the rubric warrants it. A score row must show **evidence → consequence → rubric anchor → next-point change**. A `2` says what works and names the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` explains why the discipline is exemplary and says `None—already exemplary` in the next point field. When more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or transition, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
+For an N/E row, explain why the available evidence cannot support that rubric and name the fastest evidence check. Do not award credit, invent failure, or propose implementation for unseen behavior. A missing variant can remain in **Coverage** while the supported dimension is scored.
 
-Keep the native total: `total = Orientation + Path Economy + Continuity`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
+When all three disciplines are integer scores, keep the native total: `total = Orientation + Path Economy + Continuity`; calculate `average = total / 3`, rounded to one decimal place; then apply this band and weakest dimension ceiling:
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -388,17 +277,15 @@ Keep the native total: `total = Orientation + Path Economy + Continuity`. Calcul
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores.
+Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. If any required dimension is N/E, report no native total, average, band, or weakest dimension ceiling.
 
-- **Score 0 vs 1 (Orientation only).** Score **0** when the flow strands the user with no recovery at all—a true dead end, or a flow with no exit anywhere. Score **1** when a way out exists but is hidden, surprising, unsafe, or unlabeled. Browser Back is not inherently a failure; judge whether it is the expected, discoverable, state-safe retreat for this platform and flow. A retreat that *wipes work* is a Continuity failure, scored by Gate 3.
-- If more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
-- **The verdict—Never Lost.** Yes or no: at every step, does the user know where they are, what remains when bounded, and how to retreat, get home, or leave? The total measures how close the journey gets; the verdict states whether it arrives. A true dead end on the core path is a blocker; other drop-test failures take severity from their actual consequence.
-- **A doubled destination** (the flow needs an "and") is an Orientation failure; assign P0 only when its consequence meets the shared critical definition, and flag it as the split it implies.
-
-Dimension score, overall quality band, issue severity, critical blocker, and the **Never Lost** verdict are separate. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
+The Never Lost verdict is separate from the total. Use **Yes** only when every applicable, evidenced step passes; use **No** for an observed break; use **N/E** when the outcome or the relevant drop test cannot be judged from the evidence. A true dead end on the core path is a blocker. The rule remains: a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
+<a id="shared-severity"></a>
+
+<!-- BEGIN SHARED: severity -->
 | Priority | Meaning |
 |----------|---------|
 | **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
@@ -407,22 +294,23 @@ Dimension score, overall quality band, issue severity, critical blocker, and the
 | **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
 
 Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+<!-- END SHARED: severity -->
 
-**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by type of harm—**Orientation** (the user is lost or trapped) outranks **Path Economy** (the path is longer or less honest than it should be) outranks **Continuity** (a seam drops context or state). Never reorder across priorities; a P0 Continuity issue outranks a P1 Orientation issue.
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by type of harm—**Orientation** (the user is lost or trapped) outranks **Path Economy** (the path is longer or less honest than it should be) outranks **Continuity** (a seam drops context or state). Never reorder across priorities.
 
-## Output format—use this exact structure
+## Output format: use this exact structure
 
-Every review returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
+Return this template in order. Keep every section. Emit issues and fixes only for evidenced behavior; for an evidence gap, use Coverage, Basis, or a scorecard N/E reason with the next evidence check. When any discipline is N/E, omit the native total segment from **Verdict** and omit the entire **Total** row from **Scorecard**; do not print an N/E pseudoaggregate. Emit the total, average, band, and weakest-dimension ceiling only when all three disciplines are scored.
 
-```
-**Verdict:** <No | Yes> · <the single biggest break, one phrase> · **<total>/12**
+```text
+**Verdict:** <No | Yes | N/E> · <the single biggest break or evidence gap, one phrase> [append ` · **<total>/12**` only when all three disciplines are scored]
 
-**Flow:** <name> · type: <linear | branching | hub-and-spoke | open-ended> · audience: <novice | mixed | expert>
+**Flow:** <name> · type: <linear | branching | hub-and-spoke | task-list | open-ended> · audience: <novice | mixed | expert>
 **Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
 **Screen:** <source and destination screens or exact seam reviewed>
-**State:** <exact interaction or system state(s) reviewed>
+**State:** <states and transitions actually reviewed>
 **Lifecycle:** <exact journey moment(s) reviewed>
-**Context:** <the user's state in a few words> · bar: <the best-in-class comparator you judged against>
+**Context:** <the user's state in a few words> · bar: <relevant supplied convention or comparator, or not provided>
 **Coverage:** <journey states and lifecycle paths actually reviewed> · gaps: <material paths not shown or tested, or "none">
 **Basis:** <observed from a screenshot or artifact | inferred from code | tested in a prototype or live product | walked from a description | measured from product data> · confirm with: <the fastest validating check>
 **Blocker:** <None. | concise blocker reason>
@@ -430,168 +318,129 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Orientation | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Path Economy | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Continuity | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| **Total** | **_/12 · _._/4** | **<band; exact sum of justified component scores>** | <weakest-discipline ceiling applied> |
+| Orientation | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| Path Economy | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| Continuity | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| **Total** | **<_/12 · _._/4>** | **<band; exact sum of justified component scores>** | <weakest-dimension ceiling> |
 
 ## Issues (most severe first)
-- **[P0 · Orientation]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <fix>.
-- **[P1 · Path Economy]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <fix>.
+- **[P0 · Orientation]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <specific change supported by the evidence>.
+- **[P1 · Path Economy]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <specific change supported by the evidence>.
 
 ## Top moves (up to 3)
-1. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <highest-leverage change>
-2. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next>
-3. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next>
+1. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <highest-leverage evidenced change>
+2. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next evidenced change>
+3. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next evidenced change>
 
 ## Next
-- **Structural** (do first): **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <what changes what the journey *is*—steps to cut or merge, a branch to manage, a dead end to close, state to carry, an entry point to re-route>
-- **Executional** (after): **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <what changes how a step *looks or reads*—indicator weight, Back label wording, transition motion>
-- **Hand off**: **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <anything that is not this flow's problem—single-screen layout or hierarchy goes to Focal; "None" if all of it is Compass's>
+- **Structural** (do first): **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <evidenced structural change, or the next evidence check when unseen>
+- **Executional** (after): **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <evidenced presentation change, or the next evidence check when unseen>
+- **Hand off**: **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <single-screen hierarchy → Focal; relationship leak → Flywheel; expressive treatment → Soul; `None` if all of it is Compass's>
 ```
 
-Filling it:
-- **Coverage**—name only conditions actually walked or evidenced. Use `gaps` for consequential paths such as Back, refresh, retry, interruption/resume, deep link, or returning-user bypass that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
-- **Next**—structural before executional, always: signposting a maze only labels the dead ends. Resolve structural items with the four-move build workflow in [SKILL.md](../SKILL.md) and the techniques in [patterns.md](patterns.md).
-- **Single-screen problems are out of scope—route them to [Focal](../../focal).** If an individual screen is overloaded, mis-ranked, or has no clear primary action, that is a within-screen failure for Focal, not a seam for Compass; name it in **Next** and hand it off.
-- Re-run the audit after fixes to watch the score climb.
+Use `None.` under **Issues**, **Top moves**, or a **Next** item when no evidenced item is warranted; do not add filler. For a single-screen hierarchy problem, route it to [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/reference/review.md). Re-run after an evidenced fix when the user requests a follow-up audit.
 
 <!-- END GENERATED SOURCE: compass/reference/review.md -->
 
+
+<a id="source-compass-reference-patterns-md"></a>
 
 ## Source: `compass/reference/patterns.md`
 
 <!-- BEGIN GENERATED SOURCE: compass/reference/patterns.md -->
 
-# Compass Patterns—techniques and anti-patterns
+# Compass Patterns: techniques and anti patterns
 
-The working catalog behind the three disciplines. Pull from here when building a flow or when prescribing a fix in a review. Ordered the way the disciplines apply: Orientation → Path Economy → Continuity.
+Use this catalog when building a journey or prescribing a fix that the evidence supports. It follows the three disciplines: Orientation, Path Economy, and Continuity.
 
-Orientation is the load-bearing discipline—the literal promise. When two fixes have equal consequence and dependency, restore the user's bearings first. This is prioritization, not extra numeric weight.
+## Evidence anchors (not compliance certification)
 
----
+- [GOV.UK task list](https://design-system.service.gov.uk/components/task-list/) describes a finite service where users can complete tasks in whatever order works for them, see task statuses, return to the task list, and move on only when the required tasks are complete. It also says to consider Save and return when a service spans multiple sessions. Use this as a pattern reference, not as a universal product requirement.
+- [W3C WCAG 2.2 Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html) covers information repeated within the same process and allows essential, security, and invalid-data exceptions. It explicitly does not add a requirement to store information between sessions. Use it to avoid memory bridges, not to certify a product or prescribe cross session persistence.
 
-## Orientation patterns (Discipline 1—load-bearing)
+## Orientation patterns
 
-How to make sure the user can always answer *Where am I? How far is left? How do I get back, or out?*
+The goal is a user who can answer *Where am I? What remains when bounded? How do I get back, home, or out?*
 
-- **Progress as milestones, not a tally.** A stepper that reads "Step 2 of 4" promises an end the user can picture. "12 of 47 complete" reads as a sentence. Frame progress as a small count of named, achievable stages; if the real count is large, group it ("Account → Payment → Review", not "field 14 of 38"). Defer to [Focal](../../focal) for whether any one step is overloaded—Compass owns the count of steps, not the contents of one.
-- **Breadcrumbs and active state.** On hub-and-spoke and any nested structure, the user must be able to point at where they are: a breadcrumb trail back to the hub, a highlighted nav item, a screen title that matches the link they followed. Recognition beats recall—the path home should be readable, not remembered.
-- **A platform-appropriate retreat.** Use in-product Back where the product owns the stack, browser Back where history is expected and state-safe, a hub or breadcrumb in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate controls without adding clarity. If retreat loses work, that is also a Continuity failure.
-- **Escape hatches and Cancel.** Every flow needs a way *out*, not just back: Cancel, Close, "Save & exit," or "Do this later." Back retreats one step; the escape hatch leaves the flow entirely. A multi-step wizard with no Cancel is a trap with a polite face.
-- **Never-trap modals.** A modal is the easiest place to strand someone. Every modal closes—an X, an explicit Cancel, click-outside, or Esc—and closing it returns the user to a known place, not a blank. A modal that opens another modal that has no close is the canonical maze.
-- **No dead ends.** Every screen has a clear next step *or* a clear way out. A screen the user can reach but not leave is a bug, not a state—success screens, error screens, and edge-case screens included.
-- **The drop test.** Drop the user onto any screen mid-journey with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? Run the applicable questions on every screen. The screen that fails them is where users become lost.
+- **Outcome based progress, not a widget quota.** For a bounded journey, make the outcome and remaining work legible through the cue that fits the actual work: named stages, task statuses, a checklist, a stable count, or a concise summary. A counter is optional. A named three stage stepper such as `Account → Details → Submit` is valid without a numeric count. For open ended work, show position in the space and a known home instead of fake completion progress.
+- **Task list as a finite hub.** When users need to complete several tasks in a user chosen order, show every task, its actionable status, and the finite completion condition. Let each task return to the hub. Add Save and return only when the service has a safe, permitted retention and re entry path; final review and submit close the finite journey.
+- **Branch and hub cues.** Name a branch when a choice changes the route. In a hub-and-spoke journey, show the active hub location and a labeled route back to the center. Do not require a progress bar where the journey has no endpoint.
+- **Platform appropriate retreat.** Use product Back when the product owns the stack, browser Back when history is expected and state safe, a breadcrumb or hub link in nested spaces, and Cancel, Close, or Save and return when the service supports it. Do not duplicate controls without adding clarity.
+- **Escape and no dead ends.** Back retreats one step; an escape hatch leaves the bounded flow. Every shown screen, error, success state, and modal has a clear next step or a way out.
+- **Drop test.** Remove the content and leave only title, position cue, applicable progress or task status, retreat/home path, and exit. A stranger should still identify the journey and leave or return home.
 
-**Test:** strip a screen of its content and leave only its signage—the title, any journey-appropriate position or progress cue, retreat/home path, and exit. Can a stranger say what journey this is, where they sit, and how to leave or return home? If not, orientation has failed before any step is taken.
+## Path Economy techniques
 
----
-
-## Step-reduction techniques (Discipline 2—Path Economy)
-
-Every screen in a flow is a tax on the user. Cut the tax to the minimum the task *honestly* requires. Match the technique to *why* a step exists.
+Every screen is effort. Remove waste while keeping protection and informed choice.
 
 | Technique | Use when | Example |
-|-----------|----------|---------|
-| **Merge round-trips** | Two screens bounce the user back and forth, each doing half a job | Pick item → separate confirm screen → back to list, collapsed into pick-and-confirm in place |
-| **Smart defaults that skip a step** | One choice is right for most users | Pre-selected shipping method, pre-filled country from locale, "remember this" honored |
-| **Infer rather than ask** | The system already knows or can derive the answer | Detect card type from the number; pull name from the signed-in account; geolocate the city |
-| **First value before setup** | Value is gated behind configuration | Show the populated app with sensible defaults, defer settings to when they're relevant |
-| **Prune dead branches** | A fork leads somewhere with no real continuation | Remove the option that dead-ends; or give that branch a real next step |
-| **Collapse adjacent steps** | Two thin screens fit comfortably on one without overload | Merge name + email into one screen—*defer to [Focal](../../focal) for whether the merged screen is now too heavy* |
+|---|---|---|
+| **Merge round trips** | Two screens bounce the user back and forth | Pick an item and confirm in place, then return to the list |
+| **Safe visible default** | One value is right for most users and easy to change | Preselect locale, show why, and offer Edit before continuing |
+| **Visible, correctable inference** | The system can derive a value | Show “Suggested workspace: Acme” with Change, rather than silently committing it |
+| **Consequential confirmation** | A value changes money, identity, permission, destination, quantity, legal status, or an irreversible action | Show the interpreted value and effect before Submit |
+| **First value before setup** | Configuration is blocking the first useful result | Open a usable workspace, then ask for optional setup in context |
+| **Task list** | Several tasks are finite, independently completable, and users need order freedom | Task hub with Incomplete/Completed statuses, task detail, return, and final review |
+| **Prune dead branches** | A choice has no real continuation | Remove it or give it a complete route |
+| **Collapse adjacent steps** | Two thin screens fit without overloading one screen | Merge name and email; ask Focal to judge the resulting screen density |
 
-**Choosing well:**
-- The best step is the one the user never has to take. Before adding a screen, ask whether its answer can be inferred, defaulted, or deferred.
-- Count honestly. "This is a 7-step flow that needs 3" is a finding; "feels long" is a feeling.
-- Shortening a path is a [Focal](../../focal) handoff at the boundary: Compass merges *screens*, Focal judges whether the merged screen overloads. Don't collapse steps so aggressively that a screen loses its clear organizing intent.
+Count the honest work for the journey type. User chosen task order is not waste. A step that protects the user or earns informed consent is not waste. Hiding cost, risk, permission, consequence, or a needed confirmation to make a path look shorter is a dark pattern, not economy.
 
-**The honesty caveat—read this.** Shorten the path by removing *waste*, never by removing *protection*. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, auto-opting the user into something, or burying the price to "reduce friction" is a **dark pattern, not economy**. A step that protects the user or earns their trust is not waste—it is load-bearing. If removing a step makes the flow shorter but the user worse off, you have not practiced Path Economy; you have laundered a trap as a convenience.
+## Continuity patterns
 
----
+Moving between screens should not cost users context or safe work they already provided.
 
-## Continuity patterns (Discipline 3)
+- **No memory bridge.** Show a code, amount, choice, or destination where it is needed. Within one process, make repeated information visible or available to select, while allowing essential, security, and invalid-data exceptions.
+- **Back is a retreat.** Preserve entered state across Back when retaining it is safe. If a sensitive value cannot remain, say so before the user leaves and provide the safe recovery the service supports.
+- **Conditional Save and return.** Decide retention from the data and journey, not from a blanket promise. Save only where the service may safely store the data, the user has the required permission, the retention and expiry are clear, re entry has the authentication and authorization the data requires, stale or consequential data is revalidated, and revoked access or conflicts can recover. Show what was saved and what will expire. If the conditions are absent, explain the limit and offer a recoverable re entry or safe alternative.
+- **Deep links land in context.** A notification, shared URL, or email opens the relevant task or object with its route, permissions, and current state clear. If access has expired, explain it and route to a recoverable place.
+- **Stable mental model.** Keep layout anchors, focused object, and transition direction coherent across a seam. A visual jump that loses context is a continuity issue even when the data remains.
 
-Moving between screens shouldn't cost the user anything they already gave or already knew. The seams between screens are where flows leak.
+At each seam, ask what the user knew and had on the source screen that the destination needs. If it must be re entered, re found, or re remembered, close the leak or explain why re entry is essential, security required, or invalidated.
 
-- **No memory bridge.** Never make the user carry a fact from one screen to the next in their head. If step 3 needs the code, the amount, or the choice from step 1, *show it on step 3*. The tell is any instruction shaped like "remember this for later."
-- **Preserve state on Back.** Back is a retreat, not a reset. Returning to a previous step shows everything the user already entered, still filled in. A Back that wipes the form teaches users to fear the button that's supposed to be their safety net.
-- **Survive refresh and resume.** An accidental reload, a closed tab, a return tomorrow—the flow picks up where it was left, not at step one. Persist progress so "resume" actually resumes. A "resume" that resets is worse than no resume, because it promised.
-- **Land deep links in context.** A notification, a shared URL, a search result, or an email link drops the user *on the relevant screen, mid-flow*—already oriented—not dumped at the entrance to find their own way back. If the link says "your order shipped," it lands on that order, not the home screen.
-- **Preserve the mental model across transitions.** Each screen should feel like it came from the last: stable layout anchors, the same object kept in focus, predictable forward/back motion. A jarring jump—a different layout, a lost selection, a surprise full-screen takeover—breaks the sense of one continuous task even when no data was lost.
+## Flow type playbooks
 
-**Test:** at each seam between two screens, ask what the user knew and had on the first that they need on the second. If anything required must be re-entered, re-found, or re-remembered, the seam leaks—close it by carrying it forward.
+- **Linear:** one path to one outcome. Use outcome based milestones, a task appropriate cue, and safe Back with an escape from the whole flow.
+- **Branching:** a user choice creates a distinct sequence. Name the branch, make switching possible, default the common safe route, and remove dead branches.
+- **Task-list:** a finite task hub leads to independently completable task details in user chosen order, back to the hub, then to final review and submit. Status tells users what is complete and actionable. Save and return, expiry, permission, revalidation, and recovery are part of the design only when the service needs or exposes them.
+- **Hub-and-spoke:** center → detail → center. Keep the center as home and preserve the hub state on return. No progress counter is needed without a finite endpoint.
+- **Open-ended:** browse, search, or explore with no fixed completion. Show location, active refinements, and home. Do not force a funnel or invent progress.
 
----
+## Flow state care
 
-## Flow-type playbooks
+- **Loading, validation, error, and retry:** keep the user on the relevant route, identify the issue, preserve safe work, and keep Back and exit live. Do this only for states the service has or the build explicitly requires.
+- **Permission and expiry:** explain what cannot be done, what data or access is affected, and the route to recover. Recheck permission and freshness before a consequential action.
+- **Interruption and re entry:** if Save and return is supported, show the saved point, retention/expiry, required authentication, and any revalidation. If it is not safe or permitted, state the boundary and provide the supported re entry path.
+- **Final review and success:** make the final consequence and submitted values clear, confirm consequential changes, and give the user a next move or route home after success.
 
-The disciplines assume a **linear** flow by default. The other three shapes are legitimate; one short play each.
+## Anti pattern library
 
-**Linear**—*one path, start to end (checkout, onboarding, setup).*
-Make the end visible from the start: a milestone stepper so "how far is left" is answerable on every screen. Spend your Economy budget on the single path—every step you cut is felt by every user. Back walks the path in reverse with state intact; the escape hatch leaves the whole flow.
+- **The mandatory widget:** a flow is judged against a prescribed counter, progress bar, or breadcrumb even though its outcome is better expressed by named stages, task status, or location. *(Orientation)* Use the clearest outcome based cue; a named three stage stepper may omit a counter.
+- **The hidden progress bar:** a bounded journey gives no clue about its outcome or remaining work. *(Orientation)* Add a meaningful named milestone, task status, checklist, or count when stable.
+- **The task-list funnel:** independently completable tasks are forced into an arbitrary order or the hub hides the final completion condition. *(Orientation + Path Economy)* Preserve user chosen order, status, return to hub, and final review/submit.
+- **The phantom Back:** Back resets entered data. *(Orientation + Continuity)* Preserve safe state or disclose the retention boundary before retreat.
+- **The over persistent draft:** sensitive or stale data is retained indefinitely or reopens without permission, expiry, or revalidation. *(Continuity)* Limit retention, authenticate and authorize re entry, surface expiry, and revalidate before commit.
+- **The opaque inference:** a consequential value is silently guessed. *(Path Economy)* Show the value and meaning, let the user correct it, and provide a manual fallback.
+- **The unconfirmed consequence:** Submit silently applies a material amount, identity, permission, destination, quantity, or irreversible change. *(Path Economy)* Show the effect and require confirmation before commit.
+- **The deep link to nowhere:** a notification or shared URL lands at an unrelated start screen. *(Continuity)* Land in context or explain the expired/unauthorized route and provide recovery.
+- **The unseen-state fix:** a missing loading, error, permission, or resume state is treated as a defect. *(Evidence discipline)* Mark it `not shown`, name the fastest check, and do not propose implementation until evidence exists.
 
-**Branching**—*path forks on user choice (conditional signup, "what brings you here?").*
-Orientation owns two extra jobs: show *which branch* the user is on, and offer a cheap way to *switch it* if they forked wrong. Economy means defaulting the common branch and pruning any branch that dead-ends. The drop test is sharpest here—a user dropped mid-branch must still know which fork they took.
+## Quick reference
 
-**Hub-and-spoke**—*center → detail → back to center (dashboard → record → dashboard).*
-"Back to center" is sacred: the hub is home base, and every spoke returns to it predictably (breadcrumb, a persistent "Back to dashboard," the same hub state they left). Economy is measured in *hops*—minimize the taps to reach a record and return. Don't trap the user deep in a spoke with no clear road home.
-
-**Open-ended**—*wander a space, no fixed end (browse, search-and-refine, exploration).*
-The exception that proves the rule: there's no single destination, so "how far is left" doesn't apply, and **Never Lost reduces to *always know where you are and how to get home*.** Orient by position-in-space (filters applied, current view, breadcrumb) and guarantee an easy return to a known anchor. Don't force a funnel onto a space meant for roaming. (Journey-level sibling of [Focal](../../focal)'s exploration register.)
-
----
-
-## Flow-state care
-
-The states most flows neglect—where a journey is interrupted, aborted, broken, or finished. Each is a Compass surface with its own orientation, economy, and continuity demands.
-
-- **Interruption and resume.** Users leave mid-flow—a call, a closed laptop, a dead battery. Persist progress and let them re-enter where they stopped, oriented ("You're on step 3 of 4"), with prior input intact. Resume is a Continuity promise; breaking it is the single most common reason a started flow is never finished.
-- **Partial completion.** A flow abandoned at step 3 isn't a failure to discard—it's progress to honor. Save the draft, the half-filled cart, the in-progress application; surface it on return so the user picks up rather than starts over. The fastest path to finishing is not making them re-do what's done.
-- **Error mid-flow.** When a step fails (payment declined, validation, a server error), keep the user *in the flow* and *in place*. Name the actual problem, offer the fix, preserve everything already entered, and keep Back and exit live. An error that boots the user to step one, or to a dead screen, converts a recoverable hiccup into an abandonment.
-- **Returning from a success screen.** The end of a flow is a transition, not a wall. A success screen needs a clear next move—back to the hub, on to the obvious next task, or out—never a celebratory dead end the user has to use the browser Back to escape. End on a high *and* on a door (peak-end, the journey-level sibling of [Focal](../../focal)'s peak-end care).
-
----
-
-## Anti-pattern library
-
-Each entry: the tell—the discipline it breaks—the fix.
-
-- **The trapped modal**—a dialog with no X, no Cancel, no Esc, no click-outside. *(Orientation)* Give every modal a close that returns to a known place.
-- **The dead-end screen**—a screen the user can reach but not leave; no next step, no way out. *(Orientation)* Every screen gets a clear next step or an exit—success and error screens included.
-- **The hidden progress bar**—a multi-step flow with no indication of position or length. *(Orientation)* Add a milestone stepper; show where they are and how far is left.
-- **The demoralizing tally**—progress shown as "12 of 47" instead of named stages. *(Orientation)* Reframe as a small count of achievable milestones; group the rest.
-- **The phantom Back**—a Back button that resets the flow or wipes entered data. *(Orientation + Continuity)* Make Back a true retreat that preserves state.
-- **The mystery location**—nested screens with no breadcrumb or active state; "how did I get here?" *(Orientation)* Add a trail or active nav so the user can point at where they are.
-- **The setup wall**—first value gated behind six configuration screens. *(Path Economy)* Get the user to one real win on sensible defaults; defer setup to when it's relevant.
-- **The phantom flow**—a 7-step flow that's honestly 3, padded with redundant confirm-and-return screens. *(Path Economy)* Merge the round-trips; cut the steps the task doesn't require.
-- **The needless round-trip**—two screens bounce the user back and forth, each doing half a job. *(Path Economy)* Collapse into one—then check with [Focal](../../focal) that the merged screen isn't overloaded.
-- **The dead branch**—a fork leads to a screen with no real continuation. *(Path Economy)* Remove the branch, or give it a genuine next step.
-- **The friction-hiding shortcut**—a step removed by burying the price, skipping a confirmation, or auto-opting the user in. *(Path Economy)* Restore it. This is a dark pattern, not economy—protection is never waste.
-- **The memory bridge**—step 3 needs a fact only shown on step 1. *(Continuity)* Carry the context forward; show it where it's needed.
-- **The state-eating Back**—returning to a step shows it blank instead of as the user left it. *(Continuity)* Persist input across Back and forward.
-- **The amnesiac resume**—a "resume" or refresh that drops the user back at step one. *(Continuity)* Persist progress so resume actually resumes.
-- **The deep link to nowhere**—a notification or shared URL dumps the user at the home screen instead of the relevant screen. *(Continuity)* Land them in context, mid-flow, already oriented.
-- **The jarring jump**—a transition that changes layout, loses the focused object, or surprises with a takeover. *(Continuity)* Keep layout anchors and the in-focus object stable across the seam.
-
----
-
-## Quick reference card
-
-```
-OUTCOME      finite: "from ___ to ___" · open-ended: one intent + one home anchor
-STEPS        fewest honest steps · merge round-trips · default/infer/defer · no dead branches
-ORIENT       location + progress when bounded + expected retreat/home + an exit
-CARRY        no memory bridge · state survives Back/refresh/resume · deep links land in context
-NEVER        trap a modal · hide progress · shorten by hiding cost or skipping protection
+```text
+FRAME      finite: entry → outcome · task-list: tasks → hub → final submit · open-ended: intent + home
+ORIENT     outcome based position/progress or location · retreat/home · exit · no widget quota
+ECONOMY    fewest honest steps · safe visible defaults · correctable inference · confirmed consequence
+CARRY      context across seams · safe/permissioned state · expiry and revalidation · recoverable re entry
+NEVER      dead ends, traps, silent resets, opaque consequence, or invented behavior
 ```
 
-*Defaults for a linear flow. On hub-and-spoke, "back to center" is sacred; on open-ended, drop "how-far-left" and guarantee a way home.*
-
-See [../SKILL.md](../SKILL.md) for the disciplines and the Flow Spec, and [review.md](review.md) for the three-discipline audit and scorecard.
+See [SKILL.md](#source-compass-skill-md) for the methodology and routing, [build.md](#source-compass-reference-build-md) for the conditional Flow Spec, and [review.md](#source-compass-reference-review-md) for the native scorecard.
 
 <!-- END GENERATED SOURCE: compass/reference/patterns.md -->
 
+
+<a id="source-compass-reference-examples-md"></a>
 
 ## Source: `compass/reference/examples.md`
 
@@ -599,104 +448,157 @@ See [../SKILL.md](../SKILL.md) for the disciplines and the Flow Spec, and [revie
 
 # Compass Examples
 
-Two worked examples, captured from real runs of this skill and shown in the locked output templates—one **review**, one **build**. They share a narrative: the review finds a 7-step onboarding wall that traps the user twice over, and the build redesigns that same flow so the user is never lost. These set the bar for length, specificity, and tone; the templates set the shape.
+These examples calibrate the native review and build shapes. The review demonstrates partial evidence and per dimension `N/E`; the build demonstrates a finite task list with user chosen order, Save and return, and final submit. They are examples, not universal requirements.
 
----
+## Example 1 — Review: a task list with an unseen re entry seam
 
-## Example 1—Review: a 7-step onboarding wall
-
-**Input:** a team-collaboration app's new-user onboarding, 7 steps: (1) Create account, (2) Verify email—shows "check your email" and dead-ends with no resend and no way back, (3) Choose a plan (free tier present but visually buried, prices shown here for the first time), (4) Invite teammates (required, minimum one), (5) Pick integrations from a grid of 24, (6) Name your first project, (7) a 4-slide feature tour. Only then does the user see the product. No progress indicator. Browser Back restarts at step 1 with all fields empty. The onboarding email's "Continue setup" link always opens step 1.
+**Input:** A municipal license renewal service shows a start page, a task hub, and one task detail screen. The hub lists “Applicant details,” “Supporting evidence,” and “Review and submit”; the first task is marked Completed and the other tasks Incomplete. The description says users may choose their task order and return to the hub after each task. No frame or test shows Back, refresh, Save and return, expiry, permission changes, re entry, validation, or final submission.
 
 **Compass's output:**
 
-```
-**Verdict:** No · the email-verification screen is a dead end with no resend, no Back, and no way forward · **1/12**
+```text
+**Verdict:** N/E · the final outcome and re entry seam are not shown
 
-**Flow:** Team-collaboration app new-user onboarding · type: linear · audience: novice
-**Outcome / anchor:** first real action completed inside a live workspace
-**Screen:** Email verification, onboarding steps, and resume seam
-**State:** waiting for code, attempted exit, default progression, and back-navigation reset
-**Lifecycle:** first-run activation before workspace entry, before value, and interruption/resume
-**Context:** a first-timer evaluating the product, patience near zero · bar: Linear's and Notion's first-run
-**Coverage:** first-run steps 1–7, verification waiting, browser Back, and email-link resume · gaps: validation errors, resend/retry, refresh recovery, and returning-user bypass not shown
-**Basis:** walked from a description · confirm with: walk the prototype through Back, refresh, and the onboarding resume/deep links at every step
-**Blocker:** Verification dead end; no exit from the gated wall; buried pricing; Back and resume links reset entered state.
+**Flow:** Municipal license renewal · type: task-list · audience: mixed
+**Outcome / anchor:** submitted renewal application
+**Screen:** start page → task hub → Applicant details task
+**State:** task hub default, one completed task, one incomplete task, and task detail default; Save and return and final submit not shown
+**Lifecycle:** first-run application setup before submission
+**Context:** applicant completing work across tasks · bar: a clear government service with task statuses and a visible final review
+**Coverage:** start page, task hub, task order statement, task detail, and hub return · gaps: Back, refresh, validation, permission, expiry, Save and return, re entry, final review, and submit not shown
+**Basis:** walked from a description and selected frames · confirm with: complete two tasks in different orders, leave and re-enter, then review and submit
+**Blocker:** None observed. The final submission and re-entry behavior are not shown.
 
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Orientation | 0/4 | Step 2 is a true dead end and the 7-step wall has no Cancel or skip; a first-timer cannot recover or exit, so the Never-Lost promise fails outright. | Add resend, change-email, Back, and Finish later to verification, then provide a visible exit on every remaining step. |
-| Path Economy | 1/4 | Only account creation and verification are load-bearing, while five configuration steps precede first value and pricing appears after sunk effort; the path is technically traversable but seriously wasteful and misleading. | Cut to the two honest steps and move plans, invites, integrations, naming, and the tour into dismissible in-product prompts. |
-| Continuity | 0/4 | Browser Back erases every field and the resume link returns to step 1; the flow destroys state at both exit seams, so interruption and re-entry cannot work. | Persist pending signup state, create real history entries, and deep-link users back to the step they left. |
-| **Total** | **1/12 · 0.3/4** | **Broken; exact sum of justified component scores** | Weakest-discipline ceiling applied |
+| Orientation | 3/4 | The task hub names the finite application, shows Completed and Incomplete statuses, and the shown task returns to the hub; this is Strong for the evidenced route, while the final submit and error escape are not shown. | Walk final review and submit plus error and permission states; change only what that evidence warrants. |
+| Path Economy | 3/4 | The service lets users choose task order and return to the hub, so it avoids an arbitrary linear funnel; the unseen task dependencies and final route prevent an exemplary judgment. | Confirm task dependencies and final review hops before proposing a cut. |
+| Continuity | N/E—insufficient evidence | The selected frames expose no Back, Save and return, refresh, expiry, permission, or re-entry seam, so this rubric cannot be judged without turning unknown behavior into a defect. | N/E—walk Save and return, expiry, permission, revalidation, and re-entry before proposing a change. |
 
 ## Issues (most severe first)
-- **[P0 · Orientation]** **At:** screen: Step 2, email verification · flow: new-user onboarding · state: waiting for code/email · lifecycle: first-run activation before workspace entry. The verification dead end—step 2 shows "check your email" and stops: no resend, no "change email", no Back, no way forward inside the app. A first-timer whose mail is slow, spam-filtered, or mistyped by one character has exactly one move left, which is closing the tab; the screen can be reached and not left, so it fails the drop test outright and breaks the promise at the earliest possible moment. **Fix:** make step 2 a live screen—a 6-digit code field that auto-advances on paste, "Resend code" on a 30-second countdown, "Change email", a real Back to step 1 with the address intact, and "Finish later" that saves the pending account and mails a resume link.
-- **[P0 · Orientation]** **At:** screen: Steps 1–7 · flow: new-user onboarding · state: attempted exit · lifecycle: first-run activation before value. No exit from a 7-step wall—there is no Cancel, Close, "Skip for now", or "Save & exit" on any step, and step 4 cannot be skipped and demands a minimum of one teammate invite. A user who wants to see the product before handing over a colleague's email address has no legal move; a wizard with no Cancel is a trap with a polite face, and a required invite makes the trap cost someone else's data. **Fix:** put an escape hatch on every step ("Skip" / "Finish later"), and delete the invite gate—invites become an in-product action prompted when sharing actually matters.
-- **[P0 · Path Economy]** **At:** screen: Step 3, plan choice · flow: new-user onboarding · state: first price disclosure after verification · lifecycle: new user committed but still pre-value. The buried price—prices appear for the first time at step 3, after the user has already created an account and verified an email, and the free tier is visually de-emphasized against the paid options. Cost disclosed only after sunk investment, with the free option down-weighted, is a trust break dressed as a conversion tactic; this is a dark pattern, not economy. **Fix:** disclose pricing before or at account creation, with the free tier as a visually equal, pre-selected default and no card required.
-- **[P0 · Continuity]** **At:** screen: Any onboarding step → browser Back · flow: new-user onboarding · state: back-navigation reset · lifecycle: interrupted first-run activation. The state-eating Back—pressing browser Back at any step restarts at step 1 with all fields empty. Up to six screens of work vanish on one keystroke, and after it happens once the user distrusts the only retreat they had; a Back that resets is the anti-pattern the safety net is supposed to prevent. **Fix:** make each step a real history entry, persist entered values server-side against the pending signup, and restore every field on Back and on forward.
-- **[P0 · Continuity]** **At:** screen: Continue-setup email → onboarding · flow: new-user onboarding · state: deep-linked reset to step 1 · lifecycle: return after interruption. The deep link to step one—the onboarding email's "Continue setup" link always opens step 1, so the one channel built to recover an interrupted user resets them instead. A "continue" that starts over is worse than no link, because it promised; every interrupted signup becomes a re-signup. **Fix:** sign a resume token into the link and land the user on the step they left with prior input intact, and make the verification link complete verification and land them in the workspace.
-- **[P1 · Orientation]** **At:** screen: Steps 1–7 chrome · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value. Hidden progress across all 7 steps—no stepper, no named stages, no count; standing on step 4 the user cannot tell whether one screen is left or six. An unbounded flow reads as endless, and endless is where people quit; combined with the missing signage, the drop test fails on every screen. **Fix:** once the path is cut, carry a milestone stepper with named stages on every remaining gated step ("Step 1 of 2 · Create account"), and never a tally.
-- **[P1 · Path Economy]** **At:** screen: Steps 3–7 · flow: new-user onboarding · state: required pre-product setup · lifecycle: first-run activation before first value. The setup wall—all 7 steps sit before the user ever sees the product: a plan choice, a forced invite, a 24-tile integration grid, a project name, and a 4-slide tour. Only two are load-bearing (create account, verify email)—this is a 7-step flow that needs 2. Every configuration screen before the first win asks a question the user has no context to answer. **Fix:** cut to account + verify, land the user in a pre-seeded workspace, and move plan, invites, integrations, project naming, and the tour into the product as contextual, dismissible prompts—offer 3 relevant integrations with "Browse all", not a grid of 24.
+None above P3.
 
 ## Top moves (up to 3)
-1. **At:** screen: onboarding steps 1–7 · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value · Cut the wall to 2 gated steps—create account, verify email—then put the user in a live, pre-seeded workspace; plan, invites, integrations, project name, and tour all become in-product prompts they can dismiss and return to.
-2. **At:** screen: verification and all gated steps · flow: new-user onboarding · state: waiting, attempted exit, and resume · lifecycle: interruption/resume · Make every step recoverable: a persistent 2-stage stepper, a real Back that preserves state, "Finish later" on both steps, and a verification screen with a code field, resend countdown, and change-email—so no screen can be reached and not left.
-3. **At:** screen: onboarding → resume link · flow: new-user onboarding · state: deep-linked resume · lifecycle: return after interruption · Fix the seams: persist the pending signup so refresh and return-tomorrow resume in place, and re-point the "Continue setup" and verify links at the step the user actually left instead of step 1.
+1. **At:** screen: task hub → task detail → task hub · flow: municipal license renewal · state: task order and return · lifecycle: first-run application setup · Walk the final review and submit path and the Save and return/re-entry seam before prescribing a change.
 
 ## Next
-- **Structural** (do first): **At:** screen: verification and onboarding steps · flow: new-user onboarding · state: dead end and attempted exit · lifecycle: first-run activation · close the verification dead end, add an exit to every step, cut 5 of the 7 steps into in-product prompts, persist pending-signup state across Back and refresh, and re-point both email links at the step the user left.
-- **Executional** (after): **At:** screen: onboarding chrome and plan choice · flow: new-user onboarding · state: default progression and price disclosure · lifecycle: first-run activation before value · the stepper's visual weight, the resend countdown's copy, the free-tier's equal visual treatment on the plan disclosure, and the transition between the two gated steps.
-- **Hand off**: **At:** screen: plan-disclosure screen · flow: new-user onboarding · state: free-vs-paid ranking · lifecycle: first-run activation · the plan-disclosure screen's internal layout and the free-vs-paid visual ranking are single-screen problems—Focal's, once the path is cut.
+- **Structural** (do first): **At:** screen: final review and submit · flow: municipal license renewal · state: not shown · lifecycle: first-run application setup before submission · Confirm the finite completion event and required task dependencies.
+- **Executional** (after): **At:** screen: task hub · flow: municipal license renewal · state: default task statuses · lifecycle: first-run application setup · None—no executional issue is evidenced.
+- **Hand off**: **At:** screen: task hub rows · flow: municipal license renewal · state: default status labels · lifecycle: first-run application setup · None—single-screen hierarchy is not being judged here.
 ```
 
----
+The missing variants do not erase the supported Orientation and Path Economy findings. Continuity is N/E because the available artifact contains no continuity seam to evaluate; the output names the next evidence check instead of inventing a persistence defect or implementation.
 
-## Example 2—Build: the redesigned first run
+## Example 2 — Build: a finite task-list service
 
-**Input:** "Redesign the onboarding flow we just reviewed—fewest honest steps, nothing lost, no dead ends."
+**Input:** “Design a license renewal service for mixed-expertise applicants. They must complete three tasks in whatever order works, may save a safe draft and return, and must review and submit the renewal.”
 
 **Compass's output:**
 
-```
-**Flow:** Team-collaboration app first run—gets the user from a signup click to their first real action inside a live workspace.
-**Type:** linear   ·   **Audience:** novice
-**Outcome / anchor:** first real action completed inside the live workspace
+```text
+**Flow:** License renewal—gets the user from the service start page to a submitted renewal.
+**Type:** task-list   ·   **Audience:** mixed
+**Outcome / anchor:** renewal submitted after all required tasks are complete
 
 ## Steps
-1. Create account—email + password or SSO, with plan tiers stated in plain view ("Free forever · Pro $X/user/month—start free, switch anytime"), free pre-selected, no card. [skip: none—this is the entry]
-2. Verify email—a 6-digit code field that auto-advances on paste, plus a magic link in the same mail; "Resend code" on a 30s countdown, "Change email", Back to step 1, "Finish later". [skip: the magic link completes this step from the inbox, so a user who clicks it never types anything]
-3. Workspace—the product itself, live: a workspace named from the email domain, one pre-seeded project, and the first real action (post, task, doc) available immediately. [skip: workspace and project names are inferred and renamed inline, which removes the old naming step]
+1. Task list hub—shows the three finite tasks, their Completed or Incomplete status, the task the user can choose next, and the final Review and submit condition. Users choose order and return here after each task.
+2. Task detail—completes Applicant details, Supporting evidence, or Renewal dates, then offers Save and return when safe and permitted; Back returns to the hub with safe values intact. [repeat: one task at a time in user-chosen order]
+3. Review and submit—shows the completed task summary, fee, effective date, and renewal consequence; the user corrects errors, confirms the consequential values, and submits.
+
+## State / transition inventory
+- States: hub default with mixed statuses; task detail default, loading, validation error, permission denied, saved draft, expired draft, and success; review with unresolved validation; submit confirmation and submitted success.
+- Transitions: start → hub; hub → any incomplete task; task → hub; Back; Save and return; authenticated re-entry; expired or unauthorized draft recovery; hub → review when required tasks are complete; review → correction or submit; submit → success/home.
 
 ## Cut
-- Merged: the plan step (old 3) → folded into step 1 as plain-view disclosure, so price is stated before any investment rather than after two screens.
-- Merged: the project-name step (old 6) → inference from the email domain plus inline rename inside step 3.
-- Removed: the required teammate invite (old 4)—a gate that cost a third party's data to pass; it becomes an in-product prompt at the moment sharing matters.
-- Removed: the 24-tile integration grid (old 5)—replaced by a contextual "3 suggested · Browse all" prompt inside the workspace, asked when the user has context to answer.
-- Removed: the 4-slide feature tour (old 7)—replaced by a dismissible 3-item checklist that survives dismissal and stays reachable.
-- Kept as protection: email verification—it protects the account and the address is needed for recovery, so it is not waste. Price disclosure moved *earlier*, never hidden to shorten the felt path.
+- Merged: task completion and return → one task detail → hub loop, so each task can be completed without a confirmation round trip.
+- Removed: a forced task order and a setup tour—neither protects the renewal and both delay the service outcome.
+- Kept as protection: the final review and submit step, fee and effective-date disclosure, validation, permission checks, and confirmation of consequential values.
 
 ## Orientation
-- Position/progress: both gated steps carry a two-stage milestone stepper with named stages—"Step 1 of 2 · Create account", "Step 2 of 2 · Verify email"—so the end is visible from the first screen. On arrival, the product's own nav is the position signal: workspace name as the active anchor, plus a "Get started" card reading "1 of 3 done" that honors progress rather than gating it.
-- Retreat/home + exit: step 1 has "Back to site"; step 2 has a real Back to step 1 with the email still filled, plus "Finish later" which saves the pending account and mails a resume link. Step 2 can never dead-end—resend, change email, paste code, Back, and exit are all live on it. Inside the workspace every deferred prompt is dismissible and permanently reachable: Invite in the header, Integrations in the sidebar, and the checklist collapses rather than disappearing.
+- Position/progress: the hub states “Renewal application” and the finite outcome. Task statuses show what is complete and actionable. A named three-stage cue—“Tasks → Review → Submit”—shows the journey without requiring a numeric counter.
+- Retreat/home + exit: each task has Back to task list and Save and return where supported; the start page has Exit service; review has Back to task list and Cancel; success returns to the application home.
 
 ## Continuity
-- Carries forward: the address typed on step 1 is shown verbatim on step 2 ("We sent a code to kevin@acme.com") with a change link, so no code or address is carried in the user's head; the email domain becomes the suggested workspace name on step 3; the plan chosen on step 1 carries to billing and is never re-asked.
-- Survives: Back restores every field on both steps; a refresh, a closed tab, or a return tomorrow resumes on the last step reached with prior input intact, because the pending signup is persisted server-side rather than held in the page; the workspace checklist state persists per user, so a dismissed prompt stays dismissed and a half-done item stays half-done.
-- Entry points: the "Continue setup" email link carries a signed resume token and opens the exact step the user left, never step 1; the verification magic link completes verification and lands the user in the workspace; a teammate's invite link lands the invitee on that workspace's join screen and, after account creation, inside that workspace rather than a fresh empty one.
+- Carries forward: the task name, entered values, evidence status, fee, and effective date appear where needed. Any inferred date or applicant detail is labeled with its source and can be corrected before review.
+- Survives: Back keeps safe task values in the current activity. Save and return stores only permitted draft fields after the user chooses it, shows what was saved and the expiry date, requires authenticated and authorized re-entry, and revalidates permissions, dates, fee, and stale evidence before review or submit. An expired or revoked draft explains the limit and offers a recoverable new start; it does not promise that everything resumes tomorrow.
+- Entry points: a signed resume link opens the authorized task hub or named task with status and expiry visible; an unauthorized or expired link explains the result and routes to the service start.
+- Consequence checks: before submit, show the final task summary, fee, effective date, and permission to submit; ask for explicit confirmation and keep correction routes available.
 
 ## Gates
 - [x] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
 - [x] Every step earns its place; nothing protective cut
-- [x] Where-am-I + platform-appropriate retreat/home + exit throughout
-- [x] No memory bridge; state survives; deep links land in context
-- [x] Drop test passes on every screen
+- [x] Where-am-I + journey-appropriate progress or location + retreat/home + exit throughout
+- [x] No memory bridge; safe state handling; deep links land in context
+- [x] Inferred defaults are visible and correctable; consequential values are confirmed
+- [x] Drop test passes on every applicable screen and transition
 ```
 
----
-
-**Why these two:** the review never just lists problems—it ties every issue to a discipline, ends on a short ranked set of real moves, and sorts the work structural-before-executional. The build never returns prose—it returns the same Flow Spec every time. And the second resolves the first: "cut the wall to 2 gated steps and make every one recoverable" becomes an actual three-screen flow where the user always knows where they are, what's left, and how to get back or out.
-
-Note the honest-path line running through both: the review's fix for the buried price is to disclose it *earlier*, and the build states it on step 1. Shortening the felt path by hiding cost, or dropping verification to save a screen, would be a dark pattern rather than Path Economy—which is why `## Cut` names what was kept as protection alongside what was removed as waste.
+The task list remains finite without pretending that users follow one sequence. Its Save and return behavior is specified with safety, permission, expiry, revalidation, and recovery conditions; the W3C redundant-entry guidance is not used as a claim that every service must persist across sessions.
 
 <!-- END GENERATED SOURCE: compass/reference/examples.md -->
+
+
+<a id="source-compass-reference-build-md"></a>
+
+## Source: `compass/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: compass/reference/build.md -->
+
+# Compass Build: the Flow Spec
+
+Read this reference only for a `build` request or when turning a reviewed journey into a new flow. Compass builds a route whose outcome or home is explicit, whose steps are honest, and whose state and exits are specified for the states the actual journey needs.
+
+## Four moves
+
+1. **Frame the journey.** Name the finite outcome or the open ended intent and home anchor. Record the audience, stakes, entry points, and journey type. A finite task list is a `task-list` journey when users complete several tasks in a user chosen order before one final outcome.
+2. **Map the route or space.** List the screens, repeat loops, branches, task hub and task details, and the final review or submit path that the user actually needs. A task list is a finite hub/detail loop, not a linear screen count: users may choose task order, return to the hub, and submit only when the service's required tasks are complete.
+3. **Inventory applicable states and transitions.** Record only the states and seams the journey needs: default, loading, validation or error, partial completion or failure, retry, permission, Back, branch change, save and return, interruption, re entry, review, final submit, and completion as applicable. For each, state what is visible, what carries forward, what can be safely retained, what expires or must be revalidated, and how the user recovers. Do not add a generic state checklist to a flow that does not need it.
+4. **Signpost and join the seams.** Give each screen a cue for its actual position and remaining work. Use a stable count only when it is meaningful; a named three stage stepper can omit a counter. Give every owned flow a platform appropriate retreat, home path, and exit. Make defaults visible and correctable, confirm consequential values, and specify context and state across each transition.
+
+For persistence, choose the smallest safe scope. Retain data only when the service has a safe and permitted place to keep it, a stated retention and expiry policy, a re entry path with the authentication and authorization the data requires, and a way to revalidate stale or consequential data. If those conditions do not hold, explain the loss at exit and provide a recoverable re entry or safe alternative appropriate to the service. “Return tomorrow resumes everything” is not a default requirement.
+
+## Output format: use this exact structure
+
+Return the following template in this order. Number screens the user passes through for a linear flow. For a `task-list`, use the representative hub → task → hub loop, then review and submit; state that task order is user chosen and that the loop is finite. For an open ended journey, number a representative entry → explore or refine → detail → home loop and call it a loop, not a completion funnel. Mark a gate `[x]` only when the spec actually satisfies it; keep `[ ]` with a reason otherwise. Use `N/A—<reason>` for a gate or state that does not apply; a justified N/A is not a failed gate. Keep a labeled field and write `None.` when it has no content.
+
+```text
+**Flow:** <name>—<finite: gets the user from entry to outcome | open-ended: lets the user pursue one intent while keeping one named place as home>.
+**Type:** linear | branching | hub-and-spoke | task-list | open-ended   ·   **Audience:** novice | mixed | expert
+**Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
+
+## Steps
+1. <screen>—<its job> [skip: <the safe, visible, correctable default that removes this step, if any>]
+2. <screen>—<its job>
+
+## State / transition inventory
+- States: <only the applicable default, loading, validation/error, partial completion/failure, retry, permission, saved, expired, review, success, or other states>
+- Transitions: <forward/back, branch change, task order, save/return, interruption/re entry, deep link, final review/submit, and recovery as applicable>
+
+## Cut
+- Merged: <the steps you collapsed> → <the one step they became>
+- Removed: <steps cut as waste>—<why they were not protection>
+- Kept as protection: <any step that looks like waste but stays, and why>
+
+## Orientation
+- Position/progress: <the outcome and the cue suited to this journey—named stages, task statuses, a stable count, or location/home; do not force a widget or counter>
+- Retreat/home + exit: <the platform-appropriate retreat, home, and escape behavior>
+
+## Continuity
+- Carries forward: <context passed across steps; inferred values shown and correctable>
+- Survives: <state kept on Back / refresh / interruption / re entry only when safe, permitted, unexpired, and revalidated as needed; otherwise the stated recovery>
+- Entry points: <where deep links / notifications land>
+- Consequence checks: <what is confirmed before a consequential commit, and what permission or revalidation is required>
+
+## Gates
+- [ ] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
+- [ ] Every step earns its place; nothing protective cut
+- [ ] Where-am-I + journey-appropriate progress or location + retreat/home + exit throughout
+- [ ] No memory bridge; safe state handling; deep links land in context
+- [ ] Inferred defaults are visible and correctable; consequential values are confirmed
+- [ ] Drop test passes on every applicable screen and transition
+```
+
+Build output is a proposal. Do not claim that a state, persistence rule, permission, validation path, or implementation exists unless it is supplied as a requirement or deliberately specified in the proposal. Design each individual screen with [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md).
+
+<!-- END GENERATED SOURCE: compass/reference/build.md -->

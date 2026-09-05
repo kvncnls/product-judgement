@@ -17,7 +17,7 @@ Not every completed task. A win is a moment of meaningful improvement, and it co
 | **Financial** | Money saved or earned, risk reduced, a transaction succeeds |
 | **Identity** | The user feels more capable, disciplined, expert, or part of a group they value |
 
-Identity wins are the most durable and the least designed for. They are also what makes a product hard to switch away from, because the alternative has to replace how the user sees themselves, not just what they can do.
+Identity wins can be durable when they reflect a useful change the user voluntarily values, but no win type is universally the most durable. Test the claim in context. A product may earn preference over alternatives when it leaves behind useful accumulated value—work, history, learning, or reputation—that the user can inspect, control, export, or carry with them. Treat switching resistance as evidence to investigate, never as a reason to create lock-in; accumulated value that cannot be controlled or ported is a trust and agency problem.
 
 ## Build a win map
 
@@ -27,7 +27,7 @@ Map the core journey and record every candidate:
 |---|---|---|---|---|---|
 | first analysis completes | understand a theme | prioritized themes appear | relief, clarity | generic "Done" toast | save, share, or analyze another source |
 
-Then rank each on **magnitude** (how meaningful), **frequency** (how often), **distinctiveness** (does this product create it in a way others do not), **visibility** (does the user recognize it), **shareability** (is there a natural artifact), and **commercial relevance** (does it support deeper use or payment).
+Then rank each on **magnitude** (how meaningful), **frequency** (how often, when repeat use is intended), **distinctiveness** (does this product create it in a way others do not), **visibility** (does the user recognize it), **shareability** (is there a natural artifact), and **commercial relevance** (does it support an authorized deeper use or payment). For a finite or infrequent service, rank completion quality, handoff, and safe exit instead of inventing a recurring frequency or next ask.
 
 Work the highest magnitude × visibility gap first: a large win the user does not notice is the cheapest fix available anywhere in the wheel.
 
@@ -66,7 +66,7 @@ Growth asks are upgrade, subscribe, invite, share, rate, review, connect a sourc
 4. Declining preserves the value already earned; any foregone benefit or real consequence is explicit and noncoercive.
 5. The frequency is proportionate.
 
-The sequence is: **outcome occurs → the interface confirms what changed → the emotion is reinforced → a useful next step → then, maybe, an ask.**
+The sequence is: **outcome occurs → the interface confirms what changed → the emotion is reinforced → a useful next step → then, maybe, an ask.** A finite service may end after the confirmed outcome; a next use, upgrade, or share ask needs its own evidence and purpose.
 
 The ask should feel like continuation, not extraction. An ask placed before value converts stored momentum into resistance—the user learns that this product interrupts rather than delivers, and that lesson is expensive to unteach.
 
@@ -80,7 +80,7 @@ A shareable artifact is useful or expressive to the sender, makes sense to the r
 
 ## What to measure
 
-Completion of the core value event, repeat use after a win, upgrade conversion following specific wins, feature adoption after contextual prompts, invite and share initiation *and completion*, recipient engagement with shared artifacts, time from first win to second win.
+Completion of the core value event, then the product's intended success outcome: repeat use, conversion, or advocacy for a recurring relationship; completion, handoff, or safe exit for a finite or infrequent service. Measure upgrade, invite, and share behavior only when that ask is part of the stated outcome, and measure both initiation and completion. Use time from first win to second win only when a second win is intended.
 
 The comparison that matters: users prompted **after a meaningful win** versus users prompted at arbitrary or time-based moments. That single test settles most arguments about placement.
 

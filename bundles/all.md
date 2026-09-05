@@ -9,13 +9,15 @@ Load this single file when your environment accepts only one Markdown instructio
 ---
 
 
+<a id="source-product-judgement-skill-md"></a>
+
 ## Source: `product-judgement/SKILL.md`
 
 <!-- BEGIN GENERATED SOURCE: product-judgement/SKILL.md -->
 
 ---
 name: product-judgement
-description: "Use when auditing an existing product, app, feature, or consequential flow across multiple Product Judgement scales: screen structure (Focal), multi-screen journeys (Compass), relationship value and retention (Flywheel), and memorable moments (Soul). Run for a holistic app audit, cross-scale critique, or prioritized UX review using a codebase, live product, prototype, Figma/Paper frames, screenshots, or a description. Prefer a codebase because it exposes behavior, state, and lifecycle context. Do not use when the request is clearly confined to one scale; invoke that local Skill instead. Requires the four foundational Skills installed alongside it; it audits the scales it can load and marks any it cannot `N/E`. Not for implementation, design-system analysis, visual styling, animation implementation, research, or analytics."
+description: "Audit a product, feature, or flow across multiple UX scales: screen structure, journeys, relationship value, and memorable moments. Use for a holistic product audit, cross-scale critique, or prioritized UX review from a live product, codebase, prototype, frames, screenshots, or description. Use a local Skill when the question concerns only one scale. Requires the foundational Skills alongside it or in context. Produces an audit, not implementation, user research, analytics, or a compliance certification."
 license: MIT
 argument-hint: "[audit] <product, codebase, prototype, or frames>"
 ---
@@ -24,221 +26,117 @@ argument-hint: "[audit] <product, codebase, prototype, or frames>"
 
 **Audit the product as a connected system.**
 
-Product Judgement is the orchestration Skill for the four foundational Skills:
+Run Focal, Compass, Flywheel, and Soul against one evidence map. Preserve their methodologies and native scores, reconcile overlapping findings, and return one implementation sequence. Do not invent a fifth score or average the native totals together.
 
-- **Focal**—what belongs on a screen, what waits, and what wins attention.
-- **Compass**—how a person moves between screens without getting lost.
-- **Flywheel**—where momentum drops across the relationship and what earns the next stage.
-- **Soul**—which working moments deserve craft and memory.
+## Route by the decision
 
-It is not a fifth design lens and it does not replace the four local methodologies. It runs them against a shared evidence map, keeps their boundaries intact, reconciles their findings, and returns one prioritized audit. Do not invent a fifth score or average the native totals together.
+Scope follows the decisions involved, not the number of screens. One onboarding flow can require all four lenses when the question spans clarity, route integrity, first value, and authorship.
 
-## Use it when
+- **One scale only:** use Focal for screen structure, Compass for navigation and continuity, Flywheel for relationship value, or Soul for expressive treatment.
+- **Several scales or an explicitly holistic audit:** run this workflow, even for a single screen or flow. Do not narrow it merely because the artifact is small.
+- **Build or implement:** use the relevant local build methodology; this Skill only audits and reconciles.
+- **No artifact or usable description:** ask for the product and primary goal. Otherwise proceed with labeled assumptions and specific evidence gaps.
 
-Use Product Judgement when the question is larger than one screen, one flow, one relationship stage, or one expressive moment:
+`audit`, `review`, and `critique` all run the workflow below; audit is the default.
 
-- audit the whole app or a meaningful product area;
-- find why a working product feels incoherent, hard to navigate, low-value, or forgettable;
-- decide which UX problem to fix first when several Skills identify related issues;
-- reconcile screen, journey, relationship, and memory findings into one implementation sequence.
+## Frame the evidence
 
-For a question clearly confined to one scale, invoke the local Skill directly. A single dashboard belongs to Focal; a route-orientation problem belongs to Compass; a first-value or retention problem belongs to Flywheel; a happy-path authorship problem belongs to Soul. A single onboarding flow can still warrant Product Judgement when the question spans screen decisions, path integrity, first value, and memory—scope follows the decisions involved, not the number of screens.
+Establish the audience, user goal, product goal, stakes, intended first-value event, expected usage cadence, and constraints. Use available research, support themes, analytics, and prior experiments to explain the artifact; do not manufacture that context.
 
-## Evidence and context
+Combine evidence according to the claim. Rendered UI supports hierarchy and visible states; code exposes routes, validation, and state logic; interaction tests establish behavior; product data and user research inform outcomes. Static frames and code alone do not prove lived usability, retention, or memory. Preserve distinctions between **observed, inferred, walked, tested, and measured** claims.
 
-Accept a codebase, live product, clickable prototype, Figma or Paper frames, screenshots, or a product description. Also accept the surrounding product context: the PRD (Product Requirements Document), product brief, strategy or goal documents, user research, personas, journey maps, analytics or funnel data, support themes, experiment history, and technical, accessibility, legal, or safety constraints. The artifact tells you what exists; these materials explain why it exists, for whom, and what success means. The more relevant context available, the more specific and defensible the audit. Prefer the codebase when it is available because it can expose routes, components, state transitions, validation, persistence, re-entry behavior, copy, and implementation constraints that frames cannot.
+Map the relevant screens, ordered journeys and branches, lifecycle stages, and happy-path moments. Include consequential failure, permission, completion, interruption, and re-entry states when available. Mark missing evidence `not shown` and name the fastest check that would expose it. Missing evidence is a validation task, not proof that the product needs an implementation change.
 
-Before auditing, collect or infer the following and label assumptions:
+Use the narrowest defensible **Screen · Flow · State · Lifecycle** locator for findings, priorities, and handoffs. State means the rendered/system condition; lifecycle means when it occurs in use. A missing field stays `not shown`.
 
-- business goal, product requirements, success criteria, and the outcome that matters;
-- primary audience, expertise, situation, and stakes;
-- the user's intended first-value event;
-- the primary entry points and journeys;
-- known constraints, evidence, metrics, or unresolved questions.
+## Keep ownership clear
 
-Do not stall when context is missing. State the missing context in **Coverage** or **Basis**, use `not shown` for consequential states or lifecycle moments that the evidence does not expose, and name the fastest validating check.
+| Failure | Primary owner |
+|---|---|
+| Competing local intents, hidden decision context, or misdirected attention | Focal |
+| Unclear route, dead end, lost state, or failed recovery | Compass |
+| Untrusted promise, excessive effort before value, invisible value, or unearned return | Flywheel |
+| Misplaced, exhausting, or anonymous treatment on a working path | Soul |
 
-### Figma and Paper
+A coherent but over-demanding setup can be Flywheel; a broken route through that setup is Compass. Voluntary return because value compounds is Flywheel; how that working return is authored is Soul. Fixing hierarchy is Focal even when it affects activation.
 
-Frames are valid evidence for visible structure, hierarchy, copy, and the transitions they actually show. They are not proof of behavior. When auditing from frames:
+One condition may legitimately affect several local scores, but prints once in the issue ledger. For example, lost drafts on resume lower Compass Continuity and may damage Flywheel Emotion; Compass owns the state repair, and Flywheel cites its relationship consequence.
 
-1. Point the agent at one frame or component for Focal.
-2. Select the ordered set of frames, including branches and meaningful variants, for Compass. Say which frames are in sequence; do not make the agent guess the path order.
-3. Include first-run, success, error, empty, loading, permission, interruption, and re-entry frames when they exist.
-4. Mark persistence, validation, timing, and unseen lifecycle behavior as `not shown` unless the frames or prototype demonstrate them.
+## Run the local passes
 
-Useful prompts include `/focal audit this dashboard` and `/compass audit this flow`. A holistic pass is `/product-judgement audit this app` with the relevant frames selected.
+Load each relevant spine and its review contract. Follow its decision procedures and rubric, including conditionally needed references. Reuse a shared contract already in context rather than rereading identical material. This is the evidence order, not an automatic fix order:
 
-## Keep the four boundaries clear
-
-Use the failure's location and consequence to assign a primary owner. Several Skills may mention the same symptom, but the holistic audit prints one issue with one owner and any dependencies.
-
-| Question | Primary owner | Keep it out of this Skill |
-|---|---|---|
-| What belongs here, what waits, and what should draw attention? | **Focal**—the screen-local decision surface | Do not turn it into a navigation, retention, or expressive-treatment fix. |
-| Can the user reach the destination, know where they are, and keep their state? | **Compass**—the path and its seams | Do not score local hierarchy or call every extra step a retention problem. |
-| Does the relationship earn trust, first value, recognition, return, or advocacy? | **Flywheel**—the stage transition and lifecycle | Do not use it to replace a missing Back affordance, lost route, or screen-level action model. |
-| Once the floor holds, what deserves to be remembered? | **Soul**—the authored moment and its frequency | Do not decorate a maze, hide a trust failure, or treat novelty as a retention strategy. |
-
-### The two common overlaps
-
-**Compass vs Flywheel.** Compass asks whether the route is understandable, economical, reversible, and stateful: *Where do I go? What is next? How do I get back?* Flywheel asks whether the effort and uncertainty on that route earn the next relationship stage: *Why should I continue? Is this too much work or exposure before value?* A hidden step, dead end, or lost state is Compass. A coherent but over-demanding setup, premature ask, or effort that delays first value is Flywheel. Use both when both conditions are present; make the path defect the primary owner when it blocks access to the stage.
-
-**Flywheel vs Soul.** Flywheel owns whether value lands, is recognized, compounds, and creates a substantive reason to return. Soul owns where and how a working moment is authored and made memorable. Flywheel Emotion does not require novelty, motion, or recognizability without the logo; it asks whether re-entry restores momentum and repeated use becomes more valuable. If value lands and return is earned but the experience remains anonymous, use Soul. Soul may identify expressive treatment that strengthens a Flywheel win, but it waits behind trust, comprehension, accessibility, and path integrity.
-
-Focal has the same boundary rule: a confusing action surface is Focal; a misleading product promise or missing evidence across the relationship is Flywheel; a broken transition is Compass. Do not let a local symptom acquire the wrong owner just because it appears on a screen.
-
-## The audit workflow
-
-Run the four local methodologies in this order. This is the evidence order, not an automatic fix order.
+1. **Focal:** [spine](#source-focal-skill-md) and [review](#source-focal-reference-review-md). Review the decision surfaces and representative states. Preserve the Clear Intent verdict. For several screens, use the worst evaluated screen for the summary row, identify it, and report other issues separately; do not average screens.
+2. **Compass:** [spine](#source-compass-skill-md) and [review](#source-compass-reference-review-md). Trace primary journeys, branches, entry points, retreat, interruption, and recovery. Preserve the Never Lost verdict. Do not rescore local layout here.
+3. **Flywheel:** [spine](#source-flywheel-skill-md) and [review](#source-flywheel-reference-review-md). Establish first value and intended cadence. Evaluate Trust, Friction, Wins, and Emotion. Identify the earliest evidenced relationship problem, and make the ordering provisional when lifecycle evidence is missing. Healthy completion or infrequent use can be the intended outcome.
+4. **Soul:** [spine](#source-soul-skill-md) and [review](#source-soul-reference-review-md). Check unscored Readiness, then map treatment, restraint, frequency, and stakes. Record evaluable treatment even when Readiness is Deferred; sequence expression after structural, trust, or value repairs. Zero Net-New recommendations is valid.
 
 ### When a sibling Skill is not installed
 
-Every pass below loads a sibling spine by relative path. Those paths resolve when the four foundational Skills sit beside this one—the plugin, marketplace, and `install.sh` layouts all produce that—but not for a single-Skill upload, a lone `bundles/product-judgement.md`, or a partial `skills add`. Check before auditing, and never simulate a methodology you could not read: an invented Focal score is worse than a missing one, because the reader cannot tell the two apart.
+Check whether each methodology and its review contract are readable at the linked paths or already present in context. `bundles/all.md` contains them in one file; do not mistake absent filesystem paths for absent instructions. Never simulate a methodology you could not read.
 
-A single-file bundle is the exception that looks like this case but is not. `bundles/all.md` concatenates all five spines and their review contracts into one file, so the content is already in context even though `../focal/SKILL.md` resolves to nothing. Use the in-context sections and run the full audit. Report a scale unavailable only when its methodology is neither readable at its path nor present in context.
+Keep unavailable rows as `N/E—Skill not installed`, name the gap in Coverage, and make reconciliation provisional. With fewer than two available scales, stop the holistic pass and offer the available local review. The repository's complete plugin or `scripts/install.sh` installs all five; consult the installation guide for the current platform rather than inventing commands.
 
-When a spine or review contract is genuinely unavailable:
+### Shared evidence and scoring
 
-1. Name the unavailable scale and the reason in **Coverage**.
-2. Run the passes whose Skills are present, in the same order.
-3. Score the missing scale `N/E—Skill not installed` in the scorecard and leave its cross-scale finding empty. Keep the row: the gap is part of the result.
-4. Say what closes it—`claude plugin install product-judgement@product-judgement`, or `./scripts/install.sh`, installs all five.
-5. Keep the reconciliation and the priority sequence, and mark the ordering provisional. An unread scale can hide the real upstream owner.
+<a id="shared-evidence"></a>
 
-With fewer than two scales available, stop and say so. Reconciliation is this Skill's whole function, and there is nothing to reconcile.
+<!-- BEGIN SHARED: evidence -->
+Use `N/E—insufficient evidence` when the available artifact cannot support a dimension's rubric. A missing variant does not automatically make the whole dimension unevaluable. Report supported findings and the next evidence check; do not convert unknown behavior into a defect, an implementation recommendation, or a score. If any required dimension is N/E, omit the native total, average, band, and weakest-dimension ceiling.
 
-### 1. Frame the audit and map coverage
+Before assigning `0`, `1`, or `2`, identify the observed condition that meets the negative rubric anchor. “Not shown,” “untested,” and “unknown” cannot supply that condition. If an essential part of the dimension is unsupported, use N/E rather than a lower score as a substitute for uncertainty. Supported strengths can still be described without a number.
+<!-- END SHARED: evidence -->
 
-Establish the product, audience, stakes, first value, business goal, and evidence basis. Build a compact map with four views:
+Preserve each evaluated component's integer and rationale: **evidence → consequence → rubric anchor → next-point change**. A next-point change can be an evidence check when the limitation is evidence; it must not assert missing functionality. Fully evaluated Focal, Compass, and Soul use `/12`; Flywheel uses `/16`. Scores are ordinal judgments within the named coverage, not percentages or measured product outcomes. Compare scores only with equivalent scope, evidence, rubric, and audience.
 
-- **Screens**—entry, first decision, first value, repeat use, re-entry, high-stakes actions, and failure or recovery states.
-- **Journeys**—the primary entry-to-outcome flows, branches, deep links, Back behavior, interruption, and resume behavior.
-- **Relationship**—arrival, trust, activation before value, first value, return, lapse, re-engagement, and advocacy.
-- **Memory**—the default happy path, its beats, frequency, ending, and any moments already carrying expressive treatment.
+## Reconcile and prioritize
 
-Use the same four-part implementation locator throughout: **Screen · Flow · State · Lifecycle**. Keep rendered state separate from occurrence. For example, `Import screen · CSV upload flow · validation error · first-run activation` is precise; `onboarding` is not. If one field is not evidenced, write `not shown` and name the check that would expose it.
+Deduplicate conditions, assign one primary owner, preserve secondary score consequences, and record dependencies. Sort the ledger by severity, then consequence, reach, recoverability, and confidence. Do not prioritize a finding merely because its Skill ran first.
 
-### 2. Run Focal on the decision surfaces
+Rank concrete changes: prevent material harm and loss of informed choice; repair upstream blockers to the user's outcome; clarify decision surfaces; make delivered value understandable; then consider expressive treatment. Evidence may change that sequence. A relationship problem does not outrank a state-loss defect just because retention is the business goal.
 
-Load [Focal](../focal/SKILL.md) and its [review contract](../focal/reference/review.md). Review the screens that carry the primary decisions or expose the largest relationship stages. Include representative variants rather than pretending one screenshot proves every state. Preserve Focal's native `/12` score and **One Screen, One Clear Intent** verdict.
-
-Record which screen issue is local and which one is actually a path, lifecycle, or memory issue for the later reconciliation.
-
-### 3. Run Compass on the primary journeys
-
-Load [Compass](../compass/SKILL.md) and its [review contract](../compass/reference/review.md). Review the primary journeys as ordered paths, including the seams where state, context, or entry points can fail. Preserve Compass's native `/12` score and **Never Lost** verdict.
-
-Do not use Compass to rescore every screen. Use Focal for local structure and Compass for the route between those surfaces.
-
-### 4. Run Flywheel across the relationship
-
-Load [Flywheel](../flywheel/SKILL.md) and its [review contract](../flywheel/reference/review.md). Name first value before diagnosing. Evaluate all four plays—Trust, Friction, Wins, and Emotion—then identify the earliest evidenced leaking stage, not merely the largest downstream symptom. Preserve Flywheel's native `/16` only when all four plays are supportable; if a relationship stage is entirely unexposed, preserve `N/E—insufficient evidence`, omit the total, and make the ordering provisional.
-
-Use the Compass map as evidence for the route, but keep the question separate: Compass explains whether the user can traverse the path; Flywheel explains whether the path earns the next relationship stage.
-
-### 5. Run Soul after checking the floor
-
-Load [Soul](../soul/SKILL.md) and its [review contract](../soul/reference/review.md). Run its unscored Readiness check, sweep the default happy path, assign frequency and state to each beat, and preserve the authored-state verdict. Preserve Soul's native `/12` only when all three gates are evaluable. Deferred Readiness is not by itself `N/E`: score the treatment the artifact actually shows, and use `N/E` only for a gate the structural failure genuinely prevents evaluating. Omit the total whenever any gate is `N/E`; never invent one.
-
-If Focal, Compass, or Flywheel finds a broken floor, still record the Soul findings, but sequence expressive treatment after the structural or lifecycle repair. Do not use delight to cover confusion, a maze, a trust break, or invisible value.
-
-### 6. Reconcile without flattening the Skills
-
-Create one issue ledger from the four native reports:
-
-1. Deduplicate findings that describe the same condition.
-2. Assign one primary owner using the boundary rules above.
-3. Keep the exact **Screen · Flow · State · Lifecycle** locator on every finding, recommendation, handoff, and priority change.
-4. Record dependencies, such as `Soul after Compass` or `Flywheel after Focal`.
-5. Preserve every local score, verdict, and component score rationale; do not average unlike totals into a false Product Judgement score.
-6. Separate observed, inferred, walked, tested, and measured claims.
-
-Order the ledger by severity, P0 first. Within one severity, order by owner in the run order above—Focal, then Compass, then Flywheel, then Soul—and then by that Skill's own tie-break. One condition may legitimately affect several local scores, but it still prints once in the cross-scale ledger. Secondary score rationales cite the shared condition and its primary owner instead of creating duplicate issues or duplicate fixes. For example, state loss can lower Compass Continuity and Flywheel Emotion when it damages return; Compass owns the defect, Flywheel records the relationship consequence, and the priority list contains one state-preservation change.
-
-Set the priority changes by dependency and consequence. Rank concrete implementation changes, not just findings or Skill owners:
-
-1. Stop material harm, coercion, hidden cost, permission, or safety failures.
-2. Repair the earliest blocker on the route to first value—often trust or path integrity.
-3. Fix screen-local decision surfaces that keep the user from acting or understanding.
-4. Make delivered value visible and earn the next relationship stage.
-5. Spend Soul's expressive budget only after the path, value, and trust floor holds.
-
-This order can change when evidence shows a different upstream dependency. Do not force every product through the same backlog.
+Keep uncertain claims in validation work until supported. Preserve deliberate conventions and justified restraint. Do not fill a quota or reserve a priority slot for Soul.
 
 ## Holistic output
 
-Run all four local audits first, then return this wrapper. Keep the local reports available in working notes; print their full locked templates only when the user asks for the detailed passes.
-
-The local contracts produce more than this wrapper prints, so five rules settle the surplus. **Several screens, one Focal row**—score the worst screen, name it in the Score rationale, and raise the others as separate cross-scale findings; never average screens. **Bands live in the rationale**—put each local quality band and its weakest-dimension ceiling at the end of that Skill's **Score rationale** bullet, since the scorecard has no band column. **One Blocker**—take the highest-consequence local blocker, name its owner, and record the rest as findings at their own severity. **Four slots, not six**—the local contracts mandate up to three Top moves each plus Flywheel's Fix this first and Soul's ranked moments; select for this wrapper by dependency and consequence, and say in **Handoffs** which owner's moves did not make the cut. **This wrapper supersedes local output instructions**—the local Voice sections, calibration reads of `reference/examples.md`, re-run advice, build-workflow trailers, and sibling handoffs do not apply to an orchestrated pass; their analysis still informs the scores. The **Score rationale** section is required: never report a native total such as `Focal 7/12` without its component rationales. Each component must use the local chain **evidence → consequence → rubric anchor → next-point change**, citing the same four-part locator. The **Priority changes** section is also required: each item must name the owner, **Screen, Flow, State, and Lifecycle**, concrete change, reason for its rank, and dependency.
+This wrapper supersedes local output instructions. During an orchestrated pass, local Voice sections, example-calibration reads, build trailers, and sibling handoffs do not apply. Local analysis and rubrics still apply. Keep detailed local reports available; print them only when requested.
 
 ```markdown
-**Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship> · <one biggest cross-scale issue>
-
-**Product:** <what it is, for whom> · goal: <business or user outcome> · first value: <event, or "undefined"> · stakes: <low | medium | high>
-**Screen:** <exact screens, regions, or touchpoints reviewed>
-**Flow:** <named journeys and transitions reviewed>
-**State:** <exact rendered or system states reviewed>
-**Lifecycle:** <exact user/product relationship moments reviewed>
-**Coverage:** <screens, journeys, relationship stages, states, and lifecycle moments reviewed> · gaps: <material gaps, or "none">
-**Basis:** <observed from a screenshot or artifact | inferred from code | tested in a prototype or live product | walked from a description | measured from product data> · confirm with: <fastest validating check>
-**Blocker:** <None. | concise blocker reason>
+**Verdict:** <coherent | needs structural work | needs lifecycle work | needs authorship | provisional> · <largest supported issue or evidence gap>
+**Product:** <audience and goal> · first value: <event or undefined> · cadence: <intended usage> · stakes: <low | medium | high>
+**Coverage:** <Screen · Flow · State · Lifecycle reviewed> · gaps: <material missing evidence>
+**Basis:** <observed / inferred / walked / tested / measured, matched to claims> · confirm with: <specific check>
+**Blocker:** <None. | supported release-critical condition>
 
 ## Four-scale scorecard
-| Skill | Native verdict | Score | Cross-scale finding |
-|---|---|---:|---|
-| Focal | <Clear Intent verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
-| Compass | <Never Lost verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
-| Flywheel | <earliest evidenced leak | undetermined pending evidence | N/E—Skill not installed> | <_/16 · _._/4 | N/E> | <one line> |
-| Soul | <Readiness + authored-state verdict | N/E—Skill not installed> | <_/12 · _._/4 | N/E> | <one line> |
+| Skill | Native verdict | Score | Principal finding or gap |
+|---|---|---|---|
+| Focal | <Clear Intent verdict or unavailable> | <total/12 or N/E> | <screen named> |
+| Compass | <Never Lost verdict or unavailable> | <total/12 or N/E> | <journey named> |
+| Flywheel | <earliest evidenced problem or undetermined> | <total/16 or N/E> | <stage named> |
+| Soul | <Readiness + authored-state verdict or unavailable> | <total/12 or N/E> | <moment named> |
 
 ## Score rationale
-- **Focal <_/12>:** Information Architecture _/4 — <evidence → consequence → rubric anchor → next-point change>; Progressive Disclosure _/4 — <evidence → consequence → rubric anchor → next-point change>; Visual Hierarchy _/4 — <evidence → consequence → rubric anchor → next-point change>.
-- **Compass <_/12>:** Orientation _/4 — <evidence → consequence → rubric anchor → next-point change>; Path Economy _/4 — <evidence → consequence → rubric anchor → next-point change>; Continuity _/4 — <evidence → consequence → rubric anchor → next-point change>.
-- **Flywheel <_/16 or N/E>:** Trust <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Friction <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Wins <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>; Emotion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change, or N/E reason>.
-- **Soul <_/12 or N/E> · Readiness <Ready | Deferred>:** Placement <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Proportion <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>; Signature <_/4 or N/E> — <evidence → consequence → rubric anchor → next-point change>.
+- **<Skill> · <component> · <integer/4 or N/E>:** <locator; evidence → consequence → rubric anchor → next-point change, or specific evidence gap>.
+- **<Skill> summary:** <average, band, and weakest-dimension ceiling only when complete>.
 
 ## Cross-scale findings
-- **[P0–P3 · <Focal | Compass | Flywheel | Soul> · <discipline, play, or beat>]** **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. <Name>—<observation and cost>. **Fix:** <specific change>. **Depends on:** <owner or "none">.
+- **[P0–P3 · <owner> · <dimension>]** **At:** <Screen · Flow · State · Lifecycle>. <Observed condition and consequence>. **Fix:** <supported change>. **Depends on:** <repair or none>.
 
 ## Priority changes (up to 4)
-1. **Priority 1 · <P0–P3> · Now — <primary owner and stage>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the concrete implementation change>. **Why now:** <the consequence and upstream reason>. **Depends on:** <owner or "none">.
-2. **Priority 2 · <P0–P3> · Next — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the change unlocked by Now>. **Why now:** <the consequence and dependency>. **Depends on:** <owner or "none">.
-3. **Priority 3 · <P0–P3> · Then — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <the change that makes value, return, or comprehension stronger>. **Why now:** <the consequence and dependency>. **Depends on:** <owner or "none">.
-4. **Priority 4 · <P0–P3> · Later — <primary owner>** · **At:** screen: <exact screen/region/touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact lifecycle moment>. **Change:** <a fourth warranted change>. **Why now:** <why it belongs after the earlier work>. **Depends on:** <owner or "none">.
+1. **<priority · owner>** **At:** <Screen · Flow · State · Lifecycle>. **Change:** <concrete warranted change>. **Why now:** <consequence and dependency>.
 
 ## Handoffs and validation
-- **Focal:** **At:** screen: <exact screen/region or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <screen(s) to review or rebuild>.
-- **Compass:** **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named journey or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <journey or seam to review or rebuild>.
-- **Flywheel:** **At:** screen: <exact touchpoint or `not shown`> · flow: <named journey or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <stage and first-value or return check to validate>.
-- **Soul:** **At:** screen: <exact beat/touchpoint or `not shown`> · flow: <named happy path or transition or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact moment or `not shown`> · <moment to author only after its dependency holds>.
-- **Validation:** <fastest behavior, user test, or metric for the highest-consequence claim>.
+- **<owner>:** **At:** <Screen · Flow · State · Lifecycle>. <remaining local work, omitted priorities, or dependency>.
+- **Validation:** <highest-consequence uncertain claim; evidence to obtain; what would confirm or change the recommendation>.
 ```
 
-Never emit a vague location such as `the onboarding` or `the dashboard` when **Screen, Flow, State, and Lifecycle** can be named. If the evidence cannot support that precision, say `not shown` for the missing field and name what would expose it.
-
-Emit one to four Priority changes, only when each is a concrete warranted change. Do not reserve a slot for Soul or invent filler to reach four. If Soul Readiness is Deferred, record the dependency in Handoffs rather than manufacturing an expressive priority.
-
-## Routing
-
-- **No argument** → explain that this is the whole-app audit and ask for the product, codebase, prototype, or selected frames plus the primary goal.
-- **`audit` / `review` / `critique`** → run the full workflow above. Treat `audit` as the default command.
-- **A single-screen request** → hand off to `/focal` and do not run the other three unless the user asks for a holistic pass.
-- **A single-flow request** → hand off to `/compass`; add `/flywheel` only when the question includes activation, value, return, or a relationship leak.
-- **A single moment or expressive-treatment request** → hand off to `/soul`, after checking whether the floor is sound.
-- **A build request** → use the relevant local build Skill; Product Judgement is an audit and reconciliation layer, not a replacement for the Screen, Flow, Stage, or Moment Specs.
-
-## Source files
-
-Read the sibling Skill spines and their review contracts when running the local passes:
-
-- [Focal](../focal/SKILL.md) · [review](../focal/reference/review.md)
-- [Compass](../compass/SKILL.md) · [review](../compass/reference/review.md)
-- [Flywheel](../flywheel/SKILL.md) · [review](../flywheel/reference/review.md)
-- [Soul](../soul/SKILL.md) · [review](../soul/reference/review.md)
+Repeat component rationale rows for every local dimension, including N/E rows. Native totals without component rationales are invalid. Emit zero to four warranted priority changes; if no implementation change is supported, say so and give the validating check. Keep empty sections concise instead of manufacturing findings.
 
 <!-- END GENERATED SOURCE: product-judgement/SKILL.md -->
 
+
+<a id="source-focal-skill-md"></a>
 
 ## Source: `focal/SKILL.md`
 
@@ -246,7 +144,7 @@ Read the sibling Skill spines and their review contracts when running the local 
 
 ---
 name: focal
-description: Use when designing, reviewing, or decluttering a functional product, app, dashboard, or tool screen on any platform. Focal is the screen-local structure-and-attention lens—it decides what belongs, what waits, and what wins attention through Information Architecture, Progressive Disclosure, and Visual Hierarchy. Its methodology is One Screen, One Clear Intent—not one action per screen. It classifies task, hub, and exploration registers, chooses the matching action model, supports inherent binary-choice or dual-mode sets, and adjusts density for expertise. Triggers on clutter, "too much on screen", "simplify this screen", "what's the primary action", "too many choices", choice overload, manual selection, input parsing, contextual information, "show the consequence", one screen one purpose, one clear intent, IA, dashboard, admin, or onboarding/settings. Not for multi-screen flows or navigation (use Compass), visual styling, motion, research, code, marketing/landing pages, backend, or non-UI work.
+description: "Use when designing, reviewing, or decluttering a functional product, app, dashboard, or tool screen. Focal is the screen-local structure-and-attention lens: it defines one clear organizing intent, classifies task, hub, and exploration registers, chooses the matching action model, and decides what belongs, waits, and wins attention. It adapts density to expertise, stakes, and device. Use Compass for multi-screen flows, Flywheel for lifecycle momentum, and Soul for memorable treatment."
 license: MIT
 argument-hint: "[build | review] <screen, file, or description>"
 ---
@@ -255,121 +153,49 @@ argument-hint: "[build | review] <screen, file, or description>"
 
 **One screen, one clear intent.**
 
-Good UX guides attention. People don't read a screen, they orient on it—scanning for where they are, what matters, and what to do next. Every screen, the moment it appears, has to answer three questions: *Where am I? What matters here? What do I do?* The faster and more certainly it answers, the better it works—whether it's a phone app glanced at one-handed or a dashboard an expert lives in all day. Only the pace and the density change.
+Focal judges a functional screen as a decision surface. The screen needs one
+legible reason for bringing its content and actions together; that does not
+mean one action, one content block, or one user goal. A task usually gives one
+action primary weight. A hub ranks destinations. An exploration surface lets
+its content field lead. Focal asks whether the action model fits that register
+and whether the eye can tell where to begin.
 
-Focal's answer is a single methodology: **every screen needs one clear organizing intent.** That does not mean one action, one content block, or one possible user goal. A task screen usually has one primary action; a hub can offer many destinations; an exploration surface can foreground many items. What stays singular is the screen's center of gravity—the reason its content and actions belong together.
+The method has three disciplines, applied in this order:
 
-Simple, clean UX is not a style. It is the visible result of a screen making that organizing intent legible instead of forcing the user to sort competing intents by eye.
+1. **Information Architecture** decides what belongs, how it is grouped, and
+   how it is labeled.
+2. **Progressive Disclosure** decides what appears now, what waits behind a
+   perceptible cue, and what is unnecessary.
+3. **Visual Hierarchy** decides what wins attention and whether the dominant
+   element reads as the action or content the register calls for.
 
-Three disciplines, treated as top priorities, are how you earn that outcome:
+Progressive Disclosure runs before hierarchy as a sequencing dependency, not extra numeric weight; the three review dimensions use the same 0–4 anchors.
 
-- **Information Architecture**—what belongs on the screen, and how it's organized.
-- **Visual Hierarchy**—what wins attention once it's there.
-- **Progressive Disclosure**—what's shown now, and what waits.
+These disciplines produce a better decision surface through four recurring
+decisions: minimize unnecessary choices, infer recognizable input before
+asking the user to classify it, keep decision-critical context beside the
+action, and show a consequence through a summary, comparison, preview, or
+visualization when raw values make the user do the reasoning.
 
-```
-                 ┌────────────────────────────────────────────┐
-   the outcome   │        ONE SCREEN, ONE CLEAR INTENT        │
-                 └────────────────────────────────────────────┘
-                        ▲              ▲               ▲
-   the means     Information      Progressive       Visual
-                 Architecture     Disclosure        Hierarchy
-                 what belongs     what shows now    what wins
-```
+## Scope and register
 
-Get all three right and the screen settles around one clear intent on its own. Miss any one and that intent blurs. **Progressive Disclosure is the anti-overload discipline**—it runs before hierarchy because a screen cannot rank its way out of carrying too much. That is a sequencing dependency, not extra numeric weight: all three disciplines still score on the same 0–4 scale.
+Use Focal for a screen in a mobile, web, desktop, tablet, app, dashboard,
+admin panel, checkout, editor, console, onboarding step, settings area, feed,
+or other functional interface. Dense expert tools are in scope. Density is
+judged against audience expertise, stakes, device, and frequency; it is not a
+defect by item count alone.
 
-Together, the disciplines make the screen a better **decision surface**. Keep these four rules in view:
+Focal owns the local structure and attention of one screen. It does not own
+typography, color or spacing systems, motion implementation, research,
+marketing pages, backend work, or the path across screens. Hand cross-screen
+navigation to [Compass](#source-compass-skill-md), activation/value/return leaks to
+[Flywheel](#source-flywheel-skill-md), memorable treatment to [Soul](#source-soul-skill-md), and
+cross-scale audits to [Product Judgement](#source-product-judgement-skill-md).
 
-- **Minimize choices.** Minimize decisions, not information: present the choices that change the next action; keep technical detail discoverable when it supports trust, verification, or an expert path.
-- **Pattern recognition—infer before asking.** Recognize structured input when the system can, show the interpretation, and let the user correct it instead of forcing manual classification.
-- **Contextual UI—keep context at the decision surface.** Put the history, status, price, or consequence needed for an informed choice beside the action; defer deep detail, not decision-critical context.
-- **Show the consequence.** Make relationships, tradeoffs, and process state legible through a clear summary, comparison, preview, or visualization when raw values alone make the user do the reasoning.
+Classify before judging. Walk this tree top to bottom and answer what the user
+came to do, not what the current layout happens to resemble:
 
----
-
-## When to use
-
-Focal is for **functional interfaces**—the screens of an app, product, or tool, on any platform (mobile, web, desktop, tablet), for any user (first-timer or expert). Onboarding, feeds, home screens, settings, dashboards, admin panels, checkout, editors, consoles. If a person is on the screen trying to *do* something, Focal applies.
-
-It is **not** for:
-- Marketing pages, landing pages, campaigns—design there is persuasion and narrative, not task completion, so the clear-intent test and working-memory limit bend too far to guide you.
-- Backend, infra, or non-UI work.
-
-Dense, expert tools (dashboards, IDEs, trading terminals) **are** in scope—high density is right when the audience can read it. The methodology bends for them, never breaks, through two modifiers covered below: the screen's **register** and the user's **expertise** (experts read dense displays as a few familiar chunks; first-timers can't).
-
-**Scope.** Focal is a *lens* for structure and attention—*what belongs on a screen and how it's ranked*—not a full visual-design system. It tells you the screen's organizing intent, the action model appropriate to its register, its information structure, and its hierarchy. The execution of color, typography, spacing, and motion is left to your own design system and tooling. Get the methodology right first: visual polish lands far better on a screen whose center of gravity is already clear.
-
----
-
-## The methodology—One Screen, One Clear Intent
-
-The north star. Every screen earns its place by making one organizing intent legible. An **organizing intent** is the reason this screen exists in the product—not a demand that only one action, destination, or item can appear.
-
-- **The one-sentence test.** Finish this sentence: *"This screen exists so the user can ______."* If "and" joins two outcomes that can succeed independently, the screen has competing intents. Split them, or demote one to a secondary path. Do not fail a coherent task merely because its natural name contains "and"—*review and approve this invoice* is one intent when review is necessary to approval.
-- **The register-aware action model.** Do not force one CTA onto every screen. A task screen usually gives one action primary weight. A hub ranks several destinations. An exploration surface lets a coherent field of content lead. Binary-choice screens (Accept / Decline) and genuine dual-mode screens (a map's browse + search) may carry an inherent co-equal set. Multiple primary-weight actions are a failure only when they compete for different outcomes or leave the screen without a clear center of gravity.
-- **Why this is the whole game.** People need to understand what kind of place they are in before they can use it. A screen with one legible organizing intent feels coherent; a screen hedging across three independent outcomes feels like work. The three disciplines below are the three ways that intent becomes clear—or gets lost.
-
----
-
-## The three disciplines
-
-These describe the **task screen**—the default screen type, where the user is completing a single job. Hub and exploration screens bend them; see **Registers**, below.
-
-### 1. Information Architecture—what belongs, and how it's organized
-
-A screen is a unit of intent. IA decides which content and actions belong on it, how they're grouped and labeled, and where the screen sits in the larger flow. Get this wrong and no amount of hierarchy or polish can rescue the screen—it is organizing the wrong things.
-
-- **One organizing intent per screen.** Supporting actions can coexist when they advance the same intent. If an action or content region serves an independently completable outcome, move it, defer it, or make the screen's routing role explicit. Split by *intent*, not by content type or by your data model.
-- **Group by relatedness.** Things used together live together. Proximity is the cheapest, strongest signal that two elements belong to the same idea.
-- **Label in the user's words.** Navigation, sections, and actions named in plain language the user already owns—never system or domain jargon. Recognition beats recall.
-- **Pattern recognition—infer before asking.** When input has recognizable structure—an address, identifier, date, or transaction type—parse it and propose the likely interpretation. Show what was inferred, let the user correct it, and keep a manual fallback for ambiguity; do not make the user classify input the system can already recognize.
-- **Contextual UI—keep context at the decision surface.** Co-locate everything needed to make a choice where the choice is made. If history, status, price, or consequence informs the decision, bring the relevant slice into the same screen or region. Defer deep detail, never the context required to decide or trust the action, and never force the user to remember a fact from a previous screen (the "memory bridge").
-- **Merge needless round-trips; split overloaded screens.** Two screens that each do half of one intent should be one. One screen carrying three independent intents should be split or reframed as an explicit hub. Focal decides whether the resulting screen is coherent; Compass decides how the route between screens works.
-
-> **Fails:** the kitchen-sink screen (three jobs at once); structure that mirrors the database instead of the user's intent; orphan content with no clear home; jargon labels; the memory bridge across screens.
-
-### 2. Progressive Disclosure—show now, defer the rest *(anti-overload)*
-
-Reveal complexity only when the user needs it. Working memory is the hard constraint, not screen real estate. This is the discipline that *keeps* a screen's organizing intent legible over time.
-
-- **Use four chunks as a task-screen diagnostic, not a universal limit.** At one unfamiliar decision point, about four independent options, fields, or facts is a useful default; a higher count is a prompt to test grouping, familiarity, and decision cost, not an automatic failure. A high-stakes choice may need fewer. A learned expert control set may support more.
-- **Count chunks, not raw elements.** A group the audience recognizes as one unit—a familiar toolbar, a labeled section—counts as one. Expertise grows chunk size: a pro tool can show dense data because its users read it as a few learned groups, where a first-run screen cannot. Score the actual cognitive decision, not the DOM count.
-- **The disclosure triage.** For every element, decide **Now / On-demand / Never.**
-  - *Now*—needed to complete the primary action this visit. It stays.
-  - *On-demand*—needed by some users sometimes. Defer it behind a reveal (see [reference/patterns.md](reference/patterns.md)).
-  - *Never*—nobody needed it; you assumed they would. Cut it.
-- **Minimize decisions, not information.** Present the few choices that change the next action. Keep technical detail available when it supports trust, verification, or an expert path, but do not force everyone to interpret it before they can proceed. Smart defaults plus an "Advanced" reveal beats a wall of equal options. Ten settings shown at once is a wall; three with "More options" is a path.
-- **No disclosure without a signifier.** Every deferred thing needs a perceptible cue that it exists—a chevron, a labeled "More options," a tab, a count. Deferral hides *complexity*; it must never hide *existence*. Name the cue when you defer, not just the fact of deferring: "advanced filters, behind an 'Advanced' toggle," not "advanced filters, deferred." Content behind a cue nobody perceives is content you cut—and you cut it without deciding to, which is the one form of cutting this skill does not allow. **A cue qualifies only if it is present in the screen's default state, without hover or gesture.** A function reachable only by swipe or long-press is the named worst case: if the only way to discover it is to be told about it, it is hidden, not deferred.
-- **The disclosure trap (read this).** Progressive disclosure is *deferral, not burial*. Hiding the primary action, the price, a required field, or a consequence behind a tap is a dark pattern, not disclosure. Never defer what the user needs *now* to act or to trust the screen. Disclosure reduces *choice overload*, never *honesty*.
-
-> **Fails:** the wall of options; an onboarding form that asks everything up front; settings exposed before they're relevant; the primary action or price buried behind a reveal; a reveal with no cue that anything is behind it.
-
-### 3. Visual Hierarchy—what wins attention
-
-Once the right things are on the screen and the rest deferred, rank what remains. Importance is communicated by visual weight: the heaviest element or region is the most important one—always, with no exceptions you did not choose deliberately for the register.
-
-- **The squint test.** Blur your eyes (or the screenshot). Can you still tell what's #1, what's #2, and how things group? If everything has the same weight, you have a list, not a hierarchy.
-- **The quick-orientation test.** On a task screen, a first-time user should identify the read-first region or next action within a few seconds. Treat three seconds as a probe during testing, not a stopwatch-based scoring rule; hubs and exploration surfaces orient through a leading group or content field instead of one CTA.
-- **Weight must match importance.** The most common hierarchy bug: decoration (a hero image, an illustration, a giant logo) outweighs the action model's dominant element or region. Visual weight is a budget—spend it on what the user came to do.
-- **The focusing mechanism.** One element or region must be the visual entry point that says *start here*. On a task screen that is usually the primary action or the content needed before it; on a hub it can be the leading destination or group; in exploration it is the content field itself. If the eye bounces between unrelated, equally weighted regions, the organizing intent is not being expressed.
-- **Show the consequence.** When a decision depends on a relationship, tradeoff, or process state, show that meaning at the decision surface—a simple summary, comparison, preview, or visualization may do more than a list of raw numbers. Keep exact values and supporting detail available as evidence; the visual should clarify, not decorate or conceal.
-- **Weight ranks; it does not permit.** Hierarchy answers *what should I do*; it does not answer *what can I do*. A heading can be the heaviest thing on screen and still be inert. So where the primary is an action, it has to carry a signifier that reads as actionable during the first scan: a traced boundary (fill, border, or elevation), a platform-native control convention (an iOS bar button), or an icon plus label inside a tap target. Bare text at any weight, with no convention behind it, ranks without permitting—say which of these the primary is using. A screen can pass the squint test and still leave the user unsure they are allowed to touch anything.
-- **No false signifiers.** A shadowed card that doesn't open, underlined text that isn't a link, a chevron that leads nowhere—these spend attention the screen budgeted for real actions, because the eye reads them exactly like real controls. They also cost trust the first time someone taps one and nothing happens. Count them as clutter, not decoration.
-- **The hierarchy ladder.** Use the *fewest* dimensions that achieve clear ranking, in this order: **space → weight → size → color.** Reach for color last; it is the loudest and easiest to overuse.
-- **The shape of a good screen:** one dominant element or region, two to three secondary tiers, everything else ambient. The dominant thing must match the register's action model. When every element is loud, none is.
-
-> **Fails:** hierarchy carried by color alone; the "visual noise floor" where everything has equal weight; decoration outweighing function; six type sizes that read as one; a dominant action that ranks first but doesn't read as actionable; inert elements dressed as controls.
-
----
-
-## Registers—when the rules shift
-
-The disciplines above assume the **task screen**: the default, and the most common. Two other screen types are legitimate, and applying task rules to them is a mistake—it flattens screens that are *supposed* to hold many things. Identify the register first; it changes how the clear intent is expressed, which action model fits, and where the disciplines bind.
-
-**Classify with this tree.** Walk it top to bottom and take the first match. Answer about what the user came to *do*, not about how the screen currently looks—a cluttered screen is not automatically a hub.
-
-```
+```text
 Did the user come here to complete one specific job?
 ├── Yes → TASK
 └── No
@@ -378,180 +204,135 @@ Did the user come here to complete one specific job?
     └── Did they come to browse content, with no particular endpoint?
         ├── Yes → EXPLORATION
         └── Neither is clearly true
-            └── TASK, overloaded into a hub. Score it as a task screen
-                and flag the overload under Information Architecture.
+            └── CLASSIFY TENTATIVELY; verify intent before scoring
 ```
 
-Two ties worth naming, because they recur:
-- **A record or detail screen** (a contact, an issue, an order) is a **hub** when its job is to show state and route you onward, and a **task** screen when it exists to be edited. If it tries to be both at once, that is the overloaded case—the tree's last branch.
-- **Search results** are **exploration** when the user is scanning to discover, and a **task** screen when they are finding one known item to act on.
+- **Task** completes one coherent job. One primary action usually wins; an
+  inherent binary choice or inseparable dual mode can remain co-equal.
+- **Hub** routes among related destinations. Many destinations are correct
+  when they are grouped and ranked; judge local groups or rows, not the total.
+- **Exploration** supports browsing one coherent content space. Many items are
+  correct; judge the facts and decisions inside each item, not item count.
 
-- **Task**—the user is completing a specific job. *Default; everything above applies as written.* One completion intent, usually one primary action, with decision load matched to audience and stakes. An inherent binary choice or inseparable dual mode can be co-equal without creating a second intent. (Checkout, compose, a signup step, a settings detail, any form.)
-- **Hub**—the user is choosing where to go. The organizing intent *is routing*; many destinations is correct, not clutter. (Home screen, profile, settings index, account screen, app root.)
-- **Exploration**—the user is browsing for its own sake. Abundance is the point; the goal is dwell and discovery, not a fast exit. (Feeds, discover/browse tabs, search results, a photo or product grid.)
+A record/detail screen is a hub when its job is to show state and route
+onward, and a task when its job is editing. Search results are exploration
+when the user is discovering and task when they are finding one known item to
+act on. Use a supplied task intent unless observed behavior contradicts it.
+A queue or table is not automatically a hub: processing an active item is a
+task; routing to other destinations is a hub. If the answer is unclear, record the tentative classification and the
+fastest intent check; use `task-overloaded` and flag IA only when competing
+outcomes are evidenced.
 
-The methodology still holds—*one screen, one clear intent*—but its expression changes by register, and the working-memory limit **relocates** rather than disappears:
+## Decision procedures
 
-| | Task | Hub | Exploration |
-|---|---|---|---|
-| **Organizing intent** | complete one coherent job | route among related destinations | browse one coherent content space |
-| **Action model** | one primary action usually wins; name any inherent co-equal set | rank destinations; let the likely next route lead | content leads; controls support continued discovery |
-| **Where the chunk diagnostic applies** | the unfamiliar decision point | per group / per row, not the total destination count | per item, not the item count |
-| **Hierarchy** | one dominant action or read-first region | one destination or group leads; routes remain comparable | one content type dominates; chrome recedes |
+### 1. Name the intent and action model
 
-The diagnostic relocates rather than vanishes. A settings index with 9 rows can be fine; a settings row asking a novice to compare 9 unfamiliar facts probably is not. A feed with 200 posts can be fine; a card with several competing decisions still needs scrutiny. Context and familiarity decide the score, not a raw count alone.
+Finish: *“This screen exists so the user can ___.”* An “and” is a problem only
+when it joins outcomes that can succeed independently. Review and approve an
+invoice can remain one intent when review is necessary to approval. Name the
+action model after the sentence: one primary action, an inherent co-equal set,
+ranked routes, or a content field that leads.
 
-The trap runs both ways: flattening a hub or feed down to a single action (now it does its job badly), **or** letting a task screen sprawl into an accidental hub because you skipped the one-sentence test. When you can't tell which register you're in, you're usually looking at a task screen wearing too many hats—split it or deliberately reframe it as routing.
+### 2. Architect the information
 
----
+Inventory the elements and keep each one that supports the intent. Group what
+is used together, label it in the user’s words, and move or defer an
+independently completable outcome. Parse recognizable addresses, identifiers,
+dates, or transaction types; show the interpretation, allow correction, and
+keep a fallback when ambiguity remains. Put the relevant history, status,
+price, and consequence at the decision surface. Do not make the user cross a
+context jump or memory bridge for a fact needed to choose or trust the action.
 
-## How they combine—order of operations
+### 3. Disclose progressively
 
-Apply them in this order. Skipping ahead produces a pretty screen that does the wrong thing.
+Minimize decisions, not evidence. Use four chunks as a task-screen diagnostic, not a universal limit. At the busiest local decision, judge the number of
+*unfamiliar chunks* alongside grouping, familiarity, stakes, frequency, device,
+and whether each fact changes the decision. There is no universal item, row, or
+card pass/fail line. In a hub, inspect each group or row; in exploration,
+inspect each item.
 
-1. **Define the intent and action model** (methodology). One sentence; then choose the model that fits the register.
-2. **Architect the information** (IA). Decide what belongs, how inputs are interpreted, and what decision-relevant context stays with the action.
-3. **Disclose progressively** (PD). Minimize decisions, not information; sort what belongs into Now / On-demand / Never.
-4. **Establish hierarchy** (VH). Rank what survived and make the consequence legible without letting supporting visualization outrank the action model.
+Sort what belongs into **Now**, **On-demand**, and **Never**. Keep what is
+needed for this visit Now. Put rare or advanced material On-demand behind a
+cue visible in the default state, such as a labeled toggle, count, chevron,
+tab, or “More” control. Cut what nobody needs. Never defer price, a required
+field, a material consequence, permission or risk, a required control, or
+evidence needed for informed choice. A gesture without a visible partner is
+hidden, not deferred.
 
-You cannot rank elements before you know which show (3 before 4), cannot decide what shows before you know what belongs (2 before 3), and cannot decide what belongs before you know the screen's organizing intent (1 before 2). Hierarchy applied to a kitchen-sink screen just makes the clutter well-organized.
+### 4. Establish attention
 
-This order holds for every register; only the *targets* shift—in a hub, step 4 ranks destinations; in exploration, it ranks content types over chrome.
+Name the visual entry point: the task action or read-first content, the
+leading hub route/group, or the exploration content field. Squint and state
+the intended order. Let space and weight do as much work as possible, then
+size and color only when the context needs them. Any exact spacing scale,
+type-size ratio, or mobile placement is a starting hypothesis to test against
+the product’s design system, content, viewport, input method, reachability,
+and task frequency. Focal does not impose those values. When the dominant
+thing is an action, name the control convention that makes it actionable; a
+heading can rank first and still be inert. Show a relationship or tradeoff
+with a useful summary or comparison while retaining exact values as evidence.
 
----
+### 5. Route state and evidence
 
-## Flows—hand off to Compass or Flywheel
+For a build, enumerate the states this screen can actually enter and specify
+the applicable behavior, including success/completion, partial data or
+failure, permission denial, and interruption/recovery when the screen has
+those modes. Do not add irrelevant states to satisfy a universal checklist;
+see [reference/build.md](#source-focal-reference-build-md).
 
-Focal is screen-local on purpose. A flow is a *sequence* of screens with clear organizing intents, so apply Focal to each screen in one—but the path *between* them belongs to **Compass**, the sibling skill for cross-screen flows. Focal is *within* a screen; Compass is *between* them.
-
-Route it:
-- **Focal's**—a screen that does too much, buries what matters, uses the wrong action model, or ranks the wrong thing loudest.
-- **Compass's**—too many steps, a dead end, a trapped modal, a Back that wipes work, a deep link that dumps the user at step one, or a user who can't tell where they are in the journey.
-- **Flywheel's**—a journey step that stalls activation before first value, hides a delivered win, or causes users to drift instead of return. Compass maps and connects the step; Flywheel diagnoses the lifecycle leak.
-
-An end-to-end journey must include necessary but unglamorous work—setup, verification, signing, recovery, and confirmation—not just the core utility. Compass owns how those steps are sequenced, connected, and resumable. Flywheel owns whether they create friction before value or another lifecycle leak. Focal owns the local decision surface of each screen and should not turn one step into a catch-all.
-
-These skills are not a whole-app IA or sitemap tool. If the question is "how should the entire product be organized," that is a larger exercise—return to Focal screen by screen, and Compass flow by flow, once that map exists.
-
----
+For a review, distinguish what is observed, inferred, tested, walked from a
+description, and not shown. A missing variant is evidence of a coverage gap,
+not automatically a defect or a reason to score a whole dimension N/E. The
+review contract defines when a dimension is N/E and how incomplete scorecards
+are printed; see [reference/review.md](#source-focal-reference-review-md).
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. When Product Judgement names several screens, score the *worst* one, name that screen in the rationale, and raise the others as separate findings—never average screens into one score.
+When there is no argument, explain the method briefly and ask whether the user
+wants to build a new screen or review an existing one.
 
-- **No argument** → explain the methodology and three disciplines briefly, then ask: building a new screen, or reviewing an existing one?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Focal with Compass, Flywheel, and Soul and reconciles the results.
-- **`build` (or a description of a screen to design)** → follow **The five moves** below. Pull techniques from [reference/patterns.md](reference/patterns.md).
-- **A multi-screen flow, journey, or navigation question** → that is Compass's, not Focal's. Say so and hand off (see **Flows**, above). If the question is where the journey loses activation, value recognition, or return, also hand off to Flywheel.
-- **`review` / `critique` / `audit` (or a file, screenshot, or URL to evaluate)** → load and follow [reference/review.md](reference/review.md). It scores each discipline 0–4 against a written rubric, requires an evidence-based rationale and next-point change for every score, totals to /12, displays a normalized /4 average and common quality band with a weakest-dimension ceiling, tags issues P0–P3, and anchors every issue and suggested move to the exact **Screen · Flow · State · Lifecycle** locator before closing on a Clear-Intent verdict. That file defines the rubrics, scoring contract, bands, severities, and audit locator—all of them, and nowhere else.
-- **A question about a specific technique or anti-pattern** → consult [reference/patterns.md](reference/patterns.md).
+- **Build or screen description:** read [reference/build.md](#source-focal-reference-build-md)
+  and use [reference/patterns.md](#source-focal-reference-patterns-md) only for a relevant
+  technique or anti-pattern.
+- **Review, critique, audit, screenshot, frame, file, route, prototype, or
+  URL:** read [reference/review.md](#source-focal-reference-review-md), then calibrate from
+  [reference/examples.md](#source-focal-reference-examples-md) before emitting the local
+  review.
+- **Technique or anti-pattern question:** read the relevant section of
+  [reference/patterns.md](#source-focal-reference-patterns-md).
+- **Multi-screen flow or navigation:** hand off to Compass. If the issue is
+  activation, first value, value recognition, or return, also hand off to
+  Flywheel. Do not turn a path problem into a screen-local fix.
+- **Whole-app or cross-scale audit:** hand off to Product Judgement.
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well—the templates define the shape, the examples set the bar.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](#source-product-judgement-skill-md) loads Focal for a cross-scale audit, treat the pass as review over the supplied evidence. Do not ask a framing question or print Focal’s locked local template. Preserve every native dimension rationale and score, the native `/12` total and band when all three dimensions are evaluated, or the N/E evidence rule when one is unsupported, plus the One Screen, One Clear Intent verdict and complete Screen · Flow · State · Lifecycle locators as working notes for the orchestrator. Send sibling-owned findings to its Handoffs section. Never hand a cross-scale request back to Product Judgement during this pass. Do not read [reference/examples.md](#source-focal-reference-examples-md) in this mode.
 
----
+Before a direct build or review, read [reference/examples.md](#source-focal-reference-examples-md)
+for calibration. This calibration read is skipped in the orchestrated pass.
 
-## Build: the five moves
+## Feedback standard
 
-For each screen, in order. Write the answers down—they are the spec.
-
-1. **Name the intent and action model.** One sentence: *"This screen exists so the user can ___."* Reject an "and" only when it joins independently completable outcomes. Classify the register, then name one primary action, an inherent co-equal set, ranked routes, or the content field that leads.
-2. **Architect the information.** List what belongs on the screen. Group related items; label them in the user's words; infer recognizable inputs before asking the user to classify them; and keep decision-relevant context beside each action. Anything serving a different intent moves to another screen.
-3. **Triage disclosure.** Minimize decisions, not information. Sort every element into Now / On-demand / Never. Cut the Nevers. Defer the On-demands behind a reveal. Keep the Nows.
-4. **Rank what stays.** Assign each surviving element or region a tier: one dominant entry point, only the secondary ranks the screen actually needs, and the ambient rest. A small screen may need one secondary rank; a dense expert surface may need several. Make the dominant tier express the register's action model, and make the consequence legible without letting supporting visualization outrank the action.
-5. **Run the gates.** Self-check against the six gates in the **`## Gates`** block of the Screen Spec template below. That block is the single canonical list—read them there, and emit them there. Never restate them in your own words.
-
-A screen that passes all six is structurally sound by Focal's standard. Apply visual styling and motion on top of that foundation—it lands far better on a screen that already earns its hierarchy.
-
-**Output—the Screen Spec (use this exact structure).** Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label and every gate, even when the answer is one line.
-
-```
-**Screen:** <name>—organized around <one clear intent; no unrelated second outcome>. **Action model:** <one primary | inherent co-equal set | ranked routes | content-led>: <name the action, set, routes, or content field>.
-**Register:** task | hub | exploration | task-overloaded   ·   **Audience:** novice | mixed | expert
-
-## Information
-- <element or group>—<why it belongs / how it's grouped>
-- Moved off: <element> → <where it goes instead>
-
-## Disclosure
-- Now: <shown this visit>
-- On-demand: <deferred> → behind <reveal>
-- Cut: <removed; nobody needed it>
-
-## Hierarchy
-- Primary: <the one element or region that is the visual entry point—the task action, read-first content, leading hub route/group, or exploration content field; when it is an action, name what makes it read as actionable>
-- Secondary: <the ranked supporting elements or regions; `None` is valid>
-- Ambient: <the muted rest>
-
-## States
-- Empty: <what the screen says and offers with no data, or `N/A—<reason>`>
-- Loading: <skeleton or optimistic; never a blank, or `N/A—<reason>`>
-- Error: <plain-language message, at the source, work preserved, or `N/A—<reason>`>
-- Full (worst case): <how it holds at max realistic data—longest label, most rows, or `N/A—<reason>`>
-
-## Gates
-- [ ] One-sentence organizing intent; no unrelated second outcome
-- [ ] Action model matches the register; any co-equal actions are inherent to the same intent
-- [ ] Grouped + labeled; no orphans; no memory bridge
-- [ ] Decision load fits the audience and stakes; nothing essential deferred
-- [ ] One element or region is materially heaviest and expresses the action model; any primary action reads as actionable
-- [ ] Every applicable state above designed; each `N/A` is justified
-```
-
-Filling it:
-- **Repeat any labeled bullet as many times as the screen needs**—`Moved off`, `On-demand`, and `Cut` usually take several lines each. Repeating a label is not adding a section.
-- **`<reveal>` means the perceptible cue, not the mechanism.** "Behind an 'Advanced' toggle" and "behind a chevron on the row" are answers; "behind a modal" and "deferred" are not, because neither tells the reader what the user would see that says anything is there.
-- **Gates ship unchecked.** Mark `[x]` only for gates the spec actually satisfies; leave `[ ]` with a short reason (one clause) for any it doesn't. Never check a gate the spec does not satisfy—but a spec that genuinely satisfies all six should show all six checked.
-- **`Cut` covers removed and replaced.** If a control was needed but has to become a different, safer control, put it under `Cut` and name the replacement—"uncapped refund field → hard-capped to the order total." Cutting an unsafe affordance is not the same as deciding nobody needed it.
-- If a labeled bullet has nothing, keep the label and write "None."
-
-Gate 5 is deliberately worded for spec time: it asks whether the spec *assigns* one element or region decisive weight, matches that weight to the action model, and names what makes any primary action read as actionable—all of which a spec can answer. The squint test itself needs a render—run it once the screen exists, and treat a failure there as a review finding, not a build gate.
-
----
-
-## Voice (when giving feedback)
-
-When you review or justify a Focal decision, write like a senior designer reviewing work they want to be great:
-
-- **Emit the exact output template.** Build and review each have a locked structure—the build template is in the build section above, the review template is in [reference/review.md](reference/review.md). Use it verbatim every time: same sections, same order, same headers, same table columns, same issue-line format. Don't add, remove, reorder, or rename sections; if a section has nothing, keep its header and write "None." Repeatable and scannable is the whole point.
-- **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks you to produce something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill, not a judgment call: name it in one line after the output so it can be fixed. Analysis the template has no room for is still worth doing; it informs the scores even when it isn't printed.
-- **Be specific and quantitative.** "There are three primary-weight buttons" beats "too many buttons." Count elements, name the tiers, quote the labels.
-- **Be decisive.** "This screen carries two independent intents"—not "this might feel unfocused."
-- **Factual first, then judgment, then the fix.** State what you see, why it hurts the user, what it should be instead.
-- **No hedging, no praise padding.** Don't sandwich criticism in empty compliments. If something works, say exactly why.
-- **Tie every issue to a discipline.** Each problem names which of the three it breaks, and how that obscures the screen's organizing intent. That is the whole point of the lens.
-- **Locate every issue.** Name the exact screen or region, rendered app state, and user lifecycle moment where the change belongs. Never make the implementer infer when the finding applies.
-
----
-
-## Absolute don'ts
-
-Match-and-refuse. If you're about to do one of these, you've broken a discipline—rework it.
-
-- **The kitchen-sink screen.** (IA) A screen carrying three independent intents is three screens, or an explicit hub with focused task paths.
-- **Structure that mirrors the data model.** (IA) Organize by user intent, not by your tables.
-- **Jargon labels and the memory bridge.** (IA) Name things in the user's words; carry context forward instead of making them remember it.
-- **Opaque inference.** (IA) Never silently infer a consequential value. Show the interpretation, let the user correct it, and provide a manual fallback when confidence is low.
-- **The wall of options.** (PD) Defaults plus a reveal, never N equal choices at once.
-- **Information withheld as simplification.** (PD) Minimize decisions, not the evidence a user needs to trust, verify, or understand the action.
-- **Burying what the user needs now.** (PD) Price, required fields, consequences, and controls required by the action model are never hidden behind disclosure.
-- **Competing primary actions on a task screen.** (Methodology / VH) Demote one when they pursue independent outcomes. Preserve an inherent binary-choice or dual-mode set, and never apply this task rule to a hub or exploration surface (see Registers).
-- **A reveal with no cue.** (PD) If nothing on screen says something is there, it isn't deferred—it's cut by accident. Gesture-only functions are the worst case.
-- **False signifiers.** (VH) Inert things dressed as controls. A shadowed card that doesn't open, underlined text that isn't a link. They spend the attention budget and cost trust on the first tap.
-- **Hierarchy by color alone.** (VH) Climb the ladder: space and weight first.
-- **Raw values without meaning.** (VH) Do not make users derive a relationship, tradeoff, or process consequence from numbers alone; add a clear summary, comparison, preview, or visualization while preserving exact values as supporting evidence.
-- **Decoration outweighing the action model.** (VH) The hero image must not beat the task action, leading hub route, or exploration content field.
-- **Modal as first thought.** (VH) A modal interrupts the screen's organizing intent. Exhaust inline and progressive alternatives first.
-
----
+Use the exact output template in the mode reference. Lead with the evidence,
+then its user consequence, the rubric anchor, and the smallest next-point
+change. Locate every issue, Top move, Next item, and handoff by **Screen ·
+Flow · State · Lifecycle**. If behavior is not evidenced, say `not shown` and
+name the fastest confirming check; do not convert unknown behavior into a
+defect, an implementation recommendation, or a score.
 
 ## References
 
-- [reference/review.md](reference/review.md)—the three-discipline audit, the Focal scorecard (0–4 per discipline), severity, and output format.
-- [reference/patterns.md](reference/patterns.md)—IA techniques, the progressive-disclosure technique catalog, focus mechanisms and the hierarchy ladder in practice, state care (empty / loading / error / full / first-run / peak-end), and the anti-pattern library with fixes.
-- [reference/examples.md](reference/examples.md)—worked examples: a cluttered dashboard reviewed, and a screen built, both in the locked output templates.
+- [reference/build.md](#source-focal-reference-build-md)—the build workflow and Screen Spec.
+- [reference/review.md](#source-focal-reference-review-md)—the three-discipline review,
+  native scorecard, N/E rule, severity, and output format.
+- [reference/patterns.md](#source-focal-reference-patterns-md)—disclosure techniques,
+  hierarchy methods, state guidance, and anti-patterns.
+- [reference/examples.md](#source-focal-reference-examples-md)—calibration examples for
+  direct build and review output.
 
 <!-- END GENERATED SOURCE: focal/SKILL.md -->
 
+
+<a id="source-focal-reference-review-md"></a>
 
 ## Source: `focal/reference/review.md`
 
@@ -575,9 +356,9 @@ Before judging, *notice*. Most people glance; a reviewer sees. Count the element
 Then frame, in one or two sentences each:
 - **What is this?** App type, screen purpose, target user.
 - **What's the user's state?** Anxious, rushed, casual, distracted, one-handed? A checkout under time pressure demands different care than a Sunday-morning feed scroll. Name it; the critique must respect it.
-- **Which app state and lifecycle moment is this?** Name the rendered state—default/full, loading, empty, error, success, expanded, permission-denied—and when it occurs—first run, setup, recurring use, re-entry, or post-action. If the artifact shows several variants, inventory them. If it does not, mark material states `not shown` rather than assuming them.
+- **Which app state and lifecycle moment is this?** Name the rendered state—default/full, loading, empty, partial data or failure, error, success, expanded, permission-denied, interruption, or recovery—and when it occurs—first run, setup, recurring use, re-entry, or post-action. If the artifact shows several variants, inventory them. If it does not, mark material states `not shown` rather than assuming them.
 - **What's the bar?** Every product category has an invisible standard set by its best-in-class tool. A notes screen is judged against Apple Notes and Bear; a dashboard against Linear, Stripe, and Vercel; a checkout against Stripe and Shop Pay. Ask: *what would the best-in-class product in this category do here?*
-- **The register.** Classify it by walking the decision tree in **Registers** in [SKILL.md](../SKILL.md)—take the first match, and don't re-derive the categories here. This sets how the gates should be read; see *Adjust for register* below.
+- **The register.** Classify it by walking the decision tree in **Scope and register** in [SKILL.md](#source-focal-skill-md)—take the first match, and don't re-derive the categories here. This sets how the gates should be read; see *Adjust for register* below.
 - **The methodology lens.** State the screen's apparent **organizing intent** in one sentence, then name its apparent **action model**: one primary action, an inherent co-equal set, ranked routes, or content-led exploration. On a task screen, an "and" fails only when it joins independently completable outcomes; multiple primary-weight actions fail only when they compete rather than form an inherent binary or dual-mode set. For a hub, the intent is *routing*; for exploration, *browsing one coherent content space*.
 
 ## Locate every finding
@@ -601,11 +382,11 @@ Read the gates through the register you classified in Step 0. The disciplines st
 - **Task-overloaded**: score by task rules and flag the overload as the leading Gate 1 issue.
 - **Audience:** weigh expertise. The working-memory budget is ~4 *chunks*, and experts read dense displays as a few learned groups. Don't score a pro tool's dense panel as overload if its users chunk it; do score a novice or first-run screen strictly. Density is a function of who's reading it.
 
-**A region can carry its own register.** A data table or log inside a task screen is an exploration *region*: score the screen by its own register, and apply the relocated per-row budget to that region rather than counting its rows against the screen's decision point. Say which region you scored separately. The relocation still bites either way—a settings *row* or feed *card* cramming 8+ unfamiliar facts fails Gate 2 even when the screen's total item count is fine.
+**A region can carry its own register.** A data table or log inside a task screen is an exploration *region*: score the screen by its own register, and apply a local contextual-density diagnostic within that region rather than counting its rows against the screen's decision point. Say which region you scored separately. A row or card with many unfamiliar facts may still be clear when facts are grouped, ranked, familiar, or needed together; it may overload when those conditions do not hold. There is no fixed row/card count that fails Gate 2. Judge the local density from expertise, stakes, device, content length, hierarchy, and whether each fact changes the current decision.
 
 ## The three gates
 
-Run each gate in turn, in the order the disciplines apply. Each produces a 0–4 score and the specific findings behind it.
+Run each gate in turn, in the order the disciplines apply. Each produces a 0–4 score when its rubric is supported, with the specific findings behind it; use `N/E—insufficient evidence` when the artifact cannot support that dimension.
 
 ### Gate 1—Information Architecture
 
@@ -624,14 +405,14 @@ Run each gate in turn, in the order the disciplines apply. Each produces a 0–4
 | 0 | No discernible organizing intent—a dumping ground of unrelated content |
 | 1 | Multiple competing intents; structure mirrors the data model; jargon labels |
 | 2 | One intent is identifiable but an independent outcome muddies it; weak grouping or a memory bridge |
-| 3 | Clear organizing intent, suitable action model, sensible grouping and labels, minor structural noise |
-| 4 | Unmistakable organizing intent; every element supports it; action model fits the register; plain labels; nothing orphaned |
+| 3 | Clear organizing intent, suitable action model, sensible grouping and labels; only minor structural noise, if any, remains |
+| 4 | Exemplary organization makes a demonstrably difficult set of related decisions unusually easy to navigate; explain the specific structural choice and its benefit beyond ordinary clear intent, grouping, and labels |
 
 ### Gate 2—Progressive Disclosure *(anti-overload)*
 
 *Of what belongs, is the right amount shown now?*
 
-- At the busiest decision point, **count independent chunks in working memory**. About four unfamiliar chunks is a useful task-screen default, not a universal pass/fail line. Judge familiarity, stakes, grouping, and whether each item changes the decision before calling the screen overloaded.
+- At the busiest decision point, **count independent chunks in working memory** as a diagnostic starting point. About four unfamiliar chunks can be a useful task-screen probe, but it is not a universal pass/fail line, and no row or card count is one either. Judge familiarity, stakes, grouping, device, content length, and whether each item changes the decision before calling the screen overloaded.
 - Check whether the screen **minimizes decisions without withholding evidence**. Technical detail can remain available for trust, verification, or expert use without making every user interpret it before proceeding.
 - Check the **disclosure triage**: is anything shown that should be deferred (rare options, advanced settings)? Is anything deferred that should be shown *now* (price, required fields, consequences, the task's primary action, or a control required by the register's action model)?
 - Check that deferral signals **what's hidden** (a count, a clear "More") rather than reading as absence. Name the cue for each deferred thing; if you cannot find one, the content is hidden rather than deferred. A function reachable only by an uncued gesture is the worst case.
@@ -641,14 +422,16 @@ Run each gate in turn, in the order the disciplines apply. Each produces a 0–4
 | 0 | Fundamentally broken—severe overload blocks the core task, or essential information is concealed in a way that removes informed choice or creates material harm |
 | 1 | Major failure—a wall of options or a dark-pattern reveal hides price, a required field, or a consequence, but the core task remains technically possible |
 | 2 | Some layering, but a key decision point creates material cognitive overload for its audience; or content is deferred behind no perceptible cue |
-| 3 | Mostly well-layered; one or two things shown or deferred wrongly |
-| 4 | Decision load is exceptionally well matched to audience and stakes; complexity appears exactly when needed; nothing essential is hidden |
+| 3 | Appropriate layering for the audience and stakes; decision-critical facts stay available and deferred content has a clear cue; only minor gaps, if any, remain |
+| 4 | An unusually effective disclosure strategy resolves a demonstrated complexity or competing information need without withholding essential evidence; explain what exceeds ordinary appropriate layering |
 
 A **buried essential** is a blocker only when it prevents the core outcome, removes informed choice, or hides material cost, consequence, permission, or risk. Otherwise assign severity from consequence, reach, and recoverability. Do not infer blocker status from the Progressive Disclosure score alone or force the dimension to `0` unless its rubric supports `0`.
 
 ### Gate 3—Visual Hierarchy
 
 *Does weight match importance?*
+
+Before scoring this gate, establish rendered layout or concrete style/order evidence that supports the weight ranking and control signifiers. A description that merely names a “primary action” and a details affordance establishes their intended roles, not their visual prominence. Without evidence of presentation, use `N/E—insufficient evidence` for Visual Hierarchy, describe the supported action model under IA, and omit the aggregate total. A sufficiently concrete description of layout and styles can support a score; a screenshot is not the only valid evidence source.
 
 - Run the **squint test** on the screenshot (or describe the weight order from the code). Name #1, #2, and the groupings.
 - Run the **quick-orientation probe**: on a task screen, can a first-timer identify the read-first region or next action within the first few seconds? Three seconds can be a useful test prompt, but it is not a stopwatch threshold or an automatic scoring failure. For hubs and exploration surfaces, look for a leading group or content field rather than one CTA.
@@ -668,6 +451,9 @@ A **buried essential** is a blocker only when it prevents the core outcome, remo
 
 Every discipline uses the same integer anchors:
 
+<a id="shared-anchors"></a>
+
+<!-- BEGIN SHARED: anchors -->
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
 | **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
@@ -676,13 +462,16 @@ Every discipline uses the same integer anchors:
 | **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
 | **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
-Score each discipline holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the dimension overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the dimension being scored; it does not universally require novelty.
+Meeting the ordinary requirements of the task supports `3`, not automatically `4`. A `4` rationale must identify a specific unusually effective quality visible in the evidence, beyond listing correct ingredients or repeating the rubric. It need not be novel or backed by analytics, but “no defect was shown” is not enough.
+<!-- END SHARED: anchors -->
+
+Score each discipline holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the dimension overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the dimension being scored; it does not universally require novelty. If the available artifact cannot support a dimension's rubric, mark that dimension `N/E—insufficient evidence` rather than treating the gap as zero.
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
+A score without an explanation is invalid. Fill every scored row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. A dimension with no evidence for its rubric is `N/E—insufficient evidence`; replace the next-point change with the fastest evidence check. A missing variant alone does not make the whole dimension N/E: score the supported behavior and record the gap in Coverage/Basis.
 
-Keep the native total: `total = Information Architecture + Progressive Disclosure + Visual Hierarchy`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
+When all three dimensions are scored, keep the native total: `total = Information Architecture + Progressive Disclosure + Visual Hierarchy`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -691,14 +480,19 @@ Keep the native total: `total = Information Architecture + Progressive Disclosur
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores.
+Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any required dimension is N/E, omit the native total, average, band, and weakest-dimension ceiling; report the supported rows and the evidence gap instead.
 
 - If more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
 
-Dimension score, overall quality band, issue severity, critical blocker, and the **One Screen, One Clear Intent** verdict are separate. The verdict remains Yes or No: a screen can be Solid and still receive No if its organizing intent or action model is structurally unresolved. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
+See the [shared evidence contract](#shared-evidence) already included above.
+
+Dimension score, overall quality band, issue severity, critical blocker, and the **One Screen, One Clear Intent** verdict are separate. The verdict is Yes or No when the organizing intent is evidenced; use `N/E—insufficient evidence` when the artifact cannot support that verdict, with the fastest intent check. A screen can be Solid and still receive No if its organizing intent or action model is structurally unresolved. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
+<a id="shared-severity"></a>
+
+<!-- BEGIN SHARED: severity -->
 | Priority | Meaning |
 |----------|---------|
 | **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
@@ -707,15 +501,18 @@ Dimension score, overall quality band, issue severity, critical blocker, and the
 | **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
 
 Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+<!-- END SHARED: severity -->
 
 **Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by type of harm—**structural** (IA: wrong job or mental model) outranks **behavioral** (PD: disclosure, overload) outranks **visual** (VH: weight, spacing, type). Never reorder across priorities; a P0 Hierarchy issue outranks a P1 IA issue.
 
 ## Output format—use this exact structure
 
-Every review returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
+Every review uses this structure, in this order. For a complete scorecard, return the template verbatim. For an incomplete scorecard, keep the same sections and dimension rows, apply the conditional N/E rule above, and omit only the invalid total row and total segment. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
+
+For an incomplete scorecard, keep the three dimension rows, write `N/E—insufficient evidence` in the unsupported row, and omit the **Total** row and the total segment in **Verdict**. The native total, average, band, and weakest-dimension ceiling are valid only when all required dimensions are scored.
 
 ```
-**Verdict:** <clear intent—yes or no> · <the one biggest problem, one phrase> · **<total>/12**
+**Verdict:** <clear intent—yes | no | N/E—insufficient evidence> · <the one biggest problem, one phrase> · **<total>/12**
 
 **Screen:** <what it is> · register: <task | hub | exploration | task-overloaded> · audience: <novice | mixed | expert>
 **Flow:** <named journey or `screen-local`; if not evidenced, `not shown`>
@@ -729,9 +526,9 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Information Architecture | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Progressive Disclosure | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Visual Hierarchy | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
+| Information Architecture | _/4 or N/E—insufficient evidence | <evidence → consequence → rubric anchor, or evidence gap> | <smallest next-point change, or fastest evidence check> |
+| Progressive Disclosure | _/4 or N/E—insufficient evidence | <evidence → consequence → rubric anchor, or evidence gap> | <smallest next-point change, or fastest evidence check> |
+| Visual Hierarchy | _/4 or N/E—insufficient evidence | <evidence → consequence → rubric anchor, or evidence gap> | <smallest next-point change, or fastest evidence check> |
 | **Total** | **_/12 · _._/4** | **<band; exact sum of justified component scores>** | <weakest-discipline ceiling applied> |
 
 ## Issues (most severe first)
@@ -750,13 +547,15 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 ```
 
 Filling it:
-- **Coverage**—name only states and lifecycle moments the evidence actually exposes. Use `gaps` for consequential variants such as loading, error, first-run, re-entry, or worst-case data that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
-- **Next**—structural before executional, always: polishing a screen with an unresolved organizing intent only organizes the clutter. Resolve structural items with the five-move build workflow in [SKILL.md](../SKILL.md). Single-screen work is Focal's; if the real problem is the path between screens, hand off to Compass; if it is a lifecycle leak in activation, value recognition, or return, hand off to Flywheel.
+- **Coverage**—name only states and lifecycle moments the evidence actually exposes. Use `gaps` for consequential variants such as loading, error, first-run, re-entry, worst-case data, success, partial failure, permission, or recovery that were not shown or tested. If a dimension has no support for its rubric, mark that row `N/E—insufficient evidence`; a missing variant by itself does not make the dimension N/E.
+- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves, only when each names a real change; never invent filler to reach three. If no move is warranted, write `None.` Keep each locator specific enough that a designer or engineer can reproduce the state without rereading the diagnosis. `<observation>` may run two or three sentences when specificity requires it. If behavior is unknown, the next step is an evidence check; do not prescribe an implementation for the unknown condition. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
+- **Next**—structural before executional, always: polishing a screen with an unresolved organizing intent only organizes the clutter. Resolve structural items with the five-move build workflow in [build.md](#source-focal-reference-build-md). Single-screen work is Focal's; if the real problem is the path between screens, hand off to Compass; if it is a lifecycle leak in activation, value recognition, or return, hand off to Flywheel.
 - Re-run the audit after fixes to watch the score climb.
 
 <!-- END GENERATED SOURCE: focal/reference/review.md -->
 
+
+<a id="source-focal-reference-patterns-md"></a>
 
 ## Source: `focal/reference/patterns.md`
 
@@ -789,7 +588,7 @@ How to decide what belongs on a screen and organize it around one clear intent.
 
 Match the technique to *why* the content is deferred.
 
-*About four unfamiliar chunks is a task-screen diagnostic, not a universal limit. On hub and exploration screens, inspect decision load per row or card rather than counting destinations or items. See **Registers** in [SKILL.md](../SKILL.md).*
+*About four unfamiliar chunks is a task-screen diagnostic starting point, not a universal limit. On hub and exploration screens, inspect decision load per row or card rather than counting destinations or items. Judge each row or card from familiarity, grouping, stakes, device, content length, and the decision at hand. See **Registers** in [SKILL.md](#source-focal-skill-md).*
 
 | Technique | Use when | Example |
 |-----------|----------|---------|
@@ -817,9 +616,9 @@ Match the technique to *why* the content is deferred.
 
 How to give a screen a clear visual entry point so the eye knows where to start—the visual expression of its organizing intent and action model.
 
-- **Size and weight differential.** Make the primary element materially larger or heavier than its neighbors. A ≥1.25 step between tiers reads as intentional; smaller reads as accidental.
+- **Size and weight differential.** Make the primary element materially larger or heavier than its neighbors. A ratio or token step can be a useful starting point when the system gives no guidance, but choose the relationship in context of the typeface, content, viewport, and audience; defer exact values to the product’s design system.
 - **Isolation by space.** Surround the primary element with more whitespace than anything else. The eye goes to what's alone.
-- **Position.** Above the fold, in the reading-flow landing zone (top-left start, bottom-right resolution for LTR). On mobile, primary actions sit where the thumb rests (the bottom third); on pointer-driven desktop, in the natural resolution zone of the layout (often bottom-right of a form or panel).
+- **Position.** Start with reading flow and reachability: place the dominant action where this device, input method, handedness, viewport, and task frequency make it easy to find and use. A thumb-reachable mobile region or a desktop resolution zone may be a hypothesis, not a fixed placement rule; follow the product’s layout system and verify the rendered context.
 - **Disciplined color.** On a task screen, reserve the strongest accent for the primary action or inherent co-equal set. On hubs and exploration surfaces, repeated link or interaction color can support a family of comparable routes; keep one region or content type visually dominant through space and weight.
 - **Show the consequence.** When a decision depends on a relationship, tradeoff, or process state, make that meaning legible at the decision surface with a summary, comparison, preview, or visualization when useful. Preserve exact values as supporting evidence; do not use the visual to decorate or hide the underlying facts.
 - **Suppress the rest.** Often the fastest way to create a focal point is not to amplify the hero but to *quiet everything else*—mute secondary text, recede chrome, drop ambient elements to low contrast.
@@ -832,9 +631,9 @@ How to give a screen a clear visual entry point so the eye knows where to start�
 
 Climb only as far as you need. Each rung is louder than the last.
 
-1. **Space.** Proximity groups; distance separates; generous margin elevates. Most hierarchy problems are solved here, for free. Tight gaps within a group (8–12px), generous gaps between groups (48–96px).
+1. **Space.** Proximity groups; distance separates; generous margin elevates. Most hierarchy problems are solved here, for free. Use the product’s spacing tokens when available; otherwise make within-group gaps visibly tighter than between-group gaps and verify with the real content.
 2. **Weight.** Font weight and contrast. A bold label against regular body, or full-contrast text against muted, ranks without changing size or hue.
-3. **Size.** Type scale and element scale. Keep a real scale (≥1.25 ratio between steps); three deliberate sizes beat six arbitrary ones.
+3. **Size.** Type scale and element scale. A deliberate ratio between tiers can help when the system is silent, but the right relationship depends on typeface, language, viewport, and audience. Follow existing tokens and verify that the intended order survives the rendered content.
 4. **Color.** The loudest, last rung. On task screens, reserve the strongest accent for the dominant action or inherent set. On hubs and exploration surfaces, use interaction color consistently across comparable controls while space and weight preserve a dominant region. Color as *the* hierarchy tool (rather than reinforcement) is fragile—it fails for colorblind users and in dark/light inversion.
 
 **Rule:** if space and weight already rank the screen, don't add size and color on top. Redundant emphasis flattens hierarchy as surely as no emphasis.
@@ -845,11 +644,13 @@ Climb only as far as you need. Each rung is louder than the last.
 
 Products live or die on the states most teams treat as afterthoughts. Each is a Focal surface in its own right—it has an organizing intent, an architecture, and a disclosure budget.
 
-- **Full (worst-case) state.** The biggest clutter trap in data UIs: a screen designed against 3 tidy demo rows becomes chaos at 300—with the longest label, the most items, max-digit numbers, the deepest nesting. Design and review every screen against its *worst realistic data*, not the mock. A layout that only holds together when nearly empty isn't done. (This is why dashboards drift into clutter: they were composed empty.)
+- **Full (worst-case) state.** The biggest clutter trap in data UIs: a screen designed against tidy demo rows becomes chaos at realistic volume—with the longest label, the most items, max-digit numbers, and deepest nesting. Design and review against the worst realistic data, not the mock. A layout that only holds together when nearly empty isn’t done.
 
 - **Empty state.** Not a void—the first-run teacher. One sentence of what this becomes, one primary action to get there. Empty states are the highest-leverage onboarding you have.
 - **Loading.** Always communicate system status. Skeletons over spinners for content; optimistic UI for actions the user just took. Never a blank screen with no signal.
+- **Success and partial states.** When the screen can complete an action or render only part of its data, show what changed or what is available, identify what remains, and keep the next local action clear. Do not assume full success from a partial response.
 - **Error.** Plain language, name the actual problem, offer the fix, preserve the user's work. "Email is missing an @" beats "Invalid input." Place it at the source, not in a banner far away.
+- **Permission and recovery states.** If access, device permission, interruption, or resumption can change the screen, name the blocked capability, preserve recoverable context, and offer the appropriate retry or return path. These states are relevant only when the screen can enter them.
 - **First-use state.** Make the screen's local action model legible without a wall of coach marks. Defer controls that are not needed on this visit. Whether the whole onboarding path reaches first value is Flywheel's question.
 - **Completion state.** Confirm what changed, preserve control, and expose the next locally relevant action. Flywheel owns whether the win earns return; Soul owns whether the moment deserves expressive treatment.
 
@@ -857,7 +658,7 @@ Products live or die on the states most teams treat as afterthoughts. Each is a 
 
 ## Anti-pattern library
 
-Each entry: the tell, the discipline it breaks, the fix. Severity is assigned in [review.md](review.md), not here—one authority, so a finding can't carry two priorities.
+Each entry: the tell, the discipline it breaks, the fix. Severity is assigned in [review.md](#source-focal-reference-review-md), not here—one authority, so a finding can't carry two priorities.
 
 - **The kitchen-sink screen**—one screen carries several independent intents without declaring itself a hub. *(IA)* Split by intent, or explicitly organize it as routing with focused task paths.
 - **The data-model screen**—structure mirrors the database, not the user's goal. *(IA)* Reorganize around intent; group what's used together.
@@ -865,7 +666,7 @@ Each entry: the tell, the discipline it breaks, the fix. Severity is assigned in
 - **The classification tax**—recognizable input requires the user to select its type, network, or mode before the product can proceed. *(IA)* Parse the input, show the interpretation, allow correction, and keep a manual fallback for ambiguous cases.
 - **The context jump**—the user must leave the decision surface to inspect history, status, price, or consequence. *(IA)* Bring the decision-relevant slice into the same screen or region; defer deep detail, not the context needed to choose.
 - **The memory bridge**—step 3 needs a fact only shown on step 1. *(IA, PD)* Carry the context forward, or co-locate the decision with its inputs.
-- **The wall of options**—8+ equal choices at one decision point. *(PD)* Defaults + reveal; recommend one; group the rest.
+- **The wall of options**—many equal, unfamiliar choices at one decision point. *(PD)* Defaults + reveal; recommend one; group the rest. Count alone is not the diagnosis: judge familiarity, stakes, grouping, and whether the choices change the next action.
 - **The numeric fog**—raw values leave the user to derive the relationship, tradeoff, or process state that matters. *(VH)* Add a clear summary, comparison, preview, or visualization; keep exact values available as evidence.
 - **The everything-up-front form**—onboarding asks for all data immediately. *(PD)* Ask only what's needed for the first success; defer the rest to when it's relevant.
 - **The premature settings dump**—advanced options shown before anyone needs them. *(PD)* Collapse behind "Advanced"; smart-default the common case.
@@ -901,68 +702,66 @@ NEVER      hide price, required fields, consequences, or controls needed now
 <!-- END GENERATED SOURCE: focal/reference/patterns.md -->
 
 
+<a id="source-focal-reference-examples-md"></a>
+
 ## Source: `focal/reference/examples.md`
 
 <!-- BEGIN GENERATED SOURCE: focal/reference/examples.md -->
 
 # Focal Examples
 
-Two worked examples, captured from real runs of this skill and shown in the locked output templates—one **review**, one **build**. They share a narrative: the review finds a CRM contact screen carrying four jobs, and the build designs one of the task screens it recommends splitting out. These set the bar for length, specificity, and tone; the templates set the shape.
+Three worked examples, shown in the locked output templates: a **review**, a **build**, and a review with an unevaluable dimension. The first two share a narrative: the review finds a CRM contact screen carrying four jobs, and the build designs one of the task screens it recommends splitting out. The third shows how to preserve supported findings without inventing a score or implementation when evidence is incomplete. These set the bar for length, specificity, and tone; the templates set the shape.
 
 ---
 
 ## Example 1—Review: a CRM contact detail screen
 
-**Input:** the "Contact detail" screen of a CRM. On it: the contact's name/photo/title; 6 editable fields (email, phone, company, owner, lifecycle stage, lead source); a full activity timeline of 40+ entries; an inline "Log a call" composer; an inline "Send email" composer; a Deals panel with 3 deals; Notes and Files panels; a right rail of 8 "similar contacts"; and 3 top-right buttons all styled identically as filled primary buttons ("Save", "Convert to Deal", "Delete"). Every panel header is the same size and weight.
+**Input:** A CRM contact record for reps who primarily check recent activity and the open deal during calls. The description shows name/photo/title; six editable fields; 40 activity entries expanded with no grouping or filter; open “Log a call” and “Send email” composers; Deals, Notes, and Files panels; eight similar contacts in a right rail; and Save, Convert to Deal, and Delete styled as identical filled buttons. Every panel header has equal weight. The supplied workflow says prospecting happens in the search view. No empty state, autosave, confirmation, or responsive behavior is supplied.
 
 **Focal's output:**
 
-```
-**Verdict:** No · four jobs stacked on one surface, with Delete dressed as a primary button · **3/12**
+```text
+**Verdict:** No · the record’s read-first purpose competes with two open composers · **4/12**
 
-**Screen:** CRM contact detail—a record home carrying ten co-equal regions and three identical filled primary buttons · register: task-overloaded · audience: mixed
-**Flow:** screen-local (Contact detail review)
-**State:** full/default plus empty related panels
-**Lifecycle:** first visit, recurring review, and first visit after contact creation
-**Context:** a rep mid-call or between calls, scanning fast · bar: Linear's issue detail, Stripe's customer record
-**Coverage:** full/default state for a returning rep, plus empty Deals/Notes/Files on a newly created contact · gaps: loading, save-in-progress, save error, permission-limited, and destructive-confirmation states not shown
-**Basis:** walked from a description · confirm with: open the screen, invoke Delete, and verify the destructive confirmation, autosave, and focus order
-**Blocker:** None observed. Delete's actual consequence, reversibility, and confirmation state were not shown; verify them before assigning release-critical severity.
+**Screen:** CRM Contact detail · register: task-overloaded · audience: mixed
+**Flow:** screen-local
+**State:** full/default only
+**Lifecycle:** recurring record review during calls
+**Context:** rep checking recent activity and the open deal · bar: the supplied workflow
+**Coverage:** described full/default composition and action styling · gaps: empty, save, destructive-action, responsive, and permission behavior not shown
+**Basis:** walked from a description · confirm with: observe a rep locating the last interaction and open deal, then inspect save and Delete behavior
+**Blocker:** None observed. Delete’s consequence and reversibility are not shown.
 
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Information Architecture | 1/4 | Four independently completable jobs share one surface, plus unrelated panels and a prospecting rail; the rep must sort competing outcomes by eye, which is a major failure of screen intent. | Make Contact detail a routing hub, move the composers to focused task screens, and demote unrelated regions. |
-| Progressive Disclosure | 1/4 | Ten top-level regions land open, both composers are resident before selection, and 40+ timeline entries are unfiltered; nothing waits, so first-run and recurring scanning are both overloaded. | Defer composers and secondary regions, cap the timeline, and remove the similar-contacts rail. |
-| Visual Hierarchy | 1/4 | Panel headers are visually flat and Delete carries the same filled-primary weight as Save; the screen offers no clear starting point and visually treats a potentially destructive action as routine. | Establish one primary action, visually separate Delete, verify its consequence, and rank the remaining regions with space and weight. |
-| **Total** | **3/12 · 1.0/4** | **Broken; exact sum of justified component scores** | Weakest-discipline ceiling applied |
+| Information Architecture | 1/4 | The supplied read-first job competes with two open composers and a prospecting rail. Those independent tasks are a major structural distraction from the stated record-review intent. | Make the record a coherent hub; reveal a composer only when selected and move prospecting to its supplied search context. |
+| Progressive Disclosure | 2/4 | The necessary activity and deal context is present, but both composers and 40 ungrouped entries appear before selection, creating a material mismatch with the quick-scan workflow. The count alone is not the failure. | Group recent activity and make composers on-demand, while preserving access to the full history and open deal. |
+| Visual Hierarchy | 1/4 | Equal panel headers and three equally filled actions give no dependable read-first region or action ranking. | Give recent activity and the open deal clear precedence; differentiate actions after confirming their role and consequence. |
+| **Total** | **4/12 · 1.3/4** | **Broken; exact sum of justified scores** | Weakest-discipline ceiling applied |
 
 ## Issues (most severe first)
-- **[P1 · Hierarchy]** **At:** screen: Contact detail action bar · flow: screen-local · state: full/default · lifecycle: returning rep reviewing an existing contact. Save, Convert to Deal, and Delete are styled as identical filled primaries, so the bar has no clear starting point and visually treats a potentially destructive action as routine. The description does not show whether Delete is reversible or confirmed, so P0 would be invented rather than observed. **Fix:** retire Save if autosave is real; keep "Convert to Deal" as the single filled primary; make routine actions secondary; move Delete to a separated overflow action and choose undo, a confirmation, or typed confirmation only after verifying consequence and reversibility.
-- **[P1 · IA]** **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: returning rep scanning during or between calls. Four jobs, one screen—the one-sentence test returns "This screen exists so the user can view a contact *and* edit six fields *and* log a call *and* send an email *and* manage deals, notes, and files." Each outcome can succeed independently, so the sentence exposes competing intents rather than one coherent task. Two of those are full composers sitting open on a record surface, and the six fields render as live inputs with a global Save, which means the screen is permanently in edit mode. A rep who opened it to read a phone number is forced to re-sort several intents by eye. **Fix:** make Contact detail a hub whose organizing intent is *route to the right next action*. Fields become read-only text with per-field inline edit and autosave (no global Save); "Log a call" and "Send email" become their own focused task screens launched from the header.
-- **[P1 · IA]** **At:** screen: Activity/Deals/Notes/Files regions · flow: screen-local · state: full/default · lifecycle: recurring account review. The panels mirror the data model—Deals, Notes, Files, and Activity are four peer panels, one per related table, ranked equally because the schema ranks them equally. A rep's actual intent is overwhelmingly "what happened last, and what's the open deal"; Notes and Files are archive lookups. Organizing by table forces the user to re-sort the screen by eye on every visit. **Fix:** reorder by intent—Activity dominant, Deals second in the same column, Notes and Files collapsed into one "Attachments & notes" section.
-- **[P1 · Disclosure]** **At:** screen: Contact detail landing viewport · flow: screen-local · state: full/default · lifecycle: every return to an existing contact. Nothing is deferred—ten top-level regions compete at landing, and scored by task rules that is straightforward overload: three *task* surfaces sit resident on the same screen and no element anywhere sits behind a reveal. Every element is "Now" because nobody ran the triage. **Fix:** Now—identity, read-only fields, recent activity, Deals. On-demand—composers behind their header buttons, Notes, Files. Cut—the similar-contacts rail.
-- **[P1 · Disclosure]** **At:** screen: Activity timeline · flow: screen-local · state: worst-case full · lifecycle: recurring review of a long-lived contact. The timeline has no ceiling—40+ entries render in full, undifferentiated, with no type filter and no collapse. At the worst realistic case (a two-year customer, 400 entries) this panel is the entire screen and Deals is off-screen. **Fix:** show the 5 most recent grouped by day, with a type filter and "Show 37 more"—the count, so the deferral reads as depth rather than absence.
-- **[P1 · Hierarchy]** **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: first visit by a rep unfamiliar with the record. No visual entry point—every panel header is the same size and weight. Squint at this and you get a list, not a hierarchy: nine equal grey blocks. A first-timer cannot identify the read-first region on an initial scan because nothing is visually primary. **Fix:** climb the ladder with space and weight before color—48–96px between sections against 8–12px within them, one heavier header on Activity, all other headers dropped to a muted label size.
-- **[P2 · IA]** **At:** screen: Similar contacts rail · flow: screen-local · state: full/default · lifecycle: returning rep reviewing one known contact. The similar-contacts rail is orphan content—eight contacts occupying a full rail, serving prospecting, an intent nobody arrived on this screen holding. It is here because the data was available, not because a job needed it. **Fix:** cut it; surface similar contacts in search and list views, where the user is actually comparing people.
-- **[P2 · Disclosure]** **At:** screen: Deals/Notes/Files regions · flow: screen-local · state: empty · lifecycle: first visit after contact creation. Empty panels hold full weight—Deals, Notes, and Files each render a full-weight header whether they hold three items or zero, so a brand-new contact shows three headers announcing nothing. **Fix:** collapse empty sections to one quiet line with the add action ("No notes yet · Add note").
+- **[P1 · IA]** **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: recurring record review. Open composers and prospecting content compete with the supplied activity-and-deal task. **Fix:** use a record hub with explicitly selected call/email composers and move prospecting to search. Keep editing available; verify save semantics before changing persistence or retiring Save.
+- **[P1 · Hierarchy]** **At:** screen: Contact detail body and action bar · flow: screen-local · state: full/default · lifecycle: recurring record review. Equal headers and identical filled buttons obscure the intended read-first region and action roles. **Fix:** rank activity and the open deal; visually distinguish routine and potentially destructive actions. Check Delete’s consequence before prescribing confirmation or undo.
+- **[P2 · Disclosure]** **At:** screen: Activity timeline and composers · flow: screen-local · state: full/default · lifecycle: recurring record review. The needed context exists, but ungrouped history and unselected composers compete with scanning. **Fix:** group activity by meaningful time or event, provide a visible history/filter control, and reveal composers on selection. Choose any initial history window from realistic usage, not a fixed item quota.
 
 ## Top moves (up to 3)
-1. **At:** screen: Contact detail body and action bar · flow: screen-local · state: full/default · lifecycle: returning review · Split the screen: Contact detail becomes a record hub; "Log a call" and "Send email" become focused task screens with clear completion intents; the six fields become read-only text with per-field inline edit and autosave, retiring the global Save.
-2. **At:** screen: Contact detail action bar · flow: screen-local · state: full/default · lifecycle: returning review · Rebuild the action bar to one primary: "Convert to Deal" filled, "Log a call" / "Send email" secondary, and Delete separated in overflow with protection proportionate to its verified consequence and reversibility.
-3. **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: recurring review · Rank what remains with space and weight: Activity dominant and capped at 5 with a filter and a "Show N more" count, Deals second, Notes and Files collapsed, similar-contacts rail cut.
+1. **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: recurring record review · Make the record a hub with activity and the open deal leading; launch composers on selection.
+2. **At:** screen: Contact detail action bar · flow: screen-local · state: full/default · lifecycle: recurring record review · Rank action roles and verify save/Delete semantics before changing behavior.
 
 ## Next
-- **Structural** (do first): **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: returning review · split the two composers onto their own task screens, convert the field block to read-only + inline autosave, re-triage the ten regions, cut the similar-contacts rail, cap and filter the timeline.
-- **Executional** (after): **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: recurring review · the section spacing scale, the muted header treatment, the single accent reserved for the one primary, and the destructive-action confirmation styling.
-- **Hand off**: **At:** screen: Contact detail · flow: screen-local · state: full/default · lifecycle: returning review · None—every issue here is within this screen.
+- **Structural** (do first): **At:** screen: Contact detail body · flow: screen-local · state: full/default · lifecycle: recurring record review · Prototype the hub and check whether reps find the last interaction and open deal without losing useful context.
+- **Executional** (after): **At:** screen: Contact detail body and controls · flow: screen-local · state: full/default · lifecycle: recurring record review · Apply the product’s hierarchy and control conventions, then inspect realistic content and viewport sizes.
+- **Hand off**: **At:** screen: selected composer → record · flow: call/email completion · state: not shown · lifecycle: after composing · Compass can verify the return and state transition once a route is available.
 ```
 
 ---
 
 ## Example 2—Build: the "Log a call" screen
 
-**Input:** "Build the Log a call screen we just split out of the contact record."
+**Input:** "Build the Log a call screen launched from the contact record."
+
+**Proposal assumptions:** a dialer can supply call context; authorized users may access an existing recording; follow-up scheduling and deal association are optional. Confirm these capabilities before implementation. The state handling below specifies intended behavior rather than claiming it already exists.
 
 **Focal's output:**
 
@@ -972,14 +771,14 @@ Two worked examples, captured from real runs of this skill and shown in the lock
 
 ## Information
 - Call context strip (contact name, photo, number dialed, timestamp, prefilled)—co-locates the decision with its inputs so the rep never has to remember who they called or when; read-only, no fields to re-enter.
-- Outcome selector: Connected / Voicemail / No answer / Wrong number—the one fact every logged call must carry. Four options, inside the working-memory budget, so it needs no grouping.
+- Outcome selector: Connected / Voicemail / No answer / Wrong number—the one fact every logged call must carry. The four supplied outcomes form one recognizable decision; verify labels and selection behavior with reps.
 - Duration—prefilled from the dialer, editable. Sits beside Outcome because the two are read together as one "what happened" chunk.
 - Notes—the reason the rep is on this screen thirty seconds after hanging up. Given the most vertical space of anything on the screen.
-- "Schedule follow-up" toggle—the most common next step after a connected call, and the thing the rep will otherwise forget by end of day, so it lives here rather than on a separate task screen.
+- "Schedule follow-up" toggle—a proposed optional next step after a connected call, kept local when the workflow supports it; validate its frequency with reps.
 - "Add to deal (3)"—one quiet control, with the count, because a call that moves a deal must be attributable to it.
 - Last call line ("Last call: Jul 2, voicemail")—one ambient line, so the rep knows whether this is a first attempt or a fifth without leaving for the timeline.
-- Moved off: the six editable contact fields → Contact detail hub, edited in place per field with autosave.
-- Moved off: the full 40+ activity timeline → Contact detail hub, capped and filtered; only the single last-call line survives here.
+- Moved off: the six editable contact fields → Contact detail hub, edited using the record’s verified save model.
+- Moved off: the full 40+ activity timeline → Contact detail hub, grouped and filterable; only the relevant last-call summary stays here.
 - Moved off: Send email composer → its own compose screen, launched from the Contact detail header.
 - Moved off: Deals, Notes, and Files panels → Contact detail hub; this screen reaches Deals only through "Add to deal (3)".
 - Moved off: the 8 similar contacts → search and list views, where comparing people is the actual job.
@@ -991,18 +790,24 @@ Two worked examples, captured from real runs of this skill and shown in the lock
 - On-demand: call recording and transcript → behind a "Recording" link in the context strip, present for the rare dispute, absent from the fast path.
 - Cut: lifecycle stage and lead source editors—a call log is not where a rep re-classifies a contact, and offering it invites a wrong edit under time pressure.
 - Cut: the similar-contacts rail. Nobody logging a call needs eight other people.
-- Cut: a cancel-confirmation dialog. Nothing here is destructive; discard is a link.
+- Exit: Discard names that unsaved notes will be lost; offer the safe draft option when supported. No extra confirmation is needed when there is no unsaved work.
 
 ## Hierarchy
-- Primary: "Log call"—the only filled button on the screen, bottom-right in the form's resolution zone, isolated by more whitespace than anything else.
-- Secondary: the Outcome selector (four large segmented targets, autofocused on load so the eye starts there), the Notes field (largest area, quiet-bordered), Duration.
+- Primary: "Log call"—the only filled button on the screen, at the form’s completion point, with placement tested against the viewport, keyboard, and product conventions.
+- Secondary: the Outcome selector (four clearly labeled targets; focus follows the supported input method), the Notes field (largest area, quiet-bordered), Duration.
 - Ambient: the call context strip and last-call line (muted, read-only), "Schedule follow-up", "Add to deal (3)", "Recording", and "Discard" as a plain text link. Space and weight carry the whole ranking; the single accent color is spent only on "Log call".
 
 ## States
 - Empty: a first-ever call shows "First call with Ana" in place of the last-call line.
 - Loading: context strip skeletons while the dialer record resolves; the form is interactive immediately.
-- Error: a save failure keeps every keystroke and names the cause inline at the source—"Couldn't reach the server—your notes are saved locally, retry."
+- Partial: if the dialer returns the contact but not duration or timestamp, show the available context, mark missing values as unavailable, and let the rep edit them before logging.
+- Permission denied: if access to an existing recording is denied, explain that it is unavailable while keeping call logging available. Do not request microphone access merely to play a stored recording.
+- Error: a save failure states the verified result and retains the current input while the screen is open. Say “Saved locally” only if that storage succeeded and the service permits it.
+- Recovery: retry preserves the entered notes and avoids duplicate call logs. Specify draft storage, expiry, appropriate access control, and revalidation only if the service safely supports return; otherwise explain the loss before exit.
+- Success: after "Log call," confirm the call was saved, show the new last-call line, and offer the local next action, "Schedule follow-up."
 - Full (worst case): 900-character notes scroll inside the field without pushing "Log call" off-screen; a 40-character company name truncates in the strip rather than wrapping to three lines.
+
+Scope note: all listed variants apply because dialer data, recording access, save completion, and interruption are part of this task’s possible states.
 
 ## Gates
 - [x] One-sentence organizing intent; no unrelated second outcome
@@ -1010,17 +815,153 @@ Two worked examples, captured from real runs of this skill and shown in the lock
 - [x] Grouped + labeled; no orphans; no memory bridge
 - [x] Decision load fits the audience and stakes; nothing essential deferred
 - [x] One element or region is materially heaviest and expresses the action model; any primary action reads as actionable
-- [x] Every applicable state above designed; each `N/A` is justified
+- [x] Every applicable state is specified, including success, partial, permission, and recovery modes when relevant; irrelevant modes have a reason
 ```
 
 ---
 
-**Why these two:** the review never just lists problems—it ties every issue to a discipline, ends on a short ranked set of real moves, and sorts the work structural-before-executional. The build never returns prose—it returns the same Screen Spec every time. And the second resolves the first: "split the composers onto their own task screens" becomes a screen with one coherent completion intent and an action model that fits. That is the method in motion, in both directions.
+## Example 3—Review with incomplete visual evidence
 
-Note the disclosure discipline doing the real work in the build: seven things were cut or deferred, and the busiest decision point holds four chunks. Note also what was *not* deferred—nothing the rep needs in order to log the call sits behind a reveal. Deferral is not burial.
+**Input:** A text-only inventory of an import preview: one labeled source picker, a preview table with the source’s three fields needed to verify records, an optional mapping control behind a visible “Edit mapping” label, and Import. The stated goal is to verify this source and import it. No screenshot, style definitions, visual ordering, or interaction tests are available.
+
+**Focal’s output:**
+
+```text
+**Verdict:** Yes · the described local intent is clear; visual hierarchy is unevaluable
+
+**Screen:** Import preview · register: task · audience: mixed
+**Flow:** screen-local
+**State:** described default contents only
+**Lifecycle:** before import
+**Context:** user verifying records before committing · bar: supplied task requirements
+**Coverage:** content inventory, required context, and disclosure label · gaps: rendered hierarchy, interaction, long-file, partial-result, permission, and recovery states
+**Basis:** walked from a text inventory · confirm with: render the screen with realistic records, inspect the mapping reveal, and exercise import outcomes
+**Blocker:** None observed.
+
+## Scorecard
+| Discipline | Score | Why this score | What raises it one point |
+|---|---:|---|---|
+| Information Architecture | 3/4 | Source, verification data, and Import support the stated job; this is a coherent structure in the supplied inventory. Label comprehension has not been tested. | Check the source and column labels with intended users. |
+| Progressive Disclosure | 3/4 | Verification fields remain visible and optional mapping has a named cue. The described default layering is strong; interaction and long-file behavior remain coverage gaps. | Inspect the reveal and representative data sizes before changing the design. |
+| Visual Hierarchy | N/E—insufficient evidence | The inventory contains no rendered order, weight, spacing, or control styling, so it cannot support this rubric. | Obtain a rendered view or the relevant styles before scoring. |
+
+## Issues (most severe first)
+None observed in the supplied inventory.
+
+## Top moves (up to 3)
+None. The next step is to inspect the missing evidence.
+
+## Next
+- **Structural** (do first): **At:** screen: Import preview · flow: screen-local · state: default and mapping reveal · lifecycle: before import · Verify the described content and reveal against the rendered behavior.
+- **Executional** (after): **At:** screen: Import preview · flow: screen-local · state: not shown · lifecycle: before import · Inspect visual order and control signifiers at supported viewports.
+- **Hand off**: **At:** screen: import outcome · flow: import completion · state: not shown · lifecycle: after commit · Compass can assess recovery and continuity when the relevant transition evidence is available.
+```
+
+Missing visual evidence prevents a hierarchy score. Missing interaction variants
+remain coverage gaps for otherwise supported dimensions. No native total,
+average, band, or weakest-dimension ceiling is reported.
 
 <!-- END GENERATED SOURCE: focal/reference/examples.md -->
 
+
+<a id="source-focal-reference-build-md"></a>
+
+## Source: `focal/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: focal/reference/build.md -->
+
+# Focal Build—the Screen Spec
+
+Use this reference when the request is to build, design, or restructure one
+functional screen. The output is a proposal, not a score. Read
+[SKILL.md](#source-focal-skill-md) first for the intent test, register tree, action
+models, and decision procedures. Read [patterns.md](#source-focal-reference-patterns-md) only when a
+technique or anti-pattern is relevant. Before a direct build, calibrate from
+[examples.md](#source-focal-reference-examples-md); an orchestrated Product Judgement pass skips that
+calibration read.
+
+## The five moves
+
+Write the answers in the Screen Spec below, in order.
+
+1. **Name the intent and action model.** Finish *“This screen exists so the
+   user can ___.”* Reject an “and” only when it joins independently
+   completable outcomes. Classify the register, then name one primary action,
+   an inherent co-equal set, ranked routes, or the content field that leads.
+2. **Architect the information.** Keep elements that support the intent,
+   group related items, label them in the user’s words, infer recognizable
+   input before asking for classification, and keep decision-critical context
+   beside the action. Move an independent outcome to its own focused screen or
+   make the current screen an explicit hub.
+3. **Triage disclosure.** Minimize decisions without withholding evidence.
+   Judge the local decision load in context of audience, familiarity, stakes,
+   device, frequency, and grouping. Sort every relevant element into Now,
+   On-demand, or Never. Give each deferred item a cue visible in the default
+   state; never defer a price, required field, material consequence, permission
+   or risk, required control, or evidence needed for informed choice.
+4. **Rank what stays.** Name the visual entry point and the intended attention
+   order. Use space and weight before size and color. Exact spacing, type-size
+   ratios, and mobile placement are contextual starting points: follow the
+   product’s design system and verify against content, viewport, input method,
+   reachability, and task frequency. When the dominant element is an action,
+   name its control signifier. Make relationships and consequences legible
+   with a summary, comparison, or preview when useful.
+5. **Map applicable states and run the gates.** Enumerate the states this
+   screen can actually enter. Include success/completion, partial data or
+   failure, permission denial, and interruption/recovery when the screen has
+   those modes. For each applicable state, specify visible status, action
+   availability, retained work or context, and recovery. Mark an impossible
+   mode `N/A—<reason>` only when that reason matters. Do not add irrelevant
+   variants to satisfy a universal checklist.
+
+## Screen Spec
+
+Every direct build returns this structure, in this order. Repeat labeled
+bullets when the screen needs more than one item. Leave a labeled bullet as
+`None.` when it has no entries.
+
+```text
+**Screen:** <name>—organized around <one clear intent; no unrelated second outcome>. **Action model:** <one primary | inherent co-equal set | ranked routes | content-led>: <name the action, set, routes, or content field>.
+**Register:** <task | hub | exploration | task-overloaded>   ·   **Audience:** <novice | mixed | expert>
+
+## Information
+- <element or group>—<why it belongs / how it is grouped>
+- Moved off: <element> → <where it goes instead>
+
+## Disclosure
+- Now: <shown this visit>
+- On-demand: <deferred> → behind <perceptible cue>
+- Cut: <removed, or unsafe affordance replaced with what>
+
+## Hierarchy
+- Primary: <the visual entry point—the task action, read-first content, leading hub route/group, or exploration content field; when it is an action, say what makes it read as actionable>
+- Secondary: <ranked supporting elements or regions; `None` is valid>
+- Ambient: <the muted rest>
+
+## States
+- <applicable state or mode>: <visible status, available action, retained work/context, and recovery>
+- Scope note: <why the listed variants apply; name any material impossible mode as `N/A—<reason>`>
+
+## Gates
+- [ ] One-sentence organizing intent; no unrelated second outcome
+- [ ] Action model matches the register; any co-equal actions are inherent to the same intent
+- [ ] Grouped + labeled; no orphans; no memory bridge
+- [ ] Decision load fits the audience and stakes; nothing essential deferred
+- [ ] One element or region is materially heaviest and expresses the action model; any primary action reads as actionable
+- [ ] Every applicable state is specified, including success, partial, permission, and recovery modes when relevant; irrelevant modes have a reason
+```
+
+The gates are unscored checks of the proposal. Mark `[x]` only when the spec
+actually satisfies a gate; leave `[ ]` with a short reason otherwise. Use
+`N/A—<reason>` when a gate does not apply; that is not a failed check. Gate 5
+describes intended hierarchy; the squint test itself requires a render and
+belongs in a later review. A state that is unknown at build time gets a
+constraint or evidence check, not an invented implementation detail.
+
+<!-- END GENERATED SOURCE: focal/reference/build.md -->
+
+
+<a id="source-compass-skill-md"></a>
 
 ## Source: `compass/SKILL.md`
 
@@ -1028,7 +969,7 @@ Note the disclosure discipline doing the real work in the build: seven things we
 
 ---
 name: compass
-description: Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, or navigation in any functional product, app, dashboard, or tool. Compass is the cross-screen lens—it owns the path between screens—navigation, step count, routing, retreat/home behavior, state, and entry points. Its promise is Never Lost—at every step the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Three disciplines—Orientation (load-bearing), Path Economy (fewest honest steps or least needless effort), and Continuity (context and state survive the seams). Pairs with Focal, which designs the individual screens. Triggers on flow, journey, navigation, onboarding, checkout, wizard, multi-step, "too many steps", "back button", "where am I", lost, dead end, routing, breadcrumb, progress. Not for single-screen layout (use Focal), visual styling, copy, code, marketing/landing pages, backend, or non-UI work.
+description: "Use when designing, building, reviewing, or critiquing a multi-screen flow, journey, finite task-list service, or navigation in a functional product, app, dashboard, or tool. Compass owns the path between screens, states, entry points, progress, retreat, and recovery. Its promise is Never Lost: the user knows where they are, what remains when the journey is bounded, and how to retreat, get home, or leave. Pairs with Focal for single-screen structure. Not for visual styling, copy, code, marketing pages, backend work, or a speculative whole-app sitemap."
 license: MIT
 argument-hint: "[build | review] <flow, journey, or description>"
 ---
@@ -1037,295 +978,171 @@ argument-hint: "[build | review] <flow, journey, or description>"
 
 **Never lost.**
 
-A journey is a sequence of screens governed by one intent. Most flows have a destination; open-ended journeys such as browsing have a stable home or anchor instead. Good cross-screen UX means the user never has to wonder *Where am I? What remains, when this journey has an end? How do I retreat, get home, or leave?* The moment those answers disappear, the journey becomes a maze.
+Compass is the cross-screen lens. A journey is a sequence of screens and transitions governed by one intent. At every applicable point, the user can answer: *Where am I? What remains when this journey has an end? How do I retreat, get home, or leave?* Focal owns structure inside a screen; Compass owns the path, its seams, and its recovery.
 
-Where [Focal](../focal) sharpens a single screen, Compass guides the **path between screens**. Focal is *within* a screen; Compass is *between* them. They cover structure and movement; Flywheel and Soul address the relationship and memory at their own scales.
+Compass uses three equally weighted disciplines. **Orientation** makes position, meaningful progress or location, and retreat or home legible. **Path Economy** removes needless effort while retaining protection and informed choice. **Continuity** carries context and handles state across transitions, interruption, and re entry when that retention is safe and permitted.
 
-Three disciplines, treated as top priorities, keep the user oriented:
-
-- **Orientation**—at every step, position, progress when bounded, and a way to retreat, get home, or leave.
-- **Path Economy**—the fewest honest steps for a finite outcome, or the least needless effort in an open-ended space.
-- **Continuity**—context and state survive the seams between screens.
-
-**Orientation is the load-bearing discipline**—it is the literal promise. Economy and Continuity can make a journey short and seamless, but not understandable. This makes Orientation a prerequisite for the Never-Lost verdict, not extra numeric weight; all three disciplines still use the same 0–4 scale.
-
----
+Orientation is the load bearing promise for the Never Lost verdict, but it does not receive extra numeric weight. The native Compass score remains one `0–4` score for each discipline and a `/12` total only when all three are evaluable.
 
 ## When to use
 
-Compass is for **cross-screen flows** in functional products—any platform, any user. Onboarding, signup, checkout, multi-step setup, wizards, dashboards with drill-down, account flows, anything that spans more than one screen. If the user has to *move between screens* to get something done, Compass applies.
+Use Compass for onboarding, signup, checkout, setup, wizards, finite task-list services, hub-and-spoke work, drill downs, search and discovery, and any experience where people move between screens to complete or pursue something.
 
-It is **not** for:
-- Single-screen layout and structure—that's [Focal](../focal). Compass assumes each screen is already sound and focuses on the joins.
-- Marketing pages, landing pages, campaigns—persuasion and narrative, not task completion.
-- Whole-app sitemaps generated from a spec (deciding *which* screens exist before any flow is drawn).
-- Backend, infra, or non-UI work.
+Do not use it for screen-local hierarchy or composition ([Focal](#source-focal-skill-md)), relationship momentum ([Flywheel](#source-flywheel-skill-md)), expressive treatment ([Soul](#source-soul-skill-md)), visual styling, backend behavior, or a speculative whole-app sitemap. Use [Product Judgement](#source-product-judgement-skill-md) when the decision crosses several scales.
 
-**Scope.** Compass is a *lens* for movement and orientation—*the path, the signage, and the seams between screens*—not a renderer. It decides the steps, where the user is told what, and how state carries across. The execution of color, type, motion, and copy is left to your own design system and tooling, and the design of each individual screen is left to Focal.
+## Methodology: Never Lost
 
----
+The outcome-or-anchor test. For a finite journey, name one outcome: *“This flow gets the user from ___ to ___.”* If two outcomes can succeed independently, split the flow. For an open ended journey, name one organizing intent and a stable home: *“This space lets the user ___, and ___ is home.”* Do not invent an endpoint for browsing.
 
-## The methodology—Never Lost
+The **drop test.** Place the user on each evidenced screen or transition with no memory of arrival. Can they identify their position, what remains when the journey is bounded, and how to proceed, retreat, get home, or leave? Apply only the questions that fit the journey shape.
 
-The north star. At every step of a flow, the user can answer three questions without thinking:
+### Orientation
 
-1. **Where am I?** (position in the journey)
-2. **What remains?** (progress and scope when the journey has an end; not applicable to open-ended exploration)
-3. **How do I retreat, get home, or leave?** (a platform-appropriate path that never traps them)
+- Signpost the actual outcome and remaining work. A bounded journey may use named stages, task statuses, a checklist, a stable count, or another clear cue. A counter is optional: a named three stage stepper is valid without one. Open ended work needs position in the space and a route home, not completion progress.
+- Show the branch when a choice changes the route; show the hub relationship when a detail screen returns to a center; show task status, available tasks, and the final completion condition in a finite task list.
+- Give every owned flow a platform appropriate retreat and escape: in product Back, browser Back when history is meaningful and state safe, a breadcrumb or hub link, Cancel, Close, or Save and return as the service supports. Every screen has a next step or a way out.
 
-A journey that answers every applicable question feels effortless. A bounded flow that hides remaining scope, or any journey that drops position or recovery, feels like being lost in a building with no signs.
+### Path Economy
 
-- **The outcome-or-anchor test.** For a finite flow, name one outcome: *"This flow gets the user from ___ to ___."* If it has two independently successful outcomes, split it. For an open-ended journey, name one organizing intent and home anchor: *"This space lets the user ___, and ___ is home."* Do not invent an endpoint for browsing just to satisfy the template.
-- **The drop test.** Drop the user onto any screen in the middle of the journey with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? If not, orientation has failed at that step.
+- Count the honest work for the journey shape. Merge redundant screens and round trips, default the common route, and defer setup until users have context. A task list may let users choose task order; do not call that freedom waste or force it into a linear count.
+- Infer only safe, useful values. Show the inferred value and its source or meaning, let the user correct it, and provide a manual route when confidence is low. Confirm financial, identity, permission, legal, security, destination, quantity, destructive, or otherwise consequential values before commit.
+- Never shorten a path by hiding cost, risk, permission, consequence, or protective confirmation. That is a dark pattern, not economy.
 
----
+### Continuity
 
-## The three disciplines
+- Show required context at the point of use; do not make the user remember a code, choice, amount, or destination across screens. Within one process, avoid redundant entry while honoring essential, security, and invalid-data exceptions.
+- Preserve state across Back when it is safe. Cross session save and return is conditional, not a universal requirement: retain only data the service may safely and permissibly store, with clear expiry, the authentication and authorization appropriate to the data and service at re entry, stale-data revalidation, and a recoverable route when access or retention changes. Explain what will be lost when it cannot be retained.
+- Land deep links, notifications, and search results in context. Keep the mental model and focused object stable across the seam. Do not claim persistence, validation, permission, or re entry behavior that the artifact or requirements do not expose.
 
-### 1. Orientation—where am I, and how do I get out *(load-bearing)*
+## Registers: journey types
 
-The user is never without their bearings. This is the promise; the other two disciplines serve it.
-
-- **Show position and progress when the journey is bounded.** The mechanism follows the flow type, never taste. **Linear**—a step counter (`Step 2 of 4`). **Branching**—name the branch and count within it; a global count becomes a lie the moment the path forks. **Hub-and-spoke**—an active nav state plus a labeled route back to the center, because the center *is* the position. **Open-ended**—location in the space (breadcrumb, active filter, or anchor) and no counter at all. Frame bounded progress as achievable milestones, never a demoralizing tally. Open-ended spaces need position and home, not fake completion.
-- **Always a way to retreat or leave.** Use the platform's expected mechanism: an in-product Back where the product owns the stack, browser Back where history is meaningful and state-safe, a breadcrumb or hub link in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate a platform control without adding clarity; do ensure every modal and owned flow has an obvious escape.
-- **No dead ends.** Every screen has a clear next step or a clear way out. A screen the user can reach but not leave is a bug, not a state.
-- **Signal the current location.** The user should always be able to point at where they are in the app's structure.
-
-> **Fails:** no usable retreat; trapped modals; hidden progress in a bounded flow; dead-end screens; "wait, how did I get here?"; an owned task with no exit.
-
-### 2. Path Economy—the fewest honest steps
-
-Every screen in a flow is a tax on the user. Cut the tax to the minimum the task honestly requires.
-
-- **Fewest honest steps for the journey type.** In a finite flow, cut redundant screens and merge needless round-trips where the result stays comprehensible. In an open-ended space, remove needless hops without forcing exploration into a funnel. Defer to Focal when a proposed merge may overload one screen.
-- **Defaults skip steps.** Don't ask what you can infer or pre-fill. The best step is the one the user never has to take.
-- **No setup walls.** Don't gate the value behind six configuration screens. Get the user to the first real win, then deepen.
-- **The honest-path caveat (read this).** Shorten the path by removing *waste*, never by removing *protection*. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, or burying the price to "reduce friction" is a dark pattern, not economy. A step that protects the user or earns their trust is not waste.
-
-> **Fails:** the 7-step flow that's really 3; redundant confirmations; setup walls before first value; branches that dead-end; "friction reduction" that hides cost or consequence.
-
-### 3. Continuity—the seams hold
-
-Moving between screens shouldn't cost the user anything they already gave or already knew.
-
-- **No memory bridge.** A fact the user needs at step 3 is shown at step 3—never "remember the code from the previous screen."
-- **State survives.** Back never wipes entered data. A refresh, an interruption, or a return tomorrow resumes where they left off, not at the start.
-- **Honor the entry point.** A deep link, a notification, or a search result lands the user *in context*—on the relevant screen mid-flow—not dumped at step one.
-- **Preserve the mental model.** Each screen should feel like it came from the last: consistent layout anchors, predictable transitions, the same object in focus.
-
-> **Fails:** form data lost on Back; deep links dumping you at the start; the memory bridge; a "resume" that resets; jarring jumps that break the sense of one continuous task.
-
----
-
-## How they combine—order of operations
-
-1. **Name the outcome or anchor** (methodology). One finite outcome, or one open-ended intent plus home.
-2. **Map the path or space** (Path Economy). The fewest honest steps to the outcome, or the least needless effort while roaming.
-3. **Signpost it** (Orientation). Position, progress when bounded, and platform-appropriate retreat, home, and exit behavior.
-4. **Join the seams** (Continuity). Carry context and state across each transition.
-
-You cannot signpost or join a journey you have not mapped. A finite flow needs an end; an open-ended journey needs a stable anchor and boundaries. Orientation leads the *promise* but comes after the journey shape exists—the signage goes up once the road or space is understood.
-
----
-
-## Registers—flow types
-
-The disciplines assume a **linear** flow by default. Three other shapes are legitimate, and the rules bend for them.
-
-**Classify with this tree.** Walk it top to bottom and take the first match. Answer about the journey the user is actually on, not about how the screens are built.
+Classify the journey users are actually on. Take the first match:
 
 ```
 Is roaming or discovery itself the intent, with no completion event?
 ├── Yes → OPEN-ENDED
-└── No—name the one finite outcome
-    ├── Does the user leave a center and come back to it, repeatedly?
+└── No—name one finite outcome
+    ├── Are several tasks independently completable in user-chosen order before one final outcome?
+    │   └── Yes → TASK-LIST
+    ├── Does the user leave a center and return to it repeatedly, with no endpoint beyond the loop?
     │   └── Yes → HUB-AND-SPOKE
     └── Does the path fork on a choice the user makes?
         ├── Yes → BRANCHING
         └── No → LINEAR
 ```
 
-Two ties worth naming, because they recur:
-- **A wizard with optional steps** is still **linear**—skippable is not the same as forked. A choice that inserts or removes a screen and then rejoins the same path is also **linear**; treat the inserted screen as a conditional step. It is **branching** only when a choice sends the user down a genuinely different *sequence* that does not simply rejoin.
-- **A drill-down inside a longer flow** (checkout that dips into "edit address" and returns) is **linear** overall; treat the dip as one step, not as a hub. It is **hub-and-spoke** only when returning to the center *is* the loop, with no endpoint beyond it.
+| Type | Shape | Compass emphasis |
+|---|---|---|
+| Linear | One path from entry to outcome | Make the outcome and remaining milestones legible; Back retreats with safe state. |
+| Branching | A choice sends the user down a distinct route | Name the branch, show how to change it, and prune dead branches. |
+| Task-list | Finite task hub → independently completable task details → hub → final review and submit | Let users choose order; show task status and the finite outcome; represent Save and return, expiry, permission, revalidation, and final submit when applicable. |
+| Hub-and-spoke | Center → detail → center loop | Keep the hub as home and make the return route explicit; no progress counter is required. |
+| Open-ended | Explore a space with no fixed completion | Show location, active refinements, and home; do not invent progress. |
 
-| | Linear | Branching | Hub-and-spoke | Open-ended |
-|---|---|---|---|---|
-| **Shape** | one path, start to end | path forks on user choice | center → detail → back to center | wander a space, no fixed end |
-| **Examples** | checkout, onboarding, setup | conditional signup, "what brings you here?" | dashboard → record → dashboard | browse, search-and-refine, exploration |
-| **Orientation focus** | progress to the end | which branch + how to switch it | "back to center" is sacred; the hub is home base | "where am I in the space" + easy return, not progress |
-| **Economy focus** | cut steps on the one path | prune dead branches; default the common branch | minimize hops to a record and back | let the user roam; don't force a funnel |
-
-**Open-ended is the exception that proves the rule:** there's no single destination, so "how far is left" doesn't apply and "Never Lost" reduces to *always know where you are and how to get home*. (This is the journey-level sibling of Focal's exploration register.)
-
-**Expertise dial:** novices want guardrails—guidance, confirmations, one clear path. Experts want skips, shortcuts, remembered choices, and not to be re-asked. How many steps feel "economical" scales with who's traveling.
-
----
+A wizard with optional steps remains linear when it rejoins the same path. A drill down remains part of the surrounding journey unless returning to the center is itself the complete loop. A task list is distinct because it has a finite outcome while allowing independently completed tasks in user chosen order.
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `review` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](#source-product-judgement-skill-md) orchestrates a cross scale audit, treat Compass as a `review` over the evidence supplied. Do not ask a framing question, invent a state, or emit Compass's standalone template; return Compass findings through Product Judgement's wrapper and its Handoffs section. Never hand a cross-scale request back to Product Judgement; do not read [reference/examples.md](#source-compass-reference-examples-md) during this pass. Use [reference/review.md](#source-compass-reference-review-md) for the native contract and score only what the evidence supports.
 
-- **No argument** → explain Never Lost and the three disciplines briefly, then ask: building a new flow, or reviewing an existing one?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Compass with Focal, Flywheel, and Soul and reconciles the results.
-- **`build` (or a description of a flow to design)** → follow **The four moves** below. Pull techniques from [reference/patterns.md](reference/patterns.md).
-- **`review` / `audit` (a flow, a set of screens, a prototype, or a description)** → load and follow [reference/review.md](reference/review.md). It scores each discipline 0–4 against a written rubric, requires an evidence-based rationale and next-point change for every score, totals to /12, displays a normalized /4 average and common quality band with a weakest-dimension ceiling, tags issues P0–P3, and anchors every issue and suggested move to the exact **Screen · Flow · State · Lifecycle** locator before closing on a Never-Lost verdict. That file defines the rubrics, scoring contract, bands, severities, and audit locator—all of them, and nowhere else.
-- **A question about a specific technique or anti-pattern** → consult [reference/patterns.md](reference/patterns.md).
+- **No argument:** explain Never Lost and ask whether the user is building or reviewing a journey.
+- **`build` or a flow description:** read [reference/build.md](#source-compass-reference-build-md), then return its Flow Spec. Use [reference/patterns.md](#source-compass-reference-patterns-md) for techniques.
+- **`review` or `audit`:** read [reference/review.md](#source-compass-reference-review-md). It defines the native scorecard, N/E handling, severity, locators, and output.
+- **A technique or anti pattern question:** read [reference/patterns.md](#source-compass-reference-patterns-md).
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well—the templates define the shape, the examples set the bar.
-
----
-
-## Build: the four moves
-
-For each flow, in order. Write the answers down—they are the spec.
-
-1. **Name the outcome or anchor.** For a finite flow: *"This flow gets the user from ___ to ___."* For open-ended: *"This space lets the user ___, and ___ is home."* Note the flow type and audience.
-2. **Map the path or space.** For a finite flow, list every screen required to reach the outcome. For open-ended, map entry points, home, refinements, details, and return loops. Remove needless effort, but keep every step that protects or informs.
-3. **Signpost every step.** For each screen: position; progress when bounded; and the platform-appropriate retreat, home, or exit. No dead ends.
-4. **Join the seams.** For each transition: what context carries forward, what state must survive Back/refresh, and where entry points (deep links) land.
-
-Then run the gates: self-check against the five gates in the **`## Gates`** block of the Flow Spec template below. That block is the single canonical list—read them there, and emit them there. Never restate them in your own words.
-
-A flow that passes is sound by Compass's standard. Then design each screen with [Focal](../focal), and apply visual styling and motion on top.
-
----
-
-## Voice (when giving feedback)
-
-- **Lead with the answer, then structure it.** Open every build or review with one line—the verdict, or the flow's destination—then the locked template (the build template is below; the review template is in [reference/review.md](reference/review.md)). Use it verbatim; don't add, remove, reorder, or rename sections.
-- **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks you to produce something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill, not a judgment call: name it in one line after the output so it can be fixed. Analysis the template has no room for is still worth doing; it informs the scores even when it isn't printed.
-- **Be specific and quantitative.** "This is a 7-step flow that needs 3" beats "too many steps." Count the steps, name the dead ends, quote the labels.
-- **Be decisive.** "The user is trapped on step 3"—not "the user might feel stuck."
-- **Factual first, then judgment, then the fix.** What happens, why it loses the user, what it should be.
-- **Tie every issue to a discipline,** and to how it costs the user their bearings.
-- **Locate every issue.** Name the exact step, entry point, or transition; the interaction state; and the journey lifecycle moment where the change belongs.
-
----
-
-## Build output—the Flow Spec (use this exact structure)
-
-Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-Filling it: for a finite flow, number **only the screens the user passes through**, including the one where the outcome is reached, so before/after counts use the same unit. For open-ended, number the representative entry → explore/refine → detail → home loop and say that it is a loop, not a completion funnel. Repeat labeled bullets as needed. **Gates ship unchecked**—mark `[x]` only for gates the spec actually satisfies, and leave `[ ]` with a short reason for any it does not. If a labeled bullet has nothing, keep the label and write "None."
-
-```
-**Flow:** <name>—<finite: gets the user from entry to outcome | open-ended: lets the user pursue one intent while keeping one named place as home>.
-**Type:** linear | branching | hub-and-spoke | open-ended   ·   **Audience:** novice | mixed | expert
-**Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
-
-## Steps
-1. <screen>—<its job> [skip: <the default that removes this step, if any>]
-2. <screen>—<its job>
-
-## Cut
-- Merged: <the steps you collapsed> → <the one step they became>
-- Removed: <steps cut as waste>—<why they were not protection>
-- Kept as protection: <any step that looks like waste but stays, and why>
-
-## Orientation
-- Position/progress: <how each step shows location and, only when bounded, remaining scope>
-- Retreat/home + exit: <the platform-appropriate retreat, home, and escape behavior>
-
-## Continuity
-- Carries forward: <context passed across steps>
-- Survives: <state kept on Back / refresh / resume>
-- Entry points: <where deep links / notifications land>
-
-## Gates
-- [ ] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
-- [ ] Every step earns its place; nothing protective cut
-- [ ] Where-am-I + platform-appropriate retreat/home + exit throughout
-- [ ] No memory bridge; state survives; deep links land in context
-- [ ] Drop test passes on every screen
-```
-
----
-
-## Absolute don'ts
-
-- **Dead ends.** (Orientation) Every screen has a next step or a way out.
-- **No retreat, or a trapped modal.** (Orientation) Supply the expected retreat/home behavior and an escape from every owned modal or bounded task.
-- **Hidden progress.** (Orientation) In a bounded multi-step flow, show where they are and what remains. Do not invent progress for open-ended exploration.
-- **The setup wall.** (Path Economy) Don't gate first value behind a pile of configuration.
-- **Shortening the path by hiding cost or skipping protection.** (Path Economy) That's a dark pattern, not economy.
-- **The memory bridge.** (Continuity) Never make the user carry a fact between screens in their head.
-- **Losing state on Back.** (Continuity) Back is not a reset.
-- **Deep link to step one.** (Continuity) Land the user where they were headed, in context.
-
----
+Before a standalone build, read [reference/build.md](#source-compass-reference-build-md) and the relevant patterns. Before a standalone review, read [reference/review.md](#source-compass-reference-review-md) and [reference/examples.md](#source-compass-reference-examples-md) for calibration. The orchestrated Product Judgement pass follows its own evidence and output rules.
 
 ## References
 
-- [reference/review.md](reference/review.md)—the three-discipline flow audit, the Compass scorecard (0–4 per discipline), severity, and output format.
-- [reference/patterns.md](reference/patterns.md)—orientation patterns, step-reduction techniques, continuity/state patterns, flow-type playbooks, and the anti-pattern library with fixes.
-- [reference/examples.md](reference/examples.md)—a worked flow review and a worked flow build, in the locked output templates.
+- [reference/build.md](#source-compass-reference-build-md): conditional build workflow, state and transition inventory, and Flow Spec.
+- [reference/review.md](#source-compass-reference-review-md): native three discipline audit, scoring, evidence gaps, severity, and output format.
+- [reference/patterns.md](#source-compass-reference-patterns-md): orientation, task list, path, continuity, and anti pattern techniques.
+- [reference/examples.md](#source-compass-reference-examples-md): one evidence bounded review and one finite task list build.
 
 <!-- END GENERATED SOURCE: compass/SKILL.md -->
 
+
+<a id="source-compass-reference-review-md"></a>
 
 ## Source: `compass/reference/review.md`
 
 <!-- BEGIN GENERATED SOURCE: compass/reference/review.md -->
 
-# Compass Review—the three-discipline flow audit
+# Compass Review: the three discipline flow audit
 
-Evaluate a flow (or a set of screens) against the three disciplines and the overarching methodology, then return a scorecard with prioritized, concrete fixes. Use when the user asks to review, critique, audit, or "what's wrong with" any multi-screen flow, journey, or navigation in a functional product, app, or tool.
+Use this reference for a `review` or `audit` of an existing flow, journey, finite task-list service, or navigation. Judge the route and its seams with evidence. Compass can report a supported finding without claiming that an unseen state exists.
 
-## Input modes
+## Input contract and modes
 
-- **A described flow**—the user narrates the steps ("they sign up, pick a plan, then…"). Map it as a sequence, name the finite outcome or open-ended intent and home anchor, and audit the journey you reconstruct. If the narration is ambiguous, restate the sequence and ask before scoring—that is a clarifying exchange, not part of the emitted review.
-- **A set of screens or screenshots**—read them in order, infer the transitions between them, and critique the joins. You're judging the *seams*, not each screen—a beautiful screen in the wrong order, or one that drops state on the way in, still fails. Per individual screen layout, defer to [Focal](../../focal).
-- **A clickable prototype / live URL**—if browser automation is available, walk the flow: click through, hit Back, refresh mid-flow, follow a deep link cold. Otherwise audit the described or captured steps. Always test the transitions, not just the destinations—the failures live between screens.
+Provide the journey's entry points, intended finite outcome or open ended intent and home, audience, stakes, and the screens or routes in order. Include branches and the transitions that matter. When available, include loading, validation and error, retry, permission, Back, refresh, interruption, save and return, re entry, deep link, review, and final submit states. Mark a state or seam as `not shown` when the artifact does not expose it.
 
-## Step 0—Notice the journey, name the outcome or anchor, classify the flow
+Use the mode that matches the evidence:
 
-Before judging, *walk it*. Most people glance at one screen; a reviewer traces the whole path. Count the steps. Read the progress indicators and Back affordances verbatim. Note what each transition carries and what it drops. Try to get lost. The specificity of your observation is the ceiling on the quality of your critique.
+- **A described flow:** reconstruct only the narrated sequence, name its outcome or anchor, and keep uncertain transitions `not shown`. If the description cannot establish the journey shape, ask before scoring.
+- **Screens or screenshots:** read the selected screens in order and judge the transitions they actually show. Screens prove visible structure and selected seams; they do not prove persistence, validation, timing, permission, or lifecycle behavior that is absent.
+- **Clickable prototype or live URL:** walk the route, branches, Back, refresh, a relevant deep link, and any save, re entry, error, or submit states that the product exposes. Record what was actually tested.
+- **Codebase:** inspect routes, state transitions, validation, persistence, permissions, expiry, revalidation, and re entry before making a claim. Treat code as evidence of behavior only where the path and state are reachable or otherwise verified.
+- **Finite task-list service:** model a finite outcome composed of independently completable tasks. Capture the task hub, task names and statuses, user chosen order, task detail → hub returns, Save and return behavior, final review and submit, and any task dependencies or permission gates. Do not force this journey into a linear screen count.
 
-Then frame, in one or two sentences each:
-- **What is this journey?** Product type, what the journey is for, and its entry plus outcome or home anchor.
-- **Name the outcome or anchor.** For a finite flow, settle *"This flow gets the user from ___ to ___."* If two outcomes can succeed independently, split them. For an open-ended journey, settle *"This space lets the user ___, and ___ is home."* Do not invent an end for browsing.
-- **What's the user's state?** Anxious, rushed, first-time, returning, interrupted, one-handed? A checkout under time pressure tolerates fewer steps than a leisurely setup. A flow resumed after a phone call must survive the interruption. Name it; the critique must respect it.
-- **Which journey states and lifecycle paths are covered?** Inventory the exact conditions walked: first run, returning, Back, refresh, validation error, retry, interruption/resume, deep link, branch change, or recovery. Mark important paths `not shown` when the artifact does not expose them.
-- **What's the bar?** Every flow category has an invisible standard set by its best-in-class journey. A checkout is judged against the cleanest checkouts; an onboarding against the clearest onboardings; a multi-step setup against the cleanest wizard in the category. Ask: *what would the best-in-class flow do at this seam?*
-- **The flow type.** Classify it by walking the decision tree in **Registers** in [SKILL.md](../SKILL.md)—take the first match, and don't re-derive the categories here. This sets how the gates should be read; see *Adjust for flow type* below. If the tree lands on linear but an unmanaged fork is bolted on, score it linear and flag the rogue fork under Gate 1.
+## Step 0: frame and inventory the journey
+
+Walk the actual path before judging it. Count screens only when a count is meaningful; for a task list, count the task level work and hops rather than pretending each user chosen task order is one fixed sequence. Read position cues and retreat labels verbatim. Record what each transition carries, drops, or makes the user re-enter.
+
+Name, in one or two sentences each:
+
+- **The journey:** product, purpose, entry, and finite outcome or open ended home anchor.
+- **The user:** first time, returning, interrupted, rushed, one handed, expert, or another evidenced situation; include stakes.
+- **The covered states and lifecycle paths:** only conditions walked or shown, such as default, loading, validation, retry, permission, Back, refresh, branch change, task order, save and return, interruption, re entry, deep link, review, or final submit.
+- **The bar:** the best in category journey used as a comparator, when one is known.
+
+Build a compact state and transition inventory before scoring. Use one row per evidenced surface or seam and keep the last column as a check when the behavior is not shown:
+
+| Screen or transition | State and lifecycle | What is evidenced | Next evidence check |
+|---|---|---|---|
+| <source → destination> | <state · lifecycle> | <visible or tested behavior> | <fastest check, or `none`> |
+
+Include only states appropriate to the actual flow. A task list usually needs task status, task detail → hub, order freedom, save and return, and final review → submit; a linear checkout may need payment retry and confirmation instead. Do not turn an exhaustive state checklist into a requirement.
+
+### Evidence and N/E policy
+
+See the [shared evidence contract](#shared-evidence) already included above.
+
+If a dimension has enough evidence to judge its rubric, score the supported behavior and put the unshown variants in **Coverage** or **Basis**. If the evidence cannot support its rubric, mark only that row N/E and name the behavior needed to evaluate it. Never create an issue, fix, or score from a missing state. For an unseen behavior, the next action is an evidence check, not an implementation recommendation.
+
+Check the evidence needed by each discipline before choosing its integer. A position cue supports an Orientation strength, but not a whole-discipline score when retreat or home is essential and unknown. Named stages establish the advertised journey shape; Path Economy needs the actual actions, hops, and consequential commitments, supplied through a sufficiently concrete description, code, or a walked path. Continuity needs evidence of what crosses a relevant seam. Describe supported strengths without a number when these essentials are absent; do not treat an unshown problem as proof that the path is lean or safe.
 
 ## Locate every finding
 
-Before scoring or suggesting a change, build a four-part implementation locator. Every issue, Top move, Next item, and handoff must carry the same locator:
+Every issue, Top move, Next item, and handoff carries the same four part locator:
 
-1. **Screen**—the exact source screen, destination screen, entry point, or transition seam.
-2. **Flow**—the named journey and transition being evaluated.
-3. **State**—the interaction or system condition: waiting, validation error, retry, Back, refresh, deep-linked, resumed, and so on.
-4. **Lifecycle**—the journey moment: first-run activation, returning completion, interruption/resume, recovery, or another specific path.
+1. **Screen**: exact source, destination, entry point, or transition seam.
+2. **Flow**: named journey and transition.
+3. **State**: exact interaction or system condition.
+4. **Lifecycle**: exact journey moment, such as first run, returning completion, interruption and re entry, recovery, or final submit.
 
-Use the narrowest defensible locator. `Email verification screen → workspace · account setup flow · code-expired error · first-run activation before entry` is actionable; `onboarding` is not. If any locator field is not evidenced, write `not shown` and name the fastest validating walk in **Coverage** or **Basis**—do not invent behavior.
+Use the narrowest defensible locator supported by the evidence. If one field is not evidenced, write `not shown` and name the fastest validating check in **Coverage** or **Basis**. Do not fill an unknown locator with a guessed behavior. The rule is simple: do not invent behavior.
 
-## Adjust for flow type
+## Adjust for journey type
 
-Read the gates through the flow type you classified in Step 0. The disciplines still apply; their targets move. Scoring a hub-and-spoke or an open-ended space by linear rules produces false failures.
+Classify with the decision tree in [SKILL.md](#source-compass-skill-md), taking its first match. The journey type changes what counts as progress and recovery:
 
-- **Linear** (default—checkout, onboarding, setup, wizards): score exactly as the gates describe. Progress to the end is sacred. A skippable step is waste only when skipping it loses no protection, comprehension, preference, or branch-specific value; optional does not automatically mean unnecessary.
-- **Branching** (conditional signup, "what brings you here?", plan-dependent paths): Orientation must also tell the user *which branch they're on* and *how to change it*—a fork the user can't see or undo fails Gate 1. Under Path Economy, judge whether dead or rarely-taken branches are pruned and whether the common branch is defaulted. Don't penalize the existence of branches; penalize unmanaged ones.
-- **Hub-and-spoke** (dashboard → record → dashboard, settings index → detail → index): *"back to the hub" is sacred*—the center is home base, and losing the way back to it is a Gate 1 failure even mid-spoke. Don't score it as a broken linear flow for "having no progress bar"; a hub has no single end. Under Path Economy, count hops out to a spoke and back—minimize them, don't funnel.
-- **Open-ended** (browse, search-and-refine, exploration, infinite spaces): the exception that proves the rule. There's no single destination, so *"how far is left" does not apply*—do **not** penalize the absence of a progress indicator under Gate 1. "Never Lost" reduces to *always know where you are in the space, and how to get home*. Under Path Economy, let the user roam; don't force a funnel onto a wander. (This is the journey-level sibling of Focal's exploration register.)
-- **Audience / expertise:** weigh who's traveling. Novices want guardrails—guidance, confirmations, one visible path; re-asking a novice is safer than stranding them. Experts want skips, shortcuts, remembered choices, and not to be re-asked; making an expert re-confirm a known step is the economy failure. How many steps feel "economical," and how much signposting feels like hand-holding, both scale with the audience. Don't score a pro flow's terse, skip-heavy path as under-oriented if its users have the route memorized; do score a first-run flow strictly.
+- **Linear:** one path to one outcome. Make the outcome and remaining work legible with a cue that fits the journey; a counter is optional. Back and exit should preserve safe state.
+- **Branching:** a choice sends the user down a distinct sequence. Name the branch, show how to change it, and prune dead branches. Do not require one global progress count when the path differs.
+- **Task-list:** a finite service has a task hub, independently completable tasks in user chosen order, returns to the hub, and one final review or submit outcome. Task statuses and the completion condition can orient the user; a linear step counter is not required. Judge Save and return, expiry, permission, stale-data revalidation, and recoverable re entry only when the service needs or exposes them.
+- **Hub-and-spoke:** a center → detail → center loop. The hub is home and the return route must be explicit; a progress counter is not required when there is no endpoint beyond the loop.
+- **Open ended:** browse, search, or explore without a fixed completion event. Judge position and home; do not penalize the absence of a progress indicator or invent a finish line.
 
-A flow you can't classify is usually a linear flow with an unmanaged branch or a hidden hub—score it as linear and flag the structural confusion under Gate 1.
+An optional step that rejoins the same path remains linear. A drill down inside a longer journey remains part of that journey. A task list is distinct from an unbounded hub because its task set and final outcome are finite.
 
-## The three gates
+## Gate 1: Orientation (load bearing)
 
-Run each gate in turn. Orientation leads—it's the load-bearing promise. Each produces a 0–4 score and the specific findings behind it.
+*At every evidenced step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
 
-### Gate 1—Orientation *(load-bearing)*
-
-*At every step, can the user answer where am I, what remains when bounded, and how do I retreat, get home, or leave?*
-
-- Run the **drop test** on every screen: drop the user onto it with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? A screen that fails those applicable questions fails Orientation.
-- Check **position and progress** against the mechanism the flow type requires, in **Orientation** in [SKILL.md](../SKILL.md): a counter for linear, a named branch counted within itself for branching, an active nav state plus a labeled route to the center for hub-and-spoke, location without a counter for open-ended. A mechanism borrowed from the wrong flow type is a finding even when something is displayed. Is bounded progress framed as achievable milestones, not a demoralizing tally ("12 of 47")?
-- Check for a **platform-appropriate retreat or home path** and an **escape hatch** from every owned bounded flow—especially modals and wizards. Browser Back can be sufficient when history and state behave correctly; a product-owned stack needs its own visible retreat. Do not demand duplicate controls that add no clarity.
-- Hunt for **dead ends**: a screen the user can reach but not leave is a bug, not a state.
-- For branching/hub flows, check that the user can see **which branch they're on** or **how to get back to the hub**.
+- Run the drop test on each evidenced screen and seam, applying only the questions that fit its journey type.
+- Check that the outcome and remaining work are legible through an appropriate cue: named stages, task statuses, a checklist, a stable count when meaningful, or location and home. A named three stage stepper can be valid without a numeric counter.
+- Check branch identity, the task hub and return route, or the home anchor as applicable. Browser Back can be sufficient when history is expected, discoverable, and state safe.
+- Check a platform appropriate retreat and an escape from every owned bounded flow, modal, success, and error state that is shown. Do not demand duplicate controls that add no clarity.
+- Hunt for dead ends. A screen the user can reach but not leave is a bug, not an assumed state.
 
 | Score | Criteria |
 |-------|----------|
@@ -1335,62 +1152,55 @@ Run each gate in turn. Orientation leads—it's the load-bearing promise. Each p
 | 3 | Clear position, platform-appropriate retreat/home, and exit throughout; minor signposting gaps |
 | 4 | At every step the user knows where they are, what remains when bounded, and how to proceed, retreat, get home, or escape—the journey-appropriate drop test passes everywhere |
 
-Because this discipline is load-bearing, a true dead end on the core path is a blocker. A failed drop test is not automatically release-critical: assign severity from consequence, reach, and recoverability, and reserve blocker status for a key state where the user cannot orient, proceed, retreat, or recover.
+A failed drop test is not automatically release-critical: assign severity from consequence, reach, and recoverability, and reserve blocker status for a key state where the user cannot orient, proceed, retreat, or recover.
 
-### Gate 2—Path Economy
+## Gate 2: Path Economy
 
 *For this journey type, is this the least needless effort without cutting protection?*
 
-- **Count the steps**, then count how many the task *honestly* requires. "This is a 7-step flow that needs 3" is the finding.
-- Check for **redundant screens**, needless round-trips, and steps that could **merge** without overloading a single screen (defer to Focal for whether the merged screen is too dense).
-- Check whether **defaults skip steps**: is the flow asking what it could infer or pre-fill?
-- Check for a **setup wall**: is first value gated behind a pile of configuration?
-- **Honesty guardrail:** a step that protects the user or earns trust is not waste. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, or burying the price to "reduce friction" is a **dark pattern, not economy**—score that as a failure, not a saving.
+- Count the honest work. For a task list, include task completion and the hops through the hub, but respect user chosen order and do not invent one canonical route.
+- Merge redundant screens and round trips where the result remains comprehensible. Defer screen density questions to Focal.
+- Infer or default only safe, useful values. The inferred value and its source or meaning must be visible and correctable; provide a manual route when confidence is low.
+- Confirm financial, identity, permission, legal, security, destination, quantity, destructive, or otherwise consequential values before commitment.
+- Keep protective work. Hiding cost, risk, permission, consequence, or a required confirmation is a dark pattern, not economy.
 
 | Score | Criteria |
 |-------|----------|
 | 0 | The path cannot be completed as designed—branches that dead-end, or a required step the user cannot satisfy |
 | 1 | Completable but badly bloated (roughly double the honest step count), a setup wall before first value, or a "shortcut" that hides cost or skips protection |
 | 2 | Some waste—one or two redundant steps, or a round-trip that should be one screen |
-| 3 | Lean path; a default or two could still be inferred |
+| 3 | Lean, purposeful path with protection intact; only minor opportunities, if any, remain |
 | 4 | The fewest honest steps; every screen earns its place; nothing protective was cut |
 
-### Gate 3—Continuity
+## Gate 3: Continuity
 
 *Do context and state survive the seams between screens?*
 
-- Check for the **memory bridge**: does any step ask the user to carry a fact (a code, a choice, a number) from an earlier screen in their head, rather than showing it where it's needed?
-- Test **state on Back and refresh**: does Back wipe entered data? Does a refresh or interruption resume where they left off, or reset to step one?
-- Test **entry points**: does a deep link, notification, or search result land the user *in context* on the relevant screen, or dump them at the start?
-- Check the **mental model**: do consecutive screens feel like one continuous task—consistent anchors, predictable transitions, the same object in focus—or like jarring jumps?
+- Check for a memory bridge. Within the same process, previously entered information that is required again should be visible or available to select, subject to essential, security, and invalid-data exceptions. See [W3C's Redundant Entry guidance](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html); it does not require storage between sessions.
+- Test state on Back and refresh where those transitions are exposed. Back is a retreat, not a reset, when retaining that state is safe.
+- Treat cross session save and return as conditional. Evaluate whether the service safely and permissibly stores the data, tells the user what is retained and when it expires, applies the authentication and authorization appropriate to the data and service at re entry, revalidates stale or consequential data, handles revoked access or conflicts, and offers a recoverable re entry path. Do not make “return tomorrow resumes everything” a universal requirement.
+- Test deep links, notifications, and search results where shown. They should land in context rather than at an unrelated start screen.
+- Check whether consecutive screens keep the same object, anchors, and mental model.
 
 | Score | Criteria |
 |-------|----------|
-| 0 | The seams break the task—state lost on Back, deep links dump to step one, the user re-enters everything |
+| 0 | The seams break the task through avoidable context or state loss, broken entry points, or unrecoverable re-entry |
 | 1 | A memory bridge on a key step, or a "resume" that resets |
 | 2 | Mostly continuous, but one transition drops context or state |
-| 3 | Context and state carry well; one rough seam or jarring jump |
-| 4 | Nothing the user gave or knew is lost across any seam; every entry point lands in context; the journey feels like one continuous task |
+| 3 | Context and permitted state carry dependably across the evidenced seams; only minor roughness, if any, remains |
+| 4 | Context and permitted state carry dependably across relevant seams and entry points; expiry, security-driven reset, and recovery remain understandable and effective |
 
 ## Scoring rules
 
-Every discipline uses the same integer anchors:
+Every discipline uses these shared integer anchors:
 
-| Score | Canonical label | Shared meaning |
-|---:|---|---|
-| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
-| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
-| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
-| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
-| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
+See the [shared anchors contract](#shared-anchors) already included above.
 
-Score each discipline holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the dimension overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the dimension being scored; it does not universally require novelty.
+Score each evaluable discipline holistically against its local rubric. Do not use hidden sub scores, checklist subtraction, averaging, or half points; let one severe material failure determine the score when the rubric warrants it. A score row must show **evidence → consequence → rubric anchor → next-point change**. A `2` says what works and names the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` explains why the discipline is exemplary and says `None—already exemplary` in the next point field. When more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
 
-### Score rationale—required
+For an N/E row, explain why the available evidence cannot support that rubric and name the fastest evidence check. Do not award credit, invent failure, or propose implementation for unseen behavior. A missing variant can remain in **Coverage** while the supported dimension is scored.
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the discipline is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or transition, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure.
-
-Keep the native total: `total = Orientation + Path Economy + Continuity`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
+When all three disciplines are integer scores, keep the native total: `total = Orientation + Path Economy + Continuity`; calculate `average = total / 3`, rounded to one decimal place; then apply this band and weakest dimension ceiling:
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -1399,41 +1209,29 @@ Keep the native total: `total = Orientation + Path Economy + Continuity`. Calcul
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores.
+Then cap the band by the weakest discipline: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. If any required dimension is N/E, report no native total, average, band, or weakest dimension ceiling.
 
-- **Score 0 vs 1 (Orientation only).** Score **0** when the flow strands the user with no recovery at all—a true dead end, or a flow with no exit anywhere. Score **1** when a way out exists but is hidden, surprising, unsafe, or unlabeled. Browser Back is not inherently a failure; judge whether it is the expected, discoverable, state-safe retreat for this platform and flow. A retreat that *wipes work* is a Continuity failure, scored by Gate 3.
-- If more than one independent failure sits in a discipline, score the *worst* one, then list the others as separate issues.
-- **The verdict—Never Lost.** Yes or no: at every step, does the user know where they are, what remains when bounded, and how to retreat, get home, or leave? The total measures how close the journey gets; the verdict states whether it arrives. A true dead end on the core path is a blocker; other drop-test failures take severity from their actual consequence.
-- **A doubled destination** (the flow needs an "and") is an Orientation failure; assign P0 only when its consequence meets the shared critical definition, and flag it as the split it implies.
-
-Dimension score, overall quality band, issue severity, critical blocker, and the **Never Lost** verdict are separate. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
+The Never Lost verdict is separate from the total. Use **Yes** only when every applicable, evidenced step passes; use **No** for an observed break; use **N/E** when the outcome or the relevant drop test cannot be judged from the evidence. A true dead end on the core path is a blocker. The rule remains: a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
-| Priority | Meaning |
-|----------|---------|
-| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, or return for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, confusion, dilution, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
-| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
+See the [shared severity contract](#shared-severity) already included above.
 
-Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by type of harm—**Orientation** (the user is lost or trapped) outranks **Path Economy** (the path is longer or less honest than it should be) outranks **Continuity** (a seam drops context or state). Never reorder across priorities.
 
-**Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by type of harm—**Orientation** (the user is lost or trapped) outranks **Path Economy** (the path is longer or less honest than it should be) outranks **Continuity** (a seam drops context or state). Never reorder across priorities; a P0 Continuity issue outranks a P1 Orientation issue.
+## Output format: use this exact structure
 
-## Output format—use this exact structure
+Return this template in order. Keep every section. Emit issues and fixes only for evidenced behavior; for an evidence gap, use Coverage, Basis, or a scorecard N/E reason with the next evidence check. When any discipline is N/E, omit the native total segment from **Verdict** and omit the entire **Total** row from **Scorecard**; do not print an N/E pseudoaggregate. Emit the total, average, band, and weakest-dimension ceiling only when all three disciplines are scored.
 
-Every review returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
+```text
+**Verdict:** <No | Yes | N/E> · <the single biggest break or evidence gap, one phrase> [append ` · **<total>/12**` only when all three disciplines are scored]
 
-```
-**Verdict:** <No | Yes> · <the single biggest break, one phrase> · **<total>/12**
-
-**Flow:** <name> · type: <linear | branching | hub-and-spoke | open-ended> · audience: <novice | mixed | expert>
+**Flow:** <name> · type: <linear | branching | hub-and-spoke | task-list | open-ended> · audience: <novice | mixed | expert>
 **Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
 **Screen:** <source and destination screens or exact seam reviewed>
-**State:** <exact interaction or system state(s) reviewed>
+**State:** <states and transitions actually reviewed>
 **Lifecycle:** <exact journey moment(s) reviewed>
-**Context:** <the user's state in a few words> · bar: <the best-in-class comparator you judged against>
+**Context:** <the user's state in a few words> · bar: <relevant supplied convention or comparator, or not provided>
 **Coverage:** <journey states and lifecycle paths actually reviewed> · gaps: <material paths not shown or tested, or "none">
 **Basis:** <observed from a screenshot or artifact | inferred from code | tested in a prototype or live product | walked from a description | measured from product data> · confirm with: <the fastest validating check>
 **Blocker:** <None. | concise blocker reason>
@@ -1441,168 +1239,129 @@ Every review returns this template verbatim, in this order. Don't add, remove, r
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Orientation | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Path Economy | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| Continuity | _/4 | <evidence → consequence → rubric anchor> | <smallest concrete change, or `None—already exemplary`> |
-| **Total** | **_/12 · _._/4** | **<band; exact sum of justified component scores>** | <weakest-discipline ceiling applied> |
+| Orientation | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| Path Economy | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| Continuity | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or next evidence check; no implementation for unseen behavior> |
+| **Total** | **<_/12 · _._/4>** | **<band; exact sum of justified component scores>** | <weakest-dimension ceiling> |
 
 ## Issues (most severe first)
-- **[P0 · Orientation]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <fix>.
-- **[P1 · Path Economy]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <fix>.
+- **[P0 · Orientation]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <specific change supported by the evidence>.
+- **[P1 · Path Economy]** **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment>. <Name>—<observation>. <impact>. **Fix:** <specific change supported by the evidence>.
 
 ## Top moves (up to 3)
-1. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <highest-leverage change>
-2. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next>
-3. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next>
+1. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <highest-leverage evidenced change>
+2. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next evidenced change>
+3. **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <next evidenced change>
 
 ## Next
-- **Structural** (do first): **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <what changes what the journey *is*—steps to cut or merge, a branch to manage, a dead end to close, state to carry, an entry point to re-route>
-- **Executional** (after): **At:** screen: <source/destination screen or seam> · flow: <named flow and transition> · state: <exact state> · lifecycle: <exact journey moment> · <what changes how a step *looks or reads*—indicator weight, Back label wording, transition motion>
-- **Hand off**: **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <anything that is not this flow's problem—single-screen layout or hierarchy goes to Focal; "None" if all of it is Compass's>
+- **Structural** (do first): **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <evidenced structural change, or the next evidence check when unseen>
+- **Executional** (after): **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <evidenced presentation change, or the next evidence check when unseen>
+- **Hand off**: **At:** screen: <source/destination screen or seam or `not shown`> · flow: <named flow or `not shown`> · state: <exact state or `not shown`> · lifecycle: <exact journey moment or `not shown`> · <single-screen hierarchy → Focal; relationship leak → Flywheel; expressive treatment → Soul; `None` if all of it is Compass's>
 ```
 
-Filling it:
-- **Coverage**—name only conditions actually walked or evidenced. Use `gaps` for consequential paths such as Back, refresh, retry, interruption/resume, deep link, or returning-user bypass that were not shown or tested.
-- **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Top move, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Emit one to three Top moves only when each is warranted; never invent filler to reach three. If none is warranted, write `None.` Keep the `At` locator precise enough to replay the failing transition directly. `<observation>` may run two or three sentences when specificity requires it. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
-- **Next**—structural before executional, always: signposting a maze only labels the dead ends. Resolve structural items with the four-move build workflow in [SKILL.md](../SKILL.md) and the techniques in [patterns.md](patterns.md).
-- **Single-screen problems are out of scope—route them to [Focal](../../focal).** If an individual screen is overloaded, mis-ranked, or has no clear primary action, that is a within-screen failure for Focal, not a seam for Compass; name it in **Next** and hand it off.
-- Re-run the audit after fixes to watch the score climb.
+Use `None.` under **Issues**, **Top moves**, or a **Next** item when no evidenced item is warranted; do not add filler. For a single-screen hierarchy problem, route it to [Focal](#source-focal-reference-review-md). Re-run after an evidenced fix when the user requests a follow-up audit.
 
 <!-- END GENERATED SOURCE: compass/reference/review.md -->
 
+
+<a id="source-compass-reference-patterns-md"></a>
 
 ## Source: `compass/reference/patterns.md`
 
 <!-- BEGIN GENERATED SOURCE: compass/reference/patterns.md -->
 
-# Compass Patterns—techniques and anti-patterns
+# Compass Patterns: techniques and anti patterns
 
-The working catalog behind the three disciplines. Pull from here when building a flow or when prescribing a fix in a review. Ordered the way the disciplines apply: Orientation → Path Economy → Continuity.
+Use this catalog when building a journey or prescribing a fix that the evidence supports. It follows the three disciplines: Orientation, Path Economy, and Continuity.
 
-Orientation is the load-bearing discipline—the literal promise. When two fixes have equal consequence and dependency, restore the user's bearings first. This is prioritization, not extra numeric weight.
+## Evidence anchors (not compliance certification)
 
----
+- [GOV.UK task list](https://design-system.service.gov.uk/components/task-list/) describes a finite service where users can complete tasks in whatever order works for them, see task statuses, return to the task list, and move on only when the required tasks are complete. It also says to consider Save and return when a service spans multiple sessions. Use this as a pattern reference, not as a universal product requirement.
+- [W3C WCAG 2.2 Redundant Entry](https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html) covers information repeated within the same process and allows essential, security, and invalid-data exceptions. It explicitly does not add a requirement to store information between sessions. Use it to avoid memory bridges, not to certify a product or prescribe cross session persistence.
 
-## Orientation patterns (Discipline 1—load-bearing)
+## Orientation patterns
 
-How to make sure the user can always answer *Where am I? How far is left? How do I get back, or out?*
+The goal is a user who can answer *Where am I? What remains when bounded? How do I get back, home, or out?*
 
-- **Progress as milestones, not a tally.** A stepper that reads "Step 2 of 4" promises an end the user can picture. "12 of 47 complete" reads as a sentence. Frame progress as a small count of named, achievable stages; if the real count is large, group it ("Account → Payment → Review", not "field 14 of 38"). Defer to [Focal](../../focal) for whether any one step is overloaded—Compass owns the count of steps, not the contents of one.
-- **Breadcrumbs and active state.** On hub-and-spoke and any nested structure, the user must be able to point at where they are: a breadcrumb trail back to the hub, a highlighted nav item, a screen title that matches the link they followed. Recognition beats recall—the path home should be readable, not remembered.
-- **A platform-appropriate retreat.** Use in-product Back where the product owns the stack, browser Back where history is expected and state-safe, a hub or breadcrumb in nested spaces, and Cancel / Close / Save & exit in bounded tasks. Do not duplicate controls without adding clarity. If retreat loses work, that is also a Continuity failure.
-- **Escape hatches and Cancel.** Every flow needs a way *out*, not just back: Cancel, Close, "Save & exit," or "Do this later." Back retreats one step; the escape hatch leaves the flow entirely. A multi-step wizard with no Cancel is a trap with a polite face.
-- **Never-trap modals.** A modal is the easiest place to strand someone. Every modal closes—an X, an explicit Cancel, click-outside, or Esc—and closing it returns the user to a known place, not a blank. A modal that opens another modal that has no close is the canonical maze.
-- **No dead ends.** Every screen has a clear next step *or* a clear way out. A screen the user can reach but not leave is a bug, not a state—success screens, error screens, and edge-case screens included.
-- **The drop test.** Drop the user onto any screen mid-journey with no memory of how they arrived. Can they tell where they are, what remains when bounded, and how to proceed, retreat, or get home? Run the applicable questions on every screen. The screen that fails them is where users become lost.
+- **Outcome based progress, not a widget quota.** For a bounded journey, make the outcome and remaining work legible through the cue that fits the actual work: named stages, task statuses, a checklist, a stable count, or a concise summary. A counter is optional. A named three stage stepper such as `Account → Details → Submit` is valid without a numeric count. For open ended work, show position in the space and a known home instead of fake completion progress.
+- **Task list as a finite hub.** When users need to complete several tasks in a user chosen order, show every task, its actionable status, and the finite completion condition. Let each task return to the hub. Add Save and return only when the service has a safe, permitted retention and re entry path; final review and submit close the finite journey.
+- **Branch and hub cues.** Name a branch when a choice changes the route. In a hub-and-spoke journey, show the active hub location and a labeled route back to the center. Do not require a progress bar where the journey has no endpoint.
+- **Platform appropriate retreat.** Use product Back when the product owns the stack, browser Back when history is expected and state safe, a breadcrumb or hub link in nested spaces, and Cancel, Close, or Save and return when the service supports it. Do not duplicate controls without adding clarity.
+- **Escape and no dead ends.** Back retreats one step; an escape hatch leaves the bounded flow. Every shown screen, error, success state, and modal has a clear next step or a way out.
+- **Drop test.** Remove the content and leave only title, position cue, applicable progress or task status, retreat/home path, and exit. A stranger should still identify the journey and leave or return home.
 
-**Test:** strip a screen of its content and leave only its signage—the title, any journey-appropriate position or progress cue, retreat/home path, and exit. Can a stranger say what journey this is, where they sit, and how to leave or return home? If not, orientation has failed before any step is taken.
+## Path Economy techniques
 
----
-
-## Step-reduction techniques (Discipline 2—Path Economy)
-
-Every screen in a flow is a tax on the user. Cut the tax to the minimum the task *honestly* requires. Match the technique to *why* a step exists.
+Every screen is effort. Remove waste while keeping protection and informed choice.
 
 | Technique | Use when | Example |
-|-----------|----------|---------|
-| **Merge round-trips** | Two screens bounce the user back and forth, each doing half a job | Pick item → separate confirm screen → back to list, collapsed into pick-and-confirm in place |
-| **Smart defaults that skip a step** | One choice is right for most users | Pre-selected shipping method, pre-filled country from locale, "remember this" honored |
-| **Infer rather than ask** | The system already knows or can derive the answer | Detect card type from the number; pull name from the signed-in account; geolocate the city |
-| **First value before setup** | Value is gated behind configuration | Show the populated app with sensible defaults, defer settings to when they're relevant |
-| **Prune dead branches** | A fork leads somewhere with no real continuation | Remove the option that dead-ends; or give that branch a real next step |
-| **Collapse adjacent steps** | Two thin screens fit comfortably on one without overload | Merge name + email into one screen—*defer to [Focal](../../focal) for whether the merged screen is now too heavy* |
+|---|---|---|
+| **Merge round trips** | Two screens bounce the user back and forth | Pick an item and confirm in place, then return to the list |
+| **Safe visible default** | One value is right for most users and easy to change | Preselect locale, show why, and offer Edit before continuing |
+| **Visible, correctable inference** | The system can derive a value | Show “Suggested workspace: Acme” with Change, rather than silently committing it |
+| **Consequential confirmation** | A value changes money, identity, permission, destination, quantity, legal status, or an irreversible action | Show the interpreted value and effect before Submit |
+| **First value before setup** | Configuration is blocking the first useful result | Open a usable workspace, then ask for optional setup in context |
+| **Task list** | Several tasks are finite, independently completable, and users need order freedom | Task hub with Incomplete/Completed statuses, task detail, return, and final review |
+| **Prune dead branches** | A choice has no real continuation | Remove it or give it a complete route |
+| **Collapse adjacent steps** | Two thin screens fit without overloading one screen | Merge name and email; ask Focal to judge the resulting screen density |
 
-**Choosing well:**
-- The best step is the one the user never has to take. Before adding a screen, ask whether its answer can be inferred, defaulted, or deferred.
-- Count honestly. "This is a 7-step flow that needs 3" is a finding; "feels long" is a feeling.
-- Shortening a path is a [Focal](../../focal) handoff at the boundary: Compass merges *screens*, Focal judges whether the merged screen overloads. Don't collapse steps so aggressively that a screen loses its clear organizing intent.
+Count the honest work for the journey type. User chosen task order is not waste. A step that protects the user or earns informed consent is not waste. Hiding cost, risk, permission, consequence, or a needed confirmation to make a path look shorter is a dark pattern, not economy.
 
-**The honesty caveat—read this.** Shorten the path by removing *waste*, never by removing *protection*. Skipping a confirmation on a destructive or costly action, hiding a required disclosure, auto-opting the user into something, or burying the price to "reduce friction" is a **dark pattern, not economy**. A step that protects the user or earns their trust is not waste—it is load-bearing. If removing a step makes the flow shorter but the user worse off, you have not practiced Path Economy; you have laundered a trap as a convenience.
+## Continuity patterns
 
----
+Moving between screens should not cost users context or safe work they already provided.
 
-## Continuity patterns (Discipline 3)
+- **No memory bridge.** Show a code, amount, choice, or destination where it is needed. Within one process, make repeated information visible or available to select, while allowing essential, security, and invalid-data exceptions.
+- **Back is a retreat.** Preserve entered state across Back when retaining it is safe. If a sensitive value cannot remain, say so before the user leaves and provide the safe recovery the service supports.
+- **Conditional Save and return.** Decide retention from the data and journey, not from a blanket promise. Save only where the service may safely store the data, the user has the required permission, the retention and expiry are clear, re entry has the authentication and authorization the data requires, stale or consequential data is revalidated, and revoked access or conflicts can recover. Show what was saved and what will expire. If the conditions are absent, explain the limit and offer a recoverable re entry or safe alternative.
+- **Deep links land in context.** A notification, shared URL, or email opens the relevant task or object with its route, permissions, and current state clear. If access has expired, explain it and route to a recoverable place.
+- **Stable mental model.** Keep layout anchors, focused object, and transition direction coherent across a seam. A visual jump that loses context is a continuity issue even when the data remains.
 
-Moving between screens shouldn't cost the user anything they already gave or already knew. The seams between screens are where flows leak.
+At each seam, ask what the user knew and had on the source screen that the destination needs. If it must be re entered, re found, or re remembered, close the leak or explain why re entry is essential, security required, or invalidated.
 
-- **No memory bridge.** Never make the user carry a fact from one screen to the next in their head. If step 3 needs the code, the amount, or the choice from step 1, *show it on step 3*. The tell is any instruction shaped like "remember this for later."
-- **Preserve state on Back.** Back is a retreat, not a reset. Returning to a previous step shows everything the user already entered, still filled in. A Back that wipes the form teaches users to fear the button that's supposed to be their safety net.
-- **Survive refresh and resume.** An accidental reload, a closed tab, a return tomorrow—the flow picks up where it was left, not at step one. Persist progress so "resume" actually resumes. A "resume" that resets is worse than no resume, because it promised.
-- **Land deep links in context.** A notification, a shared URL, a search result, or an email link drops the user *on the relevant screen, mid-flow*—already oriented—not dumped at the entrance to find their own way back. If the link says "your order shipped," it lands on that order, not the home screen.
-- **Preserve the mental model across transitions.** Each screen should feel like it came from the last: stable layout anchors, the same object kept in focus, predictable forward/back motion. A jarring jump—a different layout, a lost selection, a surprise full-screen takeover—breaks the sense of one continuous task even when no data was lost.
+## Flow type playbooks
 
-**Test:** at each seam between two screens, ask what the user knew and had on the first that they need on the second. If anything required must be re-entered, re-found, or re-remembered, the seam leaks—close it by carrying it forward.
+- **Linear:** one path to one outcome. Use outcome based milestones, a task appropriate cue, and safe Back with an escape from the whole flow.
+- **Branching:** a user choice creates a distinct sequence. Name the branch, make switching possible, default the common safe route, and remove dead branches.
+- **Task-list:** a finite task hub leads to independently completable task details in user chosen order, back to the hub, then to final review and submit. Status tells users what is complete and actionable. Save and return, expiry, permission, revalidation, and recovery are part of the design only when the service needs or exposes them.
+- **Hub-and-spoke:** center → detail → center. Keep the center as home and preserve the hub state on return. No progress counter is needed without a finite endpoint.
+- **Open-ended:** browse, search, or explore with no fixed completion. Show location, active refinements, and home. Do not force a funnel or invent progress.
 
----
+## Flow state care
 
-## Flow-type playbooks
+- **Loading, validation, error, and retry:** keep the user on the relevant route, identify the issue, preserve safe work, and keep Back and exit live. Do this only for states the service has or the build explicitly requires.
+- **Permission and expiry:** explain what cannot be done, what data or access is affected, and the route to recover. Recheck permission and freshness before a consequential action.
+- **Interruption and re entry:** if Save and return is supported, show the saved point, retention/expiry, required authentication, and any revalidation. If it is not safe or permitted, state the boundary and provide the supported re entry path.
+- **Final review and success:** make the final consequence and submitted values clear, confirm consequential changes, and give the user a next move or route home after success.
 
-The disciplines assume a **linear** flow by default. The other three shapes are legitimate; one short play each.
+## Anti pattern library
 
-**Linear**—*one path, start to end (checkout, onboarding, setup).*
-Make the end visible from the start: a milestone stepper so "how far is left" is answerable on every screen. Spend your Economy budget on the single path—every step you cut is felt by every user. Back walks the path in reverse with state intact; the escape hatch leaves the whole flow.
+- **The mandatory widget:** a flow is judged against a prescribed counter, progress bar, or breadcrumb even though its outcome is better expressed by named stages, task status, or location. *(Orientation)* Use the clearest outcome based cue; a named three stage stepper may omit a counter.
+- **The hidden progress bar:** a bounded journey gives no clue about its outcome or remaining work. *(Orientation)* Add a meaningful named milestone, task status, checklist, or count when stable.
+- **The task-list funnel:** independently completable tasks are forced into an arbitrary order or the hub hides the final completion condition. *(Orientation + Path Economy)* Preserve user chosen order, status, return to hub, and final review/submit.
+- **The phantom Back:** Back resets entered data. *(Orientation + Continuity)* Preserve safe state or disclose the retention boundary before retreat.
+- **The over persistent draft:** sensitive or stale data is retained indefinitely or reopens without permission, expiry, or revalidation. *(Continuity)* Limit retention, authenticate and authorize re entry, surface expiry, and revalidate before commit.
+- **The opaque inference:** a consequential value is silently guessed. *(Path Economy)* Show the value and meaning, let the user correct it, and provide a manual fallback.
+- **The unconfirmed consequence:** Submit silently applies a material amount, identity, permission, destination, quantity, or irreversible change. *(Path Economy)* Show the effect and require confirmation before commit.
+- **The deep link to nowhere:** a notification or shared URL lands at an unrelated start screen. *(Continuity)* Land in context or explain the expired/unauthorized route and provide recovery.
+- **The unseen-state fix:** a missing loading, error, permission, or resume state is treated as a defect. *(Evidence discipline)* Mark it `not shown`, name the fastest check, and do not propose implementation until evidence exists.
 
-**Branching**—*path forks on user choice (conditional signup, "what brings you here?").*
-Orientation owns two extra jobs: show *which branch* the user is on, and offer a cheap way to *switch it* if they forked wrong. Economy means defaulting the common branch and pruning any branch that dead-ends. The drop test is sharpest here—a user dropped mid-branch must still know which fork they took.
+## Quick reference
 
-**Hub-and-spoke**—*center → detail → back to center (dashboard → record → dashboard).*
-"Back to center" is sacred: the hub is home base, and every spoke returns to it predictably (breadcrumb, a persistent "Back to dashboard," the same hub state they left). Economy is measured in *hops*—minimize the taps to reach a record and return. Don't trap the user deep in a spoke with no clear road home.
-
-**Open-ended**—*wander a space, no fixed end (browse, search-and-refine, exploration).*
-The exception that proves the rule: there's no single destination, so "how far is left" doesn't apply, and **Never Lost reduces to *always know where you are and how to get home*.** Orient by position-in-space (filters applied, current view, breadcrumb) and guarantee an easy return to a known anchor. Don't force a funnel onto a space meant for roaming. (Journey-level sibling of [Focal](../../focal)'s exploration register.)
-
----
-
-## Flow-state care
-
-The states most flows neglect—where a journey is interrupted, aborted, broken, or finished. Each is a Compass surface with its own orientation, economy, and continuity demands.
-
-- **Interruption and resume.** Users leave mid-flow—a call, a closed laptop, a dead battery. Persist progress and let them re-enter where they stopped, oriented ("You're on step 3 of 4"), with prior input intact. Resume is a Continuity promise; breaking it is the single most common reason a started flow is never finished.
-- **Partial completion.** A flow abandoned at step 3 isn't a failure to discard—it's progress to honor. Save the draft, the half-filled cart, the in-progress application; surface it on return so the user picks up rather than starts over. The fastest path to finishing is not making them re-do what's done.
-- **Error mid-flow.** When a step fails (payment declined, validation, a server error), keep the user *in the flow* and *in place*. Name the actual problem, offer the fix, preserve everything already entered, and keep Back and exit live. An error that boots the user to step one, or to a dead screen, converts a recoverable hiccup into an abandonment.
-- **Returning from a success screen.** The end of a flow is a transition, not a wall. A success screen needs a clear next move—back to the hub, on to the obvious next task, or out—never a celebratory dead end the user has to use the browser Back to escape. End on a high *and* on a door (peak-end, the journey-level sibling of [Focal](../../focal)'s peak-end care).
-
----
-
-## Anti-pattern library
-
-Each entry: the tell—the discipline it breaks—the fix.
-
-- **The trapped modal**—a dialog with no X, no Cancel, no Esc, no click-outside. *(Orientation)* Give every modal a close that returns to a known place.
-- **The dead-end screen**—a screen the user can reach but not leave; no next step, no way out. *(Orientation)* Every screen gets a clear next step or an exit—success and error screens included.
-- **The hidden progress bar**—a multi-step flow with no indication of position or length. *(Orientation)* Add a milestone stepper; show where they are and how far is left.
-- **The demoralizing tally**—progress shown as "12 of 47" instead of named stages. *(Orientation)* Reframe as a small count of achievable milestones; group the rest.
-- **The phantom Back**—a Back button that resets the flow or wipes entered data. *(Orientation + Continuity)* Make Back a true retreat that preserves state.
-- **The mystery location**—nested screens with no breadcrumb or active state; "how did I get here?" *(Orientation)* Add a trail or active nav so the user can point at where they are.
-- **The setup wall**—first value gated behind six configuration screens. *(Path Economy)* Get the user to one real win on sensible defaults; defer setup to when it's relevant.
-- **The phantom flow**—a 7-step flow that's honestly 3, padded with redundant confirm-and-return screens. *(Path Economy)* Merge the round-trips; cut the steps the task doesn't require.
-- **The needless round-trip**—two screens bounce the user back and forth, each doing half a job. *(Path Economy)* Collapse into one—then check with [Focal](../../focal) that the merged screen isn't overloaded.
-- **The dead branch**—a fork leads to a screen with no real continuation. *(Path Economy)* Remove the branch, or give it a genuine next step.
-- **The friction-hiding shortcut**—a step removed by burying the price, skipping a confirmation, or auto-opting the user in. *(Path Economy)* Restore it. This is a dark pattern, not economy—protection is never waste.
-- **The memory bridge**—step 3 needs a fact only shown on step 1. *(Continuity)* Carry the context forward; show it where it's needed.
-- **The state-eating Back**—returning to a step shows it blank instead of as the user left it. *(Continuity)* Persist input across Back and forward.
-- **The amnesiac resume**—a "resume" or refresh that drops the user back at step one. *(Continuity)* Persist progress so resume actually resumes.
-- **The deep link to nowhere**—a notification or shared URL dumps the user at the home screen instead of the relevant screen. *(Continuity)* Land them in context, mid-flow, already oriented.
-- **The jarring jump**—a transition that changes layout, loses the focused object, or surprises with a takeover. *(Continuity)* Keep layout anchors and the in-focus object stable across the seam.
-
----
-
-## Quick reference card
-
-```
-OUTCOME      finite: "from ___ to ___" · open-ended: one intent + one home anchor
-STEPS        fewest honest steps · merge round-trips · default/infer/defer · no dead branches
-ORIENT       location + progress when bounded + expected retreat/home + an exit
-CARRY        no memory bridge · state survives Back/refresh/resume · deep links land in context
-NEVER        trap a modal · hide progress · shorten by hiding cost or skipping protection
+```text
+FRAME      finite: entry → outcome · task-list: tasks → hub → final submit · open-ended: intent + home
+ORIENT     outcome based position/progress or location · retreat/home · exit · no widget quota
+ECONOMY    fewest honest steps · safe visible defaults · correctable inference · confirmed consequence
+CARRY      context across seams · safe/permissioned state · expiry and revalidation · recoverable re entry
+NEVER      dead ends, traps, silent resets, opaque consequence, or invented behavior
 ```
 
-*Defaults for a linear flow. On hub-and-spoke, "back to center" is sacred; on open-ended, drop "how-far-left" and guarantee a way home.*
-
-See [../SKILL.md](../SKILL.md) for the disciplines and the Flow Spec, and [review.md](review.md) for the three-discipline audit and scorecard.
+See [SKILL.md](#source-compass-skill-md) for the methodology and routing, [build.md](#source-compass-reference-build-md) for the conditional Flow Spec, and [review.md](#source-compass-reference-review-md) for the native scorecard.
 
 <!-- END GENERATED SOURCE: compass/reference/patterns.md -->
 
+
+<a id="source-compass-reference-examples-md"></a>
 
 ## Source: `compass/reference/examples.md`
 
@@ -1610,108 +1369,163 @@ See [../SKILL.md](../SKILL.md) for the disciplines and the Flow Spec, and [revie
 
 # Compass Examples
 
-Two worked examples, captured from real runs of this skill and shown in the locked output templates—one **review**, one **build**. They share a narrative: the review finds a 7-step onboarding wall that traps the user twice over, and the build redesigns that same flow so the user is never lost. These set the bar for length, specificity, and tone; the templates set the shape.
+These examples calibrate the native review and build shapes. The review demonstrates partial evidence and per dimension `N/E`; the build demonstrates a finite task list with user chosen order, Save and return, and final submit. They are examples, not universal requirements.
 
----
+## Example 1 — Review: a task list with an unseen re entry seam
 
-## Example 1—Review: a 7-step onboarding wall
-
-**Input:** a team-collaboration app's new-user onboarding, 7 steps: (1) Create account, (2) Verify email—shows "check your email" and dead-ends with no resend and no way back, (3) Choose a plan (free tier present but visually buried, prices shown here for the first time), (4) Invite teammates (required, minimum one), (5) Pick integrations from a grid of 24, (6) Name your first project, (7) a 4-slide feature tour. Only then does the user see the product. No progress indicator. Browser Back restarts at step 1 with all fields empty. The onboarding email's "Continue setup" link always opens step 1.
+**Input:** A municipal license renewal service shows a start page, a task hub, and one task detail screen. The hub lists “Applicant details,” “Supporting evidence,” and “Review and submit”; the first task is marked Completed and the other tasks Incomplete. The description says users may choose their task order and return to the hub after each task. No frame or test shows Back, refresh, Save and return, expiry, permission changes, re entry, validation, or final submission.
 
 **Compass's output:**
 
-```
-**Verdict:** No · the email-verification screen is a dead end with no resend, no Back, and no way forward · **1/12**
+```text
+**Verdict:** N/E · the final outcome and re entry seam are not shown
 
-**Flow:** Team-collaboration app new-user onboarding · type: linear · audience: novice
-**Outcome / anchor:** first real action completed inside a live workspace
-**Screen:** Email verification, onboarding steps, and resume seam
-**State:** waiting for code, attempted exit, default progression, and back-navigation reset
-**Lifecycle:** first-run activation before workspace entry, before value, and interruption/resume
-**Context:** a first-timer evaluating the product, patience near zero · bar: Linear's and Notion's first-run
-**Coverage:** first-run steps 1–7, verification waiting, browser Back, and email-link resume · gaps: validation errors, resend/retry, refresh recovery, and returning-user bypass not shown
-**Basis:** walked from a description · confirm with: walk the prototype through Back, refresh, and the onboarding resume/deep links at every step
-**Blocker:** Verification dead end; no exit from the gated wall; buried pricing; Back and resume links reset entered state.
+**Flow:** Municipal license renewal · type: task-list · audience: mixed
+**Outcome / anchor:** submitted renewal application
+**Screen:** start page → task hub → Applicant details task
+**State:** task hub default, one completed task, one incomplete task, and task detail default; Save and return and final submit not shown
+**Lifecycle:** first-run application setup before submission
+**Context:** applicant completing work across tasks · bar: a clear government service with task statuses and a visible final review
+**Coverage:** start page, task hub, task order statement, task detail, and hub return · gaps: Back, refresh, validation, permission, expiry, Save and return, re entry, final review, and submit not shown
+**Basis:** walked from a description and selected frames · confirm with: complete two tasks in different orders, leave and re-enter, then review and submit
+**Blocker:** None observed. The final submission and re-entry behavior are not shown.
 
 ## Scorecard
 | Discipline | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Orientation | 0/4 | Step 2 is a true dead end and the 7-step wall has no Cancel or skip; a first-timer cannot recover or exit, so the Never-Lost promise fails outright. | Add resend, change-email, Back, and Finish later to verification, then provide a visible exit on every remaining step. |
-| Path Economy | 1/4 | Only account creation and verification are load-bearing, while five configuration steps precede first value and pricing appears after sunk effort; the path is technically traversable but seriously wasteful and misleading. | Cut to the two honest steps and move plans, invites, integrations, naming, and the tour into dismissible in-product prompts. |
-| Continuity | 0/4 | Browser Back erases every field and the resume link returns to step 1; the flow destroys state at both exit seams, so interruption and re-entry cannot work. | Persist pending signup state, create real history entries, and deep-link users back to the step they left. |
-| **Total** | **1/12 · 0.3/4** | **Broken; exact sum of justified component scores** | Weakest-discipline ceiling applied |
+| Orientation | 3/4 | The task hub names the finite application, shows Completed and Incomplete statuses, and the shown task returns to the hub; this is Strong for the evidenced route, while the final submit and error escape are not shown. | Walk final review and submit plus error and permission states; change only what that evidence warrants. |
+| Path Economy | 3/4 | The service lets users choose task order and return to the hub, so it avoids an arbitrary linear funnel; the unseen task dependencies and final route prevent an exemplary judgment. | Confirm task dependencies and final review hops before proposing a cut. |
+| Continuity | N/E—insufficient evidence | The selected frames expose no Back, Save and return, refresh, expiry, permission, or re-entry seam, so this rubric cannot be judged without turning unknown behavior into a defect. | N/E—walk Save and return, expiry, permission, revalidation, and re-entry before proposing a change. |
 
 ## Issues (most severe first)
-- **[P0 · Orientation]** **At:** screen: Step 2, email verification · flow: new-user onboarding · state: waiting for code/email · lifecycle: first-run activation before workspace entry. The verification dead end—step 2 shows "check your email" and stops: no resend, no "change email", no Back, no way forward inside the app. A first-timer whose mail is slow, spam-filtered, or mistyped by one character has exactly one move left, which is closing the tab; the screen can be reached and not left, so it fails the drop test outright and breaks the promise at the earliest possible moment. **Fix:** make step 2 a live screen—a 6-digit code field that auto-advances on paste, "Resend code" on a 30-second countdown, "Change email", a real Back to step 1 with the address intact, and "Finish later" that saves the pending account and mails a resume link.
-- **[P0 · Orientation]** **At:** screen: Steps 1–7 · flow: new-user onboarding · state: attempted exit · lifecycle: first-run activation before value. No exit from a 7-step wall—there is no Cancel, Close, "Skip for now", or "Save & exit" on any step, and step 4 cannot be skipped and demands a minimum of one teammate invite. A user who wants to see the product before handing over a colleague's email address has no legal move; a wizard with no Cancel is a trap with a polite face, and a required invite makes the trap cost someone else's data. **Fix:** put an escape hatch on every step ("Skip" / "Finish later"), and delete the invite gate—invites become an in-product action prompted when sharing actually matters.
-- **[P0 · Path Economy]** **At:** screen: Step 3, plan choice · flow: new-user onboarding · state: first price disclosure after verification · lifecycle: new user committed but still pre-value. The buried price—prices appear for the first time at step 3, after the user has already created an account and verified an email, and the free tier is visually de-emphasized against the paid options. Cost disclosed only after sunk investment, with the free option down-weighted, is a trust break dressed as a conversion tactic; this is a dark pattern, not economy. **Fix:** disclose pricing before or at account creation, with the free tier as a visually equal, pre-selected default and no card required.
-- **[P0 · Continuity]** **At:** screen: Any onboarding step → browser Back · flow: new-user onboarding · state: back-navigation reset · lifecycle: interrupted first-run activation. The state-eating Back—pressing browser Back at any step restarts at step 1 with all fields empty. Up to six screens of work vanish on one keystroke, and after it happens once the user distrusts the only retreat they had; a Back that resets is the anti-pattern the safety net is supposed to prevent. **Fix:** make each step a real history entry, persist entered values server-side against the pending signup, and restore every field on Back and on forward.
-- **[P0 · Continuity]** **At:** screen: Continue-setup email → onboarding · flow: new-user onboarding · state: deep-linked reset to step 1 · lifecycle: return after interruption. The deep link to step one—the onboarding email's "Continue setup" link always opens step 1, so the one channel built to recover an interrupted user resets them instead. A "continue" that starts over is worse than no link, because it promised; every interrupted signup becomes a re-signup. **Fix:** sign a resume token into the link and land the user on the step they left with prior input intact, and make the verification link complete verification and land them in the workspace.
-- **[P1 · Orientation]** **At:** screen: Steps 1–7 chrome · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value. Hidden progress across all 7 steps—no stepper, no named stages, no count; standing on step 4 the user cannot tell whether one screen is left or six. An unbounded flow reads as endless, and endless is where people quit; combined with the missing signage, the drop test fails on every screen. **Fix:** once the path is cut, carry a milestone stepper with named stages on every remaining gated step ("Step 1 of 2 · Create account"), and never a tally.
-- **[P1 · Path Economy]** **At:** screen: Steps 3–7 · flow: new-user onboarding · state: required pre-product setup · lifecycle: first-run activation before first value. The setup wall—all 7 steps sit before the user ever sees the product: a plan choice, a forced invite, a 24-tile integration grid, a project name, and a 4-slide tour. Only two are load-bearing (create account, verify email)—this is a 7-step flow that needs 2. Every configuration screen before the first win asks a question the user has no context to answer. **Fix:** cut to account + verify, land the user in a pre-seeded workspace, and move plan, invites, integrations, project naming, and the tour into the product as contextual, dismissible prompts—offer 3 relevant integrations with "Browse all", not a grid of 24.
+None above P3.
 
 ## Top moves (up to 3)
-1. **At:** screen: onboarding steps 1–7 · flow: new-user onboarding · state: default progression · lifecycle: first-run activation before value · Cut the wall to 2 gated steps—create account, verify email—then put the user in a live, pre-seeded workspace; plan, invites, integrations, project name, and tour all become in-product prompts they can dismiss and return to.
-2. **At:** screen: verification and all gated steps · flow: new-user onboarding · state: waiting, attempted exit, and resume · lifecycle: interruption/resume · Make every step recoverable: a persistent 2-stage stepper, a real Back that preserves state, "Finish later" on both steps, and a verification screen with a code field, resend countdown, and change-email—so no screen can be reached and not left.
-3. **At:** screen: onboarding → resume link · flow: new-user onboarding · state: deep-linked resume · lifecycle: return after interruption · Fix the seams: persist the pending signup so refresh and return-tomorrow resume in place, and re-point the "Continue setup" and verify links at the step the user actually left instead of step 1.
+1. **At:** screen: task hub → task detail → task hub · flow: municipal license renewal · state: task order and return · lifecycle: first-run application setup · Walk the final review and submit path and the Save and return/re-entry seam before prescribing a change.
 
 ## Next
-- **Structural** (do first): **At:** screen: verification and onboarding steps · flow: new-user onboarding · state: dead end and attempted exit · lifecycle: first-run activation · close the verification dead end, add an exit to every step, cut 5 of the 7 steps into in-product prompts, persist pending-signup state across Back and refresh, and re-point both email links at the step the user left.
-- **Executional** (after): **At:** screen: onboarding chrome and plan choice · flow: new-user onboarding · state: default progression and price disclosure · lifecycle: first-run activation before value · the stepper's visual weight, the resend countdown's copy, the free-tier's equal visual treatment on the plan disclosure, and the transition between the two gated steps.
-- **Hand off**: **At:** screen: plan-disclosure screen · flow: new-user onboarding · state: free-vs-paid ranking · lifecycle: first-run activation · the plan-disclosure screen's internal layout and the free-vs-paid visual ranking are single-screen problems—Focal's, once the path is cut.
+- **Structural** (do first): **At:** screen: final review and submit · flow: municipal license renewal · state: not shown · lifecycle: first-run application setup before submission · Confirm the finite completion event and required task dependencies.
+- **Executional** (after): **At:** screen: task hub · flow: municipal license renewal · state: default task statuses · lifecycle: first-run application setup · None—no executional issue is evidenced.
+- **Hand off**: **At:** screen: task hub rows · flow: municipal license renewal · state: default status labels · lifecycle: first-run application setup · None—single-screen hierarchy is not being judged here.
 ```
 
----
+The missing variants do not erase the supported Orientation and Path Economy findings. Continuity is N/E because the available artifact contains no continuity seam to evaluate; the output names the next evidence check instead of inventing a persistence defect or implementation.
 
-## Example 2—Build: the redesigned first run
+## Example 2 — Build: a finite task-list service
 
-**Input:** "Redesign the onboarding flow we just reviewed—fewest honest steps, nothing lost, no dead ends."
+**Input:** “Design a license renewal service for mixed-expertise applicants. They must complete three tasks in whatever order works, may save a safe draft and return, and must review and submit the renewal.”
 
 **Compass's output:**
 
-```
-**Flow:** Team-collaboration app first run—gets the user from a signup click to their first real action inside a live workspace.
-**Type:** linear   ·   **Audience:** novice
-**Outcome / anchor:** first real action completed inside the live workspace
+```text
+**Flow:** License renewal—gets the user from the service start page to a submitted renewal.
+**Type:** task-list   ·   **Audience:** mixed
+**Outcome / anchor:** renewal submitted after all required tasks are complete
 
 ## Steps
-1. Create account—email + password or SSO, with plan tiers stated in plain view ("Free forever · Pro $X/user/month—start free, switch anytime"), free pre-selected, no card. [skip: none—this is the entry]
-2. Verify email—a 6-digit code field that auto-advances on paste, plus a magic link in the same mail; "Resend code" on a 30s countdown, "Change email", Back to step 1, "Finish later". [skip: the magic link completes this step from the inbox, so a user who clicks it never types anything]
-3. Workspace—the product itself, live: a workspace named from the email domain, one pre-seeded project, and the first real action (post, task, doc) available immediately. [skip: workspace and project names are inferred and renamed inline, which removes the old naming step]
+1. Task list hub—shows the three finite tasks, their Completed or Incomplete status, the task the user can choose next, and the final Review and submit condition. Users choose order and return here after each task.
+2. Task detail—completes Applicant details, Supporting evidence, or Renewal dates, then offers Save and return when safe and permitted; Back returns to the hub with safe values intact. [repeat: one task at a time in user-chosen order]
+3. Review and submit—shows the completed task summary, fee, effective date, and renewal consequence; the user corrects errors, confirms the consequential values, and submits.
+
+## State / transition inventory
+- States: hub default with mixed statuses; task detail default, loading, validation error, permission denied, saved draft, expired draft, and success; review with unresolved validation; submit confirmation and submitted success.
+- Transitions: start → hub; hub → any incomplete task; task → hub; Back; Save and return; authenticated re-entry; expired or unauthorized draft recovery; hub → review when required tasks are complete; review → correction or submit; submit → success/home.
 
 ## Cut
-- Merged: the plan step (old 3) → folded into step 1 as plain-view disclosure, so price is stated before any investment rather than after two screens.
-- Merged: the project-name step (old 6) → inference from the email domain plus inline rename inside step 3.
-- Removed: the required teammate invite (old 4)—a gate that cost a third party's data to pass; it becomes an in-product prompt at the moment sharing matters.
-- Removed: the 24-tile integration grid (old 5)—replaced by a contextual "3 suggested · Browse all" prompt inside the workspace, asked when the user has context to answer.
-- Removed: the 4-slide feature tour (old 7)—replaced by a dismissible 3-item checklist that survives dismissal and stays reachable.
-- Kept as protection: email verification—it protects the account and the address is needed for recovery, so it is not waste. Price disclosure moved *earlier*, never hidden to shorten the felt path.
+- Merged: task completion and return → one task detail → hub loop, so each task can be completed without a confirmation round trip.
+- Removed: a forced task order and a setup tour—neither protects the renewal and both delay the service outcome.
+- Kept as protection: the final review and submit step, fee and effective-date disclosure, validation, permission checks, and confirmation of consequential values.
 
 ## Orientation
-- Position/progress: both gated steps carry a two-stage milestone stepper with named stages—"Step 1 of 2 · Create account", "Step 2 of 2 · Verify email"—so the end is visible from the first screen. On arrival, the product's own nav is the position signal: workspace name as the active anchor, plus a "Get started" card reading "1 of 3 done" that honors progress rather than gating it.
-- Retreat/home + exit: step 1 has "Back to site"; step 2 has a real Back to step 1 with the email still filled, plus "Finish later" which saves the pending account and mails a resume link. Step 2 can never dead-end—resend, change email, paste code, Back, and exit are all live on it. Inside the workspace every deferred prompt is dismissible and permanently reachable: Invite in the header, Integrations in the sidebar, and the checklist collapses rather than disappearing.
+- Position/progress: the hub states “Renewal application” and the finite outcome. Task statuses show what is complete and actionable. A named three-stage cue—“Tasks → Review → Submit”—shows the journey without requiring a numeric counter.
+- Retreat/home + exit: each task has Back to task list and Save and return where supported; the start page has Exit service; review has Back to task list and Cancel; success returns to the application home.
 
 ## Continuity
-- Carries forward: the address typed on step 1 is shown verbatim on step 2 ("We sent a code to kevin@acme.com") with a change link, so no code or address is carried in the user's head; the email domain becomes the suggested workspace name on step 3; the plan chosen on step 1 carries to billing and is never re-asked.
-- Survives: Back restores every field on both steps; a refresh, a closed tab, or a return tomorrow resumes on the last step reached with prior input intact, because the pending signup is persisted server-side rather than held in the page; the workspace checklist state persists per user, so a dismissed prompt stays dismissed and a half-done item stays half-done.
-- Entry points: the "Continue setup" email link carries a signed resume token and opens the exact step the user left, never step 1; the verification magic link completes verification and lands the user in the workspace; a teammate's invite link lands the invitee on that workspace's join screen and, after account creation, inside that workspace rather than a fresh empty one.
+- Carries forward: the task name, entered values, evidence status, fee, and effective date appear where needed. Any inferred date or applicant detail is labeled with its source and can be corrected before review.
+- Survives: Back keeps safe task values in the current activity. Save and return stores only permitted draft fields after the user chooses it, shows what was saved and the expiry date, requires authenticated and authorized re-entry, and revalidates permissions, dates, fee, and stale evidence before review or submit. An expired or revoked draft explains the limit and offers a recoverable new start; it does not promise that everything resumes tomorrow.
+- Entry points: a signed resume link opens the authorized task hub or named task with status and expiry visible; an unauthorized or expired link explains the result and routes to the service start.
+- Consequence checks: before submit, show the final task summary, fee, effective date, and permission to submit; ask for explicit confirmation and keep correction routes available.
 
 ## Gates
 - [x] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
 - [x] Every step earns its place; nothing protective cut
-- [x] Where-am-I + platform-appropriate retreat/home + exit throughout
-- [x] No memory bridge; state survives; deep links land in context
-- [x] Drop test passes on every screen
+- [x] Where-am-I + journey-appropriate progress or location + retreat/home + exit throughout
+- [x] No memory bridge; safe state handling; deep links land in context
+- [x] Inferred defaults are visible and correctable; consequential values are confirmed
+- [x] Drop test passes on every applicable screen and transition
 ```
 
----
-
-**Why these two:** the review never just lists problems—it ties every issue to a discipline, ends on a short ranked set of real moves, and sorts the work structural-before-executional. The build never returns prose—it returns the same Flow Spec every time. And the second resolves the first: "cut the wall to 2 gated steps and make every one recoverable" becomes an actual three-screen flow where the user always knows where they are, what's left, and how to get back or out.
-
-Note the honest-path line running through both: the review's fix for the buried price is to disclose it *earlier*, and the build states it on step 1. Shortening the felt path by hiding cost, or dropping verification to save a screen, would be a dark pattern rather than Path Economy—which is why `## Cut` names what was kept as protection alongside what was removed as waste.
+The task list remains finite without pretending that users follow one sequence. Its Save and return behavior is specified with safety, permission, expiry, revalidation, and recovery conditions; the W3C redundant-entry guidance is not used as a claim that every service must persist across sessions.
 
 <!-- END GENERATED SOURCE: compass/reference/examples.md -->
 
+
+<a id="source-compass-reference-build-md"></a>
+
+## Source: `compass/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: compass/reference/build.md -->
+
+# Compass Build: the Flow Spec
+
+Read this reference only for a `build` request or when turning a reviewed journey into a new flow. Compass builds a route whose outcome or home is explicit, whose steps are honest, and whose state and exits are specified for the states the actual journey needs.
+
+## Four moves
+
+1. **Frame the journey.** Name the finite outcome or the open ended intent and home anchor. Record the audience, stakes, entry points, and journey type. A finite task list is a `task-list` journey when users complete several tasks in a user chosen order before one final outcome.
+2. **Map the route or space.** List the screens, repeat loops, branches, task hub and task details, and the final review or submit path that the user actually needs. A task list is a finite hub/detail loop, not a linear screen count: users may choose task order, return to the hub, and submit only when the service's required tasks are complete.
+3. **Inventory applicable states and transitions.** Record only the states and seams the journey needs: default, loading, validation or error, partial completion or failure, retry, permission, Back, branch change, save and return, interruption, re entry, review, final submit, and completion as applicable. For each, state what is visible, what carries forward, what can be safely retained, what expires or must be revalidated, and how the user recovers. Do not add a generic state checklist to a flow that does not need it.
+4. **Signpost and join the seams.** Give each screen a cue for its actual position and remaining work. Use a stable count only when it is meaningful; a named three stage stepper can omit a counter. Give every owned flow a platform appropriate retreat, home path, and exit. Make defaults visible and correctable, confirm consequential values, and specify context and state across each transition.
+
+For persistence, choose the smallest safe scope. Retain data only when the service has a safe and permitted place to keep it, a stated retention and expiry policy, a re entry path with the authentication and authorization the data requires, and a way to revalidate stale or consequential data. If those conditions do not hold, explain the loss at exit and provide a recoverable re entry or safe alternative appropriate to the service. “Return tomorrow resumes everything” is not a default requirement.
+
+## Output format: use this exact structure
+
+Return the following template in this order. Number screens the user passes through for a linear flow. For a `task-list`, use the representative hub → task → hub loop, then review and submit; state that task order is user chosen and that the loop is finite. For an open ended journey, number a representative entry → explore or refine → detail → home loop and call it a loop, not a completion funnel. Mark a gate `[x]` only when the spec actually satisfies it; keep `[ ]` with a reason otherwise. Use `N/A—<reason>` for a gate or state that does not apply; a justified N/A is not a failed gate. Keep a labeled field and write `None.` when it has no content.
+
+```text
+**Flow:** <name>—<finite: gets the user from entry to outcome | open-ended: lets the user pursue one intent while keeping one named place as home>.
+**Type:** linear | branching | hub-and-spoke | task-list | open-ended   ·   **Audience:** novice | mixed | expert
+**Outcome / anchor:** <finite destination | open-ended organizing intent + home anchor>
+
+## Steps
+1. <screen>—<its job> [skip: <the safe, visible, correctable default that removes this step, if any>]
+2. <screen>—<its job>
+
+## State / transition inventory
+- States: <only the applicable default, loading, validation/error, partial completion/failure, retry, permission, saved, expired, review, success, or other states>
+- Transitions: <forward/back, branch change, task order, save/return, interruption/re entry, deep link, final review/submit, and recovery as applicable>
+
+## Cut
+- Merged: <the steps you collapsed> → <the one step they became>
+- Removed: <steps cut as waste>—<why they were not protection>
+- Kept as protection: <any step that looks like waste but stays, and why>
+
+## Orientation
+- Position/progress: <the outcome and the cue suited to this journey—named stages, task statuses, a stable count, or location/home; do not force a widget or counter>
+- Retreat/home + exit: <the platform-appropriate retreat, home, and escape behavior>
+
+## Continuity
+- Carries forward: <context passed across steps; inferred values shown and correctable>
+- Survives: <state kept on Back / refresh / interruption / re entry only when safe, permitted, unexpired, and revalidated as needed; otherwise the stated recovery>
+- Entry points: <where deep links / notifications land>
+- Consequence checks: <what is confirmed before a consequential commit, and what permission or revalidation is required>
+
+## Gates
+- [ ] Finite: one outcome with no independent second outcome · open-ended: one organizing intent and a stable home anchor
+- [ ] Every step earns its place; nothing protective cut
+- [ ] Where-am-I + journey-appropriate progress or location + retreat/home + exit throughout
+- [ ] No memory bridge; safe state handling; deep links land in context
+- [ ] Inferred defaults are visible and correctable; consequential values are confirmed
+- [ ] Drop test passes on every applicable screen and transition
+```
+
+Build output is a proposal. Do not claim that a state, persistence rule, permission, validation path, or implementation exists unless it is supplied as a requirement or deliberately specified in the proposal. Design each individual screen with [Focal](#source-focal-skill-md).
+
+<!-- END GENERATED SOURCE: compass/reference/build.md -->
+
+
+<a id="source-flywheel-skill-md"></a>
 
 ## Source: `flywheel/SKILL.md`
 
@@ -1719,25 +1533,20 @@ Note the honest-path line running through both: the review's fix for the buried 
 
 ---
 name: flywheel
-description: Use when improving how a product converts attention into durable value—the growth and retention side of design. Flywheel finds where a product loses the people it already earned, then applies the play that fixes that relationship stage across four ordered plays—Trust, Friction, Wins, and Emotion. A full relationship diagnosis evaluates all four plays and reports /16 only when each is supportable; a targeted stage review scores one play without fabricating a cross-play total. Triggers on growth, retention, activation, onboarding, conversion, churn, drop-off, first impression, time to value, empty state, upgrade prompt, referral, advocacy, "why do users leave", "nobody comes back", or "they sign up but never return". Not for screen-local structure (use Focal), route mechanics or journey orientation (use Compass), expressive treatment (use Soul), paid channels, campaign copy, analytics instrumentation, or research protocols.
+description: Use when improving how a product turns attention into a valuable relationship—the growth and retention side of design. Establish cadence and success outcome, then find the loss across four ordered plays—Trust, Friction, Wins, and Emotion. Full diagnosis evaluates all four and reports /16 only when each is supportable; targeted review scores one play without a fabricated total. Recurring products may need return and advocacy; finite or infrequent services may succeed through completion, handoff, and exit. Triggers on growth, retention, activation, onboarding, conversion, churn, drop-off, first impression, time to value, empty state, upgrade prompt, referral, advocacy, "why do users leave", "nobody comes back", or "they sign up but never return". Not for screen structure (Focal), route mechanics (Compass), expressive treatment (Soul), paid channels, campaign copy, analytics instrumentation, or research protocols.
 license: MIT
 argument-hint: "[build | diagnose] <product, stage, or symptom>"
 ---
 
 # Flywheel
 
-**Earn the second visit.**
+**Earn the next valuable step.**
 
-A product's journey is usually drawn as a funnel—attention narrowing to trust, to activation, to value, to payment. But look at the last stage. People who return and bring others feed the top again. The chain closes. It is not a funnel, it is a wheel.
+A product's journey is usually drawn as a funnel—attention narrowing to trust, to activation, to value, to payment. For a recurring product, people who return and bring others can feed the top again. For a finite or infrequent service, the intended success may be a completed task, safe handoff, and clean exit. Start with that product-specific outcome before assuming the chain should close. The useful question is whether the relationship stores value for the next step the product actually promises.
 
-That changes what design is for. A funnel asks how to lose fewer people on the way down. A wheel asks how much energy the system stores, and whether each turn is easier than the last.
+That changes what design is for. A funnel asks how to lose fewer people on the way down. A wheel asks how much energy the system stores, and whether the next intended step is easier, safer, or more valuable. For a one-off service, completion and exit can be the correct endpoint rather than a failed first turn.
 
-Four properties of a real flywheel decide everything here:
-
-- **It is hardest to start.** At rest, inertia is highest, and the first turn costs the most.
-- **Every push adds to what is already stored.** Force accumulates rather than dissipating.
-- **Its mass keeps it turning between pushes.** A heavy wheel coasts; a light one stops the moment you stop pushing.
-- **Friction steals what is stored.** An unmaintained wheel slows even while you push.
+A real flywheel is hardest to start, stores useful value between pushes, and loses momentum when friction or forgettability outweighs what it gives back. That metaphor is a diagnostic tool, not a requirement that every product create recurring use.
 
 **The four plays are the four parts of the wheel**, and they run in this order:
 
@@ -1754,15 +1563,9 @@ The order is not a preference. Emotional polish cannot rescue a product that fee
 
 ## When to use
 
-Flywheel is for **what attention becomes**—turning arrival into trust, trust into activation, activation into value, value into return, and return into new arrivals. That last clause is not a flourish: the wheel closes, so the moments that earn word of mouth are in scope alongside the ones that earn a second visit. Onboarding, first-run, activation paths, empty states, success states, upgrade and referral moments, re-entry, win visibility.
+Flywheel is for **what attention becomes**—turning arrival into trust, trust into activation, activation into value, and value into the next intended outcome. In recurring products that includes return, preference, and useful advocacy; in finite or infrequent services it may end with completion, handoff, and exit. Onboarding, empty states, success states, asks, re-entry, and win visibility are in scope only when the intended outcome calls for them.
 
-It is **not** for:
-- Single-screen structure, hierarchy, or clutter—that is [Focal](../focal).
-- Getting the user through a multi-screen path without getting lost—that is [Compass](../compass).
-- **Buying** attention—paid channels, budget allocation, bidding, SEO, campaign copy. Flywheel designs what attention meets when it arrives, and what makes people bring more of it. It does not buy it. Earned acquisition is in scope; paid acquisition is not.
-- Analytics instrumentation, event schemas, research protocols, or experiment statistics. It tells you which measurement would settle a question; it does not build the measurement.
-
-**Scope.** Flywheel is a *lens* for the transitions between stages of a relationship—where value is lost and how a stage earns the next one. It decides which stage is leaking, why, and what to change. The execution of color, typography, spacing, and motion is left to your own design system.
+It is **not** for screen structure (use [Focal](#source-focal-skill-md)), multi-screen route clarity (use [Compass](#source-compass-skill-md)), expressive treatment (use [Soul](#source-soul-skill-md)), paid channels or campaign copy, analytics instrumentation, research protocols, or experiment statistics. Flywheel decides which relationship stage is leaking, why, and what to change; the design system owns execution.
 
 **Flywheel cannot manufacture product-market fit.** It prevents a valuable product from hiding its value behind uncertainty, effort, silence, or forgettability. If the product does not solve a real problem, every play below will make a well-designed thing nobody wants.
 
@@ -1770,154 +1573,105 @@ It is **not** for:
 
 ## Diagnose first—which play do you need?
 
-A **full relationship diagnosis evaluates all four plays**, because the earliest leak can sit upstream of the symptom the user named. It scores every play supported by evidence and reports `/16` only when all four are evaluable. It still selects only one stage to fix first; scanning four is not permission to redesign four. A **targeted stage review or build runs one play deeply** and does not invent a `/16` total. Walk this tree top to bottom and take the first evidenced match.
+A **full relationship diagnosis evaluates all four plays**, because the earliest leak can sit upstream of the symptom. It scores supported plays and reports `/16` only when all four are evaluable, while selecting one stage to fix first when a leak is evidenced. A **targeted stage review or build runs one play deeply** and never invents a `/16` total. Walk this tree top to bottom and take the first evidenced match; if the intended outcome is met and no supported loss appears, report `No leak observed` with a validation check.
 
 ```
-Where does the product lose people?
+Where does the product lose value?
 ├── They arrive and leave without engaging ............... TRUST
 │     the wheel never starts
 ├── They engage but never reach first value ............. FRICTION
 │     drag steals the push
-├── They reach value but do not return or convert ....... WINS
-│     the power stroke lands and nothing is stored
-└── They return for a while, then drift away ............ EMOTION
-      the wheel has no mass
+├── They reach value but do not recognize or complete the intended next outcome ... WINS
+│     the power stroke lands and nothing useful is stored
+└── In a recurring relationship, they return for a while, then drift away ......... EMOTION
+      the wheel has no useful mass
 ```
 
-**Name first value before you walk the tree.** Branches 2 and 3 are separated by exactly that line, and nothing else—so an undefined first value makes the tree unwalkable, and undefined is the common case. If the team has not named it, use the strictest outcome the available product evidence can defend: the moment the user's situation changes, not the moment setup ends. Say which definition you used, because a looser one moves the whole diagnosis from Friction to Wins and changes every fix that follows. Missing internal terminology is context to align, not an automatic UX score penalty; score the experience the user actually receives.
+**Name first value, cadence, and success before you walk the tree.** Branches 2 and 3 are separated by first value, while downstream judgments depend on whether the product expects return, infrequent use, or completed exit. Use the strictest evidence-backed value event, then record cadence—finite, one-off, infrequent, recurring, or unknown—and its success outcome. A finite service may succeed by completing and exiting; absent return, conversion, engagement, or sharing is not a defect unless evidence establishes that outcome. State the definitions used. Missing internal terminology is context to align, not an automatic UX score penalty.
 
 **If two stages both leak, take the earliest among non-critical improvements.** Loss compounds downstream: a fix at Wins is wasted on people who never got past Friction. A P0 at any stage overrides that investment order for immediate stop or repair; once the critical condition is removed, resume from the earliest remaining leak.
 
 ### Diagnosing with data, and without it
 
-**With funnel data**, the leak is where the drop-off is. Compare stage-to-stage conversion, and prefer cohorts with a shared start point over aggregate averages. Read distributions, not means—a median time-to-value can hide a long tail of people who are stuck.
+**With data**, locate drop-off relative to the intended outcome: stage conversion for recurring products, or completion, handoff, and safe exit for finite or infrequent services. Prefer shared-start cohorts and distributions over aggregate averages; a median time-to-value can hide a stuck tail.
 
-**Without data**, which is the common case, diagnose from the artifact using the play's own audit checks, and say plainly which measurement would confirm it. Never stall for want of numbers, and never present a heuristic finding as a measured one—say the finding was diagnosed from the artifact, and name the metric that would confirm it. Both output templates have a slot for exactly that.
+**Without data**, diagnose from the artifact using the play's checks. Label the finding as diagnosed, name the measurement that would confirm it, and never present a heuristic as measured. Both output templates provide a slot for this.
 
-**Pick the confirming metric by what would change the verdict.** Each play's *What to measure* section is a menu; this rule picks from it, and it picks **one**. State it as a comparison, not only a level: the completion rate of the exact step you blamed, and the return or conversion rate of people who clear it versus those who do not. That comparison can support or weaken the diagnosis, but observational cohorts show association, not causation; use an experiment or additional evidence before claiming the step caused the outcome.
+**Pick one confirming metric by what would change the verdict.** Compare completion of the blamed step with the intended outcome—return or conversion for recurring relationships, completion, handoff, or safe exit for finite or infrequent services. Observational cohorts show association, not causation; use an experiment or added evidence before claiming the step caused the outcome.
 
 ### Two modifiers
 
-**Stakes.** In finance, health, children's products, employment, housing, education, identity, and safety, raise the standard. Protective friction is a growth foundation in these contexts, not a conversion problem—durable trust matters more than immediate completion, and a removed safeguard costs more than it earns.
+**Stakes.** In finance, health, children's products, employment, housing, education, identity, and safety, protective friction is a growth foundation, not a conversion problem. Durable trust matters more than immediate completion.
 
-**Motivation.** Effort must stay proportional to how much the user currently wants the outcome. The same form is reasonable at high motivation and fatal at low. Ask where in the journey the user is before judging whether a step is too much.
+**Motivation.** Effort must match how much the user currently wants the outcome. Ask where they are before judging a step. Do not manufacture a habit, upgrade, or share ask for a service whose success is completion and exit.
 
 ---
 
 ## The four plays
 
-Each play has its own reference file. The review contract contains the light scan for all four. Read the selected play's reference for the deep diagnosis or build; read another only when evidence identifies a second independent issue. This keeps the work stage-focused without hiding upstream context.
+Each play has its own reference file. The review contract scans all four; read a selected play deeply, and read another only for a second independent issue.
 
 ### 1. Trust—the first push
-*Read [reference/trust.md](reference/trust.md).*
+*Read [reference/trust.md](#source-flywheel-reference-trust-md).*
 
-The user is deciding whether this is relevant, credible, and worth another minute. Five layers, in order: **relevance** (I recognize the problem), **comprehension** (I understand the mechanism and the next step), **credibility** (the promise is supported), **craft** (this is coherent and maintained), **safety** (I know what will happen and keep control).
+The user is deciding whether this is relevant, credible, and worth continuing. Check five layers in order: **relevance**, **comprehension**, **credibility**, **craft**, and **safety/control**.
 
 Craft is not a substitute for truth. Its job is to make the product's real quality legible.
 
 ### 2. Friction—drag on the bearing
-*Read [reference/friction.md](reference/friction.md).*
+*Read [reference/friction.md](#source-flywheel-reference-friction-md).*
 
-The goal is not zero friction. It is **useful momentum**. Six kinds of friction, and only two of them are waste: accidental and cognitive friction should go, procedural friction should be automated or explained, commitment friction should move after value, and **protective and productive friction should stay**. Removing a safeguard is not a speed improvement; it is the bearing coming out of the wheel.
+The goal is **useful momentum**, not zero friction. Remove accidental drag, reduce or explain cognitive drag, automate safe procedural work, move commitment after value, and keep **protective and productive friction**. Removing a safeguard transfers cost to the user.
 
-Define first value before redesigning onboarding. Activation is experiencing value, not completing setup.
+Define first value before redesigning onboarding: activation is experiencing value, not completing setup.
 
 ### 3. Wins—the power stroke
-*Read [reference/wins.md](reference/wins.md).*
+*Read [reference/wins.md](#source-flywheel-reference-wins-md).*
 
-Products deliver value silently and then wonder why nobody noticed. A win is a moment the user's situation measurably improves. Find them, make them visible, size the feedback to the magnitude, and place every ask *after* the value it relates to.
+Find the moments the user's situation measurably improves, make them visible, match feedback to magnitude, and place every ask *after* the value it extends.
 
-An ask before value converts stored momentum into resistance. That is braking your own wheel.
+An ask before value converts momentum into resistance.
 
 ### 4. Emotion—the mass
-*Read [reference/emotion.md](reference/emotion.md).*
+*Read [reference/emotion.md](#source-flywheel-reference-emotion-md).*
 
-What makes the wheel keep turning between visits. Name the relationship state the job calls for—confidence, control, momentum, mastery—and test whether it changes future behavior. Restore context on re-entry, show accumulated value, and give the user a real reason to continue rather than a novelty prompt.
+For recurring products, Emotion makes return easier or more valuable; for finite services, it can make completion, handoff, and exit feel controlled. Name the state and success behavior—confidence, control, momentum, or mastery—and test it. Restore context on re-entry only when re-entry is intended.
 
-Flywheel owns whether the relationship earns return, preference, and advocacy. Soul owns the expressive treatment of memorable moments. A product can have strong relationship mass through useful continuity and compounding value without being visually distinctive.
+Flywheel owns relationship value and intended return, preference, or advocacy; Soul owns expressive treatment. Quiet continuity can create mass, while a finite service can earn trust through a complete, controlled ending without creating a habit.
 
 ---
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `diagnose` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Run the full four-play diagnosis; read an individual play's reference file only when a next-point change cannot be grounded without it.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](#source-product-judgement-skill-md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `diagnose` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](#source-flywheel-reference-review-md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](#source-flywheel-reference-examples-md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Run the full four-play diagnosis; read an individual play's reference file only when a next-point change cannot be grounded without it.
 
 - **No argument** → explain the wheel and the four plays briefly, then ask: diagnosing an existing product, or designing a relationship stage?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Flywheel with Focal, Compass, and Soul and reconciles the results.
-- **`diagnose` / `audit` / `review` of the product or relationship** → load and follow [reference/review.md](reference/review.md). A full diagnosis evaluates all four plays, scores every supported play 0–4, reports `/16` only when all four are evaluable, and selects the earliest evidenced leak. A request explicitly limited to one stage uses the same rubric but reports that play `/4` with no fabricated `/16` total. Both modes require evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators.
-- **`build` (a relationship stage to design)** → name first value, walk the diagnosis tree to confirm which stage, read that play's reference, then follow **Design** below. That order is fixed: the tree cannot be walked before first value is named.
+- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](#source-product-judgement-skill-md), which runs Flywheel with Focal, Compass, and Soul and reconciles the results.
+- **`diagnose` / `audit` / `review` of the product or relationship** → load and follow [reference/review.md](#source-flywheel-reference-review-md). A full diagnosis evaluates all four plays, scores every supported play 0–4, reports `/16` only when all four are evaluable, and selects the earliest evidenced leak. A request explicitly limited to one stage uses the same rubric but reports that play `/4` with no fabricated `/16` total. Both modes require evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators.
+- **`build` (a relationship stage to design)** → name first value, intended cadence, and success outcome; walk the diagnosis tree to confirm which stage; then read that play's reference and [reference/build.md](#source-flywheel-reference-build-md). That order is fixed: the tree cannot be walked before first value and the intended endpoint are named.
 - **A question about one play** → read that play's reference file.
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It is the calibration for length, tone, and how the locked templates look when filled well.
-
----
-
-## Design a relationship stage: the five moves
-
-Designing a relationship stage needs one input Focal and Compass do not: you cannot design trust or activation in the abstract. Establish the frame first.
-
-1. **Frame it.** What is the product, who is this stage for, and **what is the first-value event?** Name it as something that changes the user's situation, not as setup completed. "Created an account" is not first value; "imported data and got an actionable insight" is. Name it even when the stage sits after value—the Stage Spec has a slot for it either way, and a stage designed without knowing what value it follows is a stage designed blind.
-2. **Name the stage and its leak.** Which of the four is this, and what is being lost there today (or what would be, if this ships wrong).
-3. **Run the play.** Read that reference and apply it. One play, not four.
-4. **Place the ask.** If this stage contains a commercial or social ask—upgrade, invite, share, rate, connect—state what value lands before it and why accepting extends that value. If no value lands first, move the ask or cut it.
-5. **Run the gates.** Self-check against the **`## Gates`** block of the Stage Spec template below. That block is the single canonical list—read them there, and emit them there. Never restate them in your own words.
-
-**Output—the Stage Spec (use this exact structure).** Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-```
-**Stage:** <name>—the <trust | friction | wins | emotion> play, for <who>.
-**First value:** <the event that changes the user's situation>   ·   **Stakes:** low | medium | high
-
-## The leak
-- Today: <what is lost here, and the evidence—measured or diagnosed from the artifact>
-- Confirm with: <the specific metric that would settle it>
-
-## The design
-- <what the user encounters, in order>
-- <each element and the job it does for this stage>
-
-## Friction kept
-- <any effort deliberately preserved—protective or productive—and why removing it would cost more than it saves>
-- None, if nothing here protects the user.
-
-## The ask
-- Ask: <the commercial or social ask on this stage, or "None">
-- Lands after: <the value the user has just received>
-- Declining changes: <what already-earned value remains, plus any explicit foregone benefit or real consequence>
-
-## Gates
-- [ ] First value named as an outcome, not setup
-- [ ] The leak is stated with evidence, and the confirming metric is named
-- [ ] Every required step has a purpose the user could be told
-- [ ] Protective and productive friction preserved
-- [ ] Any ask lands after the value it extends; declining preserves value already earned; any foregone benefit is explicit and noncoercive
-- [ ] Nothing here hides cost, consequence, permission, or reversibility
-```
-
-**Gates ship unchecked.** Mark `[x]` only for gates the spec actually satisfies; leave `[ ]` with a short reason for any it does not.
+Before emitting either output, read [reference/examples.md](#source-flywheel-reference-examples-md). It is the calibration for length, tone, and how the locked templates look when filled well. The orchestrated pass skips that read as stated above.
 
 ---
 
 ## Voice (when giving feedback)
 
-- **Emit the exact output template.** The `build` and `diagnose` modes each have a locked structure—the Stage Spec is above, and the diagnosis template is in [reference/review.md](reference/review.md). Use them verbatim: same sections, same order, same headers, same table columns, same issue-line format. Don't add, remove, reorder, or rename sections; if a section has nothing, keep its header and write "None."
-- **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks you to produce something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill, not a judgment call: name it in one line after the output so it can be fixed. Analysis the template has no room for is still worth doing; it informs the scores even when it isn't printed.
-- **Separate measured from diagnosed.** Say which findings come from data and which from reading the artifact. Confidence stated honestly is worth more than confidence borrowed.
-- **Be specific and quantitative.** "Six fields before any value is shown" beats "onboarding is too long." Count the steps, name the moment, quote the copy.
-- **Name the mechanism, not the symptom.** "Conversion is low" is not a diagnosis. Trust, comprehension, effort, confidence, motivation, value recognition, timing, memory, attachment—pick the one that explains the loss, then fix that.
-- **No hedging when the finding is clear.** Severity does the hedging work.
-- **Locate every issue.** Name the exact touchpoint, rendered or system state, and relationship lifecycle stage where the loss occurs and the change belongs.
+- **Emit the exact template.** `build` uses [reference/build.md](#source-flywheel-reference-build-md); `diagnose` uses [reference/review.md](#source-flywheel-reference-review-md). Preserve each template's sections, order, labels, columns, and issue-line format; retain empty headers with `None.`
+- **Template precedence.** Put analysis in the nearest available slot; never invent a section or claim an unshown behavior. A missing fact belongs in evidence or a validating check.
+- **Separate measured from diagnosed.** State the evidence basis and the diagnostic hypothesis: observation → mechanism → consequence → smallest confirming check.
+- **Be specific.** Count steps, name moments, quote copy, and locate every issue by exact touchpoint, rendered/system state, and lifecycle stage.
 
 ---
 
 ## Absolute don'ts
 
-Match-and-refuse. These are not aggressive growth tactics; they are the ways a wheel gets destroyed while appearing to spin faster.
+Match-and-refuse. These are ways a wheel is damaged while appearing to spin faster.
 
-- **Hiding material consequence to increase action.** Cost, renewal, permissions, risk, data use, irreversibility, cancellation. Obscuring a material one removes informed choice and is P0 regardless of what it does to the metric.
-- **An extractive ask before relevant value.** A rating prompt on first launch, an invite request before collaboration is understood, or an unrelated upsell at task entry brakes the wheel. An honest purchase decision can precede product use when payment is the transaction itself; disclose the value, cost, terms, and alternative before commitment.
+- **Hiding material consequence to increase action.** Cost, renewal, permissions, risk, data use, irreversibility, or cancellation. This removes informed choice and is P0.
+- **An extractive ask before relevant value.** Rating on first launch, an invite before collaboration is understood, or an unrelated upsell at task entry. A purchase may precede use when payment is the transaction; disclose value, cost, terms, and alternatives.
 - **Weaponized emotion.** Shame, artificial urgency, fear of missing out around risky behavior, loss-chasing, punitive streaks, guilt-based cancellation flows.
-- **Celebration disproportionate to the moment.** Confetti on a routine action reads as juvenile; confetti on a high-stakes financial action before confirming safety reads as a casino.
+- **Celebration disproportionate to the moment.** Confetti on routine work is juvenile; confetti on a high-stakes action before safety confirmation is a casino signal.
 - **Optimizing screen count instead of understanding.** Combining screens that each held one real decision does not reduce effort, it concentrates it.
 - **Claiming value you cannot substantiate.** Invented time-saved numbers, inflated estimates, generic testimonials.
 - **Treating every pause as a conversion problem.** Some pauses are people thinking, which is what you want before a consequential choice.
@@ -1927,15 +1681,17 @@ Match-and-refuse. These are not aggressive growth tactics; they are the ways a w
 
 ## References
 
-- [reference/review.md](reference/review.md)—the four-play audit, the Flywheel scorecard (0–4 per play, /16), severity, and output format.
-- [reference/trust.md](reference/trust.md)—the trust stack, first-impression touchpoints, message match, performance and accessibility as trust signals.
-- [reference/friction.md](reference/friction.md)—the six-type friction taxonomy, the friction decision test, defining activation, designing backward from first value.
-- [reference/wins.md](reference/wins.md)—win types, the win map, making value visible, proportional amplification, timing asks, shareable artifacts.
-- [reference/emotion.md](reference/emotion.md)—the emotional arc, choosing the emotion, baseline vs peaks, endings and re-entry.
-- [reference/examples.md](reference/examples.md)—a worked diagnosis and a worked relationship-stage design, in the locked output templates.
+- [reference/review.md](#source-flywheel-reference-review-md)—audit rubric, scorecard, severity, and output format.
+- [reference/trust.md](#source-flywheel-reference-trust-md)—trust stack and first-impression checks.
+- [reference/friction.md](#source-flywheel-reference-friction-md)—friction taxonomy and first-value checks.
+- [reference/wins.md](#source-flywheel-reference-wins-md)—win map, visibility, endings, asks, and shareable artifacts.
+- [reference/emotion.md](#source-flywheel-reference-emotion-md)—relationship state, continuity, accumulation, and re-entry.
+- [reference/examples.md](#source-flywheel-reference-examples-md)—worked diagnosis and stage design.
 
 <!-- END GENERATED SOURCE: flywheel/SKILL.md -->
 
+
+<a id="source-flywheel-reference-review-md"></a>
 
 ## Source: `flywheel/reference/review.md`
 
@@ -1943,24 +1699,26 @@ Match-and-refuse. These are not aggressive growth tactics; they are the ways a w
 
 # Flywheel Diagnose—the four-play audit
 
-Find where a product loses the people it already earned and name the one stage to fix first. A full relationship diagnosis evaluates all four plays and reports `/16` only when all are supportable; a request explicitly limited to one stage scores that play only and reports no cross-play total. Use when the user asks to diagnose, audit, or review growth, retention, activation, conversion, churn, or a symptom like "nobody comes back."
+Find where a product loses value and name the one stage to fix first, or say that no leak is observed when the intended outcome is being met. First establish the intended cadence and success outcome: recurring products may need return and advocacy, while finite or infrequent services may succeed through completion, handoff, and exit. A full relationship diagnosis evaluates all four plays and reports `/16` only when all are supportable; a request explicitly limited to one stage scores that play only and reports no cross-play total. Use when the user asks to diagnose, audit, or review growth, retention, activation, conversion, churn, or a symptom like "nobody comes back."
 
 ## Input modes
 
-- **A symptom** ("they sign up and never return")—map it to a stage with the diagnosis tree in [SKILL.md](../SKILL.md), scan all four to catch an earlier leak, then audit the selected stage deepest.
+- **A symptom** ("they sign up and never return")—map it to a stage with the diagnosis tree in [SKILL.md](#source-flywheel-skill-md), scan all four to catch an earlier leak, then audit the selected stage deepest.
 - **A targeted stage** ("audit the upgrade moment")—run that play deeply. Mark the other rows `N/E—outside targeted scope`, and do not print a native total or common band. `N/E` means not evaluated, not zero.
 - **Funnel data**—the leak is where the drop-off is. Use cohorts with a shared start point, and read distributions rather than averages.
 - **An artifact** (a screenshot, a page, a flow, a product)—diagnose heuristically from the play's own checks. This is the common case and it is legitimate; label it as diagnosed rather than measured. If the artifact and supplied context expose no evidence for a play, use `N/E—insufficient evidence` rather than inventing lifecycle behavior.
+- **A finite or infrequent service**—judge completion, handoff, safe exit, and any explicitly intended later use. Do not treat absent return, frequency, conversion, engagement, or sharing as a defect unless the product's intended outcome requires it.
 
 ## Step 0—Frame, then find the leak
 
 Before scoring, establish in one or two sentences each:
 
 - **What is this product, and who is it for?** A growth judgment with no audience is a guess.
-- **What is first value?** Name the event that changes the user's situation. If the team has not defined it, infer the strictest definition supported by the product evidence and label it as the audit's working definition—the tree below cannot be walked without one. Missing internal terminology does not cap a UX score by itself. If no value-changing outcome can be defended from the product or context at all, say so and score the resulting uncertainty where the local rubric supports it.
+- **What is first value?** Name the event that changes the user's situation. If the team has not defined it, infer the strictest definition supported by the product evidence and label it as the audit's working definition—the tree below cannot be walked without one. Missing internal terminology does not cap a UX score by itself. If the evidence cannot establish a value-changing outcome, state the gap and use N/E for any play that depends on it. Score a weak outcome only when the observed product supports that finding.
+- **What is the intended cadence and success outcome?** Record `finite`, `one-off`, `infrequent`, `recurring`, or `unknown`, then name the outcome that defines success for that cadence. A finite service may succeed by completing and exiting; do not invent a return, conversion, upgrade, share, or engagement target.
 - **What are the stakes?** Low, medium, or high. In finance, health, children's products, employment, housing, education, identity, and safety, protective friction is a foundation and its removal is a defect, not an optimization.
-- **Where is the leak?** Walk the diagnosis tree in **[SKILL.md](../SKILL.md)**—take the first match, and don't re-derive the categories here. If two stages leak, take the earliest; loss compounds downstream.
-- **Which relationship and app states are covered?** Inventory the evidence across arrival, consideration, activation before value, first value, return, lapse, re-engagement, and advocacy—and the exact UI states exposed at those moments. Mark consequential stages or states `not shown` rather than filling them in from assumption.
+- **Where is the leak?** Walk the diagnosis tree in **[SKILL.md](#source-flywheel-skill-md)**—take the first evidenced match, and don't re-derive the categories here. If two stages leak, take the earliest; loss compounds downstream. If no supported loss appears against the intended outcome, write `No leak observed` and give the fastest validation check instead of proposing an intervention.
+- **Which relationship and app states are covered?** Inventory evidence across arrival, consideration, activation before value, first value, completion/exit, and—only when the cadence calls for it—return, lapse, re-engagement, and advocacy. Mark consequential stages or states `not shown` rather than filling them in from assumption.
 - **Measured or diagnosed?** State which. Findings from data and findings from reading an artifact carry different weight, and blending them silently is how a heuristic becomes a false certainty.
 
 ## Locate every finding
@@ -1970,13 +1728,13 @@ Before scoring or suggesting a change, build a four-part implementation locator.
 1. **Screen**—the exact touchpoint, screen, message, or control.
 2. **Flow**—the named journey or transition that carries the user to that touchpoint.
 3. **State**—the rendered or system condition: first encounter, empty, loading, error, success, ask, retry, and so on.
-4. **Lifecycle**—the relationship stage: arrival, consideration, activation before value, first value, return, lapse, re-engagement, or advocacy.
+4. **Lifecycle**—the relationship stage: arrival, consideration, activation before value, first value, completion/exit, return, lapse, re-engagement, or advocacy when applicable.
 
 Use the narrowest defensible locator. `Report screen → result · report generation flow · success after processing · first value for a new signup` is actionable; `activation` is not. If any locator field is not evidenced, write `not shown` and name the metric or behavior that would confirm it in **Coverage** or **Basis**—do not invent behavior.
 
 ## The four gates
 
-In a full diagnosis, evaluate all four plays even when only one appears to leak—a stage can be strong and still sit behind a broken one, and the reader needs to see that the fix is upstream. Score every play supported by evidence. If a play is entirely unexposed after inspecting the available artifact and context, mark it `N/E—insufficient evidence`; never turn an absent lifecycle stage into either credit or failure. In a targeted stage review, score only the selected play and mark the other three `N/E—outside targeted scope`.
+In a full diagnosis, evaluate all four plays even when only one appears to leak—a stage can be strong and still sit behind a broken one, and the reader needs to see that the fix is upstream. Score every play the available evidence supports. When the evidence cannot support a play's rubric, mark it `N/E—insufficient evidence`; never turn an absent lifecycle stage into either credit or failure. For a finite or infrequent service, completion, handoff, and safe exit can be the relevant downstream outcome; absent return is not a defect unless return is intended. In a targeted stage review, score only the selected play and mark the other three `N/E—outside targeted scope`.
 
 ### Gate 1—Trust *(the first push)*
 
@@ -1996,7 +1754,7 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 
 ### Gate 2—Friction *(drag on the bearing)*
 
-- Is first value identifiable as an outcome rather than setup? If the team has not named it, use the audit's evidence-backed working definition. Cap this gate at `2` only when no value-changing outcome can be defended, not merely because internal documentation is missing.
+- Is first value identifiable as an outcome rather than setup? If the team has not named it, use the audit's evidence-backed working definition. A demonstrated path that ends at setup without delivering a value-changing outcome supports a score no higher than `2`; missing documentation or an unshown outcome supports an evidence check, not a cap.
 - Walk the effort before first value and name its friction type. Use Compass to establish route mechanics; Flywheel scores whether that effort and uncertainty prevent the relationship from reaching value. Accidental and cognitive friction are waste; protective and productive friction are not.
 - Is any commitment asked before value has been delivered?
 - Do empty states create a path to value, and do errors preserve the user's work?
@@ -2005,7 +1763,7 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 |-------|----------|
 | 0 | Protective friction removed, or a required step the user cannot satisfy |
 | 1 | A setup wall—value is gated behind configuration the user has no context to complete |
-| 2 | Reachable, but padded with accidental or cognitive friction, or first value is undefined |
+| 2 | Reachable, but padded with accidental or cognitive friction, or the observed path ends at setup without a value-changing outcome |
 | 3 | Lean path, purposeful steps, progress preserved, recovery designed |
 | 4 | Exemplary—the fewest honest steps; safe inference and defaults do the work; protection intact and explained |
 
@@ -2013,7 +1771,7 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 
 - Name the largest win the product delivers. Does the user recognize it happened?
 - Does feedback intensity match the magnitude of the win?
-- Does every important workflow have a designed ending, or does it stop?
+- Does every important workflow have a designed ending, or does it stop? For a finite or infrequent service, inspect completion, handoff, and safe exit instead of inventing repeat use.
 - Does each ask land after the value it extends? Does declining preserve value already earned, with any foregone benefit explicit and noncoercive?
 
 | Score | Criteria |
@@ -2026,38 +1784,35 @@ In a full diagnosis, evaluate all four plays even when only one appears to leak�
 
 ### Gate 4—Emotion *(the mass)*
 
-- Is the intended relationship state named—confidence, control, momentum, mastery, belonging—and is there evidence it supports return or preference?
-- Does re-entry restore context, show what changed, and preserve accumulated value?
-- Does repeated use become easier or more valuable, giving the user a substantive reason to continue?
+- Is the intended relationship state named—confidence, control, momentum, mastery, belonging—and is there evidence it supports the product's stated success outcome? For recurring products, that may be return or preference; for finite services, it may be a confident completion and handoff.
+- When re-entry is intended, does it restore context, show what changed, and preserve accumulated value? When it is not intended, is completion and exit clear?
+- When repeated use is intended, does it become easier or more valuable? Do not score absent repetition as a defect for a finite or infrequent service.
 - Does anything here rely on shame, urgency, streak pressure, or guilt?
 
 | Score | Criteria |
 |-------|----------|
 | 0 | Emotion is weaponized—shame, false urgency, punitive streaks, guilt-based retention |
-| 1 | No relationship mass—each visit resets context or value, and return depends on prompting rather than a reason |
-| 2 | Return is possible, but restored context, accumulated value, or preference is materially weak or inconsistent |
-| 3 | Re-entry restores momentum, repeated use preserves or compounds value, and the reason to return is clear |
-| 4 | Exemplary—each return is meaningfully easier or more valuable, preference is reinforced without pressure, and evidence supports durable return or advocacy |
+| 1 | No relationship value—each intended use resets context or value, or a recurring return depends on prompting rather than a reason |
+| 2 | The intended next use is possible, but restored context, accumulated value, preference, or completion/exit is materially weak or inconsistent |
+| 3 | The intended next use preserves or compounds value, and recurring re-entry or finite completion has a clear, controlled reason |
+| 4 | Exemplary—the intended next use is meaningfully easier or more valuable, preference is reinforced without pressure, and evidence supports the product's success outcome |
 
 ## Scoring rules
 
 Every evaluated play uses the same integer anchors:
 
-| Score | Canonical label | Shared meaning |
-|---:|---|---|
-| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
-| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
-| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
-| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
-| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
+See the [shared anchors contract](#shared-anchors) already included above.
 
-Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
+See the [shared evidence contract](#shared-evidence) already included above.
+
+
+Score each evaluated play holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the play overall, apply explicit local caps or prerequisites only where that rubric states one, and let one severe material failure determine the score when the rubric warrants it. Missing internal terminology is never a score cap. Do not use hidden sub-scores, checklist subtraction, averaging, or half-points. A 4 is exemplary for the play being scored; expressive distinctiveness is Soul's concern, not a Flywheel prerequisite.
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the relationship; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the play is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or lifecycle stage, say `not shown` in Coverage/Basis and name the validating metric or behavior—do not award credit or invent failure.
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the relationship; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` must explain why the play is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or lifecycle stage, say `not shown` in Coverage/Basis and name the validating metric or behavior—do not award credit or invent failure.
 
-For a **full diagnosis with all four plays evaluated**, keep the native total: `total = Trust + Friction + Wins + Emotion`. Calculate `average = total / 4`, display it rounded to one decimal place, and apply this shared algorithm. If any play is `N/E—insufficient evidence`, report no `/16` total, average, common band, or weakest-play ceiling. For a **targeted stage review**, report the selected play `/4`, mark the others `N/E—outside targeted scope`, and report `Total: N/E—targeted stage review`; do not calculate an average, common band, or weakest-play ceiling from one play.
+For a **full diagnosis with all four plays supported**, keep the native total: `total = Trust + Friction + Wins + Emotion`. Calculate `average = total / 4`, display it rounded to one decimal place, and apply this shared algorithm. If any required play is `N/E—insufficient evidence`, omit the Total row, `/16` total, average, common band, and weakest-play ceiling. For a **targeted stage review**, report the selected play `/4`, mark the others `N/E—outside targeted scope`, and omit the Total row; do not calculate an average, common band, or weakest-play ceiling from one play.
 
 | Band | Average rule | Native total |
 |---|---:|---:|
@@ -2066,37 +1821,31 @@ For a **full diagnosis with all four plays evaluated**, keep the native total: `
 | **Solid** | `2.5 <= average < 3.5` | `10–13 / 16` |
 | **Excellent** | `average >= 3.5` | `14–16 / 16` |
 
-Then cap the band by the weakest play: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the four scores.
+When all four plays are scored, cap the band by the weakest play: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the four scores.
 
 - If more than one independent failure sits in a play, score the *worst* one, then list the others as separate issues.
 
 - **A dark pattern is a critical blocker regardless of total.** Hiding cost, permission, risk, or reversibility to increase action; weaponizing emotion; or removing informed choice must be tagged P0 and named in **Blocker**. Do not mechanically force an unrelated play to 0; score the play using its rubric.
-- **The earliest evidenced leaking stage governs non-critical investment.** A 1 at Trust and a 1 at Emotion is a Trust problem; fixing Emotion first spends effort on people who never arrive. If an earlier play is `N/E`, call the ordering provisional and put its validating check before downstream investment. A P0 at any stage overrides that order for immediate stop or repair and becomes **Fix this first**. After the critical condition is removed, resume from the earliest remaining evidenced leak.
+- **The earliest evidenced leaking stage governs non-critical investment.** A 1 at Trust and a 1 at Emotion is a Trust problem; fixing Emotion first spends effort on people who never arrive. If a needed play is `N/E`, call the ordering provisional and put its validating check before downstream investment. A P0 at any stage overrides that order for immediate stop or repair and becomes **Fix this first**. After the critical condition is removed, resume from the earliest remaining evidenced leak.
 - **Do not average away a safety or accessibility failure.** Give it its own issue line and blocker state when warranted rather than hiding it inside the total.
 
 Dimension score, overall quality band, issue severity, critical blocker, and the earliest leaking stage are separate. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**. P0 stop-or-repair work governs **Fix this first**; otherwise the earliest leaking stage does.
 
 ## Issue severity
 
-| Priority | Meaning |
-|----------|---------|
-| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, or return for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, confusion, dilution, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
-| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
+See the [shared severity contract](#shared-severity) already included above.
 
-Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
 
 **Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by stage order—Trust, then Friction, then Wins, then Emotion—because upstream fixes change the population that reaches everything downstream. Never reorder across priorities; a P0 Emotion issue outranks a P1 Trust issue.
 
 ## Output format—use this exact structure
 
-Every diagnosis returns this template verbatim, in this order. Don't add, remove, reorder, or rename sections. Fill the `<…>` slots; keep every fixed label. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
+Every diagnosis returns this template in this order. Keep the sections and fixed labels; omit only the Total row when the diagnosis is incomplete or targeted. Fill the `<…>` slots. This block is the single source of truth for the emitted shape—the issue line, the table columns, and the section list exist only here.
 
 ```
-**Verdict:** <the leaking stage | undetermined pending evidence> · <the one biggest loss or evidence gap, one phrase> · **<full: total/16 or N/E | targeted: play score/4>**
+**Verdict:** <the leaking stage | No leak observed | undetermined pending evidence> · <the one biggest loss, "no evidenced loss," or evidence gap, one phrase> · **<full: total/16 or N/E | targeted: play score/4>**
 
-**Product:** <what it is, for whom> · first value: <the event, or "undefined"> · stakes: <low | medium | high>
+**Product:** <what it is, for whom> · first value: <the event, or "undefined"> · cadence: <finite | one-off | infrequent | recurring | unknown> · success outcome: <the outcome that defines success for that cadence> · stakes: <low | medium | high>
 **Scope:** <full relationship diagnosis | targeted stage: Trust | Friction | Wins | Emotion>
 **Screen:** <exact touchpoint(s) or `not shown`>
 **Flow:** <named journey or transition(s) or `not shown`>
@@ -2113,15 +1862,15 @@ Every diagnosis returns this template verbatim, in this order. Don't add, remove
 | Friction | <_/4 or N/E> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or `N/E`> |
 | Wins | <_/4 or N/E> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or `N/E`> |
 | Emotion | <_/4 or N/E> | <evidence → consequence → rubric anchor, or N/E reason> | <smallest concrete change, `None—already exemplary`, or `N/E`> |
-| **Total** | **<full and complete: _/16 · _._/4 | otherwise: N/E>** | **<full and complete: band and exact sum | incomplete/targeted: why no cross-play total>** | <full and complete: weakest-play ceiling | otherwise: validating check or selected play only> |
+| **Total** | **<_/16 · _._/4>** | **<band and exact sum>** | <weakest-play ceiling> |
 
 ## Issues (most severe first)
 - **[P0 · Trust]** **At:** screen: <exact touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact relationship stage>. <Name>—<observation>. <what it costs>. **Fix:** <fix>.
 - **[P1 · Friction]** **At:** screen: <exact touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact relationship stage>. <Name>—<observation>. <what it costs>. **Fix:** <fix>.
 
 ## Fix this first
-**At:** screen: <exact touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact relationship stage>
-<the single leaking stage, and why fixing anything downstream is premature>
+**At:** screen: <exact touchpoint or `not applicable`> · flow: <named flow or transition or `not applicable`> · state: <exact app state or `not applicable`> · lifecycle: <exact relationship stage or `not applicable`>
+<the single leaking stage, and why fixing anything downstream is premature | `None—no leak observed; validate <the fastest check> before proposing an intervention.`>
 
 ## Next
 - **Now**: **At:** screen: <exact touchpoint> · flow: <named flow or transition> · state: <exact app state> · lifecycle: <exact relationship stage> · <the change at the leaking stage>
@@ -2130,14 +1879,16 @@ Every diagnosis returns this template verbatim, in this order. Don't add, remove
 ```
 
 Filling it:
-- **Coverage**—name only relationship stages and app states the evidence actually exposes. Use `gaps` for consequential stages such as first value, return, lapse, or re-engagement that were not shown or measured.
-- **Scope and total**—use `/16` only when all four plays were evaluated. In a full diagnosis, an entirely unsupported play is `N/E—insufficient evidence`; in a targeted stage review, the three out-of-scope rows are `N/E—outside targeted scope`. Neither kind of `N/E` is `0`, and either prevents a total or common band.
+- **Coverage**—name only relationship stages and app states the evidence actually exposes. Use `gaps` for consequential stages such as first value, completion/exit, return, lapse, or re-engagement that were not shown or measured.
+- **Scope and total**—use `/16` only when all four required plays have supported scores. In a full diagnosis, an unsupported play is `N/E—insufficient evidence`; in a targeted stage review, the three out-of-scope rows are `N/E—outside targeted scope`. Neither kind of `N/E` is `0`, and either prevents a total, average, band, or weakest-play ceiling.
 - **Issues and suggestions**—repeat the issue line once per issue, and give every issue, Fix this first recommendation, Next item, and handoff a complete **Screen · Flow · State · Lifecycle** locator. Keep the `At` locator precise enough to identify the exact touchpoint and cohort moment that must change. `<observation>` may run two or three sentences when being specific and quantitative; the rest stay tight. If nothing ranks above P3, write "None above P3." under the Issues header and keep the header.
-- **Fix this first**—one stage, never a list. The whole point of the diagnosis is to refuse to work on four things at once.
+- **Fix this first**—one stage, never a list. If no supported loss is observed, write `None—no leak observed; validate <check>` and do not invent an intervention.
 - **Basis**—never claim measurement you do not have. Use the controlled basis vocabulary in the template, and name the fastest confirming metric or behavior.
 
 <!-- END GENERATED SOURCE: flywheel/reference/review.md -->
 
+
+<a id="source-flywheel-reference-trust-md"></a>
 
 ## Source: `flywheel/reference/trust.md`
 
@@ -2181,7 +1932,7 @@ Coherence signals that someone is paying attention, which is the only proxy a ne
 The user knows the consequence and keeps agency.
 
 - Clear permissions, preview before commitment, visible fees, reversibility where it exists, honest limitations, explicit confirmation for consequential actions, a way to get help.
-- Raise this layer in finance, health, identity, and anything irreversible. **Explaining risk before requesting permission converts better than hiding it, and it is the only version that survives the second visit.**
+- Raise this layer in finance, health, identity, and anything irreversible. **Explaining risk before requesting permission supports informed completion and any later use; it is the only version that earns durable trust.**
 
 ## First impressions are not the homepage
 
@@ -2233,6 +1984,8 @@ Qualified landing continuation, primary-CTA click-through, signup start, invite 
 
 <!-- END GENERATED SOURCE: flywheel/reference/trust.md -->
 
+
+<a id="source-flywheel-reference-friction-md"></a>
 
 ## Source: `flywheel/reference/friction.md`
 
@@ -2286,7 +2039,7 @@ Onboarding is not a set of introductory screens. It is the path from expectation
 | Reached the dashboard | Imported data and received an actionable insight |
 | Enabled notifications | Invited a collaborator who participated |
 
-**Validate it.** If people who complete the proposed activation event do not retain better than comparable people who do not, the event is weak evidence of value and the definition should be revisited. The cohort comparison shows association, not causation; control for acquisition, intent, and survivorship, and use experiments or research before claiming the event caused retention.
+**Validate it.** If people who complete the proposed activation event do not reach the product's intended success outcome more often than comparable people who do not, the event is weak evidence of value and the definition should be revisited. For recurring products, that outcome may be return; for finite or infrequent services, it may be completion, handoff, or safe exit. The cohort comparison shows association, not causation; control for acquisition, intent, and survivorship, and use experiments or research before claiming the event caused retention or completion.
 
 ## Design backward from first value
 
@@ -2317,11 +2070,11 @@ Sequence setup so only prerequisites for the next value-bearing step are require
 
 ## What to measure
 
-Onboarding completion, step-level abandonment, time to first value, sessions to first value, error rate, backtracking, repeated attempts, support contact during activation, and activation rate by acquisition source.
+Onboarding completion, step-level abandonment, time to first value, error rate, backtracking, repeated attempts, support contact during activation, and activation rate by acquisition source. For recurring products add meaningful return; for finite or infrequent services add completion, handoff, or safe exit.
 
 **Use distributions, not averages.** A median hides the tail of people who are stuck, and the tail is the leak.
 
-Compare retention of comparable activated and non-activated cohorts as one validation signal. Report it as association unless an experiment or stronger causal design isolates the activation event.
+Compare the intended success outcome for comparable activated and non-activated cohorts as one validation signal: retention or meaningful return when recurring, completion, handoff, or safe exit when finite or infrequent. Report the result as association unless an experiment or stronger causal design isolates the activation event.
 
 ## Anti-patterns
 
@@ -2337,6 +2090,8 @@ Compare retention of comparable activated and non-activated cohorts as one valid
 
 <!-- END GENERATED SOURCE: flywheel/reference/friction.md -->
 
+
+<a id="source-flywheel-reference-wins-md"></a>
 
 ## Source: `flywheel/reference/wins.md`
 
@@ -2361,7 +2116,7 @@ Not every completed task. A win is a moment of meaningful improvement, and it co
 | **Financial** | Money saved or earned, risk reduced, a transaction succeeds |
 | **Identity** | The user feels more capable, disciplined, expert, or part of a group they value |
 
-Identity wins are the most durable and the least designed for. They are also what makes a product hard to switch away from, because the alternative has to replace how the user sees themselves, not just what they can do.
+Identity wins can be durable when they reflect a useful change the user voluntarily values, but no win type is universally the most durable. Test the claim in context. A product may earn preference over alternatives when it leaves behind useful accumulated value—work, history, learning, or reputation—that the user can inspect, control, export, or carry with them. Treat switching resistance as evidence to investigate, never as a reason to create lock-in; accumulated value that cannot be controlled or ported is a trust and agency problem.
 
 ## Build a win map
 
@@ -2371,7 +2126,7 @@ Map the core journey and record every candidate:
 |---|---|---|---|---|---|
 | first analysis completes | understand a theme | prioritized themes appear | relief, clarity | generic "Done" toast | save, share, or analyze another source |
 
-Then rank each on **magnitude** (how meaningful), **frequency** (how often), **distinctiveness** (does this product create it in a way others do not), **visibility** (does the user recognize it), **shareability** (is there a natural artifact), and **commercial relevance** (does it support deeper use or payment).
+Then rank each on **magnitude** (how meaningful), **frequency** (how often, when repeat use is intended), **distinctiveness** (does this product create it in a way others do not), **visibility** (does the user recognize it), **shareability** (is there a natural artifact), and **commercial relevance** (does it support an authorized deeper use or payment). For a finite or infrequent service, rank completion quality, handoff, and safe exit instead of inventing a recurring frequency or next ask.
 
 Work the highest magnitude × visibility gap first: a large win the user does not notice is the cheapest fix available anywhere in the wheel.
 
@@ -2410,7 +2165,7 @@ Growth asks are upgrade, subscribe, invite, share, rate, review, connect a sourc
 4. Declining preserves the value already earned; any foregone benefit or real consequence is explicit and noncoercive.
 5. The frequency is proportionate.
 
-The sequence is: **outcome occurs → the interface confirms what changed → the emotion is reinforced → a useful next step → then, maybe, an ask.**
+The sequence is: **outcome occurs → the interface confirms what changed → the emotion is reinforced → a useful next step → then, maybe, an ask.** A finite service may end after the confirmed outcome; a next use, upgrade, or share ask needs its own evidence and purpose.
 
 The ask should feel like continuation, not extraction. An ask placed before value converts stored momentum into resistance—the user learns that this product interrupts rather than delivers, and that lesson is expensive to unteach.
 
@@ -2424,7 +2179,7 @@ A shareable artifact is useful or expressive to the sender, makes sense to the r
 
 ## What to measure
 
-Completion of the core value event, repeat use after a win, upgrade conversion following specific wins, feature adoption after contextual prompts, invite and share initiation *and completion*, recipient engagement with shared artifacts, time from first win to second win.
+Completion of the core value event, then the product's intended success outcome: repeat use, conversion, or advocacy for a recurring relationship; completion, handoff, or safe exit for a finite or infrequent service. Measure upgrade, invite, and share behavior only when that ask is part of the stated outcome, and measure both initiation and completion. Use time from first win to second win only when a second win is intended.
 
 The comparison that matters: users prompted **after a meaningful win** versus users prompted at arbitrary or time-based moments. That single test settles most arguments about placement.
 
@@ -2443,15 +2198,17 @@ The comparison that matters: users prompted **after a meaningful win** versus us
 <!-- END GENERATED SOURCE: flywheel/reference/wins.md -->
 
 
+<a id="source-flywheel-reference-emotion-md"></a>
+
 ## Source: `flywheel/reference/emotion.md`
 
 <!-- BEGIN GENERATED SOURCE: flywheel/reference/emotion.md -->
 
 # Emotion—the mass
 
-What keeps the wheel turning between visits. In Flywheel, emotion is not a request for decoration or a memorable animation. It is the relationship state that changes future behavior: confidence that makes return feel safe, control that lowers re-entry cost, momentum that makes the next step obvious, mastery that makes continued use worthwhile, or belonging that makes contribution meaningful.
+What keeps a recurring relationship turning between visits, or makes a finite or infrequent service end with confidence and control. In Flywheel, emotion is not a request for decoration or a memorable animation. It is the relationship state that changes the product's intended next behavior: confidence that makes return or completion feel safe, control that lowers re-entry or exit cost, momentum that makes the next step obvious, mastery that makes continued use worthwhile, or belonging that makes contribution meaningful.
 
-**The job:** create a substantive reason to return, prefer, and eventually advocate—then verify that the relationship state is associated with those behaviors.
+**The job:** create a substantive reason for the product's intended success outcome, then verify that the relationship state is associated with it. For recurring products this may be return, preference, and advocacy; for finite or infrequent services it may be completion, handoff, safe exit, or explicitly intended later use. Do not treat absent return as a defect when return is not part of the outcome.
 
 **Boundary with Soul.** Flywheel owns whether the relationship earns return, preference, and advocacy. Soul owns where and how a working moment receives expressive authorship. Do not require novelty, visual distinctiveness, motion, or a “recognizable without the logo” signature to pass this play. A restrained product can have strong mass when it remembers the user, compounds value, and gets easier to resume.
 
@@ -2468,6 +2225,7 @@ What keeps the wheel turning between visits. In Flywheel, emotion is not a reque
 | Developer tool | competence, speed, mastery | reuse the tool and deepen adoption |
 | Learning | capability, progress, curiosity | begin the next practice or lesson |
 | Marketplace | confidence, anticipation, satisfaction | return for the next relevant transaction |
+| Finite or infrequent service | confidence, control, closure | complete, hand off, and exit safely; return only when intended |
 
 **Test:** finish the sentence, “After this stage, the user should feel ___, which makes them more likely to ___.” If the second blank is only “remember the brand,” hand the moment to Soul. Flywheel needs a relationship behavior.
 
@@ -2477,17 +2235,17 @@ In high-stakes contexts, calm and control usually outperform excitement. Trustwo
 
 ### 1. Continuity—return without reconstruction
 
-At re-entry, restore the exact object, progress, filters, draft, or decision context that matters. Show what changed while the user was away. Never require someone to rebuild work the product already had.
+At re-entry, when re-entry is intended, restore the exact object, progress, filters, draft, or decision context that matters. Show what changed while the user was away. Never require someone to rebuild work the product already had. When the service is finite, provide the completion, handoff, and exit context the user needs instead.
 
 Compass owns whether state survives a specific transition. Flywheel owns the relationship consequence: repeated reconstruction teaches the user that returning is expensive.
 
 ### 2. Accumulation—repeated use leaves something valuable behind
 
-Make prior effort visible as history, progress, learned preferences, a growing body of work, improved recommendations, reusable configuration, reputation, or another durable asset the user controls. Accumulation must serve the user; streak pressure, artificial loss, and punitive reset mechanics are coercion, not mass.
+Make prior effort visible as history, progress, learned preferences, a growing body of work, improved recommendations, reusable configuration, reputation, or another durable asset the user controls when repeated use is intended. Accumulation must serve the user; streak pressure, artificial loss, and punitive reset mechanics are coercion, not mass.
 
 ### 3. Preference—continued use fits the user's life better
 
-The product becomes easier to choose because it is dependable, anticipates legitimate needs, preserves control, and supports the user's real routine. Preference is not visual familiarity alone. It appears in voluntary return, lower re-entry effort, deeper adoption, resistance to switching for substantive reasons, or advocacy that carries real value to another person.
+The product becomes easier to choose because it is dependable, anticipates legitimate needs, preserves control, and supports the user's real routine. Preference is not visual familiarity alone. When recurring use is intended, it may appear in voluntary return, lower re-entry effort, deeper adoption, or advocacy that carries real value to another person. Switching resistance is useful evidence only when the product's accumulated value is voluntary, useful, and user-controlled; it is not a design goal.
 
 ## Endings and re-entry
 
@@ -2495,19 +2253,15 @@ The product becomes easier to choose because it is dependable, anticipates legit
 
 **At re-entry:** restore context, show what changed, surface the next meaningful action, and make accumulated value visible without manufacturing urgency.
 
-Retention depends less on novelty than on respectful continuity. A product that remembers where the user was and has become more useful beats one that merely greets them with something new.
+For recurring products, retention depends less on novelty than on respectful continuity. A product that remembers where the user was and has become more useful beats one that merely greets them with something new. For finite or infrequent services, a complete and safe ending is the success condition.
 
 ## What to measure
 
 Measure behavior and direct research, and keep causality claims honest:
 
-- return frequency and time to next meaningful action;
-- successful resume after interruption or lapse;
-- depth of repeat use and adoption of adjacent value;
-- voluntary sharing or invitation tied to a useful artifact;
-- preference against alternatives and switching intent;
-- how users describe the relationship state unprompted;
-- retention by whether users accumulated or resumed meaningful value.
+- For recurring products: return frequency relative to the intended cadence, time to next meaningful action, successful resume after interruption or lapse, depth of repeat use, adoption of adjacent value, and voluntary sharing tied to a useful artifact.
+- For finite or infrequent services: completion, successful handoff, safe exit, and any explicitly intended later use.
+- For either cadence: preference evidence, switching intent, how users describe the relationship state unprompted, and whether accumulated value remained useful and under their control.
 
 Activated-versus-non-activated or exposed-versus-unexposed cohorts show association. Use experiments, longitudinal evidence, or direct research before claiming one mechanism caused retention.
 
@@ -2526,111 +2280,192 @@ Activated-versus-non-activated or exposed-versus-unexposed cohorts show associat
 <!-- END GENERATED SOURCE: flywheel/reference/emotion.md -->
 
 
+<a id="source-flywheel-reference-examples-md"></a>
+
 ## Source: `flywheel/reference/examples.md`
 
 <!-- BEGIN GENERATED SOURCE: flywheel/reference/examples.md -->
 
 # Flywheel Examples
 
-Two worked examples in the locked output templates—one **diagnosis**, one **relationship-stage design**. They share a narrative: the diagnosis finds a product losing people before first value, and the stage design addresses the leak it names. These set the bar for length, specificity, and tone; the templates set the shape.
+Two worked examples in the locked output templates—one incomplete full diagnosis, one relationship-stage design. Each input states the supplied facts; proposed changes and assumptions are labeled so the output does not invent analytics or unshown states.
 
 ---
 
 ## Example 1—Diagnose: a team analytics product with a retention complaint
 
-**Input:** *"People sign up and never come back. We think we need better re-engagement emails."* The product turns support tickets into themed insight reports. Signup is email plus a 6-field workspace setup, then a required CSV upload with no sample data, then an empty dashboard reading "No reports yet." First report takes about 4 minutes to generate, and completes with a toast reading "Done." No analytics beyond signup counts.
+**Input:** *"People sign up and never come back. We think we need better re-engagement emails."* The product turns support tickets into themed insight reports for support and product teams. The complete landing-page copy contains the headline "Turn support tickets into prioritized themes" and a "Get started" CTA, with no report example or indication that a CSV export is required. Signup is email plus a 6-field workspace setup, then a required CSV upload with no sample data, then an empty dashboard reading "No reports yet." A first report takes about 4 minutes to generate and completes with a toast reading "Done." The working first-value event is a user reading a prioritized report. The intended cadence is recurring weekly. No analytics beyond signup counts are supplied. The re-engagement email is a proposed intervention, not an observed state; no returning-user, lapse, or advocacy state is supplied.
 
 **Flywheel's output:**
 
 ```
-**Verdict:** Friction · people never reach a first report, so there is nothing to come back to · **6/16**
+**Verdict:** Friction · setup precedes any chance to inspect a report · **N/E**
 
-**Product:** support-ticket analytics for support and product teams · first value: undefined · stakes: low
+**Product:** support-ticket analytics for support and product teams · first value: a user reads a prioritized report · cadence: recurring weekly · success outcome: repeated weekly analysis that informs a support or product decision · stakes: low
 **Scope:** full relationship diagnosis
-**Screen:** workspace setup, report result, and empty dashboard
+**Screen:** landing promise, workspace setup, report result, and empty dashboard
 **Flow:** signup-to-first-report
-**State:** required setup, report success, empty dashboard, and proposed re-engagement
-**Lifecycle:** arrival, activation before first value, first value, and attempted return
-**Coverage:** signup, pre-value setup, CSV upload, empty dashboard, report loading/success, and proposed re-engagement · gaps: measured activation cohorts, real returning-user state, lapse timing, and referral/advocacy not shown
-**Basis:** walked from a description · confirm with: share of signups that generate a first report, and 4-week retention split by whether they did
+**State:** first encounter, required setup, empty dashboard, report loading, and report success
+**Lifecycle:** arrival, activation before first value, and first value
+**Coverage:** landing promise, signup, pre-value setup, CSV upload, empty dashboard, report loading/success · gaps: measured activation cohorts, returning-user state, lapse timing, re-engagement, and advocacy not shown
+**Basis:** walked from a description · confirm with: share of signups that generate a first report, then weekly return among those who do
 **Blocker:** None.
 
 ## Scorecard
 | Play | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Trust | 3/4 | The outcome is legible and the promise is specific, so the first push is strong; the artifact does not show proof near the promise, which keeps Trust from exemplary. | Put a real report or credible sample beside the promise and verify message match across the highest-traffic entry. |
-| Friction | 1/4 | Six setup fields and a required CSV upload block any evidence the product works; the outcome remains technically reachable, but commitment effort is seriously misplaced before first value. | Generate a real report from sample data in one click and defer the six fields until after first value. |
-| Wins | 1/4 | Four minutes of work ends in a generic "Done" toast, so the user cannot see what changed or why the result matters; value technically arrives but is largely invisible. | Replace the toast with the report result, what was analyzed, and one next action that extends the win. |
-| Emotion | 1/4 | No return state, accumulated value, or substantive reason to continue is shown; the proposed email tries to prompt return before a first report exists, so each relationship would restart from zero. | First make the path reach value, then preserve the report and resume context so a return continues something useful. |
-| **Total** | **6/16 · 1.5/4** | **Broken; exact sum of justified component scores** | Weakest-play ceiling applied |
+| Trust | 2/4 | The landing headline names the audience problem and output, but the supplied page omits a report example and the required CSV commitment; the category is functional while credibility and the next commitment remain partial. | Show a real or clearly labeled sample report beside the promise and expose the next commitment and its consequence. |
+| Friction | 1/4 | Six setup fields and a required CSV upload block any first report; the outcome remains technically reachable, but commitment effort is seriously misplaced before value. | Generate a real report from sample data in one click and defer fields that are unnecessary for safe processing until after first value. |
+| Wins | 1/4 | The supplied 4-minute generation ends in a generic "Done" toast, so the user is not shown what changed or why the result matters; value arrives but is largely invisible. | Replace the toast with the report result, what was analyzed, and one next action that extends the win. |
+| Emotion | N/E—insufficient evidence | The supplied description contains no returning-user, lapse, re-entry, accumulated-value, or advocacy state; no recurring relationship judgment is supportable from this artifact. | N/E—confirm the intended weekly return state and inspect successful re-entry after a first report. |
 
 ## Issues (most severe first)
-- **[P1 · Friction]** **At:** screen: Workspace setup → CSV upload · flow: signup-to-first-report · state: required configuration with no sample · lifecycle: new signup activating before first value. The setup wall—6 workspace fields and a CSV upload sit before any output. None can be answered well by someone who has not seen a report, and the upload demands data they may not have exported yet. This is commitment friction placed before value. **Fix:** ship a sample dataset that generates a real report in one click; defer all 6 fields until after the first report exists, and infer the workspace name from the email domain.
-- **[P1 · Wins]** **At:** screen: Report generation → result · flow: signup-to-first-report · state: success after a 4-minute loading wait · lifecycle: first value for a new signup. The silent power stroke—the product's whole value arrives after a 4-minute wait and is announced by a toast reading "Done." The user is not told what was found, how many tickets were read, or what changed. The single largest win in the product is invisible. **Fix:** replace the toast with the result—themes found, tickets analyzed, the top theme stated in one line—and a next action that extends it.
-- **[P1 · Emotion]** **At:** screen: Proposed re-engagement email · flow: signup-to-first-report · state: lapsed before any report exists · lifecycle: attempted return before first value. Re-engagement aimed at people who never got value—the proposed fix emails users who never reached a first report. Mail asking someone to return to a product that never worked for them is pressure substituting for a reason, and it burns the address for the day the product is actually ready. **Fix:** do not build it. Every hour here belongs at Friction until first-report rate moves.
-- **[P2 · Trust]** **At:** screen: Acquisition/landing promise · flow: signup-to-first-report · state: first encounter with no product proof · lifecycle: arrival before signup. No evidence near the claim—the promise is specific but nothing on the page shows a real report. **Fix:** put an actual output on the first screen; it does double duty as proof and as comprehension.
-- **[P2 · Friction]** **At:** screen: Reports dashboard · flow: signup-to-first-report · state: empty with "No reports yet" · lifecycle: activation before first report. The empty state is a notice—"No reports yet" states a fact and offers no path. **Fix:** make it the activation surface: what will appear here, why it is useful, and one button that runs the sample.
+- **[P1 · Friction]** **At:** screen: Workspace setup → CSV upload · flow: signup-to-first-report · state: required configuration with no sample · lifecycle: activation before first value. The setup wall—6 workspace fields and a CSV upload sit before any output. The upload requires an export before someone can inspect the output; the purpose and processing dependency of the six fields need verification. This is commitment friction placed before value. **Fix:** ship a sample dataset that generates a real report in one click; verify which fields are unnecessary for safe processing and defer those until after the first report exists.
+- **[P1 · Wins]** **At:** screen: Report generation → result · flow: signup-to-first-report · state: success after a 4-minute loading wait · lifecycle: first value. The silent power stroke—the product's whole value arrives after a 4-minute wait and is announced by a toast reading "Done." The supplied artifact does not show what was found, how many tickets were read, or what changed. **Fix:** replace the toast with the result—themes found, tickets analyzed, the top theme stated in one line—and a next action that extends it.
+- **[P2 · Trust]** **At:** screen: Landing promise · flow: signup-to-first-report · state: first encounter with no report example or CSV requirement in the supplied page · lifecycle: arrival before signup. The headline is specific, but the complete supplied landing-page copy omits a report example and the CSV requirement. **Fix:** put an actual or clearly labeled sample output beside the promise and verify the first commitment's consequence.
 
 ## Fix this first
-**At:** screen: workspace setup and Reports dashboard · flow: signup-to-first-report · state: required setup and empty dashboard · lifecycle: activation before first value
-Friction. Nothing downstream can be evaluated until people reach a first report—the Wins finding is real but affects only the small group that survives setup today, and the Emotion play cannot add mass to a wheel that has not turned once. Re-engagement email is the last thing to build, not the first.
+**At:** screen: Workspace setup and Reports dashboard · flow: signup-to-first-report · state: required setup and empty dashboard · lifecycle: activation before first value
+Friction. Repair the effort before the first report first; the downstream retention hypothesis remains unverified. The Emotion play is N/E because no recurring return state was supplied, so validate it after first value rather than inventing a re-engagement intervention.
 
 ## Next
-- **Now**: **At:** screen: workspace setup and Reports dashboard · flow: signup-to-first-report · state: required setup and empty dashboard · lifecycle: activation before first value · cut the path to first report to one click on sample data; defer the 6 fields; turn the empty state into the entry point.
-- **After it moves**: **At:** screen: report result · flow: signup-to-first-report · state: success after processing · lifecycle: first value · replace the "Done" toast with the result and a next action, then place the upgrade ask after the second report.
-- **Hand off**: **At:** screen: workspace setup form · flow: signup-to-first-report · state: required pre-value setup · lifecycle: activation before first value · the 6-field setup form is a single-screen structure problem once it is repositioned—Focal.
+- **Now**: **At:** screen: Workspace setup and Reports dashboard · flow: signup-to-first-report · state: required setup and empty dashboard · lifecycle: activation before first value · cut the path to first report to one click on sample data; defer fields confirmed unnecessary for safe processing; turn the empty state into the entry point.
+- **After it moves**: **At:** screen: Report result · flow: signup-to-first-report · state: success after processing · lifecycle: first value · replace the "Done" toast with the result and a next action; test a related upgrade or weekly return prompt only if that outcome is part of the supplied product goal.
+- **Hand off**: **At:** screen: Workspace setup form · flow: signup-to-first-report · state: required pre-value setup · lifecycle: activation before first value · the 6-field setup form is a single-screen structure problem once it is repositioned—Focal.
 ```
 
 ---
 
 ## Example 2—Stage design: the first-report stage
 
-**Input:** "Design the first-report experience the diagnosis called for."
+**Input:** *"Design the first-report experience the diagnosis called for."* Supplied facts: the product turns support tickets into themed reports; signup has email plus 6 workspace fields; a required CSV upload precedes an empty dashboard; the first report takes about 4 minutes and ends with a "Done" toast. The product is intended for recurring weekly use by support leads. The sample dataset, generated report, deferred fields, and state behavior below are proposal assumptions; no implementation is supplied.
 
 **Flywheel's output:**
 
 ```
 **Stage:** First report—the friction play, for a support lead evaluating the product in their first session.
-**First value:** a themed report generated from real tickets, read and understood   ·   **Stakes:** low
+**First value:** a themed report generated from real tickets, read and understood   ·   **Success outcome:** a weekly analysis that informs a support or product decision   ·   **Cadence:** recurring
+**Stakes:** low
+
+## Evidence / assumptions
+- Evidence: email signup, 6 workspace fields, required CSV upload, empty dashboard, 4-minute report generation, and a "Done" toast.
+- Proposal assumptions: a safe sample dataset can be shown, a generated report can render before real upload, and deferred workspace fields can be saved after first value.
 
 ## The leak
-- Today: 6 workspace fields and a required CSV upload stand between signup and any output, and the empty state offers no path. Nobody sees a report without exporting data first.
-- Confirm with: share of signups generating a first report within 24 hours, and 4-week retention split on that event.
+- Today: 6 workspace fields and a required CSV upload stand between signup and any output, and the empty state offers no path. Nobody can see a report without exporting data first.
+- Hypothesis: commitment friction is asked before the user has evidence that the report is useful.
+- Confirm with: share of signups generating a first report within 24 hours, then weekly return among those who read it.
 
 ## The design
-- Signup asks for email only. The workspace name is inferred from the domain and shown as editable text, not a field to fill.
-- The first screen after signup is a live report built from a sample support dataset, already generated—not an invitation to generate one. The user reads an actual output before doing any work.
-- One primary action: "Run this on your tickets." It opens the upload, now framed as replacing sample data with real data, which is a different and easier decision than uploading into a void.
-- The 4-minute generation shows what it is doing—tickets read, themes forming—rather than an indeterminate spinner, because a wait the user can see is a wait they will sit through.
-- Completion states the result: themes found, tickets analyzed, the top theme in one sentence, and the report itself. No toast.
-- The 6 workspace fields move behind a "Workspace settings" link, prefilled with safe defaults, reachable but never blocking.
+- Signup asks for email only. Proposal assumption: infer the workspace name from the domain, show it as editable text, and defer nonessential fields.
+- Show a generated sample report after signup so the user reads an actual output before doing work. Label the data as sample and explain what will change when real tickets replace it.
+- One primary action: "Run this on your tickets." It opens the upload after value has been demonstrated.
+- Show the 4-minute generation state with tickets read and themes forming instead of an indeterminate spinner. This is a proposed progress treatment, not a claim about current behavior.
+- Completion states the result: themes found, tickets analyzed, the top theme in one sentence, and the report itself. Replace the current "Done" toast with the result.
+
+## State / applicability inventory
+- Applicable states: completion, partial upload or generation failure, recovery/retry, cancellation/abandonment, and no ask.
+- Completion: proposed report summary and saved result; the user can inspect the report or run it on real tickets.
+- Partial/failure: preserve uploaded work where safe, identify what failed, and offer retry or a clear recovery path.
+- Recovery/retry: return to the failed step with context intact; proposal assumption pending implementation evidence.
+- Cancellation/abandonment: explain what is retained or discarded and how to return safely; do not promise persistence until verified.
+- N/A states or gates: permission—N/A—no permission request is supplied; decline—N/A—there is no ask on this stage.
+- Unknown behavior: report persistence, upload recovery, and generation failure behavior require an implementation check; they are not observed facts.
 
 ## Friction kept
-- The upload step itself. It is procedural, not accidental—the product cannot analyze tickets it does not have—and it now sits after the user has seen what the analysis produces, where it reads as worth doing.
-- Naming the report before saving it. Productive friction: a named report is one the user returns to and finds again, and the cost is a few seconds against a durable gain.
+- The upload step itself. It is procedural—the product cannot analyze tickets it does not have—and it now sits after the user has seen what the analysis produces.
+- Naming the report before saving it. Productive friction: a named report is easier to find for the intended weekly return, and the cost is a few seconds against a durable gain.
 
 ## The ask
-- Ask: None on this stage.
-- Lands after: n/a—the first upgrade ask belongs after the *second* report, when the user has evidence the product works repeatedly rather than once.
-- Declining changes: nothing; there is no ask on this stage and the sample report remains available.
+- Ask: None—no ask on this stage
+- Lands after: N/A—no ask
+- Declining changes: N/A—no ask
 
 ## Gates
-- [x] First value named as an outcome, not setup
-- [x] The leak is stated with evidence, and the confirming metric is named
+- [x] First value, intended cadence, and success outcome are named; a finite or infrequent stage is not given a fabricated recurring target
+- [x] The leak and diagnostic hypothesis are grounded in supplied evidence, and the confirming metric is named
 - [x] Every required step has a purpose the user could be told
+- [x] Applicable states and exits are inventoried only where relevant; N/A reasons and unknown behavior are explicit
 - [x] Protective and productive friction preserved
-- [x] Any ask lands after the value it extends; declining preserves value already earned; any foregone benefit is explicit and noncoercive
-- [x] Nothing here hides cost, consequence, permission, or reversibility
+- [x] Any ask lands after the value it extends; declining preserves value already earned and any foregone benefit is explicit and noncoercive; a no-ask path is stated when relevant
+- [x] Nothing here hides cost, consequence, permission, reversibility, cancellation, or recovery
 ```
 
----
-
-**Why these two:** the diagnosis refuses the question it was asked. The user came for re-engagement email and the honest answer is that there is nothing to re-engage *to*—which is what "fix this first" exists to say. Note that the re-engagement finding is a P1, not a P0: it is a misdirected investment, not a dark pattern, and P0 is reserved for the ethical floor so that it keeps its meaning. The relationship-stage design then resolves it: the sample report inverts the whole stage, because a user who has already seen an output is making a completely different decision when asked to upload.
-
-Note what stayed. Two frictions were preserved and named—the upload and the report name—because this play is not about removing effort, it is about making the remaining effort obviously worth it. And note what was refused: no ask on the stage at all, because nothing has happened twice yet.
+The first diagnosis does not turn the proposed email into a lapsed-user state or score a missing recurring behavior as a defect. It identifies the supported Friction and Wins evidence, leaves Emotion N/E, and puts the fastest validation before a re-engagement intervention. The stage design then makes its sample report and state handling explicit proposal assumptions, while preserving the upload as procedural friction.
 
 <!-- END GENERATED SOURCE: flywheel/reference/examples.md -->
 
+
+<a id="source-flywheel-reference-build-md"></a>
+
+## Source: `flywheel/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: flywheel/reference/build.md -->
+
+# Flywheel Build—the Stage Spec
+
+Read this reference only for a `build` request or when turning a reviewed relationship stage into a proposal. It owns the build workflow, the Stage Spec, state applicability, and unscored gates. A build is a proposal: supplied facts are evidence, while unspecified behavior is a proposal assumption or an evidence check. A finite or infrequent service may be designed to complete, hand off, and exit; do not add a recurring habit, upgrade, share, or retention objective without an intended product outcome.
+
+## The workflow
+
+1. **Frame the relationship.** Name the product, audience, stakes, first-value event, intended cadence, and success outcome. First value changes the user's situation; it is not setup completed. Cadence is `finite`, `one-off`, `infrequent`, `recurring`, or `unknown`; success must fit it. A finite service can succeed by safe completion and exit.
+2. **Name one stage and its leak.** Choose Trust, Friction, Wins, or Emotion. State what is lost there today, or what would be lost if the stage shipped poorly. Give a diagnostic hypothesis when evidence supports one, and label assumptions.
+3. **Run one play.** Read that play's reference and apply its checks deeply. A stage build is focused; it does not redesign the other three plays.
+4. **Design the stage.** Describe what the user encounters in order, what each element does, and which protective or productive effort remains. Keep the proposal within Flywheel's relationship scope; hand screen structure to Focal, route mechanics to Compass, and expressive treatment to Soul.
+5. **Place or refuse the ask.** If the stage contains an upgrade, invite, share, rating, subscription, or other commercial or social ask, put it after the related value. State what declining preserves and any real foregone benefit. If the product has no justified ask, write `None—no ask on this stage`; do not invent one.
+6. **Inventory applicable states and exits.** Select only the states this stage can enter from completion, partial completion or failure, permission, recovery or retry, cancellation or abandonment, decline, and no ask. For each selected state specify what is visible, what remains available, what context is retained, and how the user exits or recovers. Give `N/A—<reason>` for a named state or gate that cannot apply. Do not turn an unknown behavior into an implementation claim.
+
+## Output format: use this exact structure
+
+Return this template in order. Mark `[x]` only when the proposal actually satisfies a gate; keep `[ ]` with a short reason otherwise. Gates are unscored. Use `N/A—<reason>` for an inapplicable state or gate; a justified N/A is not a failed gate. Repeat design and state bullets when needed, but do not add a universal state checklist to a stage that does not need it.
+
+```text
+**Stage:** <name>—the <trust | friction | wins | emotion> play, for <who>.
+**First value:** <the event that changes the user's situation>   ·   **Success outcome:** <the outcome that defines success for this product>   ·   **Cadence:** finite | one-off | infrequent | recurring | unknown
+**Stakes:** low | medium | high
+
+## Evidence / assumptions
+- Evidence: <supplied facts, artifact observations, or `None.`>
+- Proposal assumptions: <assumptions required to make the design concrete, or `None.`>
+
+## The leak
+- Today: <what is lost here, and the evidence—measured, diagnosed from an artifact, or `not shown`>
+- Hypothesis: <the mechanism that may explain the loss, or `None—insufficient evidence`>
+- Confirm with: <the specific metric or behavior that would settle it>
+
+## The design
+- <what the user encounters, in order>
+- <each element and the job it does for this stage>
+
+## State / applicability inventory
+- Applicable states: <only the relevant states selected from completion, partial completion/failure, permission, recovery/retry, cancellation/abandonment, decline, and no ask>
+- <state>: <visible status, available action, retained work/context, and recovery or exit>
+- N/A states or gates: <candidate states or gates that do not apply, each with a reason, or `None.`>
+- Unknown behavior: <the next evidence check or explicit proposal assumption, never an invented implementation>
+
+## Friction kept
+- <any effort deliberately preserved—protective or productive—and why removing it would cost more than it saves>
+- None, if nothing here protects the user.
+
+## The ask
+- Ask: <the commercial or social ask on this stage, or `None—no ask on this stage`>
+- Lands after: <the value the user has just received, or `N/A—no ask`>
+- Declining changes: <what already-earned value remains, plus any explicit foregone benefit or real consequence, or `N/A—no ask`>
+
+## Gates
+- [ ] First value, intended cadence, and success outcome are named; a finite or infrequent stage is not given a fabricated recurring target
+- [ ] The leak and diagnostic hypothesis are grounded in evidence or labeled as assumptions, and the confirming metric or behavior is named
+- [ ] Every required step has a purpose the user could be told
+- [ ] Applicable states and exits are inventoried only where relevant; N/A reasons and unknown behavior are explicit
+- [ ] Protective and productive friction preserved
+- [ ] Any ask lands after the value it extends; declining preserves value already earned and any foregone benefit is explicit and noncoercive; a no-ask path is stated when relevant
+- [ ] Nothing here hides cost, consequence, permission, reversibility, cancellation, or recovery
+```
+
+<!-- END GENERATED SOURCE: flywheel/reference/build.md -->
+
+
+<a id="source-soul-skill-md"></a>
 
 ## Source: `soul/SKILL.md`
 
@@ -2638,7 +2473,7 @@ Note what stayed. Two frictions were preserved and named—the upload and the re
 
 ---
 name: soul
-description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by reach and memory, splits treatments by frequency so repetition never turns expression into noise, and refuses the traditional dumping grounds (404 pages, easter eggs, error mascots) where delight goes to be unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
+description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by contextual reach, utility, stakes, frequency, cost, and evidence about memory; tests repeated treatments for feedback, control, perceivability, and comprehension; and refuses traditional dumping grounds (404 pages, easter eggs, error mascots) where expression goes unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
 license: MIT
 argument-hint: "[build | search] <product, flow, or moment>"
 ---
@@ -2647,15 +2482,15 @@ argument-hint: "[build | search] <product, flow, or moment>"
 
 **Never boring.**
 
-Most products work and feel like nothing. Every screen functional, every flow passable, nothing anyone would describe to a friend. The word people reach for is *soulless*, and the word is a diagnosis: nothing here was authored. The product is the average of its competitors.
+Most products work and feel like nothing. Every screen is functional, every flow passable, yet nothing feels authored. Soul treats that flatness as a placement problem.
 
-**Soul is not a spec—it is what accumulates when specific moments are placed well.** So this skill does not sprinkle. It maps the default path and sorts every beat into one of three tiers—what stays functional, what gets more craft, and which zero-to-three moments, if any, earn a full rebuild.
+**Soul is not a spec—it is what accumulates when specific moments are placed well.** It maps the default path and sorts every beat into one of three tiers: functional, crafted, or a zero-to-three full rebuild.
 
-Three facts decide every placement:
+Three contextual hypotheses guide every placement:
 
-- **People remember the peak and the ending, not the average.** A product with two entirely new moments and quiet craft on everything else is remembered. A product with twelve novelties is exhausting, and nothing in it reads as significant.
-- **Reach beats risk.** Delight traditionally goes where failing is cheap—the 404 page, the easter egg—which is exactly where nobody walks. Placement here is chosen by reach × memory: the default path, because that is where everyone is.
-- **Repetition kills novelty.** The 50th confetti is noise. A treatment that plays every session must survive its 50th viewing; a treatment that plays once may spend everything.
+- **Memory is a hypothesis, not a law.** Peaks and endings can shape recall when users reach them, the moment carries meaning, and recall or user evidence supports the effect. Compare reach, utility, stakes, frequency, implementation and maintenance cost, and any actual recall evidence; a later beat is not automatically stronger.
+- **Reach and consequence matter more than cheap risk.** Delight traditionally goes where failing is cheap—the 404 page, the easter egg—which is exactly where nobody walks. Use `reach × likely memory` as a working comparison, then test it against the user's job, the cost of getting it wrong, and the cost to build and maintain it.
+- **Repetition changes the bar.** A treatment that plays every session must remain perceivable, comprehensible, and under the user's control when repeated. A one-time treatment may spend more, but neither frequency nor novelty alone proves that it will endure.
 
 **The three tiers.** Every beat on the path gets exactly one:
 
@@ -2669,19 +2504,19 @@ Three facts decide every placement:
 
 ## When to use
 
-Soul is for a product that already works but reads as anonymous: a functional-but-flat happy path, a success state that stops instead of lands, an ending nobody designed, a personality budget with nowhere to go. Give it a product, a flow, screens, code, or a description.
+Soul is for a working product that reads as anonymous: a flat happy path, a success state that stops instead of lands, or an ending nobody designed. Give it a product, flow, screens, code, or description.
 
 It is **not** for:
-- Single-screen structure, hierarchy, or clutter—that is [Focal](../focal).
-- Multi-screen paths and navigation—that is [Compass](../compass).
-- Losing users before they reach value—that is [Flywheel](../flywheel). Soul makes a working path memorable; it cannot make a broken path work, and treatments on a broken path read as cosmetic.
+- Single-screen structure, hierarchy, or clutter—that is [Focal](#source-focal-skill-md).
+- Multi-screen paths and navigation—that is [Compass](#source-compass-skill-md).
+- Losing users before value—that is [Flywheel](#source-flywheel-skill-md). Soul makes a sound path memorable; it cannot repair a broken one.
 - Brand identity systems, logo, illustration style, or marketing pages. Soul places moments inside the product's default path; it does not define the visual language they are executed in.
 
 ---
 
 ## Map the path first
 
-Every job starts with the happy path: the default flow the primary user actually walks, entry to outcome. Build it from the artifact; where the artifact is silent, ask—the skeleton below is the interview, seven blanks to fill.
+Every job starts with the happy path: the default flow the primary user walks, entry to outcome. Build it from the artifact; where it is silent, ask.
 
 ```
 1. Enters from [source]
@@ -2693,18 +2528,18 @@ Every job starts with the happy path: the default flow the primary user actually
 7. Feels [intended emotional state]
 ```
 
-- **Keep the default path compact.** Expand the seven-part skeleton only when a distinct beat changes the user's understanding, action, system response, or feeling. Five to twelve beats covers many products, but it is a diagnostic range, not a quota or hard ceiling. Exclude edge branches; do not merge consequential beats merely to hit a number.
-- **Tag every beat** with its touchpoint (screen, email, notification, external) and its frequency: `once` (first-run only), `recurring` (weekly-to-monthly rhythm), `every-run` (every session).
-- **Beat 7 is a design input, not decoration.** If nobody can say what the user is meant to feel at the end, that absence is the first finding.
-- First-run empty states and waits are beats on this path—they are in scope. Error branches are excluded from Net-New selection because they are not the happy path, but include them in the restraint check: personality must remain clear and respectful during failure without turning failure into a delight destination.
+- **Keep the default path compact.** Expand the skeleton only when a beat changes understanding, action, system response, or feeling. Five to twelve beats is a diagnostic range, not a quota. Exclude edge branches and do not merge consequential beats to hit a number.
+- **Tag every beat** with its touchpoint (screen, email, notification, external), frequency, and stakes: `once` (first-run only), `recurring` (weekly-to-monthly rhythm), `every-run` (every session); stakes are `low`, `medium`, or `high`. If frequency or stakes are not evidenced, write `not shown` and name the check.
+- **Beat 7 is a design input.** If nobody can name the intended ending feeling, that absence is the first finding.
+- First-run empty states and waits are in scope. Error branches are excluded from Net-New selection, but belong in the restraint check: failure must stay clear and respectful without becoming a delight destination.
 
 ## Sort every beat
 
 The tiers have owners:
 
-- **Expected** owns the beats that must simply work—load-bearing convention, high stakes, anywhere addition would tax the task. **Expected is a verdict, not a failure**, and the receipt of Expected beats is half the deliverable.
-- **Elevated** owns the small things, and it spreads as wide as the ceilings allow. This is the anti-boring tier: the same moments with more craft—copy in the user's words, feedback that names what changed, response that feels instant. Craft survives repetition; novelty does not, which is why Elevated can be distributed and Net-New cannot.
-- **Net-New** owns **up to three** exceptional moments, and zero is a valid result. It is not the old moment done better but an entirely new experience in its place. Concentration protects significance, while the eligibility tree protects restraint: use Net-New only when a beat clears reach × memory, frequency, stakes, and convention. Two or three is common when the path genuinely earns them; it is a budget, never a quota.
+- **Expected** owns load-bearing convention, high stakes, and any beat where addition taxes the task. It is a verdict, not a failure; record the restraint.
+- **Elevated** owns the small things: the same moment with clearer language, feedback, anticipation, or feel. Distribute it where the ceiling allows.
+- **Net-New** owns up to three exceptional moments, and zero is valid. It replaces the old experience and earns its place only after the contextual comparison below; it is a budget, never a quota.
 
 Walk this for every beat, top to bottom, first match wins:
 
@@ -2716,85 +2551,41 @@ Which tier may this beat take?
 ├── Load-bearing convention .............. Expected—muscle memory is the feature
 ├── High stakes .......................... Expected or calm Elevated by default; Net-New
 │                                          only when it strengthens reassurance or control
-├── Every-run ............................ Elevated by default; Net-New only when durable
-│                                          utility—not surprise—still pays on the 50th run
+├── Every-run ............................ Elevated by default; Net-New only when later-use
+│                                          utility is supported or explicitly tested
 └── Otherwise ............................ Elevated; promote to Net-New only if it clears
                                            the selection bar and ranks within the top three
 ```
 
-**The frequency split sets each beat's ceiling:**
+**Frequency sets each beat's ceiling:**
 
-- `every-run` beats take only repetition-proof treatment—speed, feel, anticipation, useful variation, or an exceptional Net-New capability whose utility survives the 50th run. Jokes, celebration, and novelty decay with repetition; usefulness does not.
-- `once` beats may take one-shot expressive treatment—this is where storytelling spends well.
-- `recurring` beats sit between: intensity below first-run, variation so the 30th arrival still reads as alive.
+- `every-run` beats take treatment that evidence shows can remain useful, perceivable, comprehensible, and controllable under repetition—speed, feel, anticipation, useful variation, or an exceptional Net-New capability. Jokes, celebration, and surprise often decay; test the actual beat instead of assuming either decay or durability.
+- `once` beats may take one-shot expressive treatment.
+- `recurring` beats sit between: intensity below first-run, with variation tested against later arrivals.
 
-**The dumping grounds are refused.** 404 pages, error mascots, easter eggs, release-note bits—the traditional homes of product delight, chosen because failing there is cheap. Cheap failure means no reach: the work is unseen, or seen by a frustrated user at the worst moment. When the sweep finds existing delight in a dumping ground, it relocates the effort to a chosen beat. And an error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](../flywheel) or [Focal](../focal). One honest edge: a 404 that carries real traffic is not a dumping ground, it is an entry beat—treat it as recovery, one clear path back, no jokes.
+**Refuse dumping grounds.** 404 pages, error mascots, easter eggs, and release-note bits are often low-reach places to spend expression. Relocate existing craft to an on-path beat; route frequent error exposure to [Flywheel](#source-flywheel-skill-md) or [Focal](#source-focal-skill-md). A high-traffic 404 is an entry beat: state what happened and provide one clear way back.
 
-Selection heuristics, archetypes, and the full dumping-grounds list live in [reference/moments.md](reference/moments.md).
+Selection heuristics, archetypes, and the full dumping-grounds list live in [reference/moments.md](#source-soul-reference-moments-md).
 
 ---
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `search` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Record the findings even when an earlier pass found a broken floor: Product Judgement sequences the repair ahead of the treatment, and an empty Soul contribution leaves a required row unfillable.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](#source-product-judgement-skill-md) loads Soul for a cross-scale audit, treat it as `search` over supplied evidence: never ask a framing question or stall; write `not shown` and name the fastest check. Never hand a cross-scale request back to Product Judgement; put sibling-owned findings in its **Handoffs** section. Run [reference/review.md](#source-soul-reference-review-md)'s full contract—gates, scores, rationales, bands, ceilings, severity, and locators—but do not print its locked template, do not read [reference/examples.md](#source-soul-reference-examples-md), or apply Soul's Voice/opening/re-run instructions. Product Judgement owns the emitted response and any working notes; keep findings even when an earlier pass found a broken floor so its repair sequence can account for Soul.
 
 - **No argument** → explain the placement idea in three sentences, then ask: search an existing product, or build one moment?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
-- **`search` / `sweep` / `audit` / `review` / `find` (a product, a flow, screens, or "it feels generic")** → load and follow [reference/review.md](reference/review.md). It first runs an unscored Readiness check, then maps the path, assigns every beat a tier, and evaluates three Soul-local gates 0–4—Placement, Proportion, and Signature—with a `/12` total only when all three are evaluable. It requires evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators before returning up to three justified Net-New moments plus the small things worth elevating.
-- **`build` / `design` / `treat` (one beat)** → run the beat through the sort tree above; its tier is the build's **Target**. Read [reference/treatments.md](reference/treatments.md)—plus [reference/moments.md](reference/moments.md) when the target is Net-New, to confirm it clears the selection bar—then follow **Build** below.
-- **A question about a moment type or a treatment lever** → [reference/moments.md](reference/moments.md) or [reference/treatments.md](reference/treatments.md).
+- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](#source-product-judgement-skill-md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
+- **`search` / `sweep` / `audit` / `review` / `find` (a product, a flow, screens, or "it feels generic")** → load and follow [reference/review.md](#source-soul-reference-review-md). It first runs an unscored Readiness check, then maps the path, assigns every beat a tier, and evaluates three Soul-local gates 0–4—Placement, Proportion, and Signature—with a `/12` total only when all three are evaluable. It requires evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators before returning up to three justified Net-New moments plus the small things worth elevating.
+- **`build` / `design` / `treat` (one beat)** → run the beat through the sort tree above; its tier is the build's **Target**. Load [reference/build.md](#source-soul-reference-build-md) for the build workflow, applicable state inventory, Moment Spec, and gates. Read [reference/treatments.md](#source-soul-reference-treatments-md)—plus [reference/moments.md](#source-soul-reference-moments-md) when the target is Net-New, to confirm it clears the selection bar.
+- **A question about a moment type or a treatment lever** → [reference/moments.md](#source-soul-reference-moments-md) or [reference/treatments.md](#source-soul-reference-treatments-md).
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It calibrates length, tone, and what the locked templates look like filled well.
-
----
-
-## Build: the five moves
-
-1. **Frame it.** The product, the user, the beat, its frequency class, the stakes, and the one feeling this moment should produce—named, not "delight." If you cannot name the feeling, the screen, and the second it happens, you have a brand adjective, not a design target. Stakes are what the user can lose at this beat—money, work, standing, safety. Anything real to lose is high, and high puts reassurance before feeling.
-2. **Place it.** Run the beat through the sort tree—Expected, Elevated, or Net-New is the spec's **Target**. A Net-New target must also clear the selection bar in [reference/moments.md](reference/moments.md); an Elevated target respects its ceiling; an Expected target records why convention, frequency, stakes, or an already-sufficient treatment makes restraint correct. If the request points at a dumping ground, say so and redirect the budget to the nearest on-path beat.
-3. **Ladder it.** Design Expected as a real shippable floor. Add Elevated and Net-New only through the target; every rung above the target is `unavailable at this beat's ceiling` with the reason. This makes an Expected target a complete answer rather than a forced prelude to extra treatment.
-4. **Guard it.** No rung may tax speed, comprehension, or the primary action. High-stakes moments get reassurance before feeling. Every-run moments get only what survives repetition.
-5. **Run the gates.** Self-check against the **`## Gates`** block of the Moment Spec below—that block is the canonical list. Mark `[x]` only what the spec satisfies; leave `[ ]` with a one-line reason for any it does not.
-
-**Output—the Moment Spec (use this exact structure).** Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-```
-**Moment:** <the beat>—for <who>, on <the first pass | every pass | the nth pass>.
-**Feeling:** <one named emotion> · **Frequency:** <once | recurring | every-run> · **Stakes:** <low | medium | high> · **Target:** <Expected | Elevated | Net-New>
-
-## Why this moment
-- On the path: <where it sits, and who reaches it>
-- Budget decision: <why this beat earns treatment—or why Expected restraint is correct>
-- Today: <what the moment does now—observed from the artifact, or assumed>
-
-## The rungs
-- **Expected:** <the floor—the obvious version, fully functional, shippable as-is>
-- **Elevated:** <the same moment with more craft, or `unavailable at this beat's ceiling` with the reason>
-- **Net-New:** <an entirely new experience in place of the old one, or `unavailable at this beat's ceiling` with the reason>
-
-## Held constant
-- <what no rung may damage—speed, comprehension, the primary action, reversibility>
-- <the convention kept, if this beat is muscle-memory>
-
-## Constraints for the pick
-- <brand, technical, accessibility, and context limits every rung already respects>
-
-## Gates
-- [ ] On the default path—reached without hunting
-- [ ] One feeling, named—"soul" and "delight" appear nowhere as specs
-- [ ] Survives its frequency—repetition-proof if every-run
-- [ ] Proportionate to the moment's magnitude
-- [ ] Speed, comprehension, and the primary action untouched
-- [ ] Honest without motion and without sound
-```
-
-**The pick between rungs is the caller's.** The target names the tier the sort assigned; rungs below it are interim ships, and landing on one is a product decision that belongs to the human. Recommend only when asked.
+Before emitting standalone output, read [reference/examples.md](#source-soul-reference-examples-md) for calibrated length, tone, and template use. The orchestrated pass skips examples.
 
 ---
 
 ## Voice (when giving feedback)
 
-- **Emit the exact output template.** Search and build each have a locked structure—the build template is above, the search template is in [reference/review.md](reference/review.md). Use it verbatim: same sections, same order, same headers, same table columns. If a section has nothing, keep its header and write "None."
+- **Emit the exact output template.** Search has the locked structure in [reference/review.md](#source-soul-reference-review-md). One-beat build output follows the template loaded by the build route. Use each template verbatim: same sections, same order, same headers, same table columns. If a section has nothing, keep its header and write "None."
 - **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks for something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill: name it in one line after the output so it can be fixed.
 - **Name the feeling, every time.** "Delight," "personality," "magic," and "soul" never appear as specifications. The feeling, the beat, and the second it happens—or it is not a design decision yet.
 - **Separate observed from assumed.** Findings read off the artifact and findings inferred from a description carry different weight; the Basis line says which is which.
@@ -2810,8 +2601,8 @@ Match-and-refuse. Each of these is expressiveness spending trust it did not earn
 
 - **Wit at failure or loss.** The joke at the worst moment reads as mockery. Personality is tested at failure, and it passes the test by restraint.
 - **Celebration before confirmation on high-stakes actions.** Confetti before "your money arrived safely" reads as a casino. Reassurance, records, and control come first; feeling comes after.
-- **Motion that taxes the task.** Any animation that delays the primary action or comprehension converts delight into friction. Respect reduced-motion preferences without exception.
-- **Every-run novelty.** A joke on a beat users hit daily is noise by week two. If the beat is every-run, the treatment is speed, feel, or anticipation—nothing that depends on surprise.
+- **Motion or speed that taxes the task.** Any animation or response that delays the primary action, hides failure, removes control, or cannot be perceived or understood converts treatment into friction. Respect reduced-motion preferences without exception.
+- **Every-run novelty.** A joke on a beat users hit daily may become noise by week two. If the beat is every-run, require evidence that speed, feel, anticipation, or useful variation stays perceivable, comprehensible, and controllable; nothing may depend on surprise alone.
 - **The dumping grounds.** Delight placed by low risk instead of reach. If the path is sterile and the 404 has an easter egg, the budget is upside down.
 - **Charm covering confusion.** A mascot in front of an unclear flow is a bandage on a structural problem—fix the structure first (Focal or Flywheel), then decide if the moment deserves treatment.
 - **Breaking load-bearing convention.** Checkout, save, undo, back—muscle-memory beats rely on the Expected. Novelty there costs comprehension and pays back nothing.
@@ -2823,13 +2614,15 @@ Match-and-refuse. Each of these is expressiveness spending trust it did not earn
 
 ## References
 
-- [reference/review.md](reference/review.md)—the search mode: unscored Readiness plus the three-gate audit (Placement, Proportion, Signature), 0–4 rubrics, `/12` bands, severity, and the locked Moment Map template.
-- [reference/moments.md](reference/moments.md)—moment archetypes, frequency classes, selection heuristics, the up-to-three budget, and the dumping grounds.
-- [reference/treatments.md](reference/treatments.md)—the three tiers in depth, the rungs a build lays out, the craft levers, repetition-proof design, and proportionality.
-- [reference/examples.md](reference/examples.md)—a worked search and a worked build, in the locked templates.
+- [reference/review.md](#source-soul-reference-review-md)—the search mode: unscored Readiness plus the three-gate audit (Placement, Proportion, Signature), 0–4 rubrics, `/12` bands, severity, and the locked Moment Map template.
+- [reference/moments.md](#source-soul-reference-moments-md)—moment archetypes, frequency classes, selection heuristics, the up-to-three budget, and the dumping grounds.
+- [reference/treatments.md](#source-soul-reference-treatments-md)—the three tiers in depth, the rungs a build lays out, the craft levers, repetition-proof design, and proportionality.
+- [reference/examples.md](#source-soul-reference-examples-md)—a worked search and a worked build, in the locked templates.
 
 <!-- END GENERATED SOURCE: soul/SKILL.md -->
 
+
+<a id="source-soul-reference-review-md"></a>
 
 ## Source: `soul/reference/review.md`
 
@@ -2847,14 +2640,15 @@ Map the working happy path, decide where expressive treatment belongs, and retur
 
 ## Step 0—Map the path and check readiness
 
-Build the happy path with the seven-part skeleton in [SKILL.md](../SKILL.md), then expand only where a beat changes understanding, action, system response, or feeling. Tag each beat with its touchpoint and frequency. State the intended ending feeling; `unnamed` is a finding, not permission to invent brand personality.
+Build the happy path with the seven-part skeleton in [SKILL.md](#source-soul-skill-md), then expand only where a beat changes understanding, action, system response, or feeling. Tag each beat with its touchpoint, frequency, and stakes; if one is not evidenced, write `not shown` and name the check. State the intended ending feeling; `unnamed` is a finding, not permission to invent brand personality.
 
 Then run Readiness before choosing treatment:
 
 - **Ready**—the primary user can reach the outcome with enough clarity, stability, trust, and control that expressive work will not cover a defect.
 - **Deferred**—a screen, path, or relationship failure materially prevents the outcome or makes treatment cosmetic. Name the owner: Focal for the screen, Compass for the path, Flywheel for the relationship stage.
+- **N/E—insufficient evidence**—the available artifact cannot establish whether that working floor holds. Name the next check; this is neither an observed failure nor a blocker. Continue recording supported treatment findings, with investment conditional on that check.
 
-Readiness is deliberately **unscored**. The other Skills already score structural and lifecycle quality; scoring it again would double-penalize the same failure. A Deferred result still records observed treatment problems and future candidates, but **Next** starts with the handoff. If the broken path makes Placement, Proportion, or Signature impossible to evaluate, mark that gate `N/E—not evaluable until readiness holds` and do not calculate a `/12` total.
+Readiness is deliberately **unscored**. The other Skills already score structural and lifecycle quality; scoring it again would double-penalize the same failure. A Deferred result still records observed treatment problems and future candidates, but **Next** starts with the handoff. Any gate that the available evidence cannot support is `N/E—insufficient evidence`, whether or not readiness is Deferred; supported gates remain scored. Do not calculate a `/12` total when a required gate is N/E.
 
 Error branches are not Net-New candidates, but they are evidence for restraint. Check whether failure copy, motion, and personality preserve clarity and dignity; do not turn the error itself into a delight opportunity.
 
@@ -2874,8 +2668,8 @@ Use the narrowest defensible locator. `Payment notification · invoice-to-paymen
 ### Gate 1—Placement *(where does expressiveness belong?)*
 
 - List every deliberate expressive touch and every meaningful beat kept Expected.
-- Check whether treatment follows reach × memory rather than low implementation risk.
-- Check the selection bar, frequency and stakes constraints, and load-bearing conventions before promoting any beat. Treat Elevated as the default ceiling for every-run or high-stakes beats, with Net-New allowed only when durable utility, reassurance, records, or control justify the exception.
+- Check whether treatment follows the contextual reach × likely memory comparison rather than low implementation risk.
+- Check the selection bar, frequency and stakes constraints, and load-bearing conventions before promoting any beat. Treat Elevated as the default ceiling for every-run or high-stakes beats, with Net-New allowed only when evidence-backed utility, reassurance, records, or control justify the exception.
 - Treat zero Net-New moments as valid when the restraint receipt explains why no beat earns a rebuild.
 
 | Score | Criteria |
@@ -2920,13 +2714,7 @@ Use the narrowest defensible locator. `Payment notification · invoice-to-paymen
 
 Every evaluated gate uses the same integer anchors:
 
-| Score | Canonical label | Shared meaning |
-|---:|---|---|
-| **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
-| **1** | **Major failure** | The outcome may remain technically possible, but the dimension is seriously compromised, unreliable, or largely absent. Substantial correction is required. |
-| **2** | **Partial or inconsistent** | The basic function exists, with a material weakness, missing decision, or inconsistency that prevents dependable quality. |
-| **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
-| **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
+See the [shared anchors contract](#shared-anchors) already included above.
 
 Score each evaluated gate holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the gate overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` is exemplary for the gate being scored; a restrained `3` can be better product judgment than an over-authored `4` attempt.
 
@@ -2934,7 +2722,9 @@ Score each evaluated gate holistically against its local rubric. Read all checks
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check. Score the supported behavior; do not award credit or invent failure for an unknown condition.
+
+See the [shared evidence contract](#shared-evidence) already included above.
 
 When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
@@ -2945,32 +2735,25 @@ When all three gates are evaluated, keep the native total: `total = Placement + 
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any gate is `N/E`, report no total, average, or common band.
+Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any required gate is `N/E`, omit the native total, average, common band, and weakest-gate ceiling; report the supported rows and evidence gap instead.
 
 Readiness, dimension score, overall quality band, issue severity, critical blocker, and the authored-state verdict are separate. A Deferred readiness result is not itself P0. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
-| Priority | Meaning |
-|----------|---------|
-| **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, confusion, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
-| **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
-
-Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+See the [shared severity contract](#shared-severity) already included above.
 
 **Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by gate order—**Placement** (the wrong beat, or a beat off the default path) outranks **Proportion** (treatment out of scale with the moment) outranks **Signature** (character that reads as anonymous or borrowed). Never reorder across priorities; a P0 Signature issue outranks a P1 Placement issue.
 
 ## Output format—use this exact structure
 
-Every search returns this template in this order. Repeat Moment and small-thing lines only as warranted; fixed sections remain present even when their content is `None.`
+Every search returns this template in this order. Repeat Moment and small-thing lines only as warranted; fixed sections remain present even when their content is `None.` For a complete scorecard, include the native total, average, band, and weakest-gate ceiling. For an incomplete scorecard, keep all three gate rows, write `N/E—insufficient evidence` for each unsupported gate, use `N/E` in the Verdict without a total segment, and omit the **Total** row entirely.
 
 ```markdown
-**Verdict:** <authored | anonymous | misplaced | exhausting | deferred> · <the biggest missed or misplaced decision> · **<total/12 | N/E>**
+**Verdict:** <authored | anonymous | misplaced | exhausting | deferred | N/E> · <the biggest missed, misplaced, or unsupported decision> · **<total/12 only when all gates are scored; otherwise omit this segment>**
 
 **Product:** <what it is, for whom> · **Path:** <N> beats, <entry> → <outcome> · **Ends feeling:** <named state or `unnamed`>
-**Readiness:** <Ready | Deferred> · <why, plus owner when Deferred>
+**Readiness:** <Ready | Deferred | N/E—insufficient evidence> · <why, plus owner when Deferred>
 **Screen:** <exact touchpoint(s) or `not shown`>
 **Flow:** <named happy path or transition(s) or `not shown`>
 **State:** <exact rendered or system state(s) reviewed>
@@ -2980,22 +2763,22 @@ Every search returns this template in this order. Repeat Moment and small-thing 
 **Blocker:** <None. | concise blocker reason>
 
 ## The path
-| # | Beat | Touchpoint | Frequency | Verdict |
-|---|---|---|---|---|
-| 1 | <enters from…> | <surface> | <once | recurring | every-run> | <Expected | Elevated | Net-New (Moment 1)> |
+| # | Beat | Touchpoint | Frequency | Stakes | Verdict |
+|---|---|---|---|---|---|
+| 1 | <enters from…> | <surface> | <once | recurring | every-run> | <low | medium | high | not shown> | <Expected | Elevated | Net-New (Moment 1)> |
 
 ## Scorecard
 | Gate | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Placement | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| Proportion | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| Signature | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| **Total** | **<_/12 · _._/4 | N/E>** | **<band and exact sum | no total until readiness exposes all gates>** | <weakest-gate ceiling or N/E> |
+| Placement | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| Proportion | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| Signature | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| **Total** | **<_/12 · _._/4>** | **<band and exact sum>** | <weakest-gate ceiling> |
 
-## The moments (Net-New, up to 3, ranked by reach × memory)
+## The moments (Net-New, up to 3, ranked by contextual reach × likely memory)
 ### Moment 1—<beat>, <named feeling>
 - **At:** screen: <exact beat/touchpoint> · flow: <named happy path or transition> · state: <exact app state> · lifecycle: <exact occurrence>
-- Why here: <reach × memory and why this beat clears its ceiling>
+- Why here: <contextual reach × likely memory comparison, including utility, stakes, frequency, cost, and evidence>
 - Expected: <one line> · Elevated: <one line> · Net-New: <one line>
 - Constraints: <one line>
 
@@ -3019,12 +2802,14 @@ Filling it:
 - **The path**—one row per consequential default-path beat, including Expected beats. A beat whose first pass differs from steady state carries both frequency tags.
 - **The moments**—emit zero to three. If none clears the bar, keep the header and write `None—no beat currently earns Net-New; see Kept Expected.` Never create filler to satisfy a count.
 - **The small things**—emit only craft the beat's ceiling allows. Write `None.` when no Elevated treatment is warranted.
-- **Readiness and N/E**—Deferred does not automatically erase Soul findings. Use `N/E` only when the structural failure genuinely prevents a gate from being evaluated; otherwise score observed treatment and sequence it after the handoff.
+- **Readiness and N/E**—Deferred does not automatically erase Soul findings. Use `N/E—insufficient evidence` for any unsupported gate, including when readiness is Ready; score supported treatment and sequence it appropriately. A missing variant alone does not make a gate N/E.
 - **Coverage and Basis**—name only states and occurrences actually observed or walked. Use `not shown` and the fastest validating check instead of awarding credit or inventing failure.
-- **Issues and suggestions**—every issue, Moment, small thing, Next item, and handoff receives a complete **Screen · Flow · State · Lifecycle** locator. If nothing ranks above P3, write `None above P3.` under Issues.
+- **Issues and suggestions**—every issue, Moment, small thing, Next item, and handoff receives a complete **Screen · Flow · State · Lifecycle** locator. If behavior is unknown, report the next evidence check rather than a defect, implementation recommendation, or score. If nothing ranks above P3, write `None above P3.` under Issues.
 
 <!-- END GENERATED SOURCE: soul/reference/review.md -->
 
+
+<a id="source-soul-reference-moments-md"></a>
 
 ## Source: `soul/reference/moments.md`
 
@@ -3042,13 +2827,13 @@ Frequency is destiny for a treatment—it decides what a moment may carry before
 |---|---|---|---|
 | `once` | first-run beats: first impression, first success, setup completion | one-shot expressive treatment—storytelling, sequence, ceremony | it plays once, so it may spend everything |
 | `recurring` | weekly-to-monthly rhythm: a report ships, an invoice is paid, a milestone lands | mid intensity, with variation—the 30th arrival must still read as alive | familiar enough to expect, rare enough to feel |
-| `every-run` | every session: open, navigate, compose, save, send | repetition-proof treatment—speed, feel, anticipation, useful variation, or exceptional durable utility | novelty decays with repetition; usefulness does not |
+| `every-run` | every session: open, navigate, compose, save, send | treatment whose utility, feedback, perceivability, comprehension, and control survive observed repetition | novelty may decay with repetition; durability is a hypothesis to test |
 
-**The 50th-viewing test:** before treating any beat, say its frequency out loud and imagine the treatment on its 50th appearance. Confetti fails at 3. A 200ms save that used to take 2 seconds never fails.
+**The 50th-viewing test:** before treating any beat, say its frequency out loud and imagine the treatment on its 50th appearance. Ask what could fail: delay, hidden status, lost control, low perceivability, or comprehension. Confetti may fail early; a faster save may hold value, but only if the response is truthful, perceivable, and recoverable under real conditions.
 
 ## The archetypes
 
-Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat map in [SKILL.md](../SKILL.md).
+Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat map in [SKILL.md](#source-soul-skill-md).
 
 | Archetype | Skeleton position | Frequency | Candidate feelings | What usually goes wrong |
 |---|---|---|---|---|
@@ -3056,31 +2841,34 @@ Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat
 | **The first success** | beats 5–6, first pass | once | capability, pride | the product's biggest moment announced by a toast |
 | **The wait** | beat 5, when work takes >1s | varies | anticipation, confidence | a spinner where evidence of work should be |
 | **The effort peak** | beat 4 at its hardest | varies | momentum, control | the hardest step is also the most sterile |
-| **The ending** | beat 6 | varies | completion, relief, pride | it stops instead of landing—the most neglected surface in most products |
+| **The ending** | beat 6 | varies | completion, relief, pride | it stops instead of landing—a surface teams often under-design |
 | **The milestone** | recurring passes | recurring | progress, accumulation | either silent, or identical the 40th time |
 | **The handoff** | the artifact that leaves the product | recurring | pride to the sender, sense to the receiver | an export nobody would show anyone |
 | **The return** | re-entry after absence | recurring | continuity, being known | a cold start where a "welcome back" state should be |
 
-Three boundary notes. *The first success* is the beat where first value lands—Flywheel's term for the event that changes the user's situation; if the product loses people before this beat, that is a leak, and leaks go to [Flywheel](../../flywheel) before treatments. *The return* is expressive treatment on re-entry: [Compass](../../compass) owns whether state survives the specific transition, Flywheel owns whether returning restores momentum or accumulated value, and Soul makes that working return felt. *The ending* keeps its rank even when it is every-run—a session ending that merely stops is the most common miss on any path—but an every-run ending takes repetition-proof levers only; ceremony belongs to rare endings.
+Three boundary notes. *The first success* is the beat where first value lands—Flywheel's term for the event that changes the user's situation; if the product loses people before this beat, that is a leak, and leaks go to [Flywheel](#source-flywheel-skill-md) before treatments. *The return* is expressive treatment on re-entry: [Compass](#source-compass-skill-md) owns whether state survives the specific transition, Flywheel owns whether returning restores momentum or accumulated value, and Soul makes that working return felt. *The ending* can be a strong candidate when users reach it, the outcome matters, and evidence suggests it shapes recall; an every-run ending still takes only treatment that remains useful and comprehensible, while ceremony may fit rare endings.
 
 ## Selection—the bar a moment must clear
 
-Rank candidates by **reach × memory**: how many users hit this beat, times how likely the beat is to be what they remember. Peak-end weights the scale—the emotional peak and the ending hold memory far beyond their share of the path, which is why the ending can outrank the first impression even though fewer people arrive there. **When two candidates tie, take the later one**—peak-end weights endings, so the later beat holds more memory per user who reaches it.
+Rank candidates with **reach × likely memory** as a working hypothesis, not a fixed law. Compare how many users reach the beat, the utility and meaning of the outcome, stakes, frequency, implementation and maintenance cost, and actual recall or user-description evidence. Peak and ending cues may help when the moment is salient and reachable, but a later beat is not automatically better; if recall evidence is absent, label the comparison as a hypothesis and name the fastest delayed-recall, interview, replay, or sharing check.
+
+One bounded reference points in both directions: a study of a rich, heterogeneous VR experience found average valence and arousal better predicted one-week remembered experience, while peak valence helped immediate recall. That limited context does not establish a product rule or disprove peak/end effects universally; Soul's placement remains a heuristic, not proof of human recall. See [From Experience to Memory](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.01705/full).
 
 Then interrogate the shortlist:
 
-1. Where would a generic execution actively hurt—cost trust, cost the story users tell?
-2. What is public-facing—screenshotted, demoed, shared, judged by people who are not users yet?
-3. Where does the user's effort peak? High effort is high emotional energy; treatment there converts strain into momentum.
-4. Which beats carry the product's distinctive claims? Those are the strongest Net-New candidates.
-5. What would marketing show? If nothing on the path is showable, that is the finding.
+1. Where would a generic execution actively hurt—cost trust, utility, or the story users tell?
+2. Which beat is public-facing—screenshotted, demoed, shared, or judged by people who are not users yet?
+3. Where does effort or uncertainty matter most, and what are the stakes if treatment gets it wrong?
+4. Which beat carries the product's distinctive claim, and how often does it recur?
+5. What will it cost to build and maintain, and what user evidence supports recall or repeat value?
+6. What would marketing show? If nothing on the path is showable, that is the finding—not a reason to invent a novelty.
 
 **Take up to three as Net-New, only when they clear the bar.** Zero, one, two, or three can be correct. If more than three appear necessary, the path is probably scoped too broadly or significance is being diffused; narrow the path or review distinct journeys separately rather than filling one sweep with peaks. Everything below the line takes **Elevated** where its ceiling allows craft that pays, and **Expected** otherwise—recorded either way, because the receipt separates restraint from neglect.
 
 **Reasons a beat stays Expected** (any one suffices):
 - **Load-bearing convention**—checkout, save, undo, back. Muscle memory is the feature; novelty there costs comprehension and pays nothing.
-- **Every-run frequency with no repetition-proof lever available**—if speed and feel are already at ceiling, standard is correct.
-- **High stakes, calm already present**—money movement, health data, and irreversible actions want reassurance and records before anything else. Where the calm, clear version already exists, standard is the treatment; where it does not, calm *is* the treatment (see proportionality in [treatments.md](treatments.md)). Trustworthy restraint is an emotional choice, not the absence of one.
+- **Every-run frequency with no supported repetition-proof lever available**—if speed, feel, feedback, and control are already at an acceptable ceiling, standard is correct; verify latency and failure behavior before claiming the ceiling.
+- **High stakes, calm already present**—money movement, health data, and irreversible actions want reassurance and records before anything else. Where the calm, clear version already exists, standard is the treatment; where it does not, calm *is* the treatment (see proportionality in [treatments.md](#source-soul-reference-treatments-md)). Trustworthy restraint is an emotional choice, not the absence of one.
 - **Below the line**—a fine Net-New candidate that lost to a better one; it takes Elevated craft instead, and loses nothing but the rebuild. The cap is a budget, not a quota.
 
 ## The dumping grounds
@@ -3091,16 +2879,18 @@ The canonical list. These are where delight traditionally goes—chosen because 
 - **Error mascots and cheerful failure copy**—wit at the moment the user is most tense reads as mockery.
 - **Easter eggs and hidden games**—found by almost nobody, by definition off every path.
 - **Release notes bits**—read by a rounding error of the user base.
-- **Splash-screen and loading-copy jokes on every-run loads**—novelty on repeat decays into noise; if the wait is real, show the work instead.
+- **Splash-screen and loading-copy jokes on every-run loads**—novelty can decay into noise; if the wait is real, show the work and test the repeat experience instead.
 
 **The two moves when the sweep finds delight in a dumping ground:**
 1. **Relocate the effort.** The craft is real; the placement is wrong. Name the on-path beat that deserves it.
-2. **Fix the frequency, not the feeling.** An error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](../../flywheel) (a leak) or [Focal](../../focal) (a screen).
+2. **Fix the frequency, not the feeling.** An error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](#source-flywheel-skill-md) (a leak) or [Focal](#source-focal-skill-md) (a screen).
 
 One honest edge: a 404 that carries real traffic—dead links shared socially, a renamed content library—is not a dumping ground. It is an entry beat for those users. Treat it as recovery: state what happened, one clear path to the likely destination, zero jokes. The rule was never "404s don't matter"; it was "placement follows reach."
 
 <!-- END GENERATED SOURCE: soul/reference/moments.md -->
 
+
+<a id="source-soul-reference-treatments-md"></a>
 
 ## Source: `soul/reference/treatments.md`
 
@@ -3124,13 +2914,13 @@ Examples of the register: a standard signup form, a clear confirmation toast, a 
 
 Nothing new is introduced. The existing thing, done at a grade users can feel even when they cannot say why: hierarchy sharpened, copy in the user's words, motion that explains, feedback that names what changed, an empty state that starts the work, a wait that shows the work.
 
-**Elevated is the anti-boring tier.** It spreads to every beat whose ceiling allows it—craft survives repetition, so distributing it raises the whole path without exhausting anyone. Concentration is for Net-New; distribution is for craft.
+**Elevated is the anti-boring tier.** It spreads to beats whose ceiling allows it when the craft remains useful, perceivable, and comprehensible under their frequency. Concentration is for Net-New; distribution is for craft that earns repeat use.
 
 **The test:** describe the treatment in one sentence—if the sentence needs a new noun (a new feature, a new surface, a new mechanic), it is not Elevated, it is Net-New wearing modest clothes.
 
 Examples of the register: the confirmation that states the amount and the running total instead of "Done"; the upload that shows filenames processing instead of a spinner; the form whose labels anticipate the next question; the settle animation that gives a completed payment weight.
 
-**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it raises quality without spending novelty, so it survives repetition and does not compete with reassurance. Net-New is an exception, not an entitlement: on an every-run beat it must add durable utility that remains valuable on the 50th run; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
+**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it can raise quality without spending novelty, if feedback stays perceivable and the user retains control. Net-New is an exception, not an entitlement: on an every-run beat it must add utility shown or explicitly tested to remain valuable on later runs; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
 
 ## Net-New—an entirely new experience
 
@@ -3141,7 +2931,7 @@ An entirely new experience in place of the old one—not the same moment execute
 Examples of the register: a live visualization where a table was assumed; a personalized artifact worth keeping (a year-in-review, a printable record, a shareable result card); an interactive demo where static onboarding was assumed; a progress mechanic that accumulates something users check voluntarily.
 
 **Net-New ships on no more than three chosen moments, and zero is valid.** It spends surprise, so concentration matters—spread thinly, none may clear the threshold of memorable. A build designs the Net-New rung only when the beat's ceiling and target allow it; otherwise the rung states why it is unavailable. Two rules keep the tier honest:
-- **It must survive its frequency.** A Net-New mechanic on an every-run beat must be useful on the 50th run, not clever on the first. If it is only clever, move it to a `once` or `recurring` beat.
+- **It must survive its frequency.** A Net-New mechanic on an every-run beat must show useful, perceivable, comprehensible behavior on later runs, not only a clever first response. If repeat value is untested, move it to a `once` or `recurring` beat or label the proposal conditional.
 - **It must be worth keeping, not just worth noticing.** The strongest Net-New treatments produce an artifact or capability the user returns to; the weakest produce a reaction and then a chore.
 
 ## The levers
@@ -3150,7 +2940,7 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 | Lever | Used well | The failure mode |
 |---|---|---|
-| **Speed** | the response so fast it reads as attention; the strongest every-run lever there is | none—speed does not decay, which is why it ranks first |
+| **Speed** | a response that feels attentive while remaining truthful and perceivable | feedback that is too fast to notice, hides failure, removes control, or creates a false sense of completion |
 | **Feel** | weight, physics, and settle that make interaction tactile | motion that delays the action it decorates |
 | **Language** | copy in the user's words, at the moment's temperature; the highest-leverage lever per hour spent | charm before clarity; a voice that jokes at tense moments |
 | **Anticipation** | the field pre-filled, the next step staged, the default that shows the product was paying attention | guessing wrong confidently; anticipation that removes control |
@@ -3162,15 +2952,15 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 ## Repetition-proof design
 
-What survives the 50th viewing, in order of durability:
+Potentially repeatable levers, to verify against the actual beat and audience:
 
-1. **Speed**—never decays. The fastest thing in the category is a signature by itself.
-2. **Feel**—physics reads as quality indefinitely; nobody tires of a door that closes well.
-3. **Anticipation**—being known stays pleasant as long as it stays accurate.
-4. **Useful variation**—content that reflects real state (this week's number, this run's result) is different every time for free.
-5. **Cosmetic variation**—a rotating copy pool reads as alive for a while; the pool is always smaller than it looks. Last resort, small doses.
+1. **Speed**—can reduce repeated effort when the result remains truthful, visible, and recoverable.
+2. **Feel**—may signal quality when motion is brief, legible, and optional; test whether it delays or distracts.
+3. **Anticipation**—can stay useful when its inference is accurate and reversible.
+4. **Useful variation**—content that reflects real state (this week's number, this run's result) may remain relevant; confirm comprehension and control.
+5. **Cosmetic variation**—a rotating copy pool can feel alive briefly, but its value and readability need repeat testing. Use small doses.
 
-What decays: jokes, confetti, celebration sounds, surprise of any kind, mascot appearances, animated sequences longer than the action they follow. All of these are `once`-class material or cut.
+Jokes, confetti, celebration sounds, surprise, mascot appearances, and sequences longer than the action may lose value with repetition; test them before assigning a recurring ceiling, and move surprise-dependent treatments to `once` or `recurring` when repeat value is absent.
 
 ## Proportionality
 
@@ -3179,16 +2969,18 @@ Feedback intensity matches the size of the moment, and high stakes reorder the s
 - **Routine completion**—confirm clearly, offer the next step. No more.
 - **Meaningful progress**—name what changed, show the accumulation, restrained motion.
 - **Major milestone**—ceremony earned: a designed pause, a summary, an artifact.
-- **High-stakes success**—reassurance, records, and control **before** any feeling. The user confirms their money moved safely before anything celebrates. Calm outperforms excitement everywhere the user has something to lose.
+- **High-stakes success**—reassurance, records, and control **before** any feeling. The user should be able to confirm what happened and what they can do next before expressive treatment. Calm often fits better where loss is possible, but check user expectations, context, and actual comprehension.
 
 Over-celebrating the routine reads as juvenile and burns trust in every future celebration; under-playing the milestone reads as indifference. Both are Proportion failures in the scorecard, and they are the same failure: intensity decided by habit instead of by the moment.
 
 ## The accessibility floor
 
-No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, meaning never depends on color, motion, or sound alone, focus and keyboard paths survive the treatment, and copy stays legible at the moment's reading pace—a 2-second toast cannot carry a 12-word sentence.
+No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, never depend on color, motion, or sound alone, preserve focus and keyboard paths, and keep copy legible at the user's reading pace across languages and assistive technology. A transient toast should carry only what can be perceived in its available time; important status must remain available for retrieval. If motion or speed changes comprehension, revise the treatment.
 
 <!-- END GENERATED SOURCE: soul/reference/treatments.md -->
 
+
+<a id="source-soul-reference-examples-md"></a>
 
 ## Source: `soul/reference/examples.md`
 
@@ -3196,7 +2988,7 @@ No rung ships below it: treatments honor `prefers-reduced-motion` with a complet
 
 # Soul Examples
 
-Two worked examples in the locked templates—one **search**, one **build**. They share a narrative: the search finds an invoicing product spending its personality budget in all the wrong places, and the build treats the moment the search ranked first. These set the bar for length, specificity, and tone; the templates set the shape.
+Two worked examples follow the locked templates—one **search**, one **build**. The search finds an invoicing product spending its expression budget in the wrong places, and the build treats the moment the search ranked first. These set the bar for length, specificity, and tone; the build route owns the workflow, state inventory, and template.
 
 ---
 
@@ -3207,7 +2999,7 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 **Soul's output:**
 
 ```
-**Verdict:** misplaced and anonymous · the product's biggest moment—getting paid—is a system-default notification · **5/12**
+**Verdict:** misplaced and anonymous · the product's highest-consequence outcome is a system-default notification · **5/12**
 
 **Product:** invoicing for freelancers · **Path:** 7 beats, bookmark → payment landed · **Ends feeling:** unnamed—relief is the obvious candidate, and nobody has chosen it
 **Readiness:** Ready · the default path reaches payment clearly enough for Soul work; failure recovery still needs a restraint fix
@@ -3220,40 +3012,40 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 **Blocker:** None observed. The failed-send copy is inappropriate, but the artifact does not show blocked recovery, lost work, or material harm that would justify P0.
 
 ## The path
-| # | Beat | Touchpoint | Frequency | Verdict |
-|---|---|---|---|---|
-| 1 | Enters from bookmark | web app | every-run | Expected |
-| 2 | Sees dashboard—outstanding and recent | screen | every-run (first run: once) | Net-New (Moment 3, first run) |
-| 3 | Understands who owes what | screen | every-run | Elevated |
-| 4 | Composes invoice—client, items, due date | screen | recurring | Expected |
-| 5 | Sends—confirmation appears | screen | recurring | Net-New (Moment 2) |
-| 6 | Payment lands—notification | push/email | recurring | Net-New (Moment 1) |
-| 7 | Sees dashboard updated—paid, month total | screen | recurring | Elevated |
+| # | Beat | Touchpoint | Frequency | Stakes | Verdict |
+|---|---|---|---|---|---|
+| 1 | Enters from bookmark | web app | every-run | low | Expected |
+| 2 | Sees dashboard—outstanding and recent | screen | every-run (first run: once) | low | Net-New (Moment 3, first run) |
+| 3 | Understands who owes what | screen | every-run | medium | Elevated |
+| 4 | Composes invoice—client, items, due date | screen | recurring | medium | Expected |
+| 5 | Sends—confirmation appears | screen | recurring | medium | Net-New (Moment 2) |
+| 6 | Payment lands—notification | push/email | recurring | high | Net-New (Moment 1) |
+| 7 | Sees dashboard updated—paid, month total | screen | recurring | medium | Elevated |
 
 ## Scorecard
 | Gate | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Placement | 2/4 | Confetti exists on the path but is unchosen, while the strongest craft lives on a 404; expressive effort is present but materially misplaced away from the moments most people remember. | Move the budget to two or three chosen path beats, especially payment and the ending. |
-| Proportion | 2/4 | Most of the path stays restrained, but recurring confetti overplays a routine send while the payment peak is silent; one material mismatch keeps intensity from fitting frequency and magnitude dependably. | Remove recurring confetti, then give the payment outcome proportionate, record-first treatment. |
+| Placement | 2/4 | Confetti exists on the path but is unchosen, while the strongest craft lives on a 404; expressive effort is materially misplaced away from the payment outcome and the beats with the clearest user consequence. Recall was not tested, so any peak or ending effect remains a hypothesis. | Compare payment, send, and first-run candidates on reach, utility, stakes, frequency, cost, and a delayed-recall check before moving the budget. |
+| Proportion | 2/4 | Most of the path stays restrained, but recurring confetti overplays a routine send while the payment outcome is silent; one material mismatch keeps intensity from fitting frequency and magnitude dependably. | Remove recurring confetti, then give the payment outcome proportionate, record-first treatment and test repeat comprehension. |
 | Signature | 1/4 | Swap the logo and the product is indistinguishable; the mascot is generic and the ending feeling is unnamed, so no authored moment identifies the product. | Choose the ending feeling and build one distinctive payment or completion moment around it. |
 | **Total** | **5/12 · 1.7/4** | **Significant rework; exact sum of justified component scores** | Weakest-gate ceiling applied |
 
-## The moments (Net-New, up to 3, ranked by reach × memory)
+## The moments (Net-New, up to 3, ranked by contextual reach × likely memory)
 ### Moment 1—Payment lands (beat 6), relief
 - **At:** screen: payment notification and dashboard · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization
-- Why here: the entire point of invoicing, reached by every paying client, and it is the peak and near-ending of the path—currently rendered as "Invoice #1042 was paid."
+- Why here: payment is the product's outcome and carries a concrete money consequence for the freelancer; the notification is currently "Invoice #1042 was paid." Its recall advantage over send or first run is a hypothesis, so compare reach and utility with a delayed-recall check.
 - Expected: notification names client, invoice, and amount · Elevated: amount-first copy, a paid-receipt block, the outstanding total visibly settling to its new value · Net-New: a Paid ledger—a year-view that fills with each payment and exports clean at tax time
 - Constraints: money moment—records and amounts precede any feeling; no sound.
 
 ### Moment 2—Send (beat 5), confidence
 - **At:** screen: invoice send confirmation · flow: invoice-to-payment · state: successful send · lifecycle: recurring invoice creation
-- Why here: the effort peak, and the anxiety is "does it look professional to my client"—the confirmation answers a different question than the one being asked.
+- Why here: sending is where the freelancer's effort and uncertainty concentrate; the confirmation answers a different question than "does it look professional to my client?" Compare this candidate with payment on reach, stakes, frequency, and build cost rather than assuming either is the stronger memory cue.
 - Expected: "Sent to client@" with timestamp · Elevated: preview exactly as the client sees it, then a delivered state · Net-New: a client-facing invoice page polished enough to be the freelancer's storefront
 - Constraints: nothing may delay the send action itself.
 
 ### Moment 3—First-run dashboard (beat 2, first pass), possibility
 - **At:** screen: first-run dashboard · flow: invoice-to-payment · state: empty state · lifecycle: first run
-- Why here: the first impression, every user, exactly once—a `once` beat that can carry expressive treatment the recurring beats cannot.
+- Why here: the intended first-run dashboard reaches each new freelancer once and can carry more expression than recurring beats, subject to a test that the new onboarding improves comprehension and completion.
 - Expected: "No invoices yet" plus a button · Elevated: an empty state that starts the work—a sample invoice and "your first takes 2 minutes" · Net-New: composing the first invoice is the onboarding; the form is the tour
 - Constraints: one primary action; the sample must be deletable in one tap.
 
@@ -3263,12 +3055,12 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 
 ## Issues (most severe first)
 - **[P1 · off-path restraint]** **At:** screen: Invoice send · flow: invoice-to-payment · state: failed-send error · lifecycle: recurring invoice creation. Wit at failure—the mascot grins through a failed send with "Whoops! Gremlins!" while delivery is uncertain. The tone materially damages confidence at a consequential moment, but no blocked recovery or financial loss is shown, so it is not P0. **Fix:** plain error—what happened, whether the invoice is safe, and what to do next. If failed sends are frequent, hand the relationship leak to Flywheel.
-- **[P1 · beat 6]** **At:** screen: Payment landed notification · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization. The silent payoff—the product's peak moment is an OS-default notification, indistinguishable from a calendar reminder. **Fix:** treat as Moment 1; the Elevated rung alone changes what users remember this product doing.
-- **[P2 · beat 5]** **At:** screen: Invoice send confirmation · flow: invoice-to-payment · state: successful send with confetti · lifecycle: steady-state recurring use after novelty has decayed. Decayed repetition—confetti on every send was charming once and is wallpaper by week two, and it spends celebration the payoff never gets. **Fix:** replace with a sent-state that survives repetition—preview, delivered check, done.
+- **[P1 · beat 6]** **At:** screen: Payment landed notification · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization. The money outcome is a system-default notification, so the user gets little record or product-specific context at a consequential point. **Fix:** treat as Moment 1; validate whether amount-first feedback improves comprehension and delayed recall before scoping the ledger.
+- **[P2 · beat 5]** **At:** screen: Invoice send confirmation · flow: invoice-to-payment · state: successful send with confetti · lifecycle: steady-state recurring use. Repeat value is untested, and confetti may become wallpaper while spending celebration the payment outcome does not get. **Fix:** replace with a sent-state whose preview, delivered check, and done status can be perceived and understood on later runs; validate before adding ceremony.
 - **[P2 · off-path]** **At:** screen: 404 page · flow: invoice-to-payment · state: invalid-route recovery · lifecycle: accidental off-path visit. The misdirected budget—the 404 minigame is the most-crafted surface in the product, reached by accident, in annoyance. Its reach is limited and recovery still exists, so this is misplaced effort rather than a major path failure. **Fix:** relocate the craft to Moment 2 or 3; the game itself is cut, not polished.
 
 ## Kept Expected, on purpose
-Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form freelancers fill from muscle memory, where novelty costs speed. Beat 1 is an every-run entry whose only honest lever is pace, and the observed pace already needs no additional treatment.
+Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form freelancers fill from muscle memory, where novelty costs speed. Beat 1 is an every-run entry; its observed pace is acceptable, but latency, failure feedback, and repeat comprehension still need a live check before calling speed a signature.
 
 ## Next
 - **Now**: **At:** screen: payment notification and dashboard · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization · the small things and Moment 1's Elevated interim—amount-first notification, receipt block, the settling total—ship while the Net-New ledger is scoped.
@@ -3285,41 +3077,152 @@ Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form f
 **Soul's output:**
 
 ```
-**Moment:** Payment lands—for a freelancer, on every pass.
+**Moment:** Payment lands—for a freelancer, on each successful payment.
 **Feeling:** relief · **Frequency:** recurring · **Stakes:** medium · **Target:** Net-New
 
 ## Why this moment
-- On the path: beat 6, reached by every client who pays—which is every successful use of the product.
-- Budget decision: it is the payoff the whole path exists for, reached by every successful user, and its accumulating record remains useful after novelty fades.
+- On the path: beat 6, reached by a client when an invoice is paid.
+- Budget decision: payment has clear user consequence and a candidate for useful records. Its recall advantage over send or first run is untested, so the ledger remains a hypothesis to validate against reach, stakes, cost, and later use.
 - Today: an OS-default notification—"Invoice #1042 was paid."—and a dashboard that shows the change only after a manual refresh. Observed from the artifact.
+
+## Applicable states
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | Applicable | The paid notification and dashboard update expose the successful payment outcome. |
+| Partial failure | Not shown—walk partial settlement, chargeback, and notification failure | The artifact does not show whether a payment can settle partially or whether notification delivery can fail. |
+| Permission | Not shown—check notification and amount-visibility permissions | OS-default notifications are shown, but permission and shared-device behavior are not evidenced. |
+| Recovery / retry | Not shown—test delayed payment and notification retry | The artifact does not expose retry, revalidation, or recovery after an interrupted payment update. |
+| Cancel / exit | N/A—payment-landed is post-submit confirmation | Cancellation belongs before settlement; this beat only confirms the outcome. |
+| Repeated use | Applicable—replay later payments and inspect ledger comprehension | Payments recur, but later-run utility and comprehension still need validation. |
+| Reduced motion / low-motion | Applicable | The proposed total settle has a text delta equivalent; verify it with the user's reduced-motion setting. |
 
 ## The rungs
 - **Expected:** notification carries client, invoice number, and amount; the dashboard row flips to Paid on next load. Shippable as-is.
 - **Elevated:** the interim ship—the notification leads with what matters: "$1,850 from Meridian Co · Invoice #1042 paid." Opening it lands on the invoice with a paid-receipt block: date, method, a record that exists somewhere. The outstanding total settles to its new value with one 400ms count-down; reduced motion gets the delta in text—"Outstanding: $4,200 → $2,350."
-- **Net-New:** the Paid ledger—every payment lands as a row in a year-view that visibly fills, month totals accumulate, and at tax time it exports clean. Relief gains a place to compound into evidence of a working business. Useful on the 400th payment, not merely clever on the first.
+- **Net-New:** the Paid ledger—each payment could land as a row in a year-view, with month totals and a clean tax-time export. It gives relief a record to build on; validate whether that utility remains clear and worth returning to on later payments.
 
 ## Held constant
-- The notification is complete in text alone—no motion, sound, or color required to know you were paid, and it survives OS truncation at 60 characters.
+- The notification must be complete in text alone—no motion, sound, or color required to know you were paid—and its behavior under OS truncation at 60 characters still needs verification.
 - Records reachable in one tap from the notification, at every rung.
 - Nothing celebrates before the amount is stated—money moments put reassurance before feeling.
 
 ## Constraints for the pick
-- No sound at any rung. No confetti at any rung—recurring frequency plus money rules it out twice.
+- No sound at any rung. No confetti in this proposal: recurring frequency and a money outcome make record-first feedback the safer tested choice.
 - Notifications appear on shared and locked screens; amount-first copy is the point, so a "hide amounts" preference ships alongside whichever rung is chosen.
 
 ## Gates
 - [x] On the default path—reached without hunting
 - [x] One feeling, named—"soul" and "delight" appear nowhere as specs
-- [x] Survives its frequency—accuracy and accumulation, nothing that depends on surprise
+- [Not shown—replay later payments and test comprehension] Survives its frequency—the ledger's repeat value is proposed, not observed
 - [x] Proportionate to the moment's magnitude
-- [x] Speed, comprehension, and the primary action untouched
+- [Not shown—test response timing, failure feedback, and primary-action latency] Speed, comprehension, and the primary action untouched
 - [x] Honest without motion and without sound
 ```
 
 ---
 
-**Why these two:** the search refuses the question as asked. The user said "make it more delightful" and the answer is that expressive effort already exists—in a 404 game and a failure mascot—and the job is relocation, not addition. The verdict names a misplacement, not an absence. Note the tiers doing the restraint: three justified Net-New candidates, two small things elevated because their ceilings allow only craft, and two beats standard with reasons on record. The build then shows the full range on one moment—Expected floor, Elevated interim, Net-New target—so the caller can land anywhere on the ladder, and proportionality at a money moment: relief is built from records, amounts, and one restrained settle. Celebration never appears, because the frequency is recurring and the subject is money, and either alone would rule it out.
+**Why these two:** the search refuses the question as asked. The user said "make it more delightful" and the answer is that expressive effort already exists—in a 404 game and a failure mascot—and the job is relocation, not addition. The verdict names a misplacement, not an absence. Note the tiers doing the restraint: three candidates clear the initial selection bar, while the recall check remains open; two small things are elevated because their ceilings allow only craft, and two beats stay standard with reasons on record. The build then shows the full range on one moment—Expected floor, Elevated interim, Net-New target—so the caller can land anywhere on the ladder, while proportionality at a money moment stays record-first and leaves repeat value to validation.
 
 Note what never appears: confetti at any tier, the mascot polished rather than cut, or a quota-driven fourth moment. The first-run empty state is the only place one-shot expressive treatment is considered because it is the only `once` beat on the path.
 
 <!-- END GENERATED SOURCE: soul/reference/examples.md -->
+
+
+<a id="source-soul-reference-build-md"></a>
+
+## Source: `soul/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: soul/reference/build.md -->
+
+# Soul Build—the moment spec
+
+Use this reference when the request is to build, design, or treat one beat on a working path. It is a proposal, not a score. The caller may ship the Expected floor, the Elevated rung, or the Net-New rung named by **Target**. A build must make the floor shippable, explain its budget decision, and preserve the user's ability to understand and control the task.
+
+Do not use this reference to repair a broken path. If the user cannot reach the beat, hand the issue to the relevant sibling Skill first: a screen problem to Focal, a path or state problem to Compass, or a value and return problem to Flywheel. A treatment can be drafted as a future candidate, but it is not the first fix.
+
+## The five moves
+
+1. **Frame it.** Name the product, user, beat, touchpoint, state, lifecycle occurrence, frequency, stakes, and one feeling. Use a concrete feeling such as confidence, relief, curiosity, control, or pride; `delight`, `soul`, and `personality` are not feelings. If the artifact does not expose a field, write `not shown` and name the fastest check. Stakes describe what can be lost at this beat—money, work, standing, safety, access, or nothing material. High stakes put reassurance, records, and control before expression.
+
+2. **Inventory applicable states.** Review the state inventory below before choosing a treatment. Applicability depends on the beat and product: completion is relevant when the beat has an outcome, partial failure when work can divide into successes and failures, permission when an OS, device, data, or people permission is requested, recovery when interruption or retry is possible, cancel when work can be abandoned, repeated use when the beat recurs, and reduced motion or low-motion when motion or sensory feedback is present or the user preference can change it. For every row, mark `Applicable`, `N/A—<specific reason>`, or `Not shown—<fastest evidence check>`. Do not assume all listed states belong to every moment.
+
+3. **Place it.** Run the beat through the sort tree in [SKILL.md](#source-soul-skill-md). Set **Target** to Expected, Elevated, or Net-New. A Net-New target must clear the selection bar in [moments.md](#source-soul-reference-moments-md) using the available reach, utility, stakes, frequency, cost, and recall evidence. An Elevated target adds craft without a new noun. An Expected target records why convention, frequency, stakes, an already-sufficient treatment, or missing evidence makes restraint correct. If the beat is off the default path, relocate the budget.
+
+4. **Ladder it.** Write a real Expected floor first. Add Elevated only when the same moment can be executed with more care without introducing a feature, surface, or mechanic. Add Net-New only when the target and state inventory justify an entirely new experience in place of the old one. Rungs above the target must say `unavailable at this beat's ceiling` and give the reason. A proposed capability must state how it stays useful, perceivable, comprehensible, and controllable at the stated frequency; an assertion that it will be memorable or durable is a hypothesis to test.
+
+5. **Guard it and run the gates.** No rung may delay the primary action, hide failure, remove control, or make feedback too fast, subtle, or complex to perceive. High-stakes moments state the material consequence before any feeling. Every-run treatments need evidence from repeated use or an explicit validating check; a quick first-run reaction is not enough. Use the gate notation below. These gates are unscored: mark `[x]` only when the proposal satisfies one, `[ ]—<reason>` when it does not, `[N/A—<specific reason>]` when it genuinely does not apply, and `[Not shown—<check>]` when the available evidence cannot judge it.
+
+## Applicable state inventory
+
+Use this inventory for the specific beat. It is a coverage tool, not a requirement to invent states. The reason column is required for `N/A` and `Not shown`.
+
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | `<Applicable; N/A—reason; Not shown—check>` | <what successful completion means here, or why this beat has no completion>
+| Partial failure | `<Applicable; N/A—reason; Not shown—check>` | <how a mixed outcome can occur, or why the operation is atomic>
+| Permission | `<Applicable; N/A—reason; Not shown—check>` | <permission boundary and user consequence, or why none exists>
+| Recovery / retry | `<Applicable; N/A—reason; Not shown—check>` | <how interruption or failure can recover, or why no recovery exists>
+| Cancel / exit | `<Applicable; N/A—reason; Not shown—check>` | <what leaving preserves or discards, or why cancellation is impossible>
+| Repeated use | `<Applicable; N/A—reason; Not shown—check>` | <frequency and repeated-use behavior, or why the beat occurs only once>
+| Reduced motion / low-motion | `<Applicable; N/A—reason; Not shown—check>` | <motion or sensory alternative, or why no motion treatment is proposed>
+
+When a state is applicable, the build must say what the proposed treatment does in that state. Clear failure treatment states what happened, what was preserved, what remains uncertain, and the next action. It keeps tone plain and respectful; failure is a place for agency and recovery, not a celebration destination. A permission request states why access is needed, what it enables, and what happens when the user declines. Cancel and recovery preserve work where the product can, make loss explicit before it occurs, and leave a visible path back.
+
+For a repeated beat, inspect both first and later occurrences where evidence exists. Compare utility, feedback latency, perceivability, comprehension, and control. If later behavior is not shown, keep the proposed repeat treatment conditional and name the check. For reduced motion or low-motion, provide a complete non-animated equivalent; meaning cannot depend on motion, color, sound, or a timing-sensitive effect.
+
+## Rung guidance
+
+**Expected** is the obvious, fully functional version: standard conventions, clear copy, complete feedback, and a recoverable outcome. It is the final answer when novelty would tax a load-bearing convention, high stakes call for calm, frequency leaves no supported expressive lever, or the artifact already has enough authored care.
+
+**Elevated** is the same moment with visible care. It can sharpen hierarchy, use the user's words, name what changed, show work during a wait, anticipate a safe next step, or provide feedback with a perceivable settle. It does not add a new surface or mechanic. Any motion remains optional, brief enough not to delay the task, and paired with text or structure that carries the meaning.
+
+**Net-New** replaces the old treatment with an entirely new experience: a capability, mechanic, surface, or artifact that makes the moment worth choosing for this product. It is allowed only when the beat clears the selection bar and remains proportionate to stakes and frequency. State the utility that survives repeat use, the cost of building and maintaining it, and the evidence still needed. Never add a Net-New rung to fill the zero-to-three budget.
+
+## Output—the Moment Spec
+
+Every standalone build returns this structure in this order. Fill the slots and keep fixed labels. The state inventory remains in the output even when several rows are `N/A`.
+
+```markdown
+**Moment:** <the beat>—for <who>, on <the first pass | every pass | the nth pass>.
+**Feeling:** <one named emotion> · **Frequency:** <once | recurring | every-run> · **Stakes:** <low | medium | high> · **Target:** <Expected | Elevated | Net-New>
+
+## Why this moment
+- On the path: <where it sits, and who reaches it>
+- Budget decision: <why this beat earns treatment—or why Expected restraint is correct>
+- Today: <what the moment does now—observed, inferred, or `not shown` with the check>
+
+## Applicable states
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | <Applicable; N/A—reason; Not shown—check> | <...>
+| Partial failure | <Applicable; N/A—reason; Not shown—check> | <...>
+| Permission | <Applicable; N/A—reason; Not shown—check> | <...>
+| Recovery / retry | <Applicable; N/A—reason; Not shown—check> | <...>
+| Cancel / exit | <Applicable; N/A—reason; Not shown—check> | <...>
+| Repeated use | <Applicable; N/A—reason; Not shown—check> | <...>
+| Reduced motion / low-motion | <Applicable; N/A—reason; Not shown—check> | <...>
+
+## The rungs
+- **Expected:** <the floor—the obvious version, fully functional, shippable as-is>
+- **Elevated:** <the same moment with more craft, or `unavailable at this beat's ceiling` with the reason>
+- **Net-New:** <an entirely new experience in place of the old one, or `unavailable at this beat's ceiling` with the reason>
+
+## Held constant
+- <what no rung may damage—speed, comprehension, control, the primary action, reversibility>
+- <the convention kept, if this beat is muscle-memory>
+
+## Constraints for the pick
+- <brand, technical, accessibility, frequency, stakes, and context limits every rung already respects>
+
+## Gates
+- [ ] On the default path—reached without hunting
+- [ ] One feeling, named—"soul" and "delight" appear nowhere as specs
+- [ ] Survives its frequency—repetition-proof only when evidence supports it
+- [ ] Proportionate to the moment's magnitude
+- [ ] Speed, comprehension, control, and the primary action untouched
+- [ ] Honest without motion and without sound
+```
+
+The pick between rungs belongs to the caller. The Target records the result of the sort; it does not force the caller to ship Net-New. A checked gate is not a score. If a gate is inapplicable, include its `N/A` reason in the output; if evidence is missing, include the check instead of claiming that the proposal passes or fails.
+
+<!-- END GENERATED SOURCE: soul/reference/build.md -->

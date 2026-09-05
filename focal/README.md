@@ -53,19 +53,7 @@ Use [Product Judgement](../product-judgement) when the question crosses several 
 
 ## Install and update
 
-Install Focal globally with the [Skills CLI](https://skills.sh/docs/cli):
-
-```bash
-npx skills add kvncnls/product-judgement --skill focal -g
-```
-
-Update an installation tracked by the CLI:
-
-```bash
-npx skills update -g focal
-```
-
-See the collection’s [installation and update guide](../README.md#install) for Claude Code, Codex, Cursor, manual folders, and generated single-file bundles.
+Use the collection’s [installation and update guide](../README.md#install). It covers native plugins, protected folder installs, verified upload packages, and the Skills CLI with the project’s release-age policy.
 
 ## Use
 
@@ -83,10 +71,10 @@ Focal returns a fixed **Screen Spec**:
 - **Information**—what stays, moves, merges, or leaves.
 - **Disclosure**—what appears Now, On-demand, or Never.
 - **Hierarchy**—the intended attention order and focusing mechanism.
-- **States**—empty, loading, error, success, and worst-case full behavior relevant to the screen.
-- **Gates**—a binary, unscored check of the proposal.
+- **States**—the variants this screen can actually enter, including success, partial, permission, and recovery behavior when relevant.
+- **Gates**—an unscored check of the proposal, with a reason when a gate is not applicable.
 
-See the [locked Screen Spec](./SKILL.md#build-the-five-moves).
+See the [locked Screen Spec](./reference/build.md#screen-spec).
 
 ### Audit a screen
 
@@ -96,9 +84,9 @@ See the [locked Screen Spec](./SKILL.md#build-the-five-moves).
 
 Point the agent at a frame, screenshot, component, route, prototype, or running product. Focal returns:
 
-- **Verdict**—Yes or No for One Screen, One Clear Intent, plus the largest local problem.
+- **Verdict**—Yes or No for One Screen, One Clear Intent when intent is evidenced; `N/E—insufficient evidence` when it cannot be assessed, plus the largest supported local problem.
 - **Coverage and Basis**—the exact Screen · Flow · State · Lifecycle reviewed, missing evidence, and a confirming check.
-- **Scorecard**—Information Architecture, Progressive Disclosure, and Visual Hierarchy scored `0–4`, for a native total of `/12`.
+- **Scorecard**—Information Architecture, Progressive Disclosure, and Visual Hierarchy scored `0–4`, with the native `/12` total only when all three dimensions are evaluable.
 - **Issues**—P0–P3 findings with exact locators and concrete fixes.
 - **Top moves**—up to three high-leverage changes; fewer when fewer are justified.
 - **Next**—structural-before-executional sequencing and any Compass, Flywheel, or Soul handoff.
@@ -109,7 +97,7 @@ See the [locked review output](./reference/review.md#output-formatuse-this-exact
 
 ## Give it context
 
-The more Focal knows about the user, intent, business goal, constraints, stakes, device, frequency, and surrounding flow, the more useful its decisions become. Include a PRD, research, analytics, requirements, or codebase when available. If a state is not visible or verifiable, the audit marks it `not shown` rather than inventing behavior.
+The more Focal knows about the user, intent, business goal, constraints, stakes, device, frequency, and surrounding flow, the more useful its decisions become. Include a PRD, research, analytics, requirements, or codebase when available. If a state is not visible or verifiable, the audit marks it `not shown` rather than inventing behavior. A missing variant can be a coverage gap without making the entire dimension N/E; a dimension is `N/E—insufficient evidence` when the available evidence cannot support its rubric.
 
 ## What is inside
 
@@ -117,6 +105,7 @@ The more Focal knows about the user, intent, business goal, constraints, stakes,
 focal/
 ├── SKILL.md
 ├── reference/
+│   ├── build.md
 │   ├── review.md
 │   ├── patterns.md
 │   └── examples.md
@@ -135,6 +124,8 @@ IA         include what supports the intent · group meaningfully · label plain
 DISCLOSE   Now / On-demand / Never · fit decision load to audience and stakes
 DECIDE     minimize unnecessary choices · infer before asking · keep context nearby
 SHOW       make consequences legible; use a preview or visualization when it helps
+STATE      specify only applicable variants, including success, partial, permission, and recovery
+EVIDENCE   N/E only when a dimension's rubric lacks support; omit total, average, and band if any is N/E
 HIERARCHY  one intended attention order · strongest treatment matches the action model
 NEVER      hide price, requirements, consequences, or controls needed now
 ```

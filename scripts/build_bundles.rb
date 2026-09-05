@@ -69,6 +69,8 @@ BUNDLES.each do |name, config|
   discovered = ["#{name}/SKILL.md"] + Dir.glob(File.join(ROOT, name, "reference", "**", "*.md")).sort.map do |path|
     path.delete_prefix("#{ROOT}/")
   end
+  # Mode-specific references are bundled even though folder installs load them on demand.
+  config[:files] += discovered - config.fetch(:files)
   configured = config.fetch(:files)
   next if configured.sort == discovered.sort
 
@@ -114,17 +116,54 @@ def header(name, config)
 
     #{holistic_note.strip}
 
-    Common uses include an instruction file, a rules file, or an uploaded knowledge file. The source sections are concatenated verbatim so the bundle cannot silently drift from the folder Skill.
+    Common uses include an instruction file, a rules file, or an uploaded knowledge file. Source instructions are generated from the folder Skill. Relative links become links to included source sections (or repository sources when absent); identical shared contracts appear once per bundle.
 
     ---
   MARKDOWN
 end
 
-def source_section(relative_path)
+def source_anchor(path)
+  "source-" + path.downcase.gsub(/[^a-z0-9]+/, "-").sub(/-+\z/, "")
+end
+
+def source_section(relative_path, included, shared_seen)
   absolute_path = File.join(ROOT, relative_path)
   content = File.read(absolute_path, encoding: "UTF-8").rstrip
+  content = content.gsub(/<!-- BEGIN SHARED: ([a-z-]+) -->\n.*?\n<!-- END SHARED: \1 -->/m) do |fragment|
+    name = Regexp.last_match(1)
+    if shared_seen.include?(name)
+      "See the [shared #{name} contract](#shared-#{name}) already included above."
+    else
+      shared_seen << name
+      "<a id=\"shared-#{name}\"></a>\n\n#{fragment}"
+    end
+  end
+  content = content.gsub(/\[([^\]]+)\]\(([^)]+)\)/) do |link|
+    label = Regexp.last_match(1)
+    target = Regexp.last_match(2)
+    repository_prefix = "https://github.com/kvncnls/product-judgement/blob/main/"
+    if target.start_with?(repository_prefix)
+      source = target.delete_prefix(repository_prefix).split("#", 2).first
+      next "[#{label}](##{source_anchor(source)})" if included.include?(source)
+    end
+    next link if target.start_with?("#", "/") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+
+    file, fragment = target.split("#", 2)
+    resolved = File.expand_path(file, File.dirname(absolute_path))
+    next link unless resolved.start_with?(ROOT + "/") || resolved == ROOT
+    resolved = File.join(resolved, "SKILL.md") if File.directory?(resolved) && File.file?(File.join(resolved, "SKILL.md"))
+    source = resolved.delete_prefix(ROOT + "/")
+    if included.include?(source)
+      "[#{label}](##{source_anchor(source)})"
+    else
+      suffix = fragment ? "##{fragment}" : ""
+      "[#{label}](https://github.com/kvncnls/product-judgement/blob/main/#{source}#{suffix})"
+    end
+  end
 
   <<~MARKDOWN
+    <a id="#{source_anchor(relative_path)}"></a>
+
     ## Source: `#{relative_path}`
 
     <!-- BEGIN GENERATED SOURCE: #{relative_path} -->
@@ -135,16 +174,18 @@ def source_section(relative_path)
   MARKDOWN
 end
 
+def render_sources(files)
+  shared_seen = []
+  files.map { |path| source_section(path, files, shared_seen) }
+end
+
 def render_bundle(name, config)
-  sections = config.fetch(:files).map { |path| source_section(path) }
-  ([header(name, config)] + sections).join("\n\n").rstrip + "\n"
+  ([header(name, config)] + render_sources(config.fetch(:files))).join("\n\n").rstrip + "\n"
 end
 
 def render_combined
-  sections = COMBINED.fetch(:order).flat_map do |name|
-    BUNDLES.fetch(name).fetch(:files).map { |path| source_section(path) }
-  end
-  ([combined_header] + sections).join("\n\n").rstrip + "\n"
+  files = COMBINED.fetch(:order).flat_map { |name| BUNDLES.fetch(name).fetch(:files) }
+  ([combined_header] + render_sources(files)).join("\n\n").rstrip + "\n"
 end
 
 if ARGV.any? { |argument| argument != "--check" }
@@ -159,6 +200,10 @@ outputs = BUNDLES.map { |name, config| [name, render_bundle(name, config)] }
 outputs << [COMBINED.fetch(:name), render_combined]
 
 outputs.each do |name, expected|
+  ids = expected.scan(/<a id="([^"]+)"><\/a>/).flatten
+  references = expected.scan(/\]\(#((?:source|shared)-[^)]+)\)/).flatten
+  abort "#{name}: missing generated link anchors" unless (references - ids).empty?
+  abort "#{name}: duplicate generated anchors" unless ids.uniq == ids
   destination = File.join(ROOT, "bundles", "#{name}.md")
 
   if check_only

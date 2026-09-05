@@ -21,7 +21,10 @@ jobs:
           ruby-version: "3.3"
 
       - name: Verify source contracts and generated bundles
-        run: ruby scripts/verify.rb
+        run: |
+          ruby scripts/verify.rb
+          ruby scripts/test_install.rb
+          ruby scripts/test_packages.rb
 
   # scripts/ deliberately targets Ruby 2.6 so the tooling runs on the interpreter
   # macOS ships with nothing to install. The 3.3 job above cannot see that floor:
@@ -56,3 +59,5 @@ jobs:
         run: |
           unset GEM_HOME GEM_PATH RUBYOPT RUBYLIB BUNDLE_GEMFILE
           /usr/bin/ruby scripts/verify.rb
+          /usr/bin/ruby scripts/test_install.rb
+          /usr/bin/ruby scripts/test_packages.rb

@@ -6,10 +6,12 @@ The complete Soul Skill, including its unscored Readiness check, `/12` audit rub
 
 If your agent supports multi-file Skills, install the `soul/` folder instead so references can load on demand. Use this bundle when the environment accepts only one Markdown instruction file.
 
-Common uses include an instruction file, a rules file, or an uploaded knowledge file. The source sections are concatenated verbatim so the bundle cannot silently drift from the folder Skill.
+Common uses include an instruction file, a rules file, or an uploaded knowledge file. Source instructions are generated from the folder Skill. Relative links become links to included source sections (or repository sources when absent); identical shared contracts appear once per bundle.
 
 ---
 
+
+<a id="source-soul-skill-md"></a>
 
 ## Source: `soul/SKILL.md`
 
@@ -17,7 +19,7 @@ Common uses include an instruction file, a rules file, or an uploaded knowledge 
 
 ---
 name: soul
-description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by reach and memory, splits treatments by frequency so repetition never turns expression into noise, and refuses the traditional dumping grounds (404 pages, easter eggs, error mascots) where delight goes to be unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
+description: Use when a product works but feels generic, forgettable, or indistinguishable from its competitors. Soul maps the happy path and sorts every beat into three tiers—Expected (stays functional), Elevated (the same moment with more craft), and Net-New (an entirely new experience, reserved for up to three justified moments; zero is valid). Places by contextual reach, utility, stakes, frequency, cost, and evidence about memory; tests repeated treatments for feedback, control, perceivability, and comprehension; and refuses traditional dumping grounds (404 pages, easter eggs, error mascots) where expression goes unseen. Triggers on boring, bland, generic, soulless, forgettable, delight, personality, charm, whimsy, juice, microinteractions, wow moment, celebration, empty state, success state, first impression, "make it memorable", "feels generic". Not for screen structure (use Focal), flows and navigation (use Compass), retention and activation leaks (use Flywheel), brand identity systems, or marketing pages.
 license: MIT
 argument-hint: "[build | search] <product, flow, or moment>"
 ---
@@ -26,15 +28,15 @@ argument-hint: "[build | search] <product, flow, or moment>"
 
 **Never boring.**
 
-Most products work and feel like nothing. Every screen functional, every flow passable, nothing anyone would describe to a friend. The word people reach for is *soulless*, and the word is a diagnosis: nothing here was authored. The product is the average of its competitors.
+Most products work and feel like nothing. Every screen is functional, every flow passable, yet nothing feels authored. Soul treats that flatness as a placement problem.
 
-**Soul is not a spec—it is what accumulates when specific moments are placed well.** So this skill does not sprinkle. It maps the default path and sorts every beat into one of three tiers—what stays functional, what gets more craft, and which zero-to-three moments, if any, earn a full rebuild.
+**Soul is not a spec—it is what accumulates when specific moments are placed well.** It maps the default path and sorts every beat into one of three tiers: functional, crafted, or a zero-to-three full rebuild.
 
-Three facts decide every placement:
+Three contextual hypotheses guide every placement:
 
-- **People remember the peak and the ending, not the average.** A product with two entirely new moments and quiet craft on everything else is remembered. A product with twelve novelties is exhausting, and nothing in it reads as significant.
-- **Reach beats risk.** Delight traditionally goes where failing is cheap—the 404 page, the easter egg—which is exactly where nobody walks. Placement here is chosen by reach × memory: the default path, because that is where everyone is.
-- **Repetition kills novelty.** The 50th confetti is noise. A treatment that plays every session must survive its 50th viewing; a treatment that plays once may spend everything.
+- **Memory is a hypothesis, not a law.** Peaks and endings can shape recall when users reach them, the moment carries meaning, and recall or user evidence supports the effect. Compare reach, utility, stakes, frequency, implementation and maintenance cost, and any actual recall evidence; a later beat is not automatically stronger.
+- **Reach and consequence matter more than cheap risk.** Delight traditionally goes where failing is cheap—the 404 page, the easter egg—which is exactly where nobody walks. Use `reach × likely memory` as a working comparison, then test it against the user's job, the cost of getting it wrong, and the cost to build and maintain it.
+- **Repetition changes the bar.** A treatment that plays every session must remain perceivable, comprehensible, and under the user's control when repeated. A one-time treatment may spend more, but neither frequency nor novelty alone proves that it will endure.
 
 **The three tiers.** Every beat on the path gets exactly one:
 
@@ -48,19 +50,19 @@ Three facts decide every placement:
 
 ## When to use
 
-Soul is for a product that already works but reads as anonymous: a functional-but-flat happy path, a success state that stops instead of lands, an ending nobody designed, a personality budget with nowhere to go. Give it a product, a flow, screens, code, or a description.
+Soul is for a working product that reads as anonymous: a flat happy path, a success state that stops instead of lands, or an ending nobody designed. Give it a product, flow, screens, code, or description.
 
 It is **not** for:
-- Single-screen structure, hierarchy, or clutter—that is [Focal](../focal).
-- Multi-screen paths and navigation—that is [Compass](../compass).
-- Losing users before they reach value—that is [Flywheel](../flywheel). Soul makes a working path memorable; it cannot make a broken path work, and treatments on a broken path read as cosmetic.
+- Single-screen structure, hierarchy, or clutter—that is [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md).
+- Multi-screen paths and navigation—that is [Compass](https://github.com/kvncnls/product-judgement/blob/main/compass/SKILL.md).
+- Losing users before value—that is [Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md). Soul makes a sound path memorable; it cannot repair a broken one.
 - Brand identity systems, logo, illustration style, or marketing pages. Soul places moments inside the product's default path; it does not define the visual language they are executed in.
 
 ---
 
 ## Map the path first
 
-Every job starts with the happy path: the default flow the primary user actually walks, entry to outcome. Build it from the artifact; where the artifact is silent, ask—the skeleton below is the interview, seven blanks to fill.
+Every job starts with the happy path: the default flow the primary user walks, entry to outcome. Build it from the artifact; where it is silent, ask.
 
 ```
 1. Enters from [source]
@@ -72,18 +74,18 @@ Every job starts with the happy path: the default flow the primary user actually
 7. Feels [intended emotional state]
 ```
 
-- **Keep the default path compact.** Expand the seven-part skeleton only when a distinct beat changes the user's understanding, action, system response, or feeling. Five to twelve beats covers many products, but it is a diagnostic range, not a quota or hard ceiling. Exclude edge branches; do not merge consequential beats merely to hit a number.
-- **Tag every beat** with its touchpoint (screen, email, notification, external) and its frequency: `once` (first-run only), `recurring` (weekly-to-monthly rhythm), `every-run` (every session).
-- **Beat 7 is a design input, not decoration.** If nobody can say what the user is meant to feel at the end, that absence is the first finding.
-- First-run empty states and waits are beats on this path—they are in scope. Error branches are excluded from Net-New selection because they are not the happy path, but include them in the restraint check: personality must remain clear and respectful during failure without turning failure into a delight destination.
+- **Keep the default path compact.** Expand the skeleton only when a beat changes understanding, action, system response, or feeling. Five to twelve beats is a diagnostic range, not a quota. Exclude edge branches and do not merge consequential beats to hit a number.
+- **Tag every beat** with its touchpoint (screen, email, notification, external), frequency, and stakes: `once` (first-run only), `recurring` (weekly-to-monthly rhythm), `every-run` (every session); stakes are `low`, `medium`, or `high`. If frequency or stakes are not evidenced, write `not shown` and name the check.
+- **Beat 7 is a design input.** If nobody can name the intended ending feeling, that absence is the first finding.
+- First-run empty states and waits are in scope. Error branches are excluded from Net-New selection, but belong in the restraint check: failure must stay clear and respectful without becoming a delight destination.
 
 ## Sort every beat
 
 The tiers have owners:
 
-- **Expected** owns the beats that must simply work—load-bearing convention, high stakes, anywhere addition would tax the task. **Expected is a verdict, not a failure**, and the receipt of Expected beats is half the deliverable.
-- **Elevated** owns the small things, and it spreads as wide as the ceilings allow. This is the anti-boring tier: the same moments with more craft—copy in the user's words, feedback that names what changed, response that feels instant. Craft survives repetition; novelty does not, which is why Elevated can be distributed and Net-New cannot.
-- **Net-New** owns **up to three** exceptional moments, and zero is a valid result. It is not the old moment done better but an entirely new experience in its place. Concentration protects significance, while the eligibility tree protects restraint: use Net-New only when a beat clears reach × memory, frequency, stakes, and convention. Two or three is common when the path genuinely earns them; it is a budget, never a quota.
+- **Expected** owns load-bearing convention, high stakes, and any beat where addition taxes the task. It is a verdict, not a failure; record the restraint.
+- **Elevated** owns the small things: the same moment with clearer language, feedback, anticipation, or feel. Distribute it where the ceiling allows.
+- **Net-New** owns up to three exceptional moments, and zero is valid. It replaces the old experience and earns its place only after the contextual comparison below; it is a budget, never a quota.
 
 Walk this for every beat, top to bottom, first match wins:
 
@@ -95,85 +97,41 @@ Which tier may this beat take?
 ├── Load-bearing convention .............. Expected—muscle memory is the feature
 ├── High stakes .......................... Expected or calm Elevated by default; Net-New
 │                                          only when it strengthens reassurance or control
-├── Every-run ............................ Elevated by default; Net-New only when durable
-│                                          utility—not surprise—still pays on the 50th run
+├── Every-run ............................ Elevated by default; Net-New only when later-use
+│                                          utility is supported or explicitly tested
 └── Otherwise ............................ Elevated; promote to Net-New only if it clears
                                            the selection bar and ranks within the top three
 ```
 
-**The frequency split sets each beat's ceiling:**
+**Frequency sets each beat's ceiling:**
 
-- `every-run` beats take only repetition-proof treatment—speed, feel, anticipation, useful variation, or an exceptional Net-New capability whose utility survives the 50th run. Jokes, celebration, and novelty decay with repetition; usefulness does not.
-- `once` beats may take one-shot expressive treatment—this is where storytelling spends well.
-- `recurring` beats sit between: intensity below first-run, variation so the 30th arrival still reads as alive.
+- `every-run` beats take treatment that evidence shows can remain useful, perceivable, comprehensible, and controllable under repetition—speed, feel, anticipation, useful variation, or an exceptional Net-New capability. Jokes, celebration, and surprise often decay; test the actual beat instead of assuming either decay or durability.
+- `once` beats may take one-shot expressive treatment.
+- `recurring` beats sit between: intensity below first-run, with variation tested against later arrivals.
 
-**The dumping grounds are refused.** 404 pages, error mascots, easter eggs, release-note bits—the traditional homes of product delight, chosen because failing there is cheap. Cheap failure means no reach: the work is unseen, or seen by a frustrated user at the worst moment. When the sweep finds existing delight in a dumping ground, it relocates the effort to a chosen beat. And an error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](../flywheel) or [Focal](../focal). One honest edge: a 404 that carries real traffic is not a dumping ground, it is an entry beat—treat it as recovery, one clear path back, no jokes.
+**Refuse dumping grounds.** 404 pages, error mascots, easter eggs, and release-note bits are often low-reach places to spend expression. Relocate existing craft to an on-path beat; route frequent error exposure to [Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md) or [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md). A high-traffic 404 is an entry beat: state what happened and provide one clear way back.
 
-Selection heuristics, archetypes, and the full dumping-grounds list live in [reference/moments.md](reference/moments.md).
+Selection heuristics, archetypes, and the full dumping-grounds list live in [reference/moments.md](#source-soul-reference-moments-md).
 
 ---
 
 ## Routing
 
-**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](../product-judgement/SKILL.md) loads this Skill for a cross-scale audit, take this paragraph and skip the rest of this section. Treat the pass as `search` over the evidence Product Judgement supplies: never ask a framing question and never stall—write `not shown` and name the fastest validating check instead. Never hand a cross-scale request back to Product Judgement, and send a sibling-owned finding to its **Handoffs** section rather than invoking that Skill. Run the whole contract in [reference/review.md](reference/review.md)—every gate, score, rationale, band, ceiling, severity, and locator—but do not print the locked template, do not read [reference/examples.md](reference/examples.md), and do not apply this Skill's **Voice**, opening-line, or re-run instructions: Product Judgement owns the emitted response, and prints this template only when the user asks for the detailed passes. When its wrapper has no slot for something this contract produces, hand that to Product Judgement in working notes—never append a line after its output. Record the findings even when an earlier pass found a broken floor: Product Judgement sequences the repair ahead of the treatment, and an empty Soul contribution leaves a required row unfillable.
+**Orchestrated pass—this overrides every other instruction in this Skill and its reference files.** When [Product Judgement](https://github.com/kvncnls/product-judgement/blob/main/product-judgement/SKILL.md) loads Soul for a cross-scale audit, treat it as `search` over supplied evidence: never ask a framing question or stall; write `not shown` and name the fastest check. Never hand a cross-scale request back to Product Judgement; put sibling-owned findings in its **Handoffs** section. Run [reference/review.md](#source-soul-reference-review-md)'s full contract—gates, scores, rationales, bands, ceilings, severity, and locators—but do not print its locked template, do not read [reference/examples.md](#source-soul-reference-examples-md), or apply Soul's Voice/opening/re-run instructions. Product Judgement owns the emitted response and any working notes; keep findings even when an earlier pass found a broken floor so its repair sequence can account for Soul.
 
 - **No argument** → explain the placement idea in three sentences, then ask: search an existing product, or build one moment?
-- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](../product-judgement/SKILL.md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
-- **`search` / `sweep` / `audit` / `review` / `find` (a product, a flow, screens, or "it feels generic")** → load and follow [reference/review.md](reference/review.md). It first runs an unscored Readiness check, then maps the path, assigns every beat a tier, and evaluates three Soul-local gates 0–4—Placement, Proportion, and Signature—with a `/12` total only when all three are evaluable. It requires evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators before returning up to three justified Net-New moments plus the small things worth elevating.
-- **`build` / `design` / `treat` (one beat)** → run the beat through the sort tree above; its tier is the build's **Target**. Read [reference/treatments.md](reference/treatments.md)—plus [reference/moments.md](reference/moments.md) when the target is Net-New, to confirm it clears the selection bar—then follow **Build** below.
-- **A question about a moment type or a treatment lever** → [reference/moments.md](reference/moments.md) or [reference/treatments.md](reference/treatments.md).
+- **A whole-app or cross-scale audit request** → hand off to [Product Judgement](https://github.com/kvncnls/product-judgement/blob/main/product-judgement/SKILL.md), which runs Soul after Focal, Compass, and Flywheel and reconciles the results.
+- **`search` / `sweep` / `audit` / `review` / `find` (a product, a flow, screens, or "it feels generic")** → load and follow [reference/review.md](#source-soul-reference-review-md). It first runs an unscored Readiness check, then maps the path, assigns every beat a tier, and evaluates three Soul-local gates 0–4—Placement, Proportion, and Signature—with a `/12` total only when all three are evaluable. It requires evidence-based rationales, P0–P3 issues, and exact **Screen · Flow · State · Lifecycle** locators before returning up to three justified Net-New moments plus the small things worth elevating.
+- **`build` / `design` / `treat` (one beat)** → run the beat through the sort tree above; its tier is the build's **Target**. Load [reference/build.md](#source-soul-reference-build-md) for the build workflow, applicable state inventory, Moment Spec, and gates. Read [reference/treatments.md](#source-soul-reference-treatments-md)—plus [reference/moments.md](#source-soul-reference-moments-md) when the target is Net-New, to confirm it clears the selection bar.
+- **A question about a moment type or a treatment lever** → [reference/moments.md](#source-soul-reference-moments-md) or [reference/treatments.md](#source-soul-reference-treatments-md).
 
-Before emitting either output, read [reference/examples.md](reference/examples.md). It calibrates length, tone, and what the locked templates look like filled well.
-
----
-
-## Build: the five moves
-
-1. **Frame it.** The product, the user, the beat, its frequency class, the stakes, and the one feeling this moment should produce—named, not "delight." If you cannot name the feeling, the screen, and the second it happens, you have a brand adjective, not a design target. Stakes are what the user can lose at this beat—money, work, standing, safety. Anything real to lose is high, and high puts reassurance before feeling.
-2. **Place it.** Run the beat through the sort tree—Expected, Elevated, or Net-New is the spec's **Target**. A Net-New target must also clear the selection bar in [reference/moments.md](reference/moments.md); an Elevated target respects its ceiling; an Expected target records why convention, frequency, stakes, or an already-sufficient treatment makes restraint correct. If the request points at a dumping ground, say so and redirect the budget to the nearest on-path beat.
-3. **Ladder it.** Design Expected as a real shippable floor. Add Elevated and Net-New only through the target; every rung above the target is `unavailable at this beat's ceiling` with the reason. This makes an Expected target a complete answer rather than a forced prelude to extra treatment.
-4. **Guard it.** No rung may tax speed, comprehension, or the primary action. High-stakes moments get reassurance before feeling. Every-run moments get only what survives repetition.
-5. **Run the gates.** Self-check against the **`## Gates`** block of the Moment Spec below—that block is the canonical list. Mark `[x]` only what the spec satisfies; leave `[ ]` with a one-line reason for any it does not.
-
-**Output—the Moment Spec (use this exact structure).** Every build returns this template verbatim, in this order. Fill the `<…>` slots; keep every fixed label.
-
-```
-**Moment:** <the beat>—for <who>, on <the first pass | every pass | the nth pass>.
-**Feeling:** <one named emotion> · **Frequency:** <once | recurring | every-run> · **Stakes:** <low | medium | high> · **Target:** <Expected | Elevated | Net-New>
-
-## Why this moment
-- On the path: <where it sits, and who reaches it>
-- Budget decision: <why this beat earns treatment—or why Expected restraint is correct>
-- Today: <what the moment does now—observed from the artifact, or assumed>
-
-## The rungs
-- **Expected:** <the floor—the obvious version, fully functional, shippable as-is>
-- **Elevated:** <the same moment with more craft, or `unavailable at this beat's ceiling` with the reason>
-- **Net-New:** <an entirely new experience in place of the old one, or `unavailable at this beat's ceiling` with the reason>
-
-## Held constant
-- <what no rung may damage—speed, comprehension, the primary action, reversibility>
-- <the convention kept, if this beat is muscle-memory>
-
-## Constraints for the pick
-- <brand, technical, accessibility, and context limits every rung already respects>
-
-## Gates
-- [ ] On the default path—reached without hunting
-- [ ] One feeling, named—"soul" and "delight" appear nowhere as specs
-- [ ] Survives its frequency—repetition-proof if every-run
-- [ ] Proportionate to the moment's magnitude
-- [ ] Speed, comprehension, and the primary action untouched
-- [ ] Honest without motion and without sound
-```
-
-**The pick between rungs is the caller's.** The target names the tier the sort assigned; rungs below it are interim ships, and landing on one is a product decision that belongs to the human. Recommend only when asked.
+Before emitting standalone output, read [reference/examples.md](#source-soul-reference-examples-md) for calibrated length, tone, and template use. The orchestrated pass skips examples.
 
 ---
 
 ## Voice (when giving feedback)
 
-- **Emit the exact output template.** Search and build each have a locked structure—the build template is above, the search template is in [reference/review.md](reference/review.md). Use it verbatim: same sections, same order, same headers, same table columns. If a section has nothing, keep its header and write "None."
+- **Emit the exact output template.** Search has the locked structure in [reference/review.md](#source-soul-reference-review-md). One-beat build output follows the template loaded by the build route. Use each template verbatim: same sections, same order, same headers, same table columns. If a section has nothing, keep its header and write "None."
 - **Template precedence.** The template is the complete contract for what gets emitted. If any instruction in this skill asks for something the template has no slot for, put it in the nearest slot that fits, or leave it out—never invent a section. A gap like that is a bug in this skill: name it in one line after the output so it can be fixed.
 - **Name the feeling, every time.** "Delight," "personality," "magic," and "soul" never appear as specifications. The feeling, the beat, and the second it happens—or it is not a design decision yet.
 - **Separate observed from assumed.** Findings read off the artifact and findings inferred from a description carry different weight; the Basis line says which is which.
@@ -189,8 +147,8 @@ Match-and-refuse. Each of these is expressiveness spending trust it did not earn
 
 - **Wit at failure or loss.** The joke at the worst moment reads as mockery. Personality is tested at failure, and it passes the test by restraint.
 - **Celebration before confirmation on high-stakes actions.** Confetti before "your money arrived safely" reads as a casino. Reassurance, records, and control come first; feeling comes after.
-- **Motion that taxes the task.** Any animation that delays the primary action or comprehension converts delight into friction. Respect reduced-motion preferences without exception.
-- **Every-run novelty.** A joke on a beat users hit daily is noise by week two. If the beat is every-run, the treatment is speed, feel, or anticipation—nothing that depends on surprise.
+- **Motion or speed that taxes the task.** Any animation or response that delays the primary action, hides failure, removes control, or cannot be perceived or understood converts treatment into friction. Respect reduced-motion preferences without exception.
+- **Every-run novelty.** A joke on a beat users hit daily may become noise by week two. If the beat is every-run, require evidence that speed, feel, anticipation, or useful variation stays perceivable, comprehensible, and controllable; nothing may depend on surprise alone.
 - **The dumping grounds.** Delight placed by low risk instead of reach. If the path is sterile and the 404 has an easter egg, the budget is upside down.
 - **Charm covering confusion.** A mascot in front of an unclear flow is a bandage on a structural problem—fix the structure first (Focal or Flywheel), then decide if the moment deserves treatment.
 - **Breaking load-bearing convention.** Checkout, save, undo, back—muscle-memory beats rely on the Expected. Novelty there costs comprehension and pays back nothing.
@@ -202,13 +160,15 @@ Match-and-refuse. Each of these is expressiveness spending trust it did not earn
 
 ## References
 
-- [reference/review.md](reference/review.md)—the search mode: unscored Readiness plus the three-gate audit (Placement, Proportion, Signature), 0–4 rubrics, `/12` bands, severity, and the locked Moment Map template.
-- [reference/moments.md](reference/moments.md)—moment archetypes, frequency classes, selection heuristics, the up-to-three budget, and the dumping grounds.
-- [reference/treatments.md](reference/treatments.md)—the three tiers in depth, the rungs a build lays out, the craft levers, repetition-proof design, and proportionality.
-- [reference/examples.md](reference/examples.md)—a worked search and a worked build, in the locked templates.
+- [reference/review.md](#source-soul-reference-review-md)—the search mode: unscored Readiness plus the three-gate audit (Placement, Proportion, Signature), 0–4 rubrics, `/12` bands, severity, and the locked Moment Map template.
+- [reference/moments.md](#source-soul-reference-moments-md)—moment archetypes, frequency classes, selection heuristics, the up-to-three budget, and the dumping grounds.
+- [reference/treatments.md](#source-soul-reference-treatments-md)—the three tiers in depth, the rungs a build lays out, the craft levers, repetition-proof design, and proportionality.
+- [reference/examples.md](#source-soul-reference-examples-md)—a worked search and a worked build, in the locked templates.
 
 <!-- END GENERATED SOURCE: soul/SKILL.md -->
 
+
+<a id="source-soul-reference-review-md"></a>
 
 ## Source: `soul/reference/review.md`
 
@@ -226,14 +186,15 @@ Map the working happy path, decide where expressive treatment belongs, and retur
 
 ## Step 0—Map the path and check readiness
 
-Build the happy path with the seven-part skeleton in [SKILL.md](../SKILL.md), then expand only where a beat changes understanding, action, system response, or feeling. Tag each beat with its touchpoint and frequency. State the intended ending feeling; `unnamed` is a finding, not permission to invent brand personality.
+Build the happy path with the seven-part skeleton in [SKILL.md](#source-soul-skill-md), then expand only where a beat changes understanding, action, system response, or feeling. Tag each beat with its touchpoint, frequency, and stakes; if one is not evidenced, write `not shown` and name the check. State the intended ending feeling; `unnamed` is a finding, not permission to invent brand personality.
 
 Then run Readiness before choosing treatment:
 
 - **Ready**—the primary user can reach the outcome with enough clarity, stability, trust, and control that expressive work will not cover a defect.
 - **Deferred**—a screen, path, or relationship failure materially prevents the outcome or makes treatment cosmetic. Name the owner: Focal for the screen, Compass for the path, Flywheel for the relationship stage.
+- **N/E—insufficient evidence**—the available artifact cannot establish whether that working floor holds. Name the next check; this is neither an observed failure nor a blocker. Continue recording supported treatment findings, with investment conditional on that check.
 
-Readiness is deliberately **unscored**. The other Skills already score structural and lifecycle quality; scoring it again would double-penalize the same failure. A Deferred result still records observed treatment problems and future candidates, but **Next** starts with the handoff. If the broken path makes Placement, Proportion, or Signature impossible to evaluate, mark that gate `N/E—not evaluable until readiness holds` and do not calculate a `/12` total.
+Readiness is deliberately **unscored**. The other Skills already score structural and lifecycle quality; scoring it again would double-penalize the same failure. A Deferred result still records observed treatment problems and future candidates, but **Next** starts with the handoff. Any gate that the available evidence cannot support is `N/E—insufficient evidence`, whether or not readiness is Deferred; supported gates remain scored. Do not calculate a `/12` total when a required gate is N/E.
 
 Error branches are not Net-New candidates, but they are evidence for restraint. Check whether failure copy, motion, and personality preserve clarity and dignity; do not turn the error itself into a delight opportunity.
 
@@ -253,8 +214,8 @@ Use the narrowest defensible locator. `Payment notification · invoice-to-paymen
 ### Gate 1—Placement *(where does expressiveness belong?)*
 
 - List every deliberate expressive touch and every meaningful beat kept Expected.
-- Check whether treatment follows reach × memory rather than low implementation risk.
-- Check the selection bar, frequency and stakes constraints, and load-bearing conventions before promoting any beat. Treat Elevated as the default ceiling for every-run or high-stakes beats, with Net-New allowed only when durable utility, reassurance, records, or control justify the exception.
+- Check whether treatment follows the contextual reach × likely memory comparison rather than low implementation risk.
+- Check the selection bar, frequency and stakes constraints, and load-bearing conventions before promoting any beat. Treat Elevated as the default ceiling for every-run or high-stakes beats, with Net-New allowed only when evidence-backed utility, reassurance, records, or control justify the exception.
 - Treat zero Net-New moments as valid when the restraint receipt explains why no beat earns a rebuild.
 
 | Score | Criteria |
@@ -299,6 +260,9 @@ Use the narrowest defensible locator. `Payment notification · invoice-to-paymen
 
 Every evaluated gate uses the same integer anchors:
 
+<a id="shared-anchors"></a>
+
+<!-- BEGIN SHARED: anchors -->
 | Score | Canonical label | Shared meaning |
 |---:|---|---|
 | **0** | **Broken or harmful** | The dimension fails outright, blocks its core outcome, actively inverts the intended behavior, or creates material harm. |
@@ -307,13 +271,24 @@ Every evaluated gate uses the same integer anchors:
 | **3** | **Strong** | Deliberate, dependable, context-appropriate professional work with only minor gaps. This is the normal target for good execution. |
 | **4** | **Exemplary—above and beyond** | Fully realized and unusually effective for the relevant context, including realistic states and constraints. This is intentionally uncommon, not the normal target. |
 
+Meeting the ordinary requirements of the task supports `3`, not automatically `4`. A `4` rationale must identify a specific unusually effective quality visible in the evidence, beyond listing correct ingredients or repeating the rubric. It need not be novel or backed by analytics, but “no defect was shown” is not enough.
+<!-- END SHARED: anchors -->
+
 Score each evaluated gate holistically against its local rubric. Read all checks and evidence, choose the anchor that best describes the gate overall, apply explicit local caps or prerequisites, and let one severe material failure determine the score when the rubric warrants it. Do not use hidden sub-scores, checklist subtraction, averaging, half-points, or a Net-New count as a proxy for quality. A `4` is exemplary for the gate being scored; a restrained `3` can be better product judgment than an over-authored `4` attempt.
 
 - If more than one independent failure sits in a gate, score the *worst* one, then list the others as separate issues.
 
 ### Score rationale—required
 
-A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` must name the remaining gap; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check—do not award credit or invent failure. `N/E` is permitted only when Deferred readiness makes the gate genuinely unevaluable; it is not a low score.
+A score without an explanation is invalid. Fill every scorecard row with the same chain: **evidence → consequence → rubric anchor → next-point change**. State what was observed, inferred, tested, walked, or measured; what it costs the user; why that evidence earns the integer under the local rubric and stops there; and the smallest concrete change that would raise it one point. A `2` must say what works and name the material weakness; a `3` names a supported remaining gap or says `None justified by the evidence` rather than inventing a change to earn `4`; a `4` must explain why the gate is exemplary and say `None—already exemplary` in the next-point field. If the evidence does not expose a state or occurrence, say `not shown` in Coverage/Basis and name the validating check. Score the supported behavior; do not award credit or invent failure for an unknown condition.
+
+<a id="shared-evidence"></a>
+
+<!-- BEGIN SHARED: evidence -->
+Use `N/E—insufficient evidence` when the available artifact cannot support a dimension's rubric. A missing variant does not automatically make the whole dimension unevaluable. Report supported findings and the next evidence check; do not convert unknown behavior into a defect, an implementation recommendation, or a score. If any required dimension is N/E, omit the native total, average, band, and weakest-dimension ceiling.
+
+Before assigning `0`, `1`, or `2`, identify the observed condition that meets the negative rubric anchor. “Not shown,” “untested,” and “unknown” cannot supply that condition. If an essential part of the dimension is unsupported, use N/E rather than a lower score as a substitute for uncertainty. Supported strengths can still be described without a number.
+<!-- END SHARED: evidence -->
 
 When all three gates are evaluated, keep the native total: `total = Placement + Proportion + Signature`. Calculate `average = total / 3`, display it rounded to one decimal place, and apply this shared algorithm:
 
@@ -324,32 +299,36 @@ When all three gates are evaluated, keep the native total: `total = Placement + 
 | **Solid** | `2.5 <= average < 3.5` | `8–10 / 12` |
 | **Excellent** | `average >= 3.5` | `11–12 / 12` |
 
-Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any gate is `N/E`, report no total, average, or common band.
+Then cap the band by the weakest evaluated gate: a minimum of `0` allows only **Broken**, `1` allows at most **Significant rework**, `2` allows at most **Solid**, and `3–4` adds no ceiling. Use the lower-quality result of the average band and this ceiling. The total must equal the exact sum of the three scores. If any required gate is `N/E`, omit the native total, average, common band, and weakest-gate ceiling; report the supported rows and evidence gap instead.
 
 Readiness, dimension score, overall quality band, issue severity, critical blocker, and the authored-state verdict are separate. A Deferred readiness result is not itself P0. Every P0 is a blocker, but a blocker does not automatically rewrite a score to 0; a score of 0 does not automatically imply P0. Non-critical methodology failures belong in the local verdict, score, sequencing, or handoff—not in **Blocker**.
 
 ## Issue severity
 
+<a id="shared-severity"></a>
+
+<!-- BEGIN SHARED: severity -->
 | Priority | Meaning |
 |----------|---------|
 | **P0 — Critical** | Blocks the core outcome; traps the user; destroys work or state; causes or risks material harm; hides material cost, consequence, permission, or risk; removes informed choice; or uses coercive manipulation. Fix before release. |
-| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, return, or the experience's authorship for a meaningful share of users. Fix before release. |
-| **P2 — Moderate** | Creates real friction, confusion, dilution, misplaced treatment, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
+| **P1 — Major** | Materially damages comprehension, completion, orientation, trust, value realization, or return for a meaningful share of users. Fix before release. |
+| **P2 — Moderate** | Creates real friction, confusion, dilution, or missed value with a viable recovery, workaround, or limited scope. Fix in the next planned pass. |
 | **P3 — Minor** | Low-impact craft, consistency, or polish. Fix when time permits. |
 
 Assign severity from consequence, reach, and recoverability. A methodology rule violation is not automatically P0.
+<!-- END SHARED: severity -->
 
 **Ordering (one rule):** sort by priority, P0 first. Within the same priority, break ties by gate order—**Placement** (the wrong beat, or a beat off the default path) outranks **Proportion** (treatment out of scale with the moment) outranks **Signature** (character that reads as anonymous or borrowed). Never reorder across priorities; a P0 Signature issue outranks a P1 Placement issue.
 
 ## Output format—use this exact structure
 
-Every search returns this template in this order. Repeat Moment and small-thing lines only as warranted; fixed sections remain present even when their content is `None.`
+Every search returns this template in this order. Repeat Moment and small-thing lines only as warranted; fixed sections remain present even when their content is `None.` For a complete scorecard, include the native total, average, band, and weakest-gate ceiling. For an incomplete scorecard, keep all three gate rows, write `N/E—insufficient evidence` for each unsupported gate, use `N/E` in the Verdict without a total segment, and omit the **Total** row entirely.
 
 ```markdown
-**Verdict:** <authored | anonymous | misplaced | exhausting | deferred> · <the biggest missed or misplaced decision> · **<total/12 | N/E>**
+**Verdict:** <authored | anonymous | misplaced | exhausting | deferred | N/E> · <the biggest missed, misplaced, or unsupported decision> · **<total/12 only when all gates are scored; otherwise omit this segment>**
 
 **Product:** <what it is, for whom> · **Path:** <N> beats, <entry> → <outcome> · **Ends feeling:** <named state or `unnamed`>
-**Readiness:** <Ready | Deferred> · <why, plus owner when Deferred>
+**Readiness:** <Ready | Deferred | N/E—insufficient evidence> · <why, plus owner when Deferred>
 **Screen:** <exact touchpoint(s) or `not shown`>
 **Flow:** <named happy path or transition(s) or `not shown`>
 **State:** <exact rendered or system state(s) reviewed>
@@ -359,22 +338,22 @@ Every search returns this template in this order. Repeat Moment and small-thing 
 **Blocker:** <None. | concise blocker reason>
 
 ## The path
-| # | Beat | Touchpoint | Frequency | Verdict |
-|---|---|---|---|---|
-| 1 | <enters from…> | <surface> | <once | recurring | every-run> | <Expected | Elevated | Net-New (Moment 1)> |
+| # | Beat | Touchpoint | Frequency | Stakes | Verdict |
+|---|---|---|---|---|---|
+| 1 | <enters from…> | <surface> | <once | recurring | every-run> | <low | medium | high | not shown> | <Expected | Elevated | Net-New (Moment 1)> |
 
 ## Scorecard
 | Gate | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Placement | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| Proportion | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| Signature | <_/4 or N/E> | <evidence → consequence → rubric anchor> | <change, `None—already exemplary`, or N/E reason> |
-| **Total** | **<_/12 · _._/4 | N/E>** | **<band and exact sum | no total until readiness exposes all gates>** | <weakest-gate ceiling or N/E> |
+| Placement | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| Proportion | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| Signature | <_/4 or N/E—insufficient evidence> | <evidence → consequence → rubric anchor, or evidence gap> | <change, `None—already exemplary`, or fastest evidence check> |
+| **Total** | **<_/12 · _._/4>** | **<band and exact sum>** | <weakest-gate ceiling> |
 
-## The moments (Net-New, up to 3, ranked by reach × memory)
+## The moments (Net-New, up to 3, ranked by contextual reach × likely memory)
 ### Moment 1—<beat>, <named feeling>
 - **At:** screen: <exact beat/touchpoint> · flow: <named happy path or transition> · state: <exact app state> · lifecycle: <exact occurrence>
-- Why here: <reach × memory and why this beat clears its ceiling>
+- Why here: <contextual reach × likely memory comparison, including utility, stakes, frequency, cost, and evidence>
 - Expected: <one line> · Elevated: <one line> · Net-New: <one line>
 - Constraints: <one line>
 
@@ -398,12 +377,14 @@ Filling it:
 - **The path**—one row per consequential default-path beat, including Expected beats. A beat whose first pass differs from steady state carries both frequency tags.
 - **The moments**—emit zero to three. If none clears the bar, keep the header and write `None—no beat currently earns Net-New; see Kept Expected.` Never create filler to satisfy a count.
 - **The small things**—emit only craft the beat's ceiling allows. Write `None.` when no Elevated treatment is warranted.
-- **Readiness and N/E**—Deferred does not automatically erase Soul findings. Use `N/E` only when the structural failure genuinely prevents a gate from being evaluated; otherwise score observed treatment and sequence it after the handoff.
+- **Readiness and N/E**—Deferred does not automatically erase Soul findings. Use `N/E—insufficient evidence` for any unsupported gate, including when readiness is Ready; score supported treatment and sequence it appropriately. A missing variant alone does not make a gate N/E.
 - **Coverage and Basis**—name only states and occurrences actually observed or walked. Use `not shown` and the fastest validating check instead of awarding credit or inventing failure.
-- **Issues and suggestions**—every issue, Moment, small thing, Next item, and handoff receives a complete **Screen · Flow · State · Lifecycle** locator. If nothing ranks above P3, write `None above P3.` under Issues.
+- **Issues and suggestions**—every issue, Moment, small thing, Next item, and handoff receives a complete **Screen · Flow · State · Lifecycle** locator. If behavior is unknown, report the next evidence check rather than a defect, implementation recommendation, or score. If nothing ranks above P3, write `None above P3.` under Issues.
 
 <!-- END GENERATED SOURCE: soul/reference/review.md -->
 
+
+<a id="source-soul-reference-moments-md"></a>
 
 ## Source: `soul/reference/moments.md`
 
@@ -421,13 +402,13 @@ Frequency is destiny for a treatment—it decides what a moment may carry before
 |---|---|---|---|
 | `once` | first-run beats: first impression, first success, setup completion | one-shot expressive treatment—storytelling, sequence, ceremony | it plays once, so it may spend everything |
 | `recurring` | weekly-to-monthly rhythm: a report ships, an invoice is paid, a milestone lands | mid intensity, with variation—the 30th arrival must still read as alive | familiar enough to expect, rare enough to feel |
-| `every-run` | every session: open, navigate, compose, save, send | repetition-proof treatment—speed, feel, anticipation, useful variation, or exceptional durable utility | novelty decays with repetition; usefulness does not |
+| `every-run` | every session: open, navigate, compose, save, send | treatment whose utility, feedback, perceivability, comprehension, and control survive observed repetition | novelty may decay with repetition; durability is a hypothesis to test |
 
-**The 50th-viewing test:** before treating any beat, say its frequency out loud and imagine the treatment on its 50th appearance. Confetti fails at 3. A 200ms save that used to take 2 seconds never fails.
+**The 50th-viewing test:** before treating any beat, say its frequency out loud and imagine the treatment on its 50th appearance. Ask what could fail: delay, hidden status, lost control, low perceivability, or comprehension. Confetti may fail early; a faster save may hold value, but only if the response is truthful, perceivable, and recoverable under real conditions.
 
 ## The archetypes
 
-Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat map in [SKILL.md](../SKILL.md).
+Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat map in [SKILL.md](#source-soul-skill-md).
 
 | Archetype | Skeleton position | Frequency | Candidate feelings | What usually goes wrong |
 |---|---|---|---|---|
@@ -435,31 +416,34 @@ Eight places soul is usually won or lost. Skeleton positions refer to the 7-beat
 | **The first success** | beats 5–6, first pass | once | capability, pride | the product's biggest moment announced by a toast |
 | **The wait** | beat 5, when work takes >1s | varies | anticipation, confidence | a spinner where evidence of work should be |
 | **The effort peak** | beat 4 at its hardest | varies | momentum, control | the hardest step is also the most sterile |
-| **The ending** | beat 6 | varies | completion, relief, pride | it stops instead of landing—the most neglected surface in most products |
+| **The ending** | beat 6 | varies | completion, relief, pride | it stops instead of landing—a surface teams often under-design |
 | **The milestone** | recurring passes | recurring | progress, accumulation | either silent, or identical the 40th time |
 | **The handoff** | the artifact that leaves the product | recurring | pride to the sender, sense to the receiver | an export nobody would show anyone |
 | **The return** | re-entry after absence | recurring | continuity, being known | a cold start where a "welcome back" state should be |
 
-Three boundary notes. *The first success* is the beat where first value lands—Flywheel's term for the event that changes the user's situation; if the product loses people before this beat, that is a leak, and leaks go to [Flywheel](../../flywheel) before treatments. *The return* is expressive treatment on re-entry: [Compass](../../compass) owns whether state survives the specific transition, Flywheel owns whether returning restores momentum or accumulated value, and Soul makes that working return felt. *The ending* keeps its rank even when it is every-run—a session ending that merely stops is the most common miss on any path—but an every-run ending takes repetition-proof levers only; ceremony belongs to rare endings.
+Three boundary notes. *The first success* is the beat where first value lands—Flywheel's term for the event that changes the user's situation; if the product loses people before this beat, that is a leak, and leaks go to [Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md) before treatments. *The return* is expressive treatment on re-entry: [Compass](https://github.com/kvncnls/product-judgement/blob/main/compass/SKILL.md) owns whether state survives the specific transition, Flywheel owns whether returning restores momentum or accumulated value, and Soul makes that working return felt. *The ending* can be a strong candidate when users reach it, the outcome matters, and evidence suggests it shapes recall; an every-run ending still takes only treatment that remains useful and comprehensible, while ceremony may fit rare endings.
 
 ## Selection—the bar a moment must clear
 
-Rank candidates by **reach × memory**: how many users hit this beat, times how likely the beat is to be what they remember. Peak-end weights the scale—the emotional peak and the ending hold memory far beyond their share of the path, which is why the ending can outrank the first impression even though fewer people arrive there. **When two candidates tie, take the later one**—peak-end weights endings, so the later beat holds more memory per user who reaches it.
+Rank candidates with **reach × likely memory** as a working hypothesis, not a fixed law. Compare how many users reach the beat, the utility and meaning of the outcome, stakes, frequency, implementation and maintenance cost, and actual recall or user-description evidence. Peak and ending cues may help when the moment is salient and reachable, but a later beat is not automatically better; if recall evidence is absent, label the comparison as a hypothesis and name the fastest delayed-recall, interview, replay, or sharing check.
+
+One bounded reference points in both directions: a study of a rich, heterogeneous VR experience found average valence and arousal better predicted one-week remembered experience, while peak valence helped immediate recall. That limited context does not establish a product rule or disprove peak/end effects universally; Soul's placement remains a heuristic, not proof of human recall. See [From Experience to Memory](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.01705/full).
 
 Then interrogate the shortlist:
 
-1. Where would a generic execution actively hurt—cost trust, cost the story users tell?
-2. What is public-facing—screenshotted, demoed, shared, judged by people who are not users yet?
-3. Where does the user's effort peak? High effort is high emotional energy; treatment there converts strain into momentum.
-4. Which beats carry the product's distinctive claims? Those are the strongest Net-New candidates.
-5. What would marketing show? If nothing on the path is showable, that is the finding.
+1. Where would a generic execution actively hurt—cost trust, utility, or the story users tell?
+2. Which beat is public-facing—screenshotted, demoed, shared, or judged by people who are not users yet?
+3. Where does effort or uncertainty matter most, and what are the stakes if treatment gets it wrong?
+4. Which beat carries the product's distinctive claim, and how often does it recur?
+5. What will it cost to build and maintain, and what user evidence supports recall or repeat value?
+6. What would marketing show? If nothing on the path is showable, that is the finding—not a reason to invent a novelty.
 
 **Take up to three as Net-New, only when they clear the bar.** Zero, one, two, or three can be correct. If more than three appear necessary, the path is probably scoped too broadly or significance is being diffused; narrow the path or review distinct journeys separately rather than filling one sweep with peaks. Everything below the line takes **Elevated** where its ceiling allows craft that pays, and **Expected** otherwise—recorded either way, because the receipt separates restraint from neglect.
 
 **Reasons a beat stays Expected** (any one suffices):
 - **Load-bearing convention**—checkout, save, undo, back. Muscle memory is the feature; novelty there costs comprehension and pays nothing.
-- **Every-run frequency with no repetition-proof lever available**—if speed and feel are already at ceiling, standard is correct.
-- **High stakes, calm already present**—money movement, health data, and irreversible actions want reassurance and records before anything else. Where the calm, clear version already exists, standard is the treatment; where it does not, calm *is* the treatment (see proportionality in [treatments.md](treatments.md)). Trustworthy restraint is an emotional choice, not the absence of one.
+- **Every-run frequency with no supported repetition-proof lever available**—if speed, feel, feedback, and control are already at an acceptable ceiling, standard is correct; verify latency and failure behavior before claiming the ceiling.
+- **High stakes, calm already present**—money movement, health data, and irreversible actions want reassurance and records before anything else. Where the calm, clear version already exists, standard is the treatment; where it does not, calm *is* the treatment (see proportionality in [treatments.md](#source-soul-reference-treatments-md)). Trustworthy restraint is an emotional choice, not the absence of one.
 - **Below the line**—a fine Net-New candidate that lost to a better one; it takes Elevated craft instead, and loses nothing but the rebuild. The cap is a budget, not a quota.
 
 ## The dumping grounds
@@ -470,16 +454,18 @@ The canonical list. These are where delight traditionally goes—chosen because 
 - **Error mascots and cheerful failure copy**—wit at the moment the user is most tense reads as mockery.
 - **Easter eggs and hidden games**—found by almost nobody, by definition off every path.
 - **Release notes bits**—read by a rounding error of the user base.
-- **Splash-screen and loading-copy jokes on every-run loads**—novelty on repeat decays into noise; if the wait is real, show the work instead.
+- **Splash-screen and loading-copy jokes on every-run loads**—novelty can decay into noise; if the wait is real, show the work and test the repeat experience instead.
 
 **The two moves when the sweep finds delight in a dumping ground:**
 1. **Relocate the effort.** The craft is real; the placement is wrong. Name the on-path beat that deserves it.
-2. **Fix the frequency, not the feeling.** An error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](../../flywheel) (a leak) or [Focal](../../focal) (a screen).
+2. **Fix the frequency, not the feeling.** An error state frequent enough to be worth delighting is a bug to fix, not a moment to elevate—route it to [Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md) (a leak) or [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md) (a screen).
 
 One honest edge: a 404 that carries real traffic—dead links shared socially, a renamed content library—is not a dumping ground. It is an entry beat for those users. Treat it as recovery: state what happened, one clear path to the likely destination, zero jokes. The rule was never "404s don't matter"; it was "placement follows reach."
 
 <!-- END GENERATED SOURCE: soul/reference/moments.md -->
 
+
+<a id="source-soul-reference-treatments-md"></a>
 
 ## Source: `soul/reference/treatments.md`
 
@@ -503,13 +489,13 @@ Examples of the register: a standard signup form, a clear confirmation toast, a 
 
 Nothing new is introduced. The existing thing, done at a grade users can feel even when they cannot say why: hierarchy sharpened, copy in the user's words, motion that explains, feedback that names what changed, an empty state that starts the work, a wait that shows the work.
 
-**Elevated is the anti-boring tier.** It spreads to every beat whose ceiling allows it—craft survives repetition, so distributing it raises the whole path without exhausting anyone. Concentration is for Net-New; distribution is for craft.
+**Elevated is the anti-boring tier.** It spreads to beats whose ceiling allows it when the craft remains useful, perceivable, and comprehensible under their frequency. Concentration is for Net-New; distribution is for craft that earns repeat use.
 
 **The test:** describe the treatment in one sentence—if the sentence needs a new noun (a new feature, a new surface, a new mechanic), it is not Elevated, it is Net-New wearing modest clothes.
 
 Examples of the register: the confirmation that states the amount and the running total instead of "Done"; the upload that shows filenames processing instead of a spinner; the form whose labels anticipate the next question; the settle animation that gives a completed payment weight.
 
-**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it raises quality without spending novelty, so it survives repetition and does not compete with reassurance. Net-New is an exception, not an entitlement: on an every-run beat it must add durable utility that remains valuable on the 50th run; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
+**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it can raise quality without spending novelty, if feedback stays perceivable and the user retains control. Net-New is an exception, not an entitlement: on an every-run beat it must add utility shown or explicitly tested to remain valuable on later runs; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
 
 ## Net-New—an entirely new experience
 
@@ -520,7 +506,7 @@ An entirely new experience in place of the old one—not the same moment execute
 Examples of the register: a live visualization where a table was assumed; a personalized artifact worth keeping (a year-in-review, a printable record, a shareable result card); an interactive demo where static onboarding was assumed; a progress mechanic that accumulates something users check voluntarily.
 
 **Net-New ships on no more than three chosen moments, and zero is valid.** It spends surprise, so concentration matters—spread thinly, none may clear the threshold of memorable. A build designs the Net-New rung only when the beat's ceiling and target allow it; otherwise the rung states why it is unavailable. Two rules keep the tier honest:
-- **It must survive its frequency.** A Net-New mechanic on an every-run beat must be useful on the 50th run, not clever on the first. If it is only clever, move it to a `once` or `recurring` beat.
+- **It must survive its frequency.** A Net-New mechanic on an every-run beat must show useful, perceivable, comprehensible behavior on later runs, not only a clever first response. If repeat value is untested, move it to a `once` or `recurring` beat or label the proposal conditional.
 - **It must be worth keeping, not just worth noticing.** The strongest Net-New treatments produce an artifact or capability the user returns to; the weakest produce a reaction and then a chore.
 
 ## The levers
@@ -529,7 +515,7 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 | Lever | Used well | The failure mode |
 |---|---|---|
-| **Speed** | the response so fast it reads as attention; the strongest every-run lever there is | none—speed does not decay, which is why it ranks first |
+| **Speed** | a response that feels attentive while remaining truthful and perceivable | feedback that is too fast to notice, hides failure, removes control, or creates a false sense of completion |
 | **Feel** | weight, physics, and settle that make interaction tactile | motion that delays the action it decorates |
 | **Language** | copy in the user's words, at the moment's temperature; the highest-leverage lever per hour spent | charm before clarity; a voice that jokes at tense moments |
 | **Anticipation** | the field pre-filled, the next step staged, the default that shows the product was paying attention | guessing wrong confidently; anticipation that removes control |
@@ -541,15 +527,15 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 ## Repetition-proof design
 
-What survives the 50th viewing, in order of durability:
+Potentially repeatable levers, to verify against the actual beat and audience:
 
-1. **Speed**—never decays. The fastest thing in the category is a signature by itself.
-2. **Feel**—physics reads as quality indefinitely; nobody tires of a door that closes well.
-3. **Anticipation**—being known stays pleasant as long as it stays accurate.
-4. **Useful variation**—content that reflects real state (this week's number, this run's result) is different every time for free.
-5. **Cosmetic variation**—a rotating copy pool reads as alive for a while; the pool is always smaller than it looks. Last resort, small doses.
+1. **Speed**—can reduce repeated effort when the result remains truthful, visible, and recoverable.
+2. **Feel**—may signal quality when motion is brief, legible, and optional; test whether it delays or distracts.
+3. **Anticipation**—can stay useful when its inference is accurate and reversible.
+4. **Useful variation**—content that reflects real state (this week's number, this run's result) may remain relevant; confirm comprehension and control.
+5. **Cosmetic variation**—a rotating copy pool can feel alive briefly, but its value and readability need repeat testing. Use small doses.
 
-What decays: jokes, confetti, celebration sounds, surprise of any kind, mascot appearances, animated sequences longer than the action they follow. All of these are `once`-class material or cut.
+Jokes, confetti, celebration sounds, surprise, mascot appearances, and sequences longer than the action may lose value with repetition; test them before assigning a recurring ceiling, and move surprise-dependent treatments to `once` or `recurring` when repeat value is absent.
 
 ## Proportionality
 
@@ -558,16 +544,18 @@ Feedback intensity matches the size of the moment, and high stakes reorder the s
 - **Routine completion**—confirm clearly, offer the next step. No more.
 - **Meaningful progress**—name what changed, show the accumulation, restrained motion.
 - **Major milestone**—ceremony earned: a designed pause, a summary, an artifact.
-- **High-stakes success**—reassurance, records, and control **before** any feeling. The user confirms their money moved safely before anything celebrates. Calm outperforms excitement everywhere the user has something to lose.
+- **High-stakes success**—reassurance, records, and control **before** any feeling. The user should be able to confirm what happened and what they can do next before expressive treatment. Calm often fits better where loss is possible, but check user expectations, context, and actual comprehension.
 
 Over-celebrating the routine reads as juvenile and burns trust in every future celebration; under-playing the milestone reads as indifference. Both are Proportion failures in the scorecard, and they are the same failure: intensity decided by habit instead of by the moment.
 
 ## The accessibility floor
 
-No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, meaning never depends on color, motion, or sound alone, focus and keyboard paths survive the treatment, and copy stays legible at the moment's reading pace—a 2-second toast cannot carry a 12-word sentence.
+No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, never depend on color, motion, or sound alone, preserve focus and keyboard paths, and keep copy legible at the user's reading pace across languages and assistive technology. A transient toast should carry only what can be perceived in its available time; important status must remain available for retrieval. If motion or speed changes comprehension, revise the treatment.
 
 <!-- END GENERATED SOURCE: soul/reference/treatments.md -->
 
+
+<a id="source-soul-reference-examples-md"></a>
 
 ## Source: `soul/reference/examples.md`
 
@@ -575,7 +563,7 @@ No rung ships below it: treatments honor `prefers-reduced-motion` with a complet
 
 # Soul Examples
 
-Two worked examples in the locked templates—one **search**, one **build**. They share a narrative: the search finds an invoicing product spending its personality budget in all the wrong places, and the build treats the moment the search ranked first. These set the bar for length, specificity, and tone; the templates set the shape.
+Two worked examples follow the locked templates—one **search**, one **build**. The search finds an invoicing product spending its expression budget in the wrong places, and the build treats the moment the search ranked first. These set the bar for length, specificity, and tone; the build route owns the workflow, state inventory, and template.
 
 ---
 
@@ -586,7 +574,7 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 **Soul's output:**
 
 ```
-**Verdict:** misplaced and anonymous · the product's biggest moment—getting paid—is a system-default notification · **5/12**
+**Verdict:** misplaced and anonymous · the product's highest-consequence outcome is a system-default notification · **5/12**
 
 **Product:** invoicing for freelancers · **Path:** 7 beats, bookmark → payment landed · **Ends feeling:** unnamed—relief is the obvious candidate, and nobody has chosen it
 **Readiness:** Ready · the default path reaches payment clearly enough for Soul work; failure recovery still needs a restraint fix
@@ -599,40 +587,40 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 **Blocker:** None observed. The failed-send copy is inappropriate, but the artifact does not show blocked recovery, lost work, or material harm that would justify P0.
 
 ## The path
-| # | Beat | Touchpoint | Frequency | Verdict |
-|---|---|---|---|---|
-| 1 | Enters from bookmark | web app | every-run | Expected |
-| 2 | Sees dashboard—outstanding and recent | screen | every-run (first run: once) | Net-New (Moment 3, first run) |
-| 3 | Understands who owes what | screen | every-run | Elevated |
-| 4 | Composes invoice—client, items, due date | screen | recurring | Expected |
-| 5 | Sends—confirmation appears | screen | recurring | Net-New (Moment 2) |
-| 6 | Payment lands—notification | push/email | recurring | Net-New (Moment 1) |
-| 7 | Sees dashboard updated—paid, month total | screen | recurring | Elevated |
+| # | Beat | Touchpoint | Frequency | Stakes | Verdict |
+|---|---|---|---|---|---|
+| 1 | Enters from bookmark | web app | every-run | low | Expected |
+| 2 | Sees dashboard—outstanding and recent | screen | every-run (first run: once) | low | Net-New (Moment 3, first run) |
+| 3 | Understands who owes what | screen | every-run | medium | Elevated |
+| 4 | Composes invoice—client, items, due date | screen | recurring | medium | Expected |
+| 5 | Sends—confirmation appears | screen | recurring | medium | Net-New (Moment 2) |
+| 6 | Payment lands—notification | push/email | recurring | high | Net-New (Moment 1) |
+| 7 | Sees dashboard updated—paid, month total | screen | recurring | medium | Elevated |
 
 ## Scorecard
 | Gate | Score | Why this score | What raises it one point |
 |---|---:|---|---|
-| Placement | 2/4 | Confetti exists on the path but is unchosen, while the strongest craft lives on a 404; expressive effort is present but materially misplaced away from the moments most people remember. | Move the budget to two or three chosen path beats, especially payment and the ending. |
-| Proportion | 2/4 | Most of the path stays restrained, but recurring confetti overplays a routine send while the payment peak is silent; one material mismatch keeps intensity from fitting frequency and magnitude dependably. | Remove recurring confetti, then give the payment outcome proportionate, record-first treatment. |
+| Placement | 2/4 | Confetti exists on the path but is unchosen, while the strongest craft lives on a 404; expressive effort is materially misplaced away from the payment outcome and the beats with the clearest user consequence. Recall was not tested, so any peak or ending effect remains a hypothesis. | Compare payment, send, and first-run candidates on reach, utility, stakes, frequency, cost, and a delayed-recall check before moving the budget. |
+| Proportion | 2/4 | Most of the path stays restrained, but recurring confetti overplays a routine send while the payment outcome is silent; one material mismatch keeps intensity from fitting frequency and magnitude dependably. | Remove recurring confetti, then give the payment outcome proportionate, record-first treatment and test repeat comprehension. |
 | Signature | 1/4 | Swap the logo and the product is indistinguishable; the mascot is generic and the ending feeling is unnamed, so no authored moment identifies the product. | Choose the ending feeling and build one distinctive payment or completion moment around it. |
 | **Total** | **5/12 · 1.7/4** | **Significant rework; exact sum of justified component scores** | Weakest-gate ceiling applied |
 
-## The moments (Net-New, up to 3, ranked by reach × memory)
+## The moments (Net-New, up to 3, ranked by contextual reach × likely memory)
 ### Moment 1—Payment lands (beat 6), relief
 - **At:** screen: payment notification and dashboard · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization
-- Why here: the entire point of invoicing, reached by every paying client, and it is the peak and near-ending of the path—currently rendered as "Invoice #1042 was paid."
+- Why here: payment is the product's outcome and carries a concrete money consequence for the freelancer; the notification is currently "Invoice #1042 was paid." Its recall advantage over send or first run is a hypothesis, so compare reach and utility with a delayed-recall check.
 - Expected: notification names client, invoice, and amount · Elevated: amount-first copy, a paid-receipt block, the outstanding total visibly settling to its new value · Net-New: a Paid ledger—a year-view that fills with each payment and exports clean at tax time
 - Constraints: money moment—records and amounts precede any feeling; no sound.
 
 ### Moment 2—Send (beat 5), confidence
 - **At:** screen: invoice send confirmation · flow: invoice-to-payment · state: successful send · lifecycle: recurring invoice creation
-- Why here: the effort peak, and the anxiety is "does it look professional to my client"—the confirmation answers a different question than the one being asked.
+- Why here: sending is where the freelancer's effort and uncertainty concentrate; the confirmation answers a different question than "does it look professional to my client?" Compare this candidate with payment on reach, stakes, frequency, and build cost rather than assuming either is the stronger memory cue.
 - Expected: "Sent to client@" with timestamp · Elevated: preview exactly as the client sees it, then a delivered state · Net-New: a client-facing invoice page polished enough to be the freelancer's storefront
 - Constraints: nothing may delay the send action itself.
 
 ### Moment 3—First-run dashboard (beat 2, first pass), possibility
 - **At:** screen: first-run dashboard · flow: invoice-to-payment · state: empty state · lifecycle: first run
-- Why here: the first impression, every user, exactly once—a `once` beat that can carry expressive treatment the recurring beats cannot.
+- Why here: the intended first-run dashboard reaches each new freelancer once and can carry more expression than recurring beats, subject to a test that the new onboarding improves comprehension and completion.
 - Expected: "No invoices yet" plus a button · Elevated: an empty state that starts the work—a sample invoice and "your first takes 2 minutes" · Net-New: composing the first invoice is the onboarding; the form is the tour
 - Constraints: one primary action; the sample must be deletable in one tap.
 
@@ -642,12 +630,12 @@ Two worked examples in the locked templates—one **search**, one **build**. The
 
 ## Issues (most severe first)
 - **[P1 · off-path restraint]** **At:** screen: Invoice send · flow: invoice-to-payment · state: failed-send error · lifecycle: recurring invoice creation. Wit at failure—the mascot grins through a failed send with "Whoops! Gremlins!" while delivery is uncertain. The tone materially damages confidence at a consequential moment, but no blocked recovery or financial loss is shown, so it is not P0. **Fix:** plain error—what happened, whether the invoice is safe, and what to do next. If failed sends are frequent, hand the relationship leak to Flywheel.
-- **[P1 · beat 6]** **At:** screen: Payment landed notification · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization. The silent payoff—the product's peak moment is an OS-default notification, indistinguishable from a calendar reminder. **Fix:** treat as Moment 1; the Elevated rung alone changes what users remember this product doing.
-- **[P2 · beat 5]** **At:** screen: Invoice send confirmation · flow: invoice-to-payment · state: successful send with confetti · lifecycle: steady-state recurring use after novelty has decayed. Decayed repetition—confetti on every send was charming once and is wallpaper by week two, and it spends celebration the payoff never gets. **Fix:** replace with a sent-state that survives repetition—preview, delivered check, done.
+- **[P1 · beat 6]** **At:** screen: Payment landed notification · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization. The money outcome is a system-default notification, so the user gets little record or product-specific context at a consequential point. **Fix:** treat as Moment 1; validate whether amount-first feedback improves comprehension and delayed recall before scoping the ledger.
+- **[P2 · beat 5]** **At:** screen: Invoice send confirmation · flow: invoice-to-payment · state: successful send with confetti · lifecycle: steady-state recurring use. Repeat value is untested, and confetti may become wallpaper while spending celebration the payment outcome does not get. **Fix:** replace with a sent-state whose preview, delivered check, and done status can be perceived and understood on later runs; validate before adding ceremony.
 - **[P2 · off-path]** **At:** screen: 404 page · flow: invoice-to-payment · state: invalid-route recovery · lifecycle: accidental off-path visit. The misdirected budget—the 404 minigame is the most-crafted surface in the product, reached by accident, in annoyance. Its reach is limited and recovery still exists, so this is misplaced effort rather than a major path failure. **Fix:** relocate the craft to Moment 2 or 3; the game itself is cut, not polished.
 
 ## Kept Expected, on purpose
-Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form freelancers fill from muscle memory, where novelty costs speed. Beat 1 is an every-run entry whose only honest lever is pace, and the observed pace already needs no additional treatment.
+Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form freelancers fill from muscle memory, where novelty costs speed. Beat 1 is an every-run entry; its observed pace is acceptable, but latency, failure feedback, and repeat comprehension still need a live check before calling speed a signature.
 
 ## Next
 - **Now**: **At:** screen: payment notification and dashboard · flow: invoice-to-payment · state: successful payment · lifecycle: first and recurring value realization · the small things and Moment 1's Elevated interim—amount-first notification, receipt block, the settling total—ship while the Net-New ledger is scoped.
@@ -664,41 +652,152 @@ Beats 1 and 4 stay standard. Beat 4 is load-bearing convention—a weekly form f
 **Soul's output:**
 
 ```
-**Moment:** Payment lands—for a freelancer, on every pass.
+**Moment:** Payment lands—for a freelancer, on each successful payment.
 **Feeling:** relief · **Frequency:** recurring · **Stakes:** medium · **Target:** Net-New
 
 ## Why this moment
-- On the path: beat 6, reached by every client who pays—which is every successful use of the product.
-- Budget decision: it is the payoff the whole path exists for, reached by every successful user, and its accumulating record remains useful after novelty fades.
+- On the path: beat 6, reached by a client when an invoice is paid.
+- Budget decision: payment has clear user consequence and a candidate for useful records. Its recall advantage over send or first run is untested, so the ledger remains a hypothesis to validate against reach, stakes, cost, and later use.
 - Today: an OS-default notification—"Invoice #1042 was paid."—and a dashboard that shows the change only after a manual refresh. Observed from the artifact.
+
+## Applicable states
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | Applicable | The paid notification and dashboard update expose the successful payment outcome. |
+| Partial failure | Not shown—walk partial settlement, chargeback, and notification failure | The artifact does not show whether a payment can settle partially or whether notification delivery can fail. |
+| Permission | Not shown—check notification and amount-visibility permissions | OS-default notifications are shown, but permission and shared-device behavior are not evidenced. |
+| Recovery / retry | Not shown—test delayed payment and notification retry | The artifact does not expose retry, revalidation, or recovery after an interrupted payment update. |
+| Cancel / exit | N/A—payment-landed is post-submit confirmation | Cancellation belongs before settlement; this beat only confirms the outcome. |
+| Repeated use | Applicable—replay later payments and inspect ledger comprehension | Payments recur, but later-run utility and comprehension still need validation. |
+| Reduced motion / low-motion | Applicable | The proposed total settle has a text delta equivalent; verify it with the user's reduced-motion setting. |
 
 ## The rungs
 - **Expected:** notification carries client, invoice number, and amount; the dashboard row flips to Paid on next load. Shippable as-is.
 - **Elevated:** the interim ship—the notification leads with what matters: "$1,850 from Meridian Co · Invoice #1042 paid." Opening it lands on the invoice with a paid-receipt block: date, method, a record that exists somewhere. The outstanding total settles to its new value with one 400ms count-down; reduced motion gets the delta in text—"Outstanding: $4,200 → $2,350."
-- **Net-New:** the Paid ledger—every payment lands as a row in a year-view that visibly fills, month totals accumulate, and at tax time it exports clean. Relief gains a place to compound into evidence of a working business. Useful on the 400th payment, not merely clever on the first.
+- **Net-New:** the Paid ledger—each payment could land as a row in a year-view, with month totals and a clean tax-time export. It gives relief a record to build on; validate whether that utility remains clear and worth returning to on later payments.
 
 ## Held constant
-- The notification is complete in text alone—no motion, sound, or color required to know you were paid, and it survives OS truncation at 60 characters.
+- The notification must be complete in text alone—no motion, sound, or color required to know you were paid—and its behavior under OS truncation at 60 characters still needs verification.
 - Records reachable in one tap from the notification, at every rung.
 - Nothing celebrates before the amount is stated—money moments put reassurance before feeling.
 
 ## Constraints for the pick
-- No sound at any rung. No confetti at any rung—recurring frequency plus money rules it out twice.
+- No sound at any rung. No confetti in this proposal: recurring frequency and a money outcome make record-first feedback the safer tested choice.
 - Notifications appear on shared and locked screens; amount-first copy is the point, so a "hide amounts" preference ships alongside whichever rung is chosen.
 
 ## Gates
 - [x] On the default path—reached without hunting
 - [x] One feeling, named—"soul" and "delight" appear nowhere as specs
-- [x] Survives its frequency—accuracy and accumulation, nothing that depends on surprise
+- [Not shown—replay later payments and test comprehension] Survives its frequency—the ledger's repeat value is proposed, not observed
 - [x] Proportionate to the moment's magnitude
-- [x] Speed, comprehension, and the primary action untouched
+- [Not shown—test response timing, failure feedback, and primary-action latency] Speed, comprehension, and the primary action untouched
 - [x] Honest without motion and without sound
 ```
 
 ---
 
-**Why these two:** the search refuses the question as asked. The user said "make it more delightful" and the answer is that expressive effort already exists—in a 404 game and a failure mascot—and the job is relocation, not addition. The verdict names a misplacement, not an absence. Note the tiers doing the restraint: three justified Net-New candidates, two small things elevated because their ceilings allow only craft, and two beats standard with reasons on record. The build then shows the full range on one moment—Expected floor, Elevated interim, Net-New target—so the caller can land anywhere on the ladder, and proportionality at a money moment: relief is built from records, amounts, and one restrained settle. Celebration never appears, because the frequency is recurring and the subject is money, and either alone would rule it out.
+**Why these two:** the search refuses the question as asked. The user said "make it more delightful" and the answer is that expressive effort already exists—in a 404 game and a failure mascot—and the job is relocation, not addition. The verdict names a misplacement, not an absence. Note the tiers doing the restraint: three candidates clear the initial selection bar, while the recall check remains open; two small things are elevated because their ceilings allow only craft, and two beats stay standard with reasons on record. The build then shows the full range on one moment—Expected floor, Elevated interim, Net-New target—so the caller can land anywhere on the ladder, while proportionality at a money moment stays record-first and leaves repeat value to validation.
 
 Note what never appears: confetti at any tier, the mascot polished rather than cut, or a quota-driven fourth moment. The first-run empty state is the only place one-shot expressive treatment is considered because it is the only `once` beat on the path.
 
 <!-- END GENERATED SOURCE: soul/reference/examples.md -->
+
+
+<a id="source-soul-reference-build-md"></a>
+
+## Source: `soul/reference/build.md`
+
+<!-- BEGIN GENERATED SOURCE: soul/reference/build.md -->
+
+# Soul Build—the moment spec
+
+Use this reference when the request is to build, design, or treat one beat on a working path. It is a proposal, not a score. The caller may ship the Expected floor, the Elevated rung, or the Net-New rung named by **Target**. A build must make the floor shippable, explain its budget decision, and preserve the user's ability to understand and control the task.
+
+Do not use this reference to repair a broken path. If the user cannot reach the beat, hand the issue to the relevant sibling Skill first: a screen problem to Focal, a path or state problem to Compass, or a value and return problem to Flywheel. A treatment can be drafted as a future candidate, but it is not the first fix.
+
+## The five moves
+
+1. **Frame it.** Name the product, user, beat, touchpoint, state, lifecycle occurrence, frequency, stakes, and one feeling. Use a concrete feeling such as confidence, relief, curiosity, control, or pride; `delight`, `soul`, and `personality` are not feelings. If the artifact does not expose a field, write `not shown` and name the fastest check. Stakes describe what can be lost at this beat—money, work, standing, safety, access, or nothing material. High stakes put reassurance, records, and control before expression.
+
+2. **Inventory applicable states.** Review the state inventory below before choosing a treatment. Applicability depends on the beat and product: completion is relevant when the beat has an outcome, partial failure when work can divide into successes and failures, permission when an OS, device, data, or people permission is requested, recovery when interruption or retry is possible, cancel when work can be abandoned, repeated use when the beat recurs, and reduced motion or low-motion when motion or sensory feedback is present or the user preference can change it. For every row, mark `Applicable`, `N/A—<specific reason>`, or `Not shown—<fastest evidence check>`. Do not assume all listed states belong to every moment.
+
+3. **Place it.** Run the beat through the sort tree in [SKILL.md](#source-soul-skill-md). Set **Target** to Expected, Elevated, or Net-New. A Net-New target must clear the selection bar in [moments.md](#source-soul-reference-moments-md) using the available reach, utility, stakes, frequency, cost, and recall evidence. An Elevated target adds craft without a new noun. An Expected target records why convention, frequency, stakes, an already-sufficient treatment, or missing evidence makes restraint correct. If the beat is off the default path, relocate the budget.
+
+4. **Ladder it.** Write a real Expected floor first. Add Elevated only when the same moment can be executed with more care without introducing a feature, surface, or mechanic. Add Net-New only when the target and state inventory justify an entirely new experience in place of the old one. Rungs above the target must say `unavailable at this beat's ceiling` and give the reason. A proposed capability must state how it stays useful, perceivable, comprehensible, and controllable at the stated frequency; an assertion that it will be memorable or durable is a hypothesis to test.
+
+5. **Guard it and run the gates.** No rung may delay the primary action, hide failure, remove control, or make feedback too fast, subtle, or complex to perceive. High-stakes moments state the material consequence before any feeling. Every-run treatments need evidence from repeated use or an explicit validating check; a quick first-run reaction is not enough. Use the gate notation below. These gates are unscored: mark `[x]` only when the proposal satisfies one, `[ ]—<reason>` when it does not, `[N/A—<specific reason>]` when it genuinely does not apply, and `[Not shown—<check>]` when the available evidence cannot judge it.
+
+## Applicable state inventory
+
+Use this inventory for the specific beat. It is a coverage tool, not a requirement to invent states. The reason column is required for `N/A` and `Not shown`.
+
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | `<Applicable; N/A—reason; Not shown—check>` | <what successful completion means here, or why this beat has no completion>
+| Partial failure | `<Applicable; N/A—reason; Not shown—check>` | <how a mixed outcome can occur, or why the operation is atomic>
+| Permission | `<Applicable; N/A—reason; Not shown—check>` | <permission boundary and user consequence, or why none exists>
+| Recovery / retry | `<Applicable; N/A—reason; Not shown—check>` | <how interruption or failure can recover, or why no recovery exists>
+| Cancel / exit | `<Applicable; N/A—reason; Not shown—check>` | <what leaving preserves or discards, or why cancellation is impossible>
+| Repeated use | `<Applicable; N/A—reason; Not shown—check>` | <frequency and repeated-use behavior, or why the beat occurs only once>
+| Reduced motion / low-motion | `<Applicable; N/A—reason; Not shown—check>` | <motion or sensory alternative, or why no motion treatment is proposed>
+
+When a state is applicable, the build must say what the proposed treatment does in that state. Clear failure treatment states what happened, what was preserved, what remains uncertain, and the next action. It keeps tone plain and respectful; failure is a place for agency and recovery, not a celebration destination. A permission request states why access is needed, what it enables, and what happens when the user declines. Cancel and recovery preserve work where the product can, make loss explicit before it occurs, and leave a visible path back.
+
+For a repeated beat, inspect both first and later occurrences where evidence exists. Compare utility, feedback latency, perceivability, comprehension, and control. If later behavior is not shown, keep the proposed repeat treatment conditional and name the check. For reduced motion or low-motion, provide a complete non-animated equivalent; meaning cannot depend on motion, color, sound, or a timing-sensitive effect.
+
+## Rung guidance
+
+**Expected** is the obvious, fully functional version: standard conventions, clear copy, complete feedback, and a recoverable outcome. It is the final answer when novelty would tax a load-bearing convention, high stakes call for calm, frequency leaves no supported expressive lever, or the artifact already has enough authored care.
+
+**Elevated** is the same moment with visible care. It can sharpen hierarchy, use the user's words, name what changed, show work during a wait, anticipate a safe next step, or provide feedback with a perceivable settle. It does not add a new surface or mechanic. Any motion remains optional, brief enough not to delay the task, and paired with text or structure that carries the meaning.
+
+**Net-New** replaces the old treatment with an entirely new experience: a capability, mechanic, surface, or artifact that makes the moment worth choosing for this product. It is allowed only when the beat clears the selection bar and remains proportionate to stakes and frequency. State the utility that survives repeat use, the cost of building and maintaining it, and the evidence still needed. Never add a Net-New rung to fill the zero-to-three budget.
+
+## Output—the Moment Spec
+
+Every standalone build returns this structure in this order. Fill the slots and keep fixed labels. The state inventory remains in the output even when several rows are `N/A`.
+
+```markdown
+**Moment:** <the beat>—for <who>, on <the first pass | every pass | the nth pass>.
+**Feeling:** <one named emotion> · **Frequency:** <once | recurring | every-run> · **Stakes:** <low | medium | high> · **Target:** <Expected | Elevated | Net-New>
+
+## Why this moment
+- On the path: <where it sits, and who reaches it>
+- Budget decision: <why this beat earns treatment—or why Expected restraint is correct>
+- Today: <what the moment does now—observed, inferred, or `not shown` with the check>
+
+## Applicable states
+| State or occurrence | Status | Applicability reason, evidence, or next check |
+|---|---|---|
+| Completion | <Applicable; N/A—reason; Not shown—check> | <...>
+| Partial failure | <Applicable; N/A—reason; Not shown—check> | <...>
+| Permission | <Applicable; N/A—reason; Not shown—check> | <...>
+| Recovery / retry | <Applicable; N/A—reason; Not shown—check> | <...>
+| Cancel / exit | <Applicable; N/A—reason; Not shown—check> | <...>
+| Repeated use | <Applicable; N/A—reason; Not shown—check> | <...>
+| Reduced motion / low-motion | <Applicable; N/A—reason; Not shown—check> | <...>
+
+## The rungs
+- **Expected:** <the floor—the obvious version, fully functional, shippable as-is>
+- **Elevated:** <the same moment with more craft, or `unavailable at this beat's ceiling` with the reason>
+- **Net-New:** <an entirely new experience in place of the old one, or `unavailable at this beat's ceiling` with the reason>
+
+## Held constant
+- <what no rung may damage—speed, comprehension, control, the primary action, reversibility>
+- <the convention kept, if this beat is muscle-memory>
+
+## Constraints for the pick
+- <brand, technical, accessibility, frequency, stakes, and context limits every rung already respects>
+
+## Gates
+- [ ] On the default path—reached without hunting
+- [ ] One feeling, named—"soul" and "delight" appear nowhere as specs
+- [ ] Survives its frequency—repetition-proof only when evidence supports it
+- [ ] Proportionate to the moment's magnitude
+- [ ] Speed, comprehension, control, and the primary action untouched
+- [ ] Honest without motion and without sound
+```
+
+The pick between rungs belongs to the caller. The Target records the result of the sort; it does not force the caller to ship Net-New. A checked gate is not a score. If a gate is inapplicable, include its `N/A` reason in the output; if evidence is missing, include the check instead of claiming that the proposal passes or fails.
+
+<!-- END GENERATED SOURCE: soul/reference/build.md -->

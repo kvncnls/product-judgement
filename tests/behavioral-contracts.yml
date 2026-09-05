@@ -1,5 +1,6 @@
 - id: focal-expert-hub
   skill: focal
+  mode: audit
   scenario: Audit an expert operations hub with twelve routes grouped into three familiar categories.
   evidence:
     - The organizing intent is routing.
@@ -15,6 +16,7 @@
 
 - id: focal-static-evidence
   skill: focal
+  mode: audit
   scenario: Audit one Figma frame of a dashboard with no loading, error, permission, or full-data variants.
   evidence:
     - Only the default rendered frame is visible.
@@ -28,6 +30,7 @@
 
 - id: compass-open-ended-search
   skill: compass
+  mode: audit
   scenario: Audit a catalog search and discovery space with no completion event.
   evidence:
     - Browsing and refinement are the user intent.
@@ -43,6 +46,7 @@
 
 - id: compass-platform-retreat
   skill: compass
+  mode: audit
   scenario: Audit a web detail view where browser Back is expected, discoverable, and preserves the filtered list state.
   evidence:
     - The product uses normal browser history.
@@ -55,6 +59,7 @@
 
 - id: flywheel-targeted-wins
   skill: flywheel
+  mode: audit
   scenario: Review only the Wins stage after research has already established that users reach first value but do not recognize it.
   evidence:
     - Trust and first-value access are outside the requested scope.
@@ -69,6 +74,7 @@
 
 - id: flywheel-missing-lifecycle-evidence
   skill: flywheel
+  mode: audit
   scenario: Run a full relationship diagnosis from onboarding frames that expose Trust and Friction but no post-value, return, or lapse behavior.
   evidence:
     - Arrival and setup are visible.
@@ -83,6 +89,7 @@
 
 - id: soul-restraint-is-valid
   skill: soul
+  mode: audit
   scenario: Audit a recurring high-stakes money-transfer confirmation that is fast, clear, calm, and deliberately conventional.
   evidence:
     - The moment occurs every run.
@@ -98,6 +105,7 @@
 
 - id: soul-deferred-readiness
   skill: soul
+  mode: audit
   scenario: Audit expressive treatment on a checkout path whose final submission currently loses entered data.
   evidence:
     - The state-loss defect belongs to Compass Continuity.
@@ -112,6 +120,7 @@
 
 - id: product-judgement-deduplication
   skill: product-judgement
+  mode: audit
   scenario: Audit an app where state loss on resume harms both journey continuity and returning-user momentum.
   evidence:
     - Resume opens the first step and discards completed work.
@@ -126,6 +135,7 @@
 
 - id: score-four-calibration
   skill: shared
+  mode: audit
   scenario: Score a dimension that is dependable and context-appropriate but still has one minor realistic-state gap.
   evidence:
     - The core behavior is strong.
@@ -139,6 +149,7 @@
 
 - id: focal-orchestrated-no-local-template
   skill: focal
+  mode: audit
   scenario: Run the Focal pass as one leg of a Product Judgement audit that will print its own holistic wrapper.
   evidence:
     - Product Judgement is orchestrating this pass and owns the printed output.
@@ -154,6 +165,7 @@
 
 - id: compass-orchestrated-no-local-template
   skill: compass
+  mode: audit
   scenario: Run the Compass pass as one leg of a Product Judgement audit that will print its own holistic wrapper.
   evidence:
     - Product Judgement is orchestrating this pass and supplies the ordered journey.
@@ -169,6 +181,7 @@
 
 - id: flywheel-orchestrated-full-four-plays
   skill: flywheel
+  mode: audit
   scenario: Run the Flywheel pass as one leg of a Product Judgement audit of a product whose evidence covers all four relationship stages.
   evidence:
     - Product Judgement is orchestrating this pass and requires all four plays evaluated.
@@ -184,6 +197,7 @@
 
 - id: soul-orchestrated-records-despite-broken-floor
   skill: soul
+  mode: audit
   scenario: Run the Soul pass as the last leg of a Product Judgement audit in which Compass has already found a state loss on the same path.
   evidence:
     - Product Judgement is orchestrating this pass and requires a Soul row in its scorecard.
@@ -199,6 +213,7 @@
 
 - id: product-judgement-missing-sibling-skill
   skill: product-judgement
+  mode: audit
   scenario: Run a holistic audit in an environment where Focal, Compass, and Flywheel resolve but Soul is not installed.
   evidence:
     - The Soul Skill spine and its review contract cannot be loaded.
@@ -214,6 +229,7 @@
 
 - id: product-judgement-skips-local-examples
   skill: product-judgement
+  mode: audit
   scenario: Run a full four-scale audit of a mid-size app where every sibling Skill is installed and every reference file is readable.
   evidence:
     - Each local Skill instructs a calibration read of its own reference examples before emitting output.
@@ -229,6 +245,7 @@
 
 - id: compass-indicator-matches-flow-type
   skill: compass
+  mode: audit
   scenario: Review a hub-and-spoke settings area whose index links to eight detail panes that each return to the index.
   evidence:
     - The settings index is the stable home anchor and every pane returns to it.
@@ -241,3 +258,214 @@
   reject:
     - Recommend a step counter or a percentage-complete bar for the settings panes.
     - Justify the indicator choice as reviewer preference instead of naming the flow type that requires it.
+
+- id: compass-static-three-stage-checkout
+  skill: compass
+  mode: audit
+  scenario: Audit one static checkout frame with a named three-stage stepper and no interaction recording.
+  evidence:
+    - The flow has one finite outcome, placing an order from cart to confirmation.
+    - The visible stepper names Cart, Delivery, and Payment and marks the current stage without a numeric counter.
+    - Only one static frame is available; loading, failure, permission, interruption, recovery, and persistence behavior are not shown.
+  expected:
+    - Classify the journey as finite linear and judge the named stages as its orientation cue.
+    - Accept the named three-stage stepper without requiring a numeric counter.
+    - Mark unsupported behavior as not shown and name the fastest check for a consequential seam.
+    - Mark Continuity N/E—insufficient evidence and omit the native /12 total.
+    - Do not lower Orientation solely because retreat or exit is unshown; use N/E when that essential part of its rubric is unsupported.
+    - Give a situated validation step for Back or resume that protects entered checkout context before proposing a change.
+  reject:
+    - Call the absent numeric counter an Orientation defect.
+    - Treat behavior not shown as an observed persistence failure or prescribe a persistence fix.
+    - Assign a low Orientation score using only missing retreat or exit evidence as its negative condition.
+    - Report a native /12 total while Continuity is N/E.
+
+- id: compass-task-list-multisession
+  skill: compass
+  mode: audit
+  scenario: Audit a finite permit application task list that spans several sessions before one final submission.
+  evidence:
+    - "The service has one finite outcome: submit a completed permit application."
+    - A task hub contains identity, address, and supporting-document tasks that users can complete in any order and revisit.
+    - Each task returns to the hub with Incomplete, Complete, or Needs attention status; final review and Submit appear only after required tasks are complete.
+    - Save and return stores permitted draft fields for 30 days, requires account reauthentication, shows expiry, and revalidates stale documents before submission.
+  expected:
+    - Classify the experience as a finite task-list rather than a linear screen count.
+    - Preserve user-chosen task order through the hub to task to hub loop and show actionable task status.
+    - Make final review and Submit the finite completion condition after required tasks are complete.
+    - Explain Save and return with its permitted retention, reauthentication, expiry, stale-data revalidation, and recovery boundary.
+    - Give a situated validation step or warranted change for re-entry that preserves task status and safe context; do not invent a missing expiry cue when the evidence already says it is shown.
+  reject:
+    - Force applicants through a predetermined task order solely to simplify the step count.
+    - Treat the task-list loop as open-ended or omit the final review and submit outcome.
+    - Promise indefinite cross-session persistence without permission, expiry, or revalidation.
+
+- id: compass-sensitive-stale-resume
+  skill: compass
+  mode: audit
+  scenario: Audit resume of a sensitive benefits application whose saved draft has become stale and partially unauthorized.
+  evidence:
+    - The draft contains identity and bank details; only permitted non-secret context may be retained in the secure account vault.
+    - Re-entry after 45 days shows an expired draft, a changed address, and an account permission that has been revoked.
+    - Re-entry requires authentication and authorization, and identity, destination, and amount must be revalidated before final submission.
+    - The service can discard expired sensitive fields while preserving permitted task status, explain the loss, and route the user to a recoverable restart.
+  expected:
+    - Distinguish permitted context that may survive from sensitive or expired values that must be discarded and explained.
+    - Require authentication, authorization, expiry handling, and freshness revalidation before a consequential submit.
+    - Describe recovery for revoked access or an expired draft while preserving the permitted task status and user orientation.
+    - Give a situated recommendation or validating check that protects sensitive data and permitted context at the resume seam; preserving correct existing behavior is valid.
+  reject:
+    - Resume every sensitive field indefinitely without permission, expiry, or revalidation.
+    - Treat stale or revoked values as valid merely because they were previously entered.
+    - Recommend storing secrets as the default way to avoid re-entry.
+
+- id: focal-dense-expert-row
+  skill: focal
+  mode: audit
+  scenario: Audit a dense expert operations table whose active row contains more than eight facts needed for one decision.
+  evidence:
+    - The audience is an expert operations team that uses the desktop table every day.
+    - Each active row shows status, owner, region, identifier, amount, risk, SLA, timestamp, source, and the next action; every fact changes the current decision or verifies it.
+    - The facts are grouped into familiar labeled clusters, with the primary action and a details affordance visible in the row.
+    - The screen is a task-oriented work queue, not a novice onboarding surface or a decorative dashboard.
+  expected:
+    - Judge the row through contextual density, expertise, grouping, stakes, and decision relevance rather than item count.
+    - Permit more than eight facts when the expert audience needs them together and the clusters remain scannable.
+    - Keep decision-critical facts available and place only genuinely ancillary material behind a visible cue.
+    - Give a situated next step tied to a named row cluster or decision, with its tradeoff stated; this may be a warranted change or a specific validating check when no defect is evidenced.
+    - Preserve the stated task intent unless concrete evidence contradicts it; a table or queue is not automatically a hub.
+    - Mark Visual Hierarchy N/E and omit the aggregate when the description supplies action roles but no rendered layout, weight, or style evidence.
+  reject:
+    - Fail Progressive Disclosure solely because one row contains more than eight facts.
+    - Impose a universal four-chunk or eight-fact quota on this expert row.
+    - Remove a required fact without explaining the decision or trust cost.
+    - Award a numeric Visual Hierarchy score merely because an action is called primary or a details affordance is said to exist.
+
+- id: soul-contextual-moment-selection
+  skill: soul
+  mode: audit
+  scenario: Audit whether expressive budget belongs on an early useful milestone or a later flashy feedback beat.
+  evidence:
+    - The early moment is the first successful import, where the user sees an actionable result and needs confidence about what to do next; it happens once per first run.
+    - The later moment is a bright celebration animation on every weekly reopen, delays the next action, and adds no durable information.
+    - The path is structurally sound, and speed, comprehension, and the primary action must remain intact.
+  expected:
+    - Map both beats with their location, frequency, stakes, and current treatment before selecting a tier.
+    - Prefer the early useful milestone when its treatment improves confidence or value recognition, while keeping the later every-run beat restrained.
+    - State that a later flashy treatment is not mandatory and name the contextual tradeoff between memory value and repeated task cost.
+    - Give a situated recommendation naming the exact beat, feeling, and invariant it protects.
+  reject:
+    - Spread a fixed expressive quota across both beats or require a later Net-New moment.
+    - Prioritize every-run novelty over the early moment solely to make the product feel more distinctive.
+    - Add animation that delays the weekly action or obscures the imported result.
+
+- id: product-judgement-single-flow-routing
+  skill: product-judgement
+  mode: audit
+  scenario: Run a holistic audit of one onboarding-to-first-value flow whose screen, route, relationship, and treatment decisions are all in scope.
+  evidence:
+    - The flow includes an invite screen, a setup path, a first useful dashboard result, a returning-user path, and a completion treatment.
+    - The decision asks whether the same flow is clear on screen, never loses the user between steps, reaches recognized value, and earns a memorable but restrained moment.
+    - The artifact identifies one resume state-loss seam that affects route continuity and returning-user confidence.
+  expected:
+    - Route one cross-scale flow through Focal, Compass, Flywheel, and Soul because the decision crosses all four lenses.
+    - Preserve each local Skill's native evidence, score rationale, and ownership inside one holistic wrapper.
+    - Deduplicate the resume seam into one owned change while carrying its downstream consequence to the relevant scale.
+    - Give a situated priority with a Screen, Flow, State, and Lifecycle locator and a concrete context-preserving fix.
+  reject:
+    - Narrow the work to one local Skill merely because the artifact is one flow.
+    - Average native scale totals into a Product Judgement score.
+    - Print four duplicate fixes for the same resume seam.
+
+- id: flywheel-infrequent-success-exit
+  skill: flywheel
+  mode: audit
+  scenario: Diagnose an annual permit service where a clear successful exit is the intended relationship outcome.
+  evidence:
+    - Users complete the permit renewal once a year; there is no meaningful weekly or monthly job after the permit is issued.
+    - The success state confirms approval, provides a downloadable receipt and expiry date, and offers a user-chosen reminder for the next renewal.
+    - Completion and receipt download are strong; the artifact contains no evidence that lack of frequent return is a relationship leak.
+    - A stakeholder proposes streaks, forced notifications, and a daily status feed to increase return frequency.
+  expected:
+    - Treat successful completion, confirmation, receipt access, and a clean exit as valid value for an infrequent finite service.
+    - Distinguish the service's natural cadence from a retention failure and mark unsupported downstream behavior as an evidence gap when appropriate.
+    - Preserve the receipt, expiry context, and user-controlled reminder in a situated recommendation; affirming the existing design and rejecting the proposed engagement loop is valid.
+    - Name the tradeoff between a useful future reminder and coercive or irrelevant repeat engagement.
+  reject:
+    - Diagnose annual return cadence as churn solely because users do not visit frequently.
+    - Add streaks, forced notifications, or a daily feed as a condition of relationship success.
+    - Treat a successful exit as a failed retention state.
+
+- id: focal-build-applicable-states
+  skill: focal
+  mode: build
+  scenario: Build a screen spec for an invoice upload and submit screen with known completion and recovery modes.
+  evidence:
+    - The screen's job is to upload three required invoices and submit them for review.
+    - Upload can be loading, complete, partially accepted when one invoice is invalid, or fully failed and retryable.
+    - File permission can be denied, and an interruption can occur while uploading; valid selected filenames should remain available for recovery.
+    - Successful submission shows a confirmation and reference number; unrelated account deletion and social sharing do not belong to this screen.
+  expected:
+    - Return the Focal Screen Spec build structure rather than a scored audit.
+    - Specify visible status, available action, retained context, and recovery for completion, partial failure, permission denial, and interruption.
+    - Keep the three required invoices and the submission consequence visible while making the invalid file and retry path clear.
+    - Name a concrete recovery behavior that preserves valid selected files without hiding the failure.
+  reject:
+    - Add unrelated account deletion or social-sharing states to satisfy a generic checklist.
+    - Return a Focal scorecard instead of a build proposal.
+
+- id: compass-build-applicable-states
+  skill: compass
+  mode: build
+  scenario: Build a flow spec for a finite permit application with a task-list loop, final submit, and safe interruption handling.
+  evidence:
+    - "The flow has one outcome: submit a permit application after identity, address, and document tasks are complete."
+    - Applicants may complete those tasks in user-chosen order, return to the task hub, and save permitted fields for 30 days with reauthentication on return.
+    - Document upload can partially fail, identity permission can be denied, and a saved draft can expire; final review and submit show the application consequence before commit.
+    - Completion shows a receipt and exit path; Back preserves safe entered context, while no open-ended browse state exists.
+  expected:
+    - Return the Compass Flow Spec build structure and classify the journey as a finite task-list.
+    - Inventory only the applicable completion, partial-failure, permission, expiry, interruption/re-entry, review, submit, and recovery states with their context and exits.
+    - Preserve user-chosen order, hub orientation, safe Back state, reauthentication, and stale-data revalidation through the final submit.
+    - Give one concrete recovery behavior that preserves permitted context and protects the consequential commit.
+  reject:
+    - Force a linear screen count or invent an open-ended progress model for the task-list.
+    - Add unrelated states solely to complete a universal checklist.
+
+- id: flywheel-build-applicable-states
+  skill: flywheel
+  mode: build
+  scenario: Build a relationship-stage spec for first value in a budgeting app that imports a user's transactions.
+  evidence:
+    - First value is an actionable spending insight after the user's transaction import, not account creation or setup completion.
+    - Import may succeed, partially fail for some sources, be blocked by permission denial, or be interrupted and resumed for permitted mapping context.
+    - The result screen confirms the insight and its next step; a consequential account connection is reauthorized before commit.
+    - The stage must keep protective permission and reversibility friction, and must not ask for a referral or streak before first value lands.
+  expected:
+    - Return the Flywheel Stage Spec build structure with first value named as the outcome and one relationship play selected.
+    - Specify the applicable completion, partial-failure, permission, interruption/recovery, and consequence behavior in the stage design.
+    - Preserve protective permission and reversibility while making the actionable insight and next step understandable.
+    - Name a concrete recovery for partial import that keeps permitted mapping context and tells the user what remains.
+  reject:
+    - Define first value as account creation or setup completion.
+    - Add a referral, streak, or return ask before the actionable insight is delivered.
+    - Invent unrelated lifecycle states that the supplied stage cannot enter.
+
+- id: soul-build-applicable-states
+  skill: soul
+  mode: build
+  scenario: Build a Moment Spec for the first successful transaction import while preserving calm recovery and repetition-proof treatment.
+  evidence:
+    - The beat is the first successful import, reached once on a user's first run, and the user needs confidence about the actionable result and next step.
+    - The import can complete, partially fail for one source, be denied a required permission, or be interrupted and resumed with permitted context.
+    - A later status animation runs every week and delays the next action without adding information; it is not the required expressive destination.
+    - The treatment must remain honest without motion or sound and must preserve speed, comprehension, and the primary action.
+  expected:
+    - Return the Soul Moment Spec build structure with a named feeling, frequency, stakes, target tier, and treatment rungs.
+    - Account for the applicable completion, partial-failure, permission, and interruption/recovery conditions in the moment's design and constraints.
+    - Select treatment contextually for the first useful import and leave the later every-run animation optional or restrained.
+    - Name a concrete recovery that preserves the actionable result and permitted context without making expressive treatment carry structural work.
+  reject:
+    - Make a later flashy every-run moment mandatory or assign a fixed Net-New quota.
+    - Hide the primary action or recovery behind motion, sound, or a celebratory effect.
+    - Add unrelated state variants solely to satisfy a generic checklist.

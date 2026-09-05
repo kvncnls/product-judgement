@@ -25,7 +25,7 @@ How to decide what belongs on a screen and organize it around one clear intent.
 
 Match the technique to *why* the content is deferred.
 
-*About four unfamiliar chunks is a task-screen diagnostic, not a universal limit. On hub and exploration screens, inspect decision load per row or card rather than counting destinations or items. See **Registers** in [SKILL.md](../SKILL.md).*
+*About four unfamiliar chunks is a task-screen diagnostic starting point, not a universal limit. On hub and exploration screens, inspect decision load per row or card rather than counting destinations or items. Judge each row or card from familiarity, grouping, stakes, device, content length, and the decision at hand. See **Registers** in [SKILL.md](../SKILL.md).*
 
 | Technique | Use when | Example |
 |-----------|----------|---------|
@@ -53,9 +53,9 @@ Match the technique to *why* the content is deferred.
 
 How to give a screen a clear visual entry point so the eye knows where to start—the visual expression of its organizing intent and action model.
 
-- **Size and weight differential.** Make the primary element materially larger or heavier than its neighbors. A ≥1.25 step between tiers reads as intentional; smaller reads as accidental.
+- **Size and weight differential.** Make the primary element materially larger or heavier than its neighbors. A ratio or token step can be a useful starting point when the system gives no guidance, but choose the relationship in context of the typeface, content, viewport, and audience; defer exact values to the product’s design system.
 - **Isolation by space.** Surround the primary element with more whitespace than anything else. The eye goes to what's alone.
-- **Position.** Above the fold, in the reading-flow landing zone (top-left start, bottom-right resolution for LTR). On mobile, primary actions sit where the thumb rests (the bottom third); on pointer-driven desktop, in the natural resolution zone of the layout (often bottom-right of a form or panel).
+- **Position.** Start with reading flow and reachability: place the dominant action where this device, input method, handedness, viewport, and task frequency make it easy to find and use. A thumb-reachable mobile region or a desktop resolution zone may be a hypothesis, not a fixed placement rule; follow the product’s layout system and verify the rendered context.
 - **Disciplined color.** On a task screen, reserve the strongest accent for the primary action or inherent co-equal set. On hubs and exploration surfaces, repeated link or interaction color can support a family of comparable routes; keep one region or content type visually dominant through space and weight.
 - **Show the consequence.** When a decision depends on a relationship, tradeoff, or process state, make that meaning legible at the decision surface with a summary, comparison, preview, or visualization when useful. Preserve exact values as supporting evidence; do not use the visual to decorate or hide the underlying facts.
 - **Suppress the rest.** Often the fastest way to create a focal point is not to amplify the hero but to *quiet everything else*—mute secondary text, recede chrome, drop ambient elements to low contrast.
@@ -68,9 +68,9 @@ How to give a screen a clear visual entry point so the eye knows where to start�
 
 Climb only as far as you need. Each rung is louder than the last.
 
-1. **Space.** Proximity groups; distance separates; generous margin elevates. Most hierarchy problems are solved here, for free. Tight gaps within a group (8–12px), generous gaps between groups (48–96px).
+1. **Space.** Proximity groups; distance separates; generous margin elevates. Most hierarchy problems are solved here, for free. Use the product’s spacing tokens when available; otherwise make within-group gaps visibly tighter than between-group gaps and verify with the real content.
 2. **Weight.** Font weight and contrast. A bold label against regular body, or full-contrast text against muted, ranks without changing size or hue.
-3. **Size.** Type scale and element scale. Keep a real scale (≥1.25 ratio between steps); three deliberate sizes beat six arbitrary ones.
+3. **Size.** Type scale and element scale. A deliberate ratio between tiers can help when the system is silent, but the right relationship depends on typeface, language, viewport, and audience. Follow existing tokens and verify that the intended order survives the rendered content.
 4. **Color.** The loudest, last rung. On task screens, reserve the strongest accent for the dominant action or inherent set. On hubs and exploration surfaces, use interaction color consistently across comparable controls while space and weight preserve a dominant region. Color as *the* hierarchy tool (rather than reinforcement) is fragile—it fails for colorblind users and in dark/light inversion.
 
 **Rule:** if space and weight already rank the screen, don't add size and color on top. Redundant emphasis flattens hierarchy as surely as no emphasis.
@@ -81,11 +81,13 @@ Climb only as far as you need. Each rung is louder than the last.
 
 Products live or die on the states most teams treat as afterthoughts. Each is a Focal surface in its own right—it has an organizing intent, an architecture, and a disclosure budget.
 
-- **Full (worst-case) state.** The biggest clutter trap in data UIs: a screen designed against 3 tidy demo rows becomes chaos at 300—with the longest label, the most items, max-digit numbers, the deepest nesting. Design and review every screen against its *worst realistic data*, not the mock. A layout that only holds together when nearly empty isn't done. (This is why dashboards drift into clutter: they were composed empty.)
+- **Full (worst-case) state.** The biggest clutter trap in data UIs: a screen designed against tidy demo rows becomes chaos at realistic volume—with the longest label, the most items, max-digit numbers, and deepest nesting. Design and review against the worst realistic data, not the mock. A layout that only holds together when nearly empty isn’t done.
 
 - **Empty state.** Not a void—the first-run teacher. One sentence of what this becomes, one primary action to get there. Empty states are the highest-leverage onboarding you have.
 - **Loading.** Always communicate system status. Skeletons over spinners for content; optimistic UI for actions the user just took. Never a blank screen with no signal.
+- **Success and partial states.** When the screen can complete an action or render only part of its data, show what changed or what is available, identify what remains, and keep the next local action clear. Do not assume full success from a partial response.
 - **Error.** Plain language, name the actual problem, offer the fix, preserve the user's work. "Email is missing an @" beats "Invalid input." Place it at the source, not in a banner far away.
+- **Permission and recovery states.** If access, device permission, interruption, or resumption can change the screen, name the blocked capability, preserve recoverable context, and offer the appropriate retry or return path. These states are relevant only when the screen can enter them.
 - **First-use state.** Make the screen's local action model legible without a wall of coach marks. Defer controls that are not needed on this visit. Whether the whole onboarding path reaches first value is Flywheel's question.
 - **Completion state.** Confirm what changed, preserve control, and expose the next locally relevant action. Flywheel owns whether the win earns return; Soul owns whether the moment deserves expressive treatment.
 
@@ -101,7 +103,7 @@ Each entry: the tell, the discipline it breaks, the fix. Severity is assigned in
 - **The classification tax**—recognizable input requires the user to select its type, network, or mode before the product can proceed. *(IA)* Parse the input, show the interpretation, allow correction, and keep a manual fallback for ambiguous cases.
 - **The context jump**—the user must leave the decision surface to inspect history, status, price, or consequence. *(IA)* Bring the decision-relevant slice into the same screen or region; defer deep detail, not the context needed to choose.
 - **The memory bridge**—step 3 needs a fact only shown on step 1. *(IA, PD)* Carry the context forward, or co-locate the decision with its inputs.
-- **The wall of options**—8+ equal choices at one decision point. *(PD)* Defaults + reveal; recommend one; group the rest.
+- **The wall of options**—many equal, unfamiliar choices at one decision point. *(PD)* Defaults + reveal; recommend one; group the rest. Count alone is not the diagnosis: judge familiarity, stakes, grouping, and whether the choices change the next action.
 - **The numeric fog**—raw values leave the user to derive the relationship, tradeoff, or process state that matters. *(VH)* Add a clear summary, comparison, preview, or visualization; keep exact values available as evidence.
 - **The everything-up-front form**—onboarding asks for all data immediately. *(PD)* Ask only what's needed for the first success; defer the rest to when it's relevant.
 - **The premature settings dump**—advanced options shown before anyone needs them. *(PD)* Collapse behind "Advanced"; smart-default the common case.

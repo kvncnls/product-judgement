@@ -16,13 +16,13 @@ Examples of the register: a standard signup form, a clear confirmation toast, a 
 
 Nothing new is introduced. The existing thing, done at a grade users can feel even when they cannot say why: hierarchy sharpened, copy in the user's words, motion that explains, feedback that names what changed, an empty state that starts the work, a wait that shows the work.
 
-**Elevated is the anti-boring tier.** It spreads to every beat whose ceiling allows it—craft survives repetition, so distributing it raises the whole path without exhausting anyone. Concentration is for Net-New; distribution is for craft.
+**Elevated is the anti-boring tier.** It spreads to beats whose ceiling allows it when the craft remains useful, perceivable, and comprehensible under their frequency. Concentration is for Net-New; distribution is for craft that earns repeat use.
 
 **The test:** describe the treatment in one sentence—if the sentence needs a new noun (a new feature, a new surface, a new mechanic), it is not Elevated, it is Net-New wearing modest clothes.
 
 Examples of the register: the confirmation that states the amount and the running total instead of "Done"; the upload that shows filenames processing instead of a spinner; the form whose labels anticipate the next question; the settle animation that gives a completed payment weight.
 
-**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it raises quality without spending novelty, so it survives repetition and does not compete with reassurance. Net-New is an exception, not an entitlement: on an every-run beat it must add durable utility that remains valuable on the 50th run; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
+**On `every-run` and high-stakes beats, Elevated is the default ceiling**—it can raise quality without spending novelty, if feedback stays perceivable and the user retains control. Net-New is an exception, not an entitlement: on an every-run beat it must add utility shown or explicitly tested to remain valuable on later runs; on a high-stakes beat it must strengthen reassurance, records, or control while preserving load-bearing convention. If the case depends on surprise, spectacle, or unfamiliarity, keep the target at Elevated or Expected.
 
 ## Net-New—an entirely new experience
 
@@ -33,7 +33,7 @@ An entirely new experience in place of the old one—not the same moment execute
 Examples of the register: a live visualization where a table was assumed; a personalized artifact worth keeping (a year-in-review, a printable record, a shareable result card); an interactive demo where static onboarding was assumed; a progress mechanic that accumulates something users check voluntarily.
 
 **Net-New ships on no more than three chosen moments, and zero is valid.** It spends surprise, so concentration matters—spread thinly, none may clear the threshold of memorable. A build designs the Net-New rung only when the beat's ceiling and target allow it; otherwise the rung states why it is unavailable. Two rules keep the tier honest:
-- **It must survive its frequency.** A Net-New mechanic on an every-run beat must be useful on the 50th run, not clever on the first. If it is only clever, move it to a `once` or `recurring` beat.
+- **It must survive its frequency.** A Net-New mechanic on an every-run beat must show useful, perceivable, comprehensible behavior on later runs, not only a clever first response. If repeat value is untested, move it to a `once` or `recurring` beat or label the proposal conditional.
 - **It must be worth keeping, not just worth noticing.** The strongest Net-New treatments produce an artifact or capability the user returns to; the weakest produce a reaction and then a chore.
 
 ## The levers
@@ -42,7 +42,7 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 | Lever | Used well | The failure mode |
 |---|---|---|
-| **Speed** | the response so fast it reads as attention; the strongest every-run lever there is | none—speed does not decay, which is why it ranks first |
+| **Speed** | a response that feels attentive while remaining truthful and perceivable | feedback that is too fast to notice, hides failure, removes control, or creates a false sense of completion |
 | **Feel** | weight, physics, and settle that make interaction tactile | motion that delays the action it decorates |
 | **Language** | copy in the user's words, at the moment's temperature; the highest-leverage lever per hour spent | charm before clarity; a voice that jokes at tense moments |
 | **Anticipation** | the field pre-filled, the next step staged, the default that shows the product was paying attention | guessing wrong confidently; anticipation that removes control |
@@ -54,15 +54,15 @@ What treatments are actually made of. Every lever carries its own failure mode�
 
 ## Repetition-proof design
 
-What survives the 50th viewing, in order of durability:
+Potentially repeatable levers, to verify against the actual beat and audience:
 
-1. **Speed**—never decays. The fastest thing in the category is a signature by itself.
-2. **Feel**—physics reads as quality indefinitely; nobody tires of a door that closes well.
-3. **Anticipation**—being known stays pleasant as long as it stays accurate.
-4. **Useful variation**—content that reflects real state (this week's number, this run's result) is different every time for free.
-5. **Cosmetic variation**—a rotating copy pool reads as alive for a while; the pool is always smaller than it looks. Last resort, small doses.
+1. **Speed**—can reduce repeated effort when the result remains truthful, visible, and recoverable.
+2. **Feel**—may signal quality when motion is brief, legible, and optional; test whether it delays or distracts.
+3. **Anticipation**—can stay useful when its inference is accurate and reversible.
+4. **Useful variation**—content that reflects real state (this week's number, this run's result) may remain relevant; confirm comprehension and control.
+5. **Cosmetic variation**—a rotating copy pool can feel alive briefly, but its value and readability need repeat testing. Use small doses.
 
-What decays: jokes, confetti, celebration sounds, surprise of any kind, mascot appearances, animated sequences longer than the action they follow. All of these are `once`-class material or cut.
+Jokes, confetti, celebration sounds, surprise, mascot appearances, and sequences longer than the action may lose value with repetition; test them before assigning a recurring ceiling, and move surprise-dependent treatments to `once` or `recurring` when repeat value is absent.
 
 ## Proportionality
 
@@ -71,10 +71,10 @@ Feedback intensity matches the size of the moment, and high stakes reorder the s
 - **Routine completion**—confirm clearly, offer the next step. No more.
 - **Meaningful progress**—name what changed, show the accumulation, restrained motion.
 - **Major milestone**—ceremony earned: a designed pause, a summary, an artifact.
-- **High-stakes success**—reassurance, records, and control **before** any feeling. The user confirms their money moved safely before anything celebrates. Calm outperforms excitement everywhere the user has something to lose.
+- **High-stakes success**—reassurance, records, and control **before** any feeling. The user should be able to confirm what happened and what they can do next before expressive treatment. Calm often fits better where loss is possible, but check user expectations, context, and actual comprehension.
 
 Over-celebrating the routine reads as juvenile and burns trust in every future celebration; under-playing the milestone reads as indifference. Both are Proportion failures in the scorecard, and they are the same failure: intensity decided by habit instead of by the moment.
 
 ## The accessibility floor
 
-No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, meaning never depends on color, motion, or sound alone, focus and keyboard paths survive the treatment, and copy stays legible at the moment's reading pace—a 2-second toast cannot carry a 12-word sentence.
+No rung ships below it: treatments honor `prefers-reduced-motion` with a complete non-animated equivalent, never depend on color, motion, or sound alone, preserve focus and keyboard paths, and keep copy legible at the user's reading pace across languages and assistive technology. A transient toast should carry only what can be perceived in its available time; important status must remain available for retrieval. If motion or speed changes comprehension, revise the treatment.
