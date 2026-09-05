@@ -6,7 +6,7 @@
 
 Soul is a Skill for deciding where a working product should remain conventional, where it deserves more craft, and where a genuinely new treatment could make the experience memorable. It places authorship; it does not add decoration everywhere.
 
-Where [Focal](../focal) owns screen structure, [Compass](../compass) owns the path, and [Flywheel](../flywheel) owns relationship momentum, Soul owns treatment and the contextual memory question on a sound path.
+Where [Focal](https://github.com/kvncnls/product-judgement/tree/main/focal) owns screen structure, [Compass](https://github.com/kvncnls/product-judgement/tree/main/compass) owns the path, and [Flywheel](https://github.com/kvncnls/product-judgement/tree/main/flywheel) owns relationship momentum, Soul owns treatment and the contextual memory question on a sound path.
 
 ## The method
 
@@ -30,7 +30,7 @@ Error, recovery, and interruption states are still reviewed for restraint and ap
 
 ## Soul versus Flywheel Emotion
 
-[Flywheel](../flywheel) asks whether returning preserves or compounds substantive value and whether the relationship earns preference, return, or advocacy. Soul asks how a working moment is authored and remembered. A quiet continuity feature can strengthen Flywheel without becoming a Soul moment; a memorable completion can be strong Soul work without creating a durable reason to return.
+[Flywheel](https://github.com/kvncnls/product-judgement/tree/main/flywheel) asks whether returning preserves or compounds substantive value and whether the relationship earns preference, return, or advocacy. Soul asks how a working moment is authored and remembered. A quiet continuity feature can strengthen Flywheel without becoming a Soul moment; a memorable completion can be strong Soul work without creating a durable reason to return.
 
 ## When to use Soul
 
@@ -38,20 +38,20 @@ Reach for Soul when a working path feels anonymous, generic, emotionally flat, o
 
 Soul does not own:
 
-- screen structure or clutter—that is [Focal](../focal);
-- navigation, route economy, or state continuity across a journey—that is [Compass](../compass);
-- activation, value recognition, or durable relationship momentum—that is [Flywheel](../flywheel);
+- screen structure or clutter—that is [Focal](https://github.com/kvncnls/product-judgement/tree/main/focal);
+- navigation, route economy, or state continuity across a journey—that is [Compass](https://github.com/kvncnls/product-judgement/tree/main/compass);
+- activation, value recognition, or durable relationship momentum—that is [Flywheel](https://github.com/kvncnls/product-judgement/tree/main/flywheel);
 - brand identity, illustration systems, typography systems, marketing pages, or production animation code.
 
-Use [Product Judgement](../product-judgement) when the question crosses several scales.
+Use [Product Judgement](https://github.com/kvncnls/product-judgement/tree/main/product-judgement) when the question crosses several scales.
 
 ## Install and update
 
-Use the collection’s [installation and update guide](../README.md#install) for Claude Code, Codex, Cursor, manual folders, and generated single-file bundles.
+Use the collection’s [installation and update guide](https://github.com/kvncnls/product-judgement#install) for Claude Code, Codex, Cursor, manual folders, and generated single-file bundles.
 
 ## Use
 
-Invoke `/soul` explicitly or ask an agent with the Skill installed.
+The slash-command examples below use Claude Code folder installs. Invoke `/soul` explicitly, or ask an agent with the Skill installed. With the Claude Code plugin, use `/product-judgement:soul`; the umbrella Skill is `/product-judgement:product-judgement`. Other agents use their own picker or invocation, or the Skill name.
 
 ### Audit the default path
 
@@ -70,9 +70,9 @@ Soul returns a fixed **happy-path sweep**:
 
 Readiness is not a fourth scored gate. Any unsupported Soul-local gate may be `N/E—insufficient evidence`, whether readiness is Ready or Deferred. Keep supported rows, report the next evidence check, and omit the native total, average, band, and weakest-gate ceiling whenever a required gate is N/E. `N/E` is not zero.
 
-Every evaluated score must explain **evidence → consequence → rubric anchor → smallest next-point change**. A `3/4` is the normal target for strong professional work. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon. Signature does not require a Net-New moment: a distinctive, repeatable Elevated pattern can earn it.
+Every evaluated score must explain **evidence → consequence → rubric anchor → smallest next-point change**. A `3/4` is the normal target for strong professional work and may say `None justified by the evidence` when no supported change is warranted. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon. Signature does not require a Net-New moment: a distinctive, repeatable Elevated pattern can earn it.
 
-See the [locked sweep output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](../README.md#shared-audit-contract).
+See the [locked sweep output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](https://github.com/kvncnls/product-judgement#shared-audit-contract).
 
 ### Build one moment
 
@@ -84,16 +84,17 @@ Soul returns a fixed **Moment Spec**:
 
 - **Moment**—the beat, audience, named feeling, frequency, stakes, and target tier.
 - **Why this moment**—its role on the path and the budget decision, including why restraint may be right.
+- **Applicable states**—completion, partial failure, permission, recovery/retry, cancel/exit, repeated use, and reduced motion/low-motion marked Applicable, N/A with a reason, or Not shown with a fastest check as each beat warrants.
 - **Treatment ladder**—a real Expected floor, the selected target, and higher rungs marked unavailable with their ceiling reason.
 - **Held constant**—speed, comprehension, control, convention, safety, and other invariants.
 - **Constraints**—brand, technical, accessibility, frequency, and contextual limits.
-- **Gates**—a binary, unscored check of the proposal.
+- **Gates**—binary, unscored checks marked pass, fail with a reason, N/A with a reason, or Not shown with a check.
 
 Expected, Elevated, and Net-New are all valid build targets. See the build route in [SKILL.md](./SKILL.md#routing).
 
 ## Give it context
 
-Provide the default path, intended audience, product promise, frequency, stakes, brand constraints, accessibility needs, existing patterns, business goal, and known relationship behavior. A PRD, research, prototype, codebase, analytics, and design references help Soul distinguish a meaningful moment from decoration. Missing states are marked `not shown` rather than invented; a missing variant does not automatically make a gate unevaluable.
+Provide the default path, intended audience, product promise, frequency, stakes, brand constraints, accessibility needs, existing patterns, business goal, and known relationship behavior. A PRD, research, prototype, codebase, analytics, and design references help Soul distinguish a meaningful moment from decoration. Each applicable-state row is marked `Applicable`, `N/A—<reason>`, or `Not shown—<check>`; missing states are marked `not shown` rather than invented, and a missing variant does not automatically make a gate unevaluable.
 
 ## What is inside
 

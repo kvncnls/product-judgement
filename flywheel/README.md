@@ -6,11 +6,11 @@
 
 Flywheel is a Skill for finding where a product loses value and deciding which relationship stage to fix first. Establish the intended cadence and success outcome before judging return, frequency, conversion, or engagement. Recurring products may need return and advocacy; finite or infrequent services may succeed through completion, safe handoff, and exit. Flywheel does not buy attention or prescribe a growth channel.
 
-Where [Focal](../focal) owns decisions inside a screen and [Compass](../compass) owns movement through a journey, Flywheel owns whether those experiences build momentum across the relationship.
+Where [Focal](https://github.com/kvncnls/product-judgement/tree/main/focal) owns decisions inside a screen and [Compass](https://github.com/kvncnls/product-judgement/tree/main/compass) owns movement through a journey, Flywheel owns whether those experiences build momentum across the relationship.
 
 ## The method
 
-A funnel ends. A recurring product relationship can feed useful return and recommendation back into itself; a finite service can end successfully after completion and exit. Flywheel checks four ordered plays:
+A funnel ends. A recurring product relationship can feed useful return and recommendation back into itself; a finite service can end successfully after completion, handoff, and safe exit. Flywheel checks four ordered plays:
 
 | Play | Relationship question | Typical loss |
 |---|---|---|
@@ -25,7 +25,7 @@ A **relationship leak** is the first point where momentum materially drops again
 
 ## Flywheel Emotion versus Soul
 
-Flywheel’s Emotion play is about substantive relationship behavior: continuity without reconstruction, accumulated value, meaningful preference, and the product’s intended return or completion outcome. [Soul](../soul) owns authored treatment and memory: which working moments deserve expressive craft and how much. A product can have a strong reason to return with quiet treatment, or a finite service can end with a clear, controlled handoff.
+Flywheel’s Emotion play is about substantive relationship behavior: continuity without reconstruction, accumulated value, meaningful preference, and the product’s intended return or completion outcome. [Soul](https://github.com/kvncnls/product-judgement/tree/main/soul) owns authored treatment and memory: which working moments deserve expressive craft and how much. A product can have a strong reason to return with quiet treatment, or a finite service can end with a clear, controlled handoff.
 
 ## What “build a stage” means
 
@@ -44,20 +44,20 @@ Reach for Flywheel when people arrive but do not trust, activate, recognize valu
 
 Flywheel does not own:
 
-- screen composition—that is [Focal](../focal);
-- route clarity, step count, or state across one journey—that is [Compass](../compass);
-- expressive treatment or memorable authorship—that is [Soul](../soul);
+- screen composition—that is [Focal](https://github.com/kvncnls/product-judgement/tree/main/focal);
+- route clarity, step count, or state across one journey—that is [Compass](https://github.com/kvncnls/product-judgement/tree/main/compass);
+- expressive treatment or memorable authorship—that is [Soul](https://github.com/kvncnls/product-judgement/tree/main/soul);
 - paid acquisition, SEO, campaign planning, analytics instrumentation, experiment statistics, or manufacturing product-market fit.
 
-Use [Product Judgement](../product-judgement) when the question crosses several scales.
+Use [Product Judgement](https://github.com/kvncnls/product-judgement/tree/main/product-judgement) when the question crosses several scales.
 
 ## Install and update
 
-See the collection’s [installation and update guide](../README.md#install) for the Skills CLI, Claude Code, Codex, Cursor, manual folders, and generated single-file bundles.
+See the collection’s [installation and update guide](https://github.com/kvncnls/product-judgement#install) for the Skills CLI, Claude Code, Codex, Cursor, manual folders, and generated single-file bundles.
 
 ## Use
 
-Invoke `/flywheel` explicitly or ask an agent with the Skill installed.
+The slash-command examples below use Claude Code folder installs. Invoke `/flywheel` explicitly, or ask an agent with the Skill installed. With the Claude Code plugin, use `/product-judgement:flywheel`; the umbrella Skill is `/product-judgement:product-judgement`. Other agents use their own picker or invocation, or the Skill name.
 
 ### Diagnose the relationship
 
@@ -70,15 +70,15 @@ A full diagnosis returns:
 - **Verdict**—the earliest evidenced relationship leak, `No leak observed`, or the evidence gap that prevents ordering, plus one stage to fix first when needed.
 - **Coverage and Basis**—the exact Screen · Flow · State · Lifecycle reviewed, evidence gaps, and a confirming behavior or metric.
 - **Scorecard**—Trust, Friction, Wins, and Emotion scored `0–4` when supported, for a native total of `/16` only when all four are evaluable.
-- **Issues**—P0–P3 findings ordered from earlier to later relationship stages, with exact locators and concrete fixes.
+- **Issues**—P0–P3 findings ordered by priority first, then by Trust → Friction → Wins → Emotion within each priority, with exact locators and concrete fixes.
 - **Fix this first**—one stage, or `None—no leak observed; validate <check>`, with no invented intervention.
 - **Handoffs**—local screen, journey, or authored-treatment work owned by Focal, Compass, or Soul.
 
 A targeted stage review scores only the selected play `/4`. The other three rows are `N/E—outside targeted scope`; Flywheel does not turn a one-stage review into a synthetic `/16` total or common band. A full diagnosis evaluates all four plays, but any play whose rubric is unsupported is `N/E—insufficient evidence`; any `N/E` prevents a `/16` total, average, band, or weakest-play ceiling and makes ordering provisional where the missing evidence matters.
 
-Every evaluated score must explain **evidence → consequence → rubric anchor → smallest next-point change**. A `3/4` is the normal target for strong professional work. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon.
+Every evaluated score must explain **evidence → consequence → rubric anchor → smallest next-point change**. A `3/4` is the normal target for strong professional work and may say `None justified by the evidence` when no supported change is warranted. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon.
 
-See the [locked diagnosis output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](../README.md#shared-audit-contract).
+See the [locked diagnosis output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](https://github.com/kvncnls/product-judgement#shared-audit-contract).
 
 ### Build a relationship stage
 
@@ -86,16 +86,16 @@ See the [locked diagnosis output](./reference/review.md#output-formatuse-this-ex
 /flywheel build the first-value stage for a budgeting app
 ```
 
-Flywheel returns the fixed **Stage Spec** in [reference/build.md](reference/build.md), loaded only for a `build` request. It includes:
+Flywheel returns the fixed **Stage Spec** in [reference/build.md](reference/build.md), loaded for a `build` request or when turning a reviewed relationship stage into a proposal. It includes:
 
-- **Stage**—one play, audience, first value, intended cadence, success outcome, stakes, and relationship transition.
+- **Stage**—one play, audience, first value, intended cadence, success outcome, stakes, and relationship transition; finite services may define success through completion, handoff, and safe exit.
 - **Evidence / assumptions**—supplied facts separated from proposal assumptions.
-- **The leak**—what is being lost and the fastest confirming metric or behavior.
+- **The leak**—what is being lost, the diagnostic hypothesis, and the fastest confirming metric or behavior.
 - **The design**—the proposed intervention at that relationship stage.
-- **State / applicability inventory**—only relevant completion, partial failure, permission, recovery, cancellation, decline, and no-ask states, with N/A reasons and unknown behavior labeled.
+- **State / applicability inventory**—only relevant completion, partial completion/failure, permission, recovery/retry, cancellation/abandonment, decline, and no-ask states, with N/A reasons for inapplicable states or gates and unknown behavior labeled.
 - **Friction kept**—productive or protective effort retained deliberately.
 - **The ask**—what value precedes a commercial or social request; declining preserves already-earned value, and any foregone benefit is explicit and noncoercive.
-- **Gates**—a binary, unscored check of the proposal.
+- **Gates**—binary, unscored checks marked pass, fail with a reason, or N/A with a reason.
 
 See the [locked Stage Spec](./reference/build.md#output-format-use-this-exact-structure).
 
@@ -127,7 +127,7 @@ flywheel/
 ```text
 DIAGNOSE  leave before engagement → Trust · engage, no first value → Friction
           value occurs, no intended completion/recognition → Wins
-          recurring use then drifts → Emotion · finite service ends well → completion may be success
+          recurring use then drifts → Emotion · finite service ends well → completion, handoff, or safe exit may be success
 EARLIEST  among non-critical work, fix the earliest evidenced leak first
 P0        stop or repair immediately at any stage; then resume earliest-stage order
 FRICTION  remove accidental and cognitive drag · keep protective and productive effort

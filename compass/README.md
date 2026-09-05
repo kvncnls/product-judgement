@@ -6,7 +6,7 @@
 
 Compass is a Skill for designing and reviewing journeys across screens: how people move, know where they are, preserve safe context, and recover or leave. It covers onboarding, checkout, setup, finite task-list services, hub-and-spoke work, drill downs, search, and discovery.
 
-Where [Focal](https://github.com/kvncnls/product-judgement/blob/main/focal/SKILL.md) owns structure inside one screen, Compass owns the path and seams between screens. [Flywheel](https://github.com/kvncnls/product-judgement/blob/main/flywheel/SKILL.md) owns relationship momentum, and [Soul](https://github.com/kvncnls/product-judgement/blob/main/soul/SKILL.md) owns expressive treatment and memory.
+Where [Focal](https://github.com/kvncnls/product-judgement/tree/main/focal) owns structure inside one screen, Compass owns the path and seams between screens. [Flywheel](https://github.com/kvncnls/product-judgement/tree/main/flywheel) owns relationship momentum, and [Soul](https://github.com/kvncnls/product-judgement/tree/main/soul) owns expressive treatment and memory.
 
 ## The method
 
@@ -40,9 +40,9 @@ The shape determines the cue; no progress widget is mandatory by type. A task li
 
 ## Install and invoke
 
-Use the collection’s [installation and update guide](../README.md#install) for native plugins, protected folder installs, verified uploads, and the Skills CLI with the project’s release-age policy.
+Use the collection’s [installation and update guide](https://github.com/kvncnls/product-judgement#install) for native plugins, protected folder installs, verified uploads, and the Skills CLI with the project’s release-age policy.
 
-Invoke `/compass build <journey>` or `/compass review <journey>`. For a whole-app audit, use [Product Judgement](https://github.com/kvncnls/product-judgement/blob/main/product-judgement/SKILL.md).
+The examples below use `/compass build <journey>` or `/compass review <journey>` for a Claude Code folder install. With the Claude Code plugin, use `/product-judgement:compass`. In other agents, use their own Skill picker or invocation syntax, or ask for Compass by name. When the decisions span multiple scales, use [Product Judgement](https://github.com/kvncnls/product-judgement/tree/main/product-judgement).
 
 ## Build a journey
 
@@ -50,7 +50,7 @@ Invoke `/compass build <journey>` or `/compass review <journey>`. For a whole-ap
 /compass build the license renewal service
 ```
 
-For a build, provide the intended outcome or home anchor, audience and stakes, entry points, journey type, screens or task list, and applicable states and transitions. For a task list, include user chosen order, task statuses, Save and return, final review/submit, and any permission or expiry constraints. The build reference returns a Flow Spec with an explicit state/transition inventory.
+For a build, provide the intended outcome or home anchor, audience and stakes, entry points, journey type, screens or task list, and applicable states and transitions. For a task list, include user chosen order, task statuses, final review/submit, and applicable Save and return, permission, expiry, revalidation, and recovery behavior. Save and return is conditional: retain only data the service may safely and permissibly store, with expiry, appropriate re-entry authorization, revalidation, and recovery; otherwise explain what is lost and provide a safe re-entry or restart. The build reference returns a Flow Spec with an explicit state/transition inventory.
 
 Read the conditional [Flow Spec](./reference/build.md) and [build patterns](./reference/patterns.md).
 

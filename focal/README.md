@@ -44,20 +44,20 @@ Reach for Focal when a screen feels crowded, unclear, over-explained, under-cont
 
 Focal does not own:
 
-- the route across multiple screens—that is [Compass](../compass);
-- activation, value recognition, return, or relationship momentum—that is [Flywheel](../flywheel);
-- the placement of memorable or expressive moments—that is [Soul](../soul);
+- the route across multiple screens—that is [Compass](https://github.com/kvncnls/product-judgement/tree/main/compass);
+- activation, value recognition, return, or relationship momentum—that is [Flywheel](https://github.com/kvncnls/product-judgement/tree/main/flywheel);
+- the placement of memorable or expressive moments—that is [Soul](https://github.com/kvncnls/product-judgement/tree/main/soul);
 - typography, color, spacing systems, animation implementation, marketing pages, or backend work.
 
-Use [Product Judgement](../product-judgement) when the question crosses several of those scales.
+Use [Product Judgement](https://github.com/kvncnls/product-judgement/tree/main/product-judgement) when the question crosses several of those scales.
 
 ## Install and update
 
-Use the collection’s [installation and update guide](../README.md#install). It covers native plugins, protected folder installs, verified upload packages, and the Skills CLI with the project’s release-age policy.
+Use the collection’s [installation and update guide](https://github.com/kvncnls/product-judgement#install). It covers native plugins, protected folder installs, verified upload packages, and the Skills CLI with the project’s release-age policy.
 
 ## Use
 
-Invoke `/focal` explicitly or ask an agent with the Skill installed.
+The examples below use `/focal` for a Claude Code folder install. With the Claude Code plugin, use `/product-judgement:focal`. In other agents, use their own Skill picker or invocation syntax, or ask for Focal by name.
 
 ### Build a screen
 
@@ -91,9 +91,11 @@ Point the agent at a frame, screenshot, component, route, prototype, or running 
 - **Top moves**—up to three high-leverage changes; fewer when fewer are justified.
 - **Next**—structural-before-executional sequencing and any Compass, Flywheel, or Soul handoff.
 
-Every score must explain **evidence → consequence → rubric anchor → smallest next-point change**. A `3/4` is the normal target for strong professional work. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon. A total without those row-level explanations is invalid.
+Every score must explain **evidence → consequence → rubric anchor → smallest next-point change**; for a strong `3/4`, use `None justified by the evidence` when no supported change is warranted instead of inventing a gap. A `3/4` is the normal target for strong professional work. A `4/4` means above-and-beyond, unusually effective execution and is intentionally uncommon. A total without those row-level explanations is invalid.
 
-See the [locked review output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](../README.md#shared-audit-contract).
+Visual Hierarchy requires rendered layout or concrete style/order evidence. Naming a primary action establishes its role, not its visual prominence; when presentation evidence is absent, mark Visual Hierarchy `N/E—insufficient evidence` and omit the native total, average, band, and weakest-dimension ceiling.
+
+See the [locked review output](./reference/review.md#output-formatuse-this-exact-structure) and the collection’s [shared audit contract](https://github.com/kvncnls/product-judgement#shared-audit-contract).
 
 ## Give it context
 
@@ -125,7 +127,7 @@ DISCLOSE   Now / On-demand / Never · fit decision load to audience and stakes
 DECIDE     minimize unnecessary choices · infer before asking · keep context nearby
 SHOW       make consequences legible; use a preview or visualization when it helps
 STATE      specify only applicable variants, including success, partial, permission, and recovery
-EVIDENCE   N/E only when a dimension's rubric lacks support; omit total, average, and band if any is N/E
+EVIDENCE   N/E only when a dimension's rubric lacks support; omit total, average, band, and weakest-dimension ceiling if any is N/E
 HIERARCHY  one intended attention order · strongest treatment matches the action model
 NEVER      hide price, requirements, consequences, or controls needed now
 ```
