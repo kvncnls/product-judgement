@@ -1,0 +1,13 @@
+[project]
+name = "product-judgement-tools"
+# Internal tooling metadata; plugin versions live in the four plugin manifests.
+version = "0.0.0"
+description = "Maintainer tooling for the Product Judgement Skills"
+requires-python = ">=3.11"
+dependencies = ["PyYAML==6.0.3"]
+
+[tool.uv]
+package = false
+required-version = ">=0.12.10"
+# Apply the same 24-hour minimum release age as the optional Skills CLI.
+exclude-newer = "24 hours"

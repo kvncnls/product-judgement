@@ -9,55 +9,31 @@ permissions:
 
 jobs:
   verify:
-    name: Verify on Ruby 3.3
-    runs-on: ubuntu-latest
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.11", "3.14"]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          ruby-version: "3.3"
+          version: "0.12.10"
+          python-version: ${{ matrix.python-version }}
 
-      - name: Verify source contracts and generated bundles
+      - name: Install locked maintainer dependencies
+        run: uv sync --locked
+
+      - name: Verify source contracts, installation, and upload packages
         run: |
-          ruby scripts/verify.rb
-          ruby scripts/test_install.rb
-          ruby scripts/test_packages.rb
-
-  # scripts/ deliberately targets Ruby 2.6 so the tooling runs on the interpreter
-  # macOS ships with nothing to install. The 3.3 job above cannot see that floor:
-  # a 2.7-only method such as filter_map passes there and still fails on a stock
-  # Mac. This job runs the real system interpreter, which is the only check that
-  # holds the floor honest.
-  verify-macos-system-ruby:
-    name: Verify on the Ruby macOS ships
-    runs-on: macos-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Confirm macOS still ships Ruby 2.6
-        run: |
-          if [ ! -x /usr/bin/ruby ]; then
-            echo "::error::/usr/bin/ruby is missing on $(sw_vers -productName) $(sw_vers -productVersion)."
-            echo "::error::The Ruby 2.6 floor in README.md assumes macOS ships an interpreter. Revisit the floor."
-            exit 1
-          fi
-          version=$(/usr/bin/ruby -e 'print RUBY_VERSION')
-          echo "$(sw_vers -productName) $(sw_vers -productVersion) ships Ruby ${version}"
-          case "$version" in
-            2.6.*) ;;
-            *)
-              echo "::error::System Ruby is ${version}, not 2.6.x. The floor documented in README.md is stale; raise it."
-              exit 1
-              ;;
-          esac
-
-      - name: Verify source contracts and generated bundles on system Ruby
-        run: |
-          unset GEM_HOME GEM_PATH RUBYOPT RUBYLIB BUNDLE_GEMFILE
-          /usr/bin/ruby scripts/verify.rb
-          /usr/bin/ruby scripts/test_install.rb
-          /usr/bin/ruby scripts/test_packages.rb
+          uv run --locked scripts/verify.py
+          uv run --locked scripts/test_install.py
+          uv run --locked scripts/test_packages.py
+          uv run --locked scripts/test_tooling.py
+          uv run --locked scripts/test_eval.py
+          uv run --locked scripts/test_eval_cli.py

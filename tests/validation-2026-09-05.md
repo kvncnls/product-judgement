@@ -1,5 +1,7 @@
 # Remediation validation, 2026-09-05 UTC
 
+This is a historical record of the checks run on that date. Its interpreter and command references describe that run; current maintainer commands live in [the contributor guide](../CONTRIBUTING.md).
+
 This note records the installation and UX-instruction repairs made on `main`, based on `a79cce0`, before publication. Six implementation subagents covered the installer, Focal, Compass, Flywheel, Soul, and evaluation harness. Separate subagents performed installation safety review and fresh behavioral samples; integration, shared contracts, packaging, and the conclusions below were handled in the main task.
 
 The repository changes and generated packages are local. Version `1.1.0` is prepared in the four versioned manifests. No commit, tag, release, or global Skill installation was made. The published `v1.0.0` archives remain old; the README now directs upload users to build and verify current source packages until a corrected release is published.

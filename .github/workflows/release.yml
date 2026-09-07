@@ -9,54 +9,64 @@ permissions:
   contents: write
 
 jobs:
-  # A release must clear the same Ruby 2.6 floor as a push, or a tag can ship
-  # tooling that only runs on CI's interpreter.
-  verify-macos-system-ruby:
-    name: Verify on the Ruby macOS ships
-    runs-on: macos-latest
+  verify:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.11", "3.14"]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Verify source contracts and generated bundles on system Ruby
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.10"
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install locked maintainer dependencies
+        run: uv sync --locked
+
+      - name: Verify source contracts, installation, and upload packages
         run: |
-          version=$(/usr/bin/ruby -e 'print RUBY_VERSION')
-          echo "System Ruby is ${version}"
-          unset GEM_HOME GEM_PATH RUBYOPT RUBYLIB BUNDLE_GEMFILE
-          /usr/bin/ruby scripts/verify.rb
-          /usr/bin/ruby scripts/test_install.rb
-          /usr/bin/ruby scripts/test_packages.rb
+          uv run --locked scripts/verify.py
+          uv run --locked scripts/test_install.py
+          uv run --locked scripts/test_packages.py
+          uv run --locked scripts/test_tooling.py
+          uv run --locked scripts/test_eval.py
+          uv run --locked scripts/test_eval_cli.py
 
   release:
     runs-on: ubuntu-latest
-    needs: verify-macos-system-ruby
+    needs: verify
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          ruby-version: "3.3"
+          version: "0.12.10"
+          python-version: "3.14"
 
-      - name: Verify source contracts and generated bundles
-        run: |
-          ruby scripts/verify.rb
-          ruby scripts/test_install.rb
-          ruby scripts/test_packages.rb
+      - name: Install locked maintainer dependencies
+        run: uv sync --locked
 
       - name: Confirm the tag matches the plugin manifests
-        run: ruby scripts/check_version.rb "${GITHUB_REF_NAME#v}"
+        run: uv run --locked scripts/check_version.py "${GITHUB_REF_NAME#v}"
 
-      # package_skills.rb strips Claude Code-only frontmatter keys from the
+      # package_skills.py strips Claude Code-only frontmatter keys from the
       # packages, because a Claude.ai or Skills API upload rejects them outright.
       - name: Build upload packages
         run: |
-          ruby scripts/package_skills.rb --out dist
+          uv run --locked scripts/package_skills.py --out dist
           cp bundles/all.md dist/product-judgement-complete-bundle.md
 
       - name: Validate the downloadable archives
-        run: ruby scripts/verify_packages.rb --dir dist
+        run: uv run --locked scripts/verify_packages.py --dir dist
 
       - name: Publish release
         uses: softprops/action-gh-release@v2

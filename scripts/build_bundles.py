@@ -1,0 +1,325 @@
+#!/usr/bin/env python3
+"""Generate single-file Skill bundles from the canonical source folders.
+
+Bundles are build artifacts. Edit the Skill folders and rerun this script;
+never edit a file under ``bundles/`` directly.
+"""
+
+from __future__ import annotations
+
+import os
+import re
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+
+BUNDLES: dict[str, dict[str, object]] = {
+    "focal": {
+        "title": "Focal",
+        "summary": "The complete Focal Skill, including its `/12` audit rubric, patterns, and worked examples.",
+        "files": [
+            "focal/SKILL.md",
+            "focal/reference/review.md",
+            "focal/reference/patterns.md",
+            "focal/reference/examples.md",
+        ],
+    },
+    "compass": {
+        "title": "Compass",
+        "summary": "The complete Compass Skill, including its `/12` audit rubric, patterns, and worked examples.",
+        "files": [
+            "compass/SKILL.md",
+            "compass/reference/review.md",
+            "compass/reference/patterns.md",
+            "compass/reference/examples.md",
+        ],
+    },
+    "flywheel": {
+        "title": "Flywheel",
+        "summary": "The complete Flywheel Skill, including its complete-evidence `/16` and targeted `/4` audit contracts, four play references, and worked examples.",
+        "files": [
+            "flywheel/SKILL.md",
+            "flywheel/reference/review.md",
+            "flywheel/reference/trust.md",
+            "flywheel/reference/friction.md",
+            "flywheel/reference/wins.md",
+            "flywheel/reference/emotion.md",
+            "flywheel/reference/examples.md",
+        ],
+    },
+    "soul": {
+        "title": "Soul",
+        "summary": "The complete Soul Skill, including its unscored Readiness check, `/12` audit rubric, moment and treatment references, and worked examples.",
+        "files": [
+            "soul/SKILL.md",
+            "soul/reference/review.md",
+            "soul/reference/moments.md",
+            "soul/reference/treatments.md",
+            "soul/reference/examples.md",
+        ],
+    },
+    "product-judgement": {
+        "title": "Product Judgement",
+        "summary": "The Product Judgement orchestration Skill. For a holistic audit, load it with the four foundational bundles so their native methodologies remain available.",
+        "files": ["product-judgement/SKILL.md"],
+    },
+}
+
+# The complete collection as one file, for environments that accept a single
+# upload. Product Judgement leads because it routes to the four local
+# methodologies that follow it.
+COMBINED = {
+    "name": "all",
+    "title": "Product Judgement—complete collection",
+    "summary": "All five Skills in one file: Product Judgement plus the four foundational methodologies it calls—Focal, Compass, Flywheel, and Soul.",
+    "order": ["product-judgement", "focal", "compass", "flywheel", "soul"],
+}
+
+
+def check_source_lists() -> None:
+    """Add discovered references and fail if a configured path is unknown.
+
+    The Ruby generator deliberately bundles any newly discovered reference file
+    before checking the configured list. This keeps mode-specific references in
+    bundles automatically while still catching stale configured paths.
+    """
+
+    for name, config in BUNDLES.items():
+        skill_root = ROOT / name
+        reference_root = skill_root / "reference"
+        discovered = [f"{name}/SKILL.md"]
+        if reference_root.is_dir():
+            discovered.extend(
+                sorted(
+                    path.relative_to(ROOT).as_posix()
+                    for path in reference_root.rglob("*.md")
+                    if path.is_file()
+                )
+            )
+
+        configured = config["files"]
+        if not isinstance(configured, list):
+            raise TypeError(f"Bundle source list for {name} is not a list")
+
+        # Match `config[:files] += discovered - config.fetch(:files)` from Ruby:
+        # append each new discovery once, preserving discovery order.
+        configured.extend(path for path in discovered if path not in configured)
+        if sorted(configured) == sorted(discovered):
+            continue
+
+        missing = [path for path in discovered if path not in configured]
+        unknown = [path for path in configured if path not in discovered]
+        print(f"Bundle source list for {name} is incomplete.", file=sys.stderr)
+        if missing:
+            print(f"Missing: {', '.join(missing)}", file=sys.stderr)
+        if unknown:
+            print(f"Unknown: {', '.join(unknown)}", file=sys.stderr)
+        raise BuildError(2)
+
+
+class BuildError(Exception):
+    """An expected command failure carrying the process exit status."""
+
+    def __init__(self, status: int) -> None:
+        super().__init__()
+        self.status = status
+
+
+def combined_header() -> str:
+    return (
+        f"# {COMBINED['title']}\n"
+        "\n"
+        "> Generated by `uv run scripts/build_bundles.py` from the source files listed below. Do not edit this file directly.\n"
+        "\n"
+        f"{COMBINED['summary']}\n"
+        "\n"
+        "Load this single file when your environment accepts only one Markdown instruction or knowledge file and you want the holistic `/product-judgement` audit, which needs all four local methodologies present. Common uses include a ChatGPT Project or custom GPT knowledge file, a Claude Project, or a single rules file. If your agent supports multi-file Skills, install the Skill folders instead so references load on demand.\n"
+        "\n"
+        "---\n"
+    )
+
+
+def header(name: str, config: dict[str, object]) -> str:
+    if name == "product-judgement":
+        holistic_note = (
+            "Product Judgement calls Focal, Compass, Flywheel, and Soul. In a single-file "
+            "environment, load this file together with `focal.md`, `compass.md`, `flywheel.md`, and `soul.md`."
+        )
+    else:
+        holistic_note = (
+            f"If your agent supports multi-file Skills, install the `{name}/` folder instead so references can load on demand. Use this bundle when the environment accepts only one Markdown instruction file."
+        )
+
+    return (
+        f"# {config['title']}—single-file bundle\n"
+        "\n"
+        "> Generated by `uv run scripts/build_bundles.py` from the source files listed below. Do not edit this file directly.\n"
+        "\n"
+        f"{config['summary']}\n"
+        "\n"
+        f"{holistic_note}\n"
+        "\n"
+        "Common uses include an instruction file, a rules file, or an uploaded knowledge file. Source instructions are generated from the folder Skill. Relative links become links to included source sections (or repository sources when absent); identical shared contracts appear once per bundle.\n"
+        "\n"
+        "---\n"
+    )
+
+
+def source_anchor(path: str) -> str:
+    return "source-" + re.sub(r"[^a-z0-9]+", "-", path.lower()).rstrip("-")
+
+
+_SHARED_FRAGMENT = re.compile(
+    r"<!-- BEGIN SHARED: ([a-z-]+) -->\n.*?\n<!-- END SHARED: \1 -->",
+    re.DOTALL,
+)
+_MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+_URL_SCHEME = re.compile(r"\A[a-z][a-z0-9+.-]*:", re.IGNORECASE)
+
+
+def source_section(relative_path: str, included: list[str], shared_seen: list[str]) -> str:
+    absolute_path = ROOT / relative_path
+    content = absolute_path.read_bytes().decode("utf-8").rstrip()
+
+    def replace_shared(match: re.Match[str]) -> str:
+        name = match.group(1)
+        if name in shared_seen:
+            return f"See the [shared {name} contract](#shared-{name}) already included above."
+        shared_seen.append(name)
+        return f'<a id="shared-{name}"></a>\n\n{match.group(0)}'
+
+    content = _SHARED_FRAGMENT.sub(replace_shared, content)
+
+    repository_prefix = "https://github.com/kvncnls/product-judgement/blob/main/"
+
+    def replace_link(match: re.Match[str]) -> str:
+        label = match.group(1)
+        target = match.group(2)
+        if target.startswith(repository_prefix):
+            source = target[len(repository_prefix) :].split("#", 1)[0]
+            if source in included:
+                return f"[{label}](#{source_anchor(source)})"
+
+        if target.startswith(("#", "/")) or _URL_SCHEME.match(target):
+            return match.group(0)
+
+        file_name, separator, fragment = target.partition("#")
+        # `File.expand_path` is lexical: it normalizes `..` without resolving
+        # symlinks. os.path.abspath provides the same behavior here.
+        resolved = os.path.abspath(
+            os.path.join(absolute_path.parent, os.path.expanduser(file_name))
+        )
+        root_string = str(ROOT)
+        if not (resolved.startswith(root_string + os.sep) or resolved == root_string):
+            return match.group(0)
+
+        candidate = Path(resolved)
+        skill_file = candidate / "SKILL.md"
+        if candidate.is_dir() and skill_file.is_file():
+            resolved = str(skill_file)
+
+        if resolved.startswith(root_string + os.sep):
+            source = resolved[len(root_string) + 1 :]
+        else:
+            # This mirrors Ruby's String#delete_prefix behavior when the
+            # resolved path is exactly ROOT.
+            source = resolved
+
+        if source in included:
+            return f"[{label}](#{source_anchor(source)})"
+
+        suffix = f"#{fragment}" if separator else ""
+        return f"[{label}](https://github.com/kvncnls/product-judgement/blob/main/{source}{suffix})"
+
+    content = _MARKDOWN_LINK.sub(replace_link, content)
+
+    return (
+        f'<a id="{source_anchor(relative_path)}"></a>\n'
+        "\n"
+        f"## Source: `{relative_path}`\n"
+        "\n"
+        f"<!-- BEGIN GENERATED SOURCE: {relative_path} -->\n"
+        "\n"
+        f"{content}\n"
+        "\n"
+        f"<!-- END GENERATED SOURCE: {relative_path} -->\n"
+    )
+
+
+def render_sources(files: list[str]) -> list[str]:
+    shared_seen: list[str] = []
+    return [source_section(path, files, shared_seen) for path in files]
+
+
+def render_bundle(name: str, config: dict[str, object]) -> str:
+    files = config["files"]
+    if not isinstance(files, list):
+        raise TypeError(f"Bundle source list for {name} is not a list")
+    return "\n\n".join([header(name, config), *render_sources(files)]).rstrip() + "\n"
+
+
+def render_combined() -> str:
+    files: list[str] = []
+    for name in COMBINED["order"]:
+        config = BUNDLES[name]
+        configured = config["files"]
+        if not isinstance(configured, list):
+            raise TypeError(f"Bundle source list for {name} is not a list")
+        files.extend(configured)
+    return "\n\n".join([combined_header(), *render_sources(files)]).rstrip() + "\n"
+
+
+def main(argv: list[str]) -> int:
+    try:
+        check_source_lists()
+    except BuildError as error:
+        return error.status
+
+    if any(argument != "--check" for argument in argv):
+        print("Usage: uv run scripts/build_bundles.py [--check]", file=sys.stderr)
+        return 2
+
+    check_only = "--check" in argv
+    stale: list[Path] = []
+
+    outputs = [(name, render_bundle(name, config)) for name, config in BUNDLES.items()]
+    outputs.append((str(COMBINED["name"]), render_combined()))
+
+    for name, expected in outputs:
+        ids = re.findall(r'<a id="([^"]+)"></a>', expected)
+        references = re.findall(r"\]\(#((?:source|shared)-[^)]+)\)", expected)
+        if set(references) - set(ids):
+            print(f"{name}: missing generated link anchors", file=sys.stderr)
+            return 1
+        if len(ids) != len(set(ids)):
+            print(f"{name}: duplicate generated anchors", file=sys.stderr)
+            return 1
+
+        destination = ROOT / "bundles" / f"{name}.md"
+        if check_only:
+            if not destination.is_file() or destination.read_bytes().decode("utf-8") != expected:
+                stale.append(destination)
+        else:
+            destination.write_bytes(expected.encode("utf-8"))
+            print(f"generated {destination.relative_to(ROOT).as_posix()}")
+
+    if check_only and stale:
+        print("Generated bundles are stale:", file=sys.stderr)
+        for path in stale:
+            print(f"- {path.relative_to(ROOT).as_posix()}", file=sys.stderr)
+        print("Run: uv run scripts/build_bundles.py", file=sys.stderr)
+        return 1
+
+    if check_only:
+        print("All generated bundles are current.")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main(sys.argv[1:]))
+    except (OSError, UnicodeError, TypeError) as error:
+        print(str(error), file=sys.stderr)
+        raise SystemExit(1)

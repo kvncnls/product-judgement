@@ -2,23 +2,25 @@
 
 [`behavioral-contracts.yml`](./behavioral-contracts.yml) contains representative prompts and evidence conditions that guard the collection’s decision boundaries. Each fixture states behavior an agent should produce and behavior it must reject.
 
-Two harnesses cover this repository, and the boundary between them matters. [`scripts/verify.rb`](../scripts/verify.rb) guards **text**: frontmatter, links, the cross-file identity of the shared audit contract, the plugin manifests, and exact bundle synchronization. It is free, runs on every push, and catches deletion and drift. [`scripts/eval.rb`](../scripts/eval.rb) guards **behavior**: it runs each fixture against a model and grades the result. It costs real tokens, so it is opt-in and never runs in CI. Do not move an assertion a string match can hold into the expensive harness.
+Two harnesses cover this repository, and the boundary between them matters. [`scripts/verify.py`](../scripts/verify.py) guards **text**: frontmatter, links, the cross-file identity of the shared audit contract, the plugin manifests, and exact bundle synchronization. It is free, runs on every push, and catches deletion and drift. [`scripts/eval.py`](../scripts/eval.py) guards **behavior**: it runs each fixture against a model and grades the result. It costs real tokens, so it is opt-in and never runs in CI. Do not move an assertion a string match can hold into the expensive harness.
 
 ## Running the fixtures
 
+Complete the [maintainer setup](../CONTRIBUTING.md#setup) first.
+
 ```bash
-ruby scripts/eval.rb --dry-run
+uv run scripts/eval.py --dry-run
 ```
 
 `--dry-run` renders every audit and build prompt, resolves every argv, checks the excerpt verifier, verifies the namespaced invocation and ablation body, and checks that expected/reject text is withheld. It spends nothing. Run it first, every time. A real pass adds the baseline arm:
 
 ```bash
-ruby scripts/eval.rb --ablation --repeat 3
+uv run scripts/eval.py --ablation --repeat 3
 ```
 
 `--ablation` is the option that decides whether the suite means anything. It runs each fixture a second time with the Skills unloaded; a fixture that passes in both arms is reported **NO SIGNAL**, because it is measuring the base model rather than these instructions. Use `--id` for a bounded representative run before attempting a larger sample.
 
-`scripts/eval.rb --help` lists the rest. The unit of measurement is `(fixture, assertion)` and the number is always `k/N` — the runner is non-deterministic, with no temperature or seed available, so a per-fixture boolean is a number the harness cannot honestly produce.
+`scripts/eval.py --help` lists the rest. The unit of measurement is `(fixture, assertion)` and the number is always `k/N` — the runner is non-deterministic, with no temperature or seed available, so a per-fixture boolean is a number the harness cannot honestly produce.
 
 Exit codes separate what was learned from what was not: `0` green, `1` a behavioral regression, `2` a harness or runner error (auth, timeout, budget — meaning nothing was learned), `3` no fixture matched the filters, `4` a fixture-quality failure only, such as NO SIGNAL or a judge-control leak.
 

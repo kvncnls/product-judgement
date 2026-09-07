@@ -232,16 +232,9 @@ cursor-agent plugin marketplace update product-judgement
 
 ### Claude Desktop and Claude.ai
 
-Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Build verified packages from the current checkout:
+Claude.ai takes a Skill as a `.zip` whose root is the Skill folder. Follow the [upload package instructions](./CONTRIBUTING.md#building-upload-packages) to build verified ZIPs from this checkout.
 
-The published `v1.0.0` ZIPs predate the frontmatter compatibility fix. Do not use those archives for uploads. A newer release must pass the archive checks below before replacing this source-build recommendation.
-
-```bash
-ruby scripts/package_skills.rb --out dist
-ruby scripts/verify_packages.rb --dir dist
-```
-
-Build them with that script rather than a bare `zip`. These Skills carry `argument-hint` in their frontmatter for Claude Code, and the Agent Skills spec does not allow it—an upload carrying it fails with `Unexpected key(s) in SKILL.md frontmatter: argument-hint` instead of ignoring it. `package_skills.rb` strips non-spec keys from the packages and leaves the source untouched. Pass `--skill focal` for one Skill, or `--check` to see what would be stripped.
+The published `v1.0.0` ZIPs predate the frontmatter compatibility fix. Do not use those archives for uploads. A newer release must pass the archive checks before replacing this source-build recommendation.
 
 Enable **Code execution and file creation** in Settings → Capabilities, then upload the `.zip` under Settings → Capabilities → Skills. Repeat for each Skill you want. A holistic `/product-judgement` audit needs all five, because the orchestration Skill calls the four local methodologies.
 
@@ -312,50 +305,11 @@ pnpm dlx skills update -g product-judgement focal compass flywheel soul
 
 Rerun the full `skills add` command when an update reports a failure, when a new Skill is added to the repository, when an agent link is missing, or when an installation predates the CLI lock record. Use `pnpm dlx skills list -g` to inspect what is installed.
 
-### For maintainers
-
-Maintainer tooling targets **Ruby 2.6 or newer** and uses only the standard library. Packaging also requires the system `zip` and `unzip` commands. CI tests current Ruby and the macOS system interpreter; keep new code inside the 2.6 API floor. The installed Skills themselves stay pure Markdown and have no runtime build step.
-
-Two frontmatter facts govern where these Skills can be installed. `description` is capped at **1024 characters** by the Agent Skills spec; `scripts/verify.rb` enforces that ceiling, and Compass has previously exceeded it. `argument-hint` is a **Claude Code-only extension** that the spec does not allow, so an upload to Claude.ai or the Skills API fails hard rather than ignoring it—`Unexpected key(s) in SKILL.md frontmatter: argument-hint`. The release workflow therefore strips non-spec keys from the `.zip` packages it builds; keep the field in the source, and never add a non-spec key without teaching `scripts/package_skills.rb` about it.
-
-Shared evidence rules, score anchors, and severity definitions are maintained in `contracts/` and copied into each standalone Skill with `sync_contracts.rb`. Edit the canonical fragment, then regenerate its inline copies and the bundles. Build instructions live in mode-specific references, so an audit does not need to load a build template. Bundles are generated artifacts:
-
-```bash
-ruby scripts/sync_contracts.rb
-ruby scripts/build_bundles.rb
-```
-
-The behavioral fixtures in [`tests/`](./tests) have their own opt-in runner. It spends real model tokens, never runs in CI, and is not part of the verifier:
-
-```bash
-ruby scripts/eval.rb --dry-run
-```
-
-Run the repository checks before committing. The verifier validates frontmatter, relative links, shared contracts, score arithmetic, fixture structure, plugin manifests, and exact bundle synchronization. Separate regression tests exercise installer preservation and downloadable archive integrity; CI runs all three:
-
-```bash
-ruby scripts/verify.rb
-ruby scripts/test_install.rb
-ruby scripts/test_packages.rb
-```
-
-#### Cutting a release
-
-The version appears in four manifests, and `scripts/check_version.rb` fails the release if any of them disagrees with the tag. Bump all four, rebuild and inspect packages, and review the intended commit before publishing a new tag. Never move an existing release tag. For the prepared 1.1.0 release:
-
-```bash
-ruby scripts/build_bundles.rb
-ruby scripts/verify.rb
-ruby scripts/package_skills.rb --out dist
-ruby scripts/verify_packages.rb --dir dist
-ruby scripts/check_version.rb 1.1.0
-```
-
-The four are `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json`, and `.codex-plugin/plugin.json`. After the reviewed changes are committed and pushed, publishing a new `v*` tag runs the verifier, confirms the tag matches, builds and validates the Skill `.zip` packages and combined bundle, and publishes the new release. Verify the published asset contents before restoring a download recommendation in the [Claude Desktop and Claude.ai](#claude-desktop-and-claudeai) section.
-
 ## Contributing
 
-Issues and pull requests are welcome. A change should sharpen one Skill's ownership of its own scale rather than broaden it: Focal owns the screen, Compass the path, Flywheel the relationship, Soul authored memory, and Product Judgement only the reconciliation between them. Run `/usr/bin/ruby scripts/verify.rb` before opening a pull request, and regenerate the bundles in the same commit as any source edit.
+Issues and pull requests are welcome. A change should sharpen one Skill's ownership of its own scale rather than broaden it: Focal owns the screen, Compass the path, Flywheel the relationship, Soul authored memory, and Product Judgement only the reconciliation between them.
+
+The installed Skills stay pure Markdown and have no runtime build step. See [the contributor guide](./CONTRIBUTING.md) for maintainer setup, verification, bundle generation, and releases.
 
 ## License
 
