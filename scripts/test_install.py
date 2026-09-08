@@ -307,6 +307,15 @@ class InstallerTest:
         self.assert_equal(original, (destination / "SKILL.md").read_bytes())
 
     def test_competing_destination_directory_is_rejected_before_backup_discard(self) -> None:
+        self.assert_competing_directory_preserved()
+
+    def test_competing_destination_directory_skipped_move_keeps_backup(self) -> None:
+        self.assert_competing_directory_preserved(move_exit=0)
+
+    def test_competing_destination_directory_rejected_move_keeps_backup(self) -> None:
+        self.assert_competing_directory_preserved(move_exit=1)
+
+    def assert_competing_directory_preserved(self, move_exit: int | None = None) -> None:
         arguments = self.project_arguments() + ["--copy", "--skill", "focal"]
         self.assert_success(self.invoke(arguments))
         destination = self.target("focal")
@@ -320,21 +329,34 @@ class InstallerTest:
               */.product-judgement-stage.*/*)
                 mkdir -p "$move_destination"
                 printf 'concurrent directory content\n' > "$move_destination/keep-me.txt"
+                {move_outcome}
                 ;;
             esac
             exec "$real_command" "$@"
             """
-        ).format(parser=self.mv_argument_parser())
+        ).format(
+            parser=self.mv_argument_parser(),
+            move_outcome="" if move_exit is None else f"exit {move_exit}",
+        )
         with self.with_command_shim("mv", body) as environment:
             result = self.invoke(arguments, environment)
             self.assert_failure(result, "a competing destination directory must stop replacement")
-            self.assert_("did not land" in result.stderr, "directory race should be reported")
 
         self.assert_equal("concurrent directory content\n", (destination / "keep-me.txt").read_text(encoding="utf-8"))
         self.assert_(not self.path_present(destination / "focal"), "staged entry must not remain nested")
         backup_entries = list((destination.parent).glob(".product-judgement-backup.*/entry/SKILL.md"))
         self.assert_equal(1, len(backup_entries), "original should remain in a rollback directory")
         self.assert_equal(original, backup_entries[0].read_bytes())
+
+        # No-clobber mv implementations can skip with status 0 or reject with
+        # a nonzero status. Both must fail the installation and retain the
+        # original. A status-0 skip must also be caught by the identity check.
+        self.assert_(
+            "cannot install staged Skill at" in result.stderr and "original retained" in result.stderr,
+            f"directory race and retained backup should be reported\nstderr: {result.stderr}",
+        )
+        if move_exit == 0:
+            self.assert_("did not land" in result.stderr, "a skipped move must fail the destination identity check")
 
     def test_competing_destination_symlink_is_not_followed(self) -> None:
         arguments = self.project_arguments() + ["--copy", "--skill", "focal"]
