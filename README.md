@@ -6,21 +6,26 @@ The umbrella is **coherence**: focused within a screen, navigable across a journ
 
 ## Quick install
 
-Install all five Skills through your agent’s plugin system:
+Install all five Skills with the method for your agent:
 
+Claude Code:
 ```bash
 claude plugin marketplace add kvncnls/product-judgement && claude plugin install product-judgement@product-judgement
 ```
 
+Cursor:
 ```bash
-cursor-agent plugin marketplace add https://github.com/kvncnls/product-judgement
+git clone https://github.com/kvncnls/product-judgement.git
+cd product-judgement
+./scripts/install.sh --agent cursor
 ```
 
+Codex:
 ```bash
 codex plugin marketplace add kvncnls/product-judgement && codex plugin add product-judgement@product-judgement
 ```
 
-For Cursor, marketplace registration is the first step: open **Customize → Plugins**, select **Product Judgement**, choose **Install**, and select user or project scope.
+For Cursor, the install script places the five Skill folders in `~/.cursor/skills/`. Restart Cursor after installation so it reloads the Skill metadata. Use `./scripts/install.sh --agent cursor --copy` if you want independent copies instead of links back to the clone.
 
 Then ask for an audit: `audit this dashboard with Focal`, or `audit this app with Product Judgement`.
 
@@ -189,26 +194,22 @@ Each Skill is a folder with a `SKILL.md` at its root, which is the shape Claude 
 
 | Environment | How it installs | Invocation |
 |---|---|---|
-| Claude Code, Cursor, Codex | Plugin, from this repository | Ask for the Skill by name; Claude Code also supports `/product-judgement:focal`, etc. |
+| Claude Code | Plugin, from this repository | Ask for the Skill by name; Claude Code also supports `/product-judgement:focal`, etc. |
+| Cursor | Folder install from this repository | Ask for the Skill by name after running the Cursor install command below |
+| Codex | Plugin, from this repository | Ask for the Skill by name |
 | Claude Desktop, Claude.ai | Upload a Skill `.zip` | Ask for the Skill by name |
 | ChatGPT, custom GPTs | Upload the combined Markdown bundle | Ask for the Skill by name |
 | Anything else, or a project-scoped setup | `scripts/install.sh` | Ask for the Skill by name or use the agent’s Skill picker |
 
-### Claude Code, Cursor, and Codex
+### Claude Code and Codex
 
-These three read a plugin manifest from this repository, so installation is one marketplace and one plugin. Claude Code and Cursor share `.claude-plugin/`; Codex reads `.agents/plugins/` and `.codex-plugin/`.
+Claude Code and Codex can read the plugin manifests from this repository, so installation is one marketplace and one plugin.
 
 Claude Code:
 
 ```bash
 claude plugin marketplace add kvncnls/product-judgement
 claude plugin install product-judgement@product-judgement
-```
-
-Cursor:
-
-```bash
-cursor-agent plugin marketplace add https://github.com/kvncnls/product-judgement
 ```
 
 Codex:
@@ -218,7 +219,19 @@ codex plugin marketplace add kvncnls/product-judgement
 codex plugin add product-judgement@product-judgement
 ```
 
-In Claude Code, the equivalent session commands are `/plugin marketplace add kvncnls/product-judgement` and `/plugin install`. In Cursor, open **Customize → Plugins**, select **Product Judgement**, choose **Install**, then choose user or project scope after registering the marketplace. Confirm that the plugin lists all five Skills. See [Cursor’s plugin instructions](https://prod.cursor.com/docs/plugins) for the current UI.
+In Claude Code, the equivalent session commands are `/plugin marketplace add kvncnls/product-judgement` and `/plugin install`. Confirm that the plugin lists all five Skills.
+
+### Cursor manual install
+
+Cursor users can install the Skills without a marketplace listing. Clone the repository and run the installer for the current user:
+
+```bash
+git clone https://github.com/kvncnls/product-judgement.git
+cd product-judgement
+./scripts/install.sh --agent cursor
+```
+
+The default install creates links from `~/.cursor/skills/` to the cloned repository, so pulling the repository updates the installed Skills. Add `--copy` for standalone copies, or use `--scope project` to install into `.cursor/skills/` for one project. Restart Cursor after installation, then ask for Focal, Compass, Flywheel, Soul, or Product Judgement by name.
 
 In Claude Code, plugin Skills use namespaced commands such as `/product-judgement:focal`. Folder installs use bare Skill names such as `/focal`. Other agents expose their own picker or invocation syntax; asking for Focal by name also makes the intended lens clear. Use [the install script](#any-other-agent-or-a-project-scoped-install) for folder installs.
 
@@ -227,8 +240,9 @@ Update or remove an installed plugin with its own tooling:
 ```bash
 claude plugin update product-judgement
 codex plugin marketplace upgrade product-judgement
-cursor-agent plugin marketplace update product-judgement
 ```
+
+For a Cursor folder install, run `git pull` in the cloned repository. Linked installs update immediately; rerun `./scripts/install.sh --agent cursor --copy` when using standalone copies.
 
 ### Claude Desktop and Claude.ai
 
