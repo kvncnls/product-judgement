@@ -1,0 +1,43 @@
+{
+  "name": "product-judgement",
+  "version": "1.1.0",
+  "description": "Skills for making better product decisions across the screen, the journey, the relationship, and the memory.",
+  "license": "MIT",
+  "author": "Kevin Canlas (https://github.com/kvncnls)",
+  "homepage": "https://github.com/kvncnls/product-judgement",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvncnls/product-judgement.git"
+  },
+  "bugs": "https://github.com/kvncnls/product-judgement/issues",
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "claude-code",
+    "cursor",
+    "codex",
+    "product-design",
+    "ux",
+    "design-review"
+  ],
+  "type": "module",
+  "bin": {
+    "product-judgement": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "scripts/install.sh",
+    "contracts/",
+    "focal/",
+    "compass/",
+    "flywheel/",
+    "soul/",
+    "product-judgement/"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0"
+  }
+}

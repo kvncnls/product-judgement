@@ -16,6 +16,7 @@ MANIFESTS: dict[str, Callable[[dict[str, Any]], Any]] = {
     ".claude-plugin/marketplace.json": lambda data: data["plugins"][0]["version"],
     ".cursor-plugin/plugin.json": lambda data: data["version"],
     ".codex-plugin/plugin.json": lambda data: data["version"],
+    "package.json": lambda data: data["version"],
 }
 
 

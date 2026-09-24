@@ -7,6 +7,9 @@ tests/results/
 
 .DS_Store
 
+# Node dependencies for the npx installer.
+node_modules/
+
 # Local Python environment and bytecode.
 .venv/
 __pycache__/
