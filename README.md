@@ -6,26 +6,46 @@ The umbrella is **coherence**: focused within a screen, navigable across a journ
 
 ## Quick install
 
-Install all five Skills with the method for your agent:
+One command, any agent. It asks where to install, which tools to set up, and
+which Skills you want:
 
-Claude Code:
 ```bash
-claude plugin marketplace add kvncnls/product-judgement && claude plugin install product-judgement@product-judgement
+npx product-judgement
 ```
 
-Cursor:
+It installs copies, so update with `npx product-judgement@latest`. Pass flags to
+skip the questions: `npx product-judgement --agent claude --agent cursor`.
+
+Claude Code and Codex can also install this repository as a native plugin:
+
+```bash
+claude plugin marketplace add kvncnls/product-judgement
+```
+
+```bash
+claude plugin install product-judgement@product-judgement
+```
+
+```bash
+codex plugin marketplace add kvncnls/product-judgement
+```
+
+```bash
+codex plugin add product-judgement@product-judgement
+```
+
+Restart your agent after any install so it reloads the Skill metadata.
+
+Working on the Skills themselves? Clone the repository and run the installer
+directly — it symlinks by default, so `git pull` updates every agent at once:
+
 ```bash
 git clone https://github.com/kvncnls/product-judgement.git
-cd product-judgement
-./scripts/install.sh --agent cursor
 ```
 
-Codex:
 ```bash
-codex plugin marketplace add kvncnls/product-judgement && codex plugin add product-judgement@product-judgement
+cd product-judgement && ./scripts/install.sh
 ```
-
-For Cursor, the install script places the five Skill folders in `~/.cursor/skills/`. Restart Cursor after installation so it reloads the Skill metadata. Use `./scripts/install.sh --agent cursor --copy` if you want independent copies instead of links back to the clone.
 
 Then ask for an audit: `audit this dashboard with Focal`, or `audit this app with Product Judgement`.
 
@@ -194,6 +214,7 @@ Each Skill is a folder with a `SKILL.md` at its root, which is the shape Claude 
 
 | Environment | How it installs | Invocation |
 |---|---|---|
+| Any agent below, in one command | `npx product-judgement` | Ask for the Skill by name |
 | Claude Code | Plugin, from this repository | Ask for the Skill by name; Claude Code also supports `/product-judgement:focal`, etc. |
 | Cursor | Folder install from this repository | Ask for the Skill by name after running the Cursor install command below |
 | Codex | Plugin, from this repository | Ask for the Skill by name |
